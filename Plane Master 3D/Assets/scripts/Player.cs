@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
 
     [Header("Serializables")]
     [SerializeField]
+    bool touchControls = true;
+    [SerializeField]
     FloatingJoystick joistick;
     [SerializeField]
     Animator visual3D;
@@ -28,7 +30,8 @@ public class Player : MonoBehaviour
     CharacterController controller;
     float inputX, inputY;
     float currentSpeed;
-    bool isMoving;
+    [HideInInspector]
+    public bool isMoving;
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -39,18 +42,22 @@ public class Player : MonoBehaviour
         //touch controls
         inputY = joistick.Vertical;
         inputX = joistick.Horizontal;
-        Debug.Log("X: " + inputX + "Y: " + inputY);
 
 
-        if (Mathf.Max(Mathf.Abs(joistick.Horizontal), Mathf.Abs(joistick.Vertical)) == 0)
+        if (!touchControls)
         {
             //pc controls for debugging
             inputY = Input.GetAxisRaw("Vertical");
             inputX = Input.GetAxisRaw("Horizontal");
+            currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed, moveSmooth);
+        }
+        else
+        {
+            currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed * joistickReplyCurve.Evaluate(joistick.Direction.magnitude) , moveSmooth);
         }
             if (Mathf.Max(Mathf.Abs(inputY), Mathf.Abs(inputX)) > 0)
             {
-                currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed, moveSmooth);
+                
                 Vector3 tempLookRotation = stableForward.forward * inputY + stableForward.right * inputX;
                 tempLookRotation *= 180;
                 lookRotation = Vector3.Lerp(lookRotation, tempLookRotation, turnSmooth);
