@@ -60,9 +60,15 @@ public class Backpack : MonoBehaviour
                             print("stage3");
                             int itemToDrop = CheckItems(u.name);
                             Transform itemTransform = items[itemToDrop].transform;
+                            droppingZone.items.Add(items[itemToDrop]);
                             items.RemoveAt(itemToDrop);
-                            itemTransform.parent = u.itemDestination;
-                            StartCoroutine(LerpItemToDestination(itemTransform));
+                            
+                            if(!droppingZone.showDroppedItems)
+                            {
+                                itemTransform.parent = u.itemDestination;
+                                StartCoroutine(LerpItemToDestination(itemTransform));
+                            }
+                            
                             u.count++;
 
                             dropTime = itemDropInterval;
@@ -73,7 +79,7 @@ public class Backpack : MonoBehaviour
         }
     }
 
-    IEnumerator LerpItemToDestination(Transform item)
+    IEnumerator LerpItemToDestination(Transform item, bool destroy = true)
     {
         while(item.transform.localPosition != Vector3.zero)
         {
@@ -81,6 +87,7 @@ public class Backpack : MonoBehaviour
             item.transform.localPosition = Vector3.Lerp(item.transform.localPosition, Vector3.zero, 0.1f);
             yield return null;
         }
+        if(destroy)
         Destroy(item.gameObject);
         
     }
