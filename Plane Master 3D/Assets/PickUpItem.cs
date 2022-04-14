@@ -30,7 +30,10 @@ public class PickUpItem : MonoBehaviour
         {
             itemRemove.OnHandleTrashBin();
         }
+    }
 
+    private void OnTriggerStay(Collider other)
+    {
         if (other.TryGetComponent<PlataformAdd>(out PlataformAdd dropAdd))
         {
             dropAdd.OnHandleHoverPlatform();
