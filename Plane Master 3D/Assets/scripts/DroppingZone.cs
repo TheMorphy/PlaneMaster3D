@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class DroppingZone : MonoBehaviour
 {
@@ -16,25 +17,45 @@ public class DroppingZone : MonoBehaviour
     public List<Item> items = new List<Item>();
     [SerializeField]
     Transform visualStart;
+    [SerializeField]
+    bool debug = false;
+
+    Vector3[] positions = new Vector3[10];
+    List<int> emptySlots = new List<int>();
 
     private void Start()
     {
+        if(showDroppedItems)
+        {
+            
+            Array.Resize(ref positions, conditions[0].countNeeded);
+            GenerateSortingSystem();
+        }
         StartCoroutine(WaitForComplete());
+    }
+    private void Update()
+    {
+        if(debug)
+        {
+            GenerateSortingSystem();
+        }
     }
 
     IEnumerator WaitForComplete()
     {
-        while ( false == false)
+        while (false == false)
         {
             yield return new WaitUntil(() => AllDone());
             allConditionsComplete = true;
             yield return new WaitUntil(() => !AllDone());
+            allConditionsComplete = false;
             yield return null;
         }
     }
 
     bool AllDone()
     {
+        print("AllDone()");
         bool output = true;
         foreach(UpgradeCondition u in conditions)
         {
@@ -50,28 +71,57 @@ public class DroppingZone : MonoBehaviour
         return output;
     }
 
-    private void Update()
+    public void AddItem(Item item)
     {
-        if(!itemsAllSet() && showDroppedItems && items.Count > 0)
+        print("addItem");
+        items.Add(item);
+        item.transform.parent = visualStart;
+        SetItemDestination(items.Count - 1);
+    }
+    void SetItemDestination(int item)
+    {
+        items[item].destination = positions[item];
+        Coroutine c = StartCoroutine(LerpItemToDestination(item));
+    }
+    IEnumerator LerpItemToDestination(int i)
+    {
+        while (items[i].transform.localPosition != items[i].destination)
         {
-            SortItems();
+            items[i].transform.localPosition = Vector3.Lerp(items[i].transform.localPosition, items[i].destination, 0.1f);
+            items[i].transform.localRotation = Quaternion.Lerp(items[i].transform.localRotation, Quaternion.Euler(Vector3.zero), 0.1f);
+            yield return new WaitForEndOfFrame();
         }
     }
-    bool itemsAllSet()
+    void GenerateSortingSystem()
     {
-        bool output = true;
-        foreach(Item i in items)
+        Vector3 nextPos = Vector3.zero;
+        int count = 0;
+        for (int y = (int)limitations.y; y > 0; y--)
         {
-            if(i.transform.position != i.destination)
+            for (int x = (int)limitations.x; x > 0; x--)
             {
-                output = false;
+                for (int z = (int)limitations.z; z > 0; z--)
+                {
+                    positions[count] = nextPos;
+                    nextPos.z += space.z;
+                    count++;
+                    if (count >= conditions[0].countNeeded)
+                    {
+                        return;
+                    }
+                }
+                nextPos.x += space.x;
+                nextPos.z = 0;
             }
+            nextPos.x = 0;
+            nextPos.y += space.y;
         }
-        return output;
     }
+
 
     void SortItems()
     {
+        print("sorting");
         Vector3 nextPos = Vector3.zero;
         int count = 0;
         for(int y = (int)limitations.y; y > 0; y--)
@@ -82,6 +132,8 @@ public class DroppingZone : MonoBehaviour
                 {
                     Item i = items[count];
                     count++;
+                    if (count >= conditions[0].countNeeded)
+                        return;
                     i.destination = nextPos;
                     i.transform.parent = visualStart;
                     if (i.transform.localPosition != i.destination)
@@ -93,7 +145,6 @@ public class DroppingZone : MonoBehaviour
                 }
                 nextPos.x += space.x;
                 nextPos.z = 0;
-                
             }
             nextPos.x = 0;
             nextPos.y += space.y;

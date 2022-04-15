@@ -6,6 +6,15 @@ public class Drill : MonoBehaviour
 {
 
     [SerializeField] int timeToDrop, maxDrop;
+    [SerializeField]
+    StashZone stashZone;
+    [SerializeField]
+    GameObject ironItemPrefab;
+    [SerializeField]
+    List<Transform> drillIronStickSpots = new List<Transform>();
+    Item itemToAdd;
+    [SerializeField]
+    Transform animParent;
 
     //[SerializeField] GameObject itemDrop;
 
@@ -15,7 +24,7 @@ public class Drill : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(WaitToDrop());
+       // StartCoroutine(WaitToDrop());
     }
 
     IEnumerator WaitToDrop()
@@ -23,13 +32,33 @@ public class Drill : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(timeToDrop);
-            //Instantiate(itemDrop);
-            if (CurrentDrop < maxDrop)
+            if(stashZone.currentStashCount < stashZone.capacity)
             {
-                CurrentDrop += 1;
+                stashZone.AddItem(Instantiate(ironItemPrefab, RandomSpawnPos().position, Quaternion.identity).GetComponent<Item>());
             }
-            else CurrentDrop += 0;
-            print(CurrentDrop);
         }
+    }
+    public void CatchIron()
+    {
+        if (stashZone.currentStashCount < stashZone.capacity)
+        {
+            Transform rnd = RandomSpawnPos();
+            itemToAdd = Instantiate(ironItemPrefab, rnd.position, rnd.rotation, animParent).GetComponent<Item>();
+        }
+            
+    }
+
+    public void ReleaseIron()
+    {
+        if (stashZone.currentStashCount < stashZone.capacity)
+        {
+            stashZone.AddItem(itemToAdd);
+        }
+    }
+
+    Transform RandomSpawnPos()
+    {
+        int i = Random.Range(0, drillIronStickSpots.Count - 1);
+        return drillIronStickSpots[i];
     }
 }
