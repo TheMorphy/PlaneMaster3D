@@ -1,27 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class Drill : MonoBehaviour
 {
 
-    [SerializeField] int timeToDrop, maxDrop, currentDrop;
+    [SerializeField] int timeToDrop, maxDrop;
+    [SerializeField]
+    StashZone stashZone;
+    [SerializeField]
+    GameObject ironItemPrefab;
+    [SerializeField]
+    List<Transform> drillIronStickSpots = new List<Transform>();
+    Item itemToAdd;
+    [SerializeField]
+    Transform animParent;
 
-    [SerializeField] TextMeshPro dropText;
+    //[SerializeField] GameObject itemDrop;
 
-    [SerializeField] PlataformAdd droppingZone;
+    int currentDrop;
 
     public int CurrentDrop { get => currentDrop; set => currentDrop = value; }
 
     void Start()
     {
-        StartCoroutine(WaitToDrop());
-    }
-
-    private void Update()
-    {
-        dropText.text = currentDrop.ToString() + "/" + maxDrop.ToString();
+       // StartCoroutine(WaitToDrop());
     }
 
     IEnumerator WaitToDrop()
@@ -29,11 +32,33 @@ public class Drill : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(timeToDrop);
-            if (CurrentDrop < maxDrop)
+            if(stashZone.currentStashCount < stashZone.capacity)
             {
-                CurrentDrop += 1;
+                stashZone.AddItem(Instantiate(ironItemPrefab, RandomSpawnPos().position, Quaternion.identity).GetComponent<Item>());
             }
-            print(CurrentDrop);
         }
+    }
+    public void CatchIron()
+    {
+        if (stashZone.currentStashCount < stashZone.capacity)
+        {
+            Transform rnd = RandomSpawnPos();
+            itemToAdd = Instantiate(ironItemPrefab, rnd.position, rnd.rotation, animParent).GetComponent<Item>();
+        }
+            
+    }
+
+    public void ReleaseIron()
+    {
+        if (stashZone.currentStashCount < stashZone.capacity)
+        {
+            stashZone.AddItem(itemToAdd);
+        }
+    }
+
+    Transform RandomSpawnPos()
+    {
+        int i = Random.Range(0, drillIronStickSpots.Count - 1);
+        return drillIronStickSpots[i];
     }
 }

@@ -60,7 +60,7 @@ public class Backpack : MonoBehaviour
                             print("stage3");
                             int itemToDrop = CheckItems(u.name);
                             Transform itemTransform = items[itemToDrop].transform;
-                            droppingZone.items.Add(items[itemToDrop]);
+                            droppingZone.AddItem(items[itemToDrop]);
                             items.RemoveAt(itemToDrop);
                             
                             if(!droppingZone.showDroppedItems)
