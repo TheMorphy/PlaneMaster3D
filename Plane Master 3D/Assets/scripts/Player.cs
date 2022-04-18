@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     float currentSpeed;
     [HideInInspector]
     public bool isMoving;
+    bool isGrounded;
+    float velY;
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -77,7 +79,7 @@ public class Player : MonoBehaviour
 
 
 
-            velocity = stableForward.forward * inputY * Time.deltaTime * currentSpeed + stableForward.right * inputX * Time.deltaTime * currentSpeed;
+            velocity = stableForward.forward * inputY * Time.deltaTime * currentSpeed + stableForward.right * inputX * Time.deltaTime * currentSpeed +stableForward.up * velY;
 
             transform.rotation = Quaternion.LookRotation(lookRotation);
             controller.Move(velocity);
@@ -85,5 +87,18 @@ public class Player : MonoBehaviour
         
         
 
+    }
+
+    private void FixedUpdate()
+    {
+        isGrounded = Physics.CheckSphere(transform.position, 0.3f, 3);
+        if(!isGrounded)
+        {
+            velY += -9.81f * Time.fixedDeltaTime; 
+        }
+        else
+        {
+            velY = -2f;
+        }
     }
 }
