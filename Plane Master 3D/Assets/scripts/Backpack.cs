@@ -57,18 +57,21 @@ public class Backpack : MonoBehaviour
                         {
                             int itemToDrop = CheckItems(u.name);
                             Transform itemTransform = items[itemToDrop].transform;
-                            if(!droppingZone.showDroppedItems)
+                            u.count++;
+                            if (!droppingZone.showDroppedItems)
                             {
                                 StartCoroutine(LerpItemToDestination(itemTransform));
+                                droppingZone.AddItem(items[itemToDrop], false);
                             }
                             else
                             {
                                 droppingZone.AddItem(items[itemToDrop]);
                                 itemTransform.parent = u.itemDestination;
                             }
+                            
                             items.RemoveAt(itemToDrop);
 
-                            u.count++;
+                            
 
                             dropTime = itemDropInterval;
                         }

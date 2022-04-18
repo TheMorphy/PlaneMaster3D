@@ -75,9 +75,15 @@ public class DroppingZone : MonoBehaviour
 
     public void AddItem(Item item, bool translateItem = true)
     {
+        print("adding ITem");
         items.Add(item);
-        item.transform.parent = visualStart;
-        SetItemDestination(items.Count - 1);
+        if (translateItem)
+        {
+            item.transform.parent = visualStart;
+
+            SetItemDestination(items.Count - 1);
+
+        }
         SendMessage("OnAddItem", SendMessageOptions.DontRequireReceiver);
     }
     void SetItemDestination(int item)

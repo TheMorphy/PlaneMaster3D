@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class RepairScript : MonoBehaviour
 {
+    [SerializeField]
+    float debug;
     [SerializeField] Plane plane;
     [SerializeField] GameObject[] scaleObject;
     [SerializeField] GameObject niceUi;
@@ -14,119 +16,96 @@ public class RepairScript : MonoBehaviour
     [SerializeField] GameObject mLeft;
     [SerializeField] GameObject mRight;
 
-    [Range(1.0f, 0.0f)]
+    [SerializeField]
+    Transform f, l, r;
+
+    [Range(3.0f, 0.0f)]
     public float silhouetteSlider;
 
     DroppingZone dzScript;
     int currentCogs, currentIron, i, maskPosition, startingScaling, t;
-    float scaleX, scaleY, scaleZ, percentage, maxCount, currentCount;
+    float scaleX, scaleY, scaleZ, percentage;
     private Vector3 scaleChange;
+    List<float> defaulzScales = new List<float>();
 
     private void Start()
     {
-        dzScript = gameObject.GetComponent<DroppingZone>();
+        dzScript = GetComponent<DroppingZone>();
         plane.randomRepair = 0;
         plane.RandomRepair();
+        
+        for(int i = 0; i < scaleObject.Length; i++)
+        {
+            defaulzScales.Add(scaleObject[i].transform.localScale.z);
+        }
     }
 
     private void Update()
     {
-        FillSilhouette();
+        //FillSilhouette();
 
         if (silhouetteSlider <= 0)
         {
-            niceUi.SetActive(true);
+            //niceUi.SetActive(true);
         }
-
-        foreach (UpgradeCondition u in dzScript.conditions)
-        {
-            if (dzScript.conditions.Count > t)
-            {
-                maxCount += u.countNeeded;
-                t += 1;
-            }
-
-            if (currentCount < u.countNeeded)
-            {
-                currentCount = u.count;
-            }
-
-            percentage = currentCount / maxCount;
-
-            silhouetteSlider = 1 - percentage;
-
-            //print(maxCount);
-            //print(percentage);
-        }
+        
     }
 
-    void OnAddItem()
+    private void OnAddItem()
     {
         
+        int maxCount = 0, currentCount = 0;
+        foreach (UpgradeCondition u in dzScript.conditions)
+        {
+            currentCount += u.count;
 
-        
+            maxCount += u.countNeeded;
+
+
+        }
+        print(currentCount);
+        percentage = (float)currentCount / maxCount;
+        print(percentage);
+        silhouetteSlider = (1 - percentage) * 3;
+        FillSilhouette();
     }
 
     private void FillSilhouette()
     {
-        for (i = 0; i < scaleObject.Length; i++)
-        {
-            string maskToString = scaleObject[i].name;
+        l.localScale = new Vector3(l.localScale.x, l.localScale.y, 5.346772f * Mathf.Clamp01((silhouetteSlider - 2)));
+        r.localScale = new Vector3(r.localScale.x, r.localScale.y, 5.346772f * Mathf.Clamp01((silhouetteSlider - 1)));
+        f.localScale = new Vector3(f.localScale.x, f.localScale.y, 25.89941f * Mathf.Clamp01((silhouetteSlider)));
 
-            if (maskToString == plane.repairParts)
-            {
-                maskPosition = i;
 
-                if (plane.repairParts == "Front")
+
+
+
+
+
+
+
+
+        /*
+                switch (plane.randomRepair)
                 {
-                    scaleY = scaleObject[i].transform.localScale.y;
-                    scaleZ = scaleObject[i].transform.localScale.z;
-
-                    scaleChange = new Vector3(silhouetteSlider, scaleY, scaleZ);
-
-                    scaleObject[i].transform.localScale = scaleChange;
+                    case 1:
+                        mFront.SetActive(true);
+                        mLeft.SetActive(false);
+                        mRight.SetActive(false);
+                        break;
+                    case 2:
+                        mLeft.SetActive(true);
+                        mFront.SetActive(false);
+                        mRight.SetActive(false);
+                        break;
+                    case 3:
+                        mRight.SetActive(true);
+                        mLeft.SetActive(false);
+                        mFront.SetActive(false);
+                        break;
                 }
+        */
 
-                if (plane.repairParts == "Left")
-                {
-                    scaleY = scaleObject[i].transform.localScale.y;
-                    scaleX = scaleObject[i].transform.localScale.x;
-
-                    scaleChange = new Vector3(scaleX, scaleY, silhouetteSlider);
-
-                    scaleObject[i].transform.localScale = scaleChange;
-                }
-
-                if (plane.repairParts == "Right")
-                {
-                    scaleY = scaleObject[i].transform.localScale.y;
-                    scaleX = scaleObject[i].transform.localScale.x;
-
-                    scaleChange = new Vector3(scaleX, scaleY, silhouetteSlider);
-
-                    scaleObject[i].transform.localScale = scaleChange;
-                }
-            }
-        }
-
-        switch (plane.randomRepair)
-        {
-            case 1:
-                mFront.SetActive(true);
-                mLeft.SetActive(false);
-                mRight.SetActive(false);
-                break;
-            case 2:
-                mLeft.SetActive(true);
-                mFront.SetActive(false);
-                mRight.SetActive(false);
-                break;
-            case 3:
-                mRight.SetActive(true);
-                mLeft.SetActive(false);
-                mFront.SetActive(false);
-                break;
-        }
     }
 
 }
