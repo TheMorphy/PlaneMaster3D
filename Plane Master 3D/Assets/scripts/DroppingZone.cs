@@ -5,7 +5,6 @@ using System;
 
 public class DroppingZone : MonoBehaviour
 {
-
     [SerializeField]
     public List<UpgradeCondition> conditions = new List<UpgradeCondition>();
     public bool allConditionsComplete;
@@ -22,6 +21,8 @@ public class DroppingZone : MonoBehaviour
 
     Vector3[] positions = new Vector3[10];
     List<int> emptySlots = new List<int>();
+
+    public int maxCount;
 
     private void Start()
     {
@@ -55,7 +56,7 @@ public class DroppingZone : MonoBehaviour
 
     bool AllDone()
     {
-        print("AllDone()");
+        //print("AllDone()");
         bool output = true;
         foreach(UpgradeCondition u in conditions)
         {
@@ -77,6 +78,7 @@ public class DroppingZone : MonoBehaviour
         items.Add(item);
         item.transform.parent = visualStart;
         SetItemDestination(items.Count - 1);
+        SendMessage("OnAddItem", SendMessageOptions.DontRequireReceiver);
     }
     void SetItemDestination(int item)
     {
@@ -105,6 +107,7 @@ public class DroppingZone : MonoBehaviour
                     positions[count] = nextPos;
                     nextPos.z += space.z;
                     count++;
+                    print(count);
                     if (count >= conditions[0].countNeeded)
                     {
                         return;
