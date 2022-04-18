@@ -47,6 +47,7 @@ public class DroppingZone : MonoBehaviour
         {
             yield return new WaitUntil(() => AllDone());
             allConditionsComplete = true;
+            SendMessage("OnAllConditionsComplete", SendMessageOptions.DontRequireReceiver);
             yield return new WaitUntil(() => !AllDone());
             allConditionsComplete = false;
             yield return null;
@@ -55,12 +56,13 @@ public class DroppingZone : MonoBehaviour
 
     bool AllDone()
     {
-        print("AllDone()");
         bool output = true;
         foreach(UpgradeCondition u in conditions)
         {
             if (u.count >= u.countNeeded)
                 u.completed = true;
+            else
+                u.completed = false;
             if(!u.completed)
             {
                 output = false;
@@ -71,12 +73,12 @@ public class DroppingZone : MonoBehaviour
         return output;
     }
 
-    public void AddItem(Item item)
+    public void AddItem(Item item, bool translateItem = true)
     {
-        print("addItem");
         items.Add(item);
         item.transform.parent = visualStart;
         SetItemDestination(items.Count - 1);
+        SendMessage("OnAddItem", SendMessageOptions.DontRequireReceiver);
     }
     void SetItemDestination(int item)
     {

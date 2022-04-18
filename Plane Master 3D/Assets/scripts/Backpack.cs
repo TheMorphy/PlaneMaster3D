@@ -48,27 +48,26 @@ public class Backpack : MonoBehaviour
             
             if(c.gameObject.layer == 7 && !player.isMoving && dropTime <= 0)
             {
-                print("stage1");
                 DroppingZone droppingZone = c.GetComponent<DroppingZone>();
                 foreach(UpgradeCondition u in droppingZone.conditions)
                 { 
                     if(!u.completed && dropTime <= 0)
                     {
-                        print("stage2");
                         if (CheckItems(u.name) >= 0)
                         {
-                            print("stage3");
                             int itemToDrop = CheckItems(u.name);
                             Transform itemTransform = items[itemToDrop].transform;
-                            droppingZone.AddItem(items[itemToDrop]);
-                            items.RemoveAt(itemToDrop);
-                            
                             if(!droppingZone.showDroppedItems)
                             {
-                                itemTransform.parent = u.itemDestination;
                                 StartCoroutine(LerpItemToDestination(itemTransform));
                             }
-                            
+                            else
+                            {
+                                droppingZone.AddItem(items[itemToDrop]);
+                                itemTransform.parent = u.itemDestination;
+                            }
+                            items.RemoveAt(itemToDrop);
+
                             u.count++;
 
                             dropTime = itemDropInterval;
@@ -83,7 +82,6 @@ public class Backpack : MonoBehaviour
     {
         while(item.transform.localPosition != Vector3.zero)
         {
-            print("lerping");
             item.transform.localPosition = Vector3.Lerp(item.transform.localPosition, Vector3.zero, 0.1f);
             yield return null;
         }
