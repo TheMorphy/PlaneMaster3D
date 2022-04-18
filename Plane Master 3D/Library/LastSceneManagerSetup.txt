@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/MaxysScene.unity
+- path: Assets/Scenes/EnvironmentIslandTest.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
