@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1728626410030300515}
   - component: {fileID: 2329076905002267334}
   - component: {fileID: 555768300003984908}
+  - component: {fileID: 5810864814500141135}
   m_Layer: 0
   m_Name: WideTree
   m_TagString: Untagged
@@ -82,6 +83,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5810864814500141135
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068981967533549529}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0176512, y: 0.118289374, z: 0.017382333}
+  m_Center: {x: -0.00004759587, y: 0.055714693, z: 0.0014020224}
 --- !u!1 &6221043821867166349
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +142,7 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.1490414
+  - screenRelativeHeight: 0
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 555768300003984908}
