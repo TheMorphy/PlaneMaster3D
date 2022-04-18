@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33bd32a7256d90d43b26fb83486b40ad, type: 3}
   m_Name: Plane1
   m_EditorClassIdentifier: 
-  planeName: 
-  requiredCogs: 
-  requiredIron: 
-  mainPart: {fileID: 0}
-  planeParts: []
+  planeName: Plane
+  requiredCogs: 5
+  requiredIron: 10
+  randomRepair: 1
+  repairParts: Front

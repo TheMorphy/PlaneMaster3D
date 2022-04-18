@@ -10,10 +10,27 @@ public class Plane : ScriptableObject
     public string planeName;
     public int requiredCogs;
     public int requiredIron;
+    public int randomRepair;
 
-    [Space]
-    [Header("Plane Parts")]
-    public GameObject mainPart;
-    public GameObject[] planeParts;
+    public string repairParts;
 
+    public void RandomRepair()
+    {
+        randomRepair = Random.Range(1, 4);
+
+        //Debug.Log(randomRepair);
+
+        switch (randomRepair)
+        {
+            case 1:
+                repairParts = "Front";
+                break;
+            case 2:
+                repairParts = "Left";
+                break;
+            case 3:
+                repairParts = "Right";
+                break;
+        }
+    }
 }
