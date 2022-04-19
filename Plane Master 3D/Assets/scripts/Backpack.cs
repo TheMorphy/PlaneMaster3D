@@ -60,6 +60,7 @@ public class Backpack : MonoBehaviour
                             u.count++;
                             if (!droppingZone.showDroppedItems)
                             {
+                                itemTransform.parent = u.itemDestination;
                                 StartCoroutine(LerpItemToDestination(itemTransform));
                                 droppingZone.AddItem(items[itemToDrop], false);
                             }
