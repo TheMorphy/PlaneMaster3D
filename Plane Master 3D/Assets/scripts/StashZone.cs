@@ -29,7 +29,6 @@ public class StashZone : MonoBehaviour
         {
             //emptySlots.Add(i);
         }
-        Array.Resize(ref positions, capacity);
         StartCoroutine(WaitForItemPickup());
         GenerateSortingSystem();
     }
@@ -59,7 +58,7 @@ public class StashZone : MonoBehaviour
             item.transform.parent = visualStart;
             SetItemDestination(items.Count - 1);
         }
-        else
+        else if(ClosestNullItem() >= 0)
         {
             item.transform.parent = visualStart;
             int i = ClosestNullItem();
@@ -80,7 +79,7 @@ public class StashZone : MonoBehaviour
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
 
     IEnumerator WaitForItemPickup()
@@ -123,18 +122,22 @@ public class StashZone : MonoBehaviour
         StartCoroutine(LerpItemToDestination(items[item]));
     }
 
-    IEnumerator LerpItemToDestination(Item i)
+    IEnumerator LerpItemToDestination(Item item)
     {
+        Item i = item;
         while(i.transform.localPosition != i.destination && !i.pickedUp)
         {
             i.transform.localPosition = Vector3.Lerp(i.transform.localPosition, i.destination, 0.1f);
             i.transform.localRotation = Quaternion.Lerp(i.transform.localRotation, Quaternion.Euler(Vector3.zero), 0.1f);
             yield return new WaitForEndOfFrame();
+            if (i == null)
+                yield break;
         }
     }
 
     void GenerateSortingSystem()
     {
+        Array.Resize(ref positions, capacity);
         Vector3 nextPos = Vector3.zero;
         int count = 0;
         for (int y = (int)limitations.y; y > 0; y--)

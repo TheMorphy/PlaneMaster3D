@@ -10,7 +10,7 @@ public class DroppingZone : MonoBehaviour
     public List<UpgradeCondition> conditions = new List<UpgradeCondition>();
     public bool allConditionsComplete;
     [SerializeField]
-    public bool showDroppedItems;
+    public bool showDroppedItems, displayTextAsCountDown;
     [SerializeField]
     Vector3 limitations, space;
     [SerializeField]
@@ -25,13 +25,36 @@ public class DroppingZone : MonoBehaviour
 
     private void Start()
     {
+        
         if(showDroppedItems)
         {
             
             Array.Resize(ref positions, conditions[0].countNeeded);
             GenerateSortingSystem();
         }
+        else
+        {
+            LoadConditions();
+        }
         StartCoroutine(WaitForComplete());
+    }
+
+    void LoadConditions()
+    {
+        foreach (UpgradeCondition c in conditions)
+        {
+            c.count = PlayerPrefs.GetInt(gameObject.name + c.name + "count");
+        }
+        
+            
+    }
+
+    public void SaveConditions()
+    {
+        foreach (UpgradeCondition c in conditions)
+        {
+            PlayerPrefs.SetInt(gameObject.name + c.name + "count", c.count);
+        }
     }
     private void Update()
     {
@@ -40,9 +63,20 @@ public class DroppingZone : MonoBehaviour
             GenerateSortingSystem();
         }
     }
+    public void ResetConditions()
+    {
+        foreach(UpgradeCondition c in conditions)
+        {
+            c.count = 0;
+        }
+        SaveConditions();
+    }
+
+
 
     IEnumerator WaitForComplete()
     {
+        yield return new WaitUntil(() => !AllDone());
         while (false == false)
         {
             yield return new WaitUntil(() => AllDone());
@@ -67,15 +101,30 @@ public class DroppingZone : MonoBehaviour
             {
                 output = false;
             }
-            
-            u.text.text = u.count + "/" + u.countNeeded;
+            if(displayTextAsCountDown)
+            {
+                u.text.text = (u.countNeeded - u.count).ToString();
+                if(u.completed)
+                {
+                    u.text.gameObject.SetActive(false);
+                }
+                else if(!u.text.gameObject.activeSelf)
+                    u.text.gameObject.SetActive(true);
+
+            }
+            else
+            {
+                u.text.text = u.count + "/" + u.countNeeded;
+            }
         }
         return output;
     }
 
+    
+
     public void AddItem(Item item, bool translateItem = true)
     {
-        print("adding ITem");
+        SaveConditions();
         items.Add(item);
         if (translateItem)
         {
@@ -93,12 +142,21 @@ public class DroppingZone : MonoBehaviour
     }
     IEnumerator LerpItemToDestination(int i)
     {
-        while (items[i].transform.localPosition != items[i].destination)
-        {
-            items[i].transform.localPosition = Vector3.Lerp(items[i].transform.localPosition, items[i].destination, 0.1f);
-            items[i].transform.localRotation = Quaternion.Lerp(items[i].transform.localRotation, Quaternion.Euler(Vector3.zero), 0.1f);
-            yield return new WaitForEndOfFrame();
-        }
+        Item itemToLerp = items[i];
+        Vector3 des = itemToLerp.destination;
+            while (itemToLerp.transform.localPosition != itemToLerp.destination && itemToLerp.destination == des)
+            {
+                itemToLerp.transform.localPosition = Vector3.Lerp(itemToLerp.transform.localPosition, itemToLerp.destination, 0.1f);
+                itemToLerp.transform.localRotation = Quaternion.Lerp(itemToLerp.transform.localRotation, Quaternion.Euler(Vector3.zero), 0.1f);
+                yield return new WaitForEndOfFrame();
+            if(itemToLerp == null)
+            {
+                yield break;
+            }
+                
+            }
+       
+        
     }
     void GenerateSortingSystem()
     {
