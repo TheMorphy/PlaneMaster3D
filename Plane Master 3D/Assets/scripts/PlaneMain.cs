@@ -6,7 +6,7 @@ public class PlaneMain : MonoBehaviour
 {
     DroppingZone dz;
     [SerializeField]
-    List<Breakable> breakables = new List<Breakable>();
+    public List<Breakable> breakables = new List<Breakable>();
     [SerializeField]
     float planeHealth;
     [SerializeField]
@@ -18,7 +18,7 @@ public class PlaneMain : MonoBehaviour
     List<ParticleSystem> fire = new List<ParticleSystem>();
     [SerializeField]
     float fireStopPercentage;
-    private void Start()
+    private void OnEnable()
     {
         dz = GetComponent<DroppingZone>();
         OnAddItem();
@@ -39,7 +39,7 @@ public class PlaneMain : MonoBehaviour
     {
         //print(curPercentage());
     }
-    void OnAddItem()
+    public void OnAddItem()
     {
         repairPercent = curPercentage();
         planeHealth = repairPercent;
@@ -55,15 +55,15 @@ public class PlaneMain : MonoBehaviour
                     {
                         breakables[i].health = repairPercent / breakables[i].neededRepairPercent;
                         breakables[i].obj.GetComponent<Outline>().enabled = true;
-                        dz.conditions[0].itemDestination.position = breakables[i].obj.position;
-                        dz.conditions[1].itemDestination.position = breakables[i].obj.position;
+                        //dz.conditions[0].itemDestination.position = breakables[i].obj.position;
+                        //dz.conditions[1].itemDestination.position = breakables[i].obj.position;
                     }
                     else if (repairPercent > breakables[i - 1].neededRepairPercent)
                     {
                         breakables[i].health = (repairPercent - breakables[i - 1].neededRepairPercent) / (breakables[i].neededRepairPercent - breakables[i - 1].neededRepairPercent);
                         breakables[i].obj.GetComponent<Outline>().enabled = true;
-                        dz.conditions[0].itemDestination.position = breakables[i].obj.position;
-                        dz.conditions[1].itemDestination.position = breakables[i].obj.position;
+                        //dz.conditions[0].itemDestination.position = breakables[i].obj.position;
+                        //dz.conditions[1].itemDestination.position = breakables[i].obj.position;
                     }
                     else
                         breakables[i].obj.GetComponent<Outline>().enabled = false;
