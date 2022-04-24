@@ -39,7 +39,7 @@ public class TruckDropParts : MonoBehaviour
 
         if (ps != null)
         {
-            listSize = ps.breakables.Count;
+            //listSize = ps.breakables.Count;
         }
         
         for (int i = 0; listSize > planeParts.Count; i++)
@@ -51,7 +51,7 @@ public class TruckDropParts : MonoBehaviour
 
             parts[i].transform.position = planeParts[i].transform.position;
 
-            ps.OnAddItem();
+            //ps.OnAddItem();
         }
     }
 }

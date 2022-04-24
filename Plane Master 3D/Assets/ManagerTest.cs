@@ -24,10 +24,11 @@ public class ManagerTest : MonoBehaviour
 
     GameObject addObj;
 
-    public void DoScript()
+    public void DoScript(List<Transform> groundPositions)
     {
         ChangeNormalPosition();
-        ps.enabled = true;
+        //ps.enabled = true;
+        StartCoroutine(MoveBreakablesToGroundDestinations(groundPositions));
     }
 
     void ChangeNormalPosition()
@@ -35,16 +36,31 @@ public class ManagerTest : MonoBehaviour
         StartCoroutine(ChangePos());
     }
 
+    IEnumerator MoveBreakablesToGroundDestinations(List<Transform> groundPositions)
+    {
+        while(Vector3.Distance(ps.breakables[0].transform.position, groundPositions[0].position) > 0.1f)
+        {
+            for (int i = 0; i < ps.breakables.Count; i++)
+            {
+                ps.breakables[i].transform.position = Vector3.Lerp(ps.breakables[i].transform.position, groundPositions[i].position, 0.1f);
+                ps.breakables[i].transform.rotation = Quaternion.Lerp(ps.breakables[i].transform.rotation, groundPositions[i].rotation, 0.1f);
+            }
+            yield return null;
+        }
+        //Parts moved to the ground
+        yield break;
+    }
+
     private IEnumerator ChangePos()
     {
         for (int i = 0; i < realNormalPos.Count; i++)
         {
-            ps.breakables[i].normalPosition = truckNormalPos[i];
+            //ps.breakables[i].normalPosition = truckNormalPos[i];
         }
         yield return new WaitForSeconds(1);
         for (int i = 0; i < realNormalPos.Count; i++)
         {
-            ps.breakables[i].normalPosition = realNormalPos[i];
+            //ps.breakables[i].normalPosition = realNormalPos[i];
         }
 
         /*if (addObj.transform.Find("BrokenPos") != null)

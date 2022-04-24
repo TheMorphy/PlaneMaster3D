@@ -16,6 +16,8 @@ public class TruckManager : MonoBehaviour
     [Space]
     [SerializeField] int truckSpeed = 1, waitToMove;
     [SerializeField] GameObject planePrefab;
+    [SerializeField]
+    List<Transform> groundPositions = new List<Transform>();
 
     bool isTruckInScene, isTruckStopped, isPlaneInScene, isTruckOpen;
     GameObject truck;
@@ -94,7 +96,8 @@ public class TruckManager : MonoBehaviour
         if (!isTruckOpen)
         {
             ts = FindObjectOfType<ManagerTest>();
-            ts.DoScript();
+            ts.DoScript(groundPositions);
+            print("call do script");
             isTruckOpen = true;
         }
         if (lastDestination != null)

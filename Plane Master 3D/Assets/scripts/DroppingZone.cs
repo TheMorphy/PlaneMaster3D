@@ -112,7 +112,7 @@ public class DroppingZone : MonoBehaviour
                     u.text.gameObject.SetActive(true);
 
             }
-            else
+            else if(u.text != null)
             {
                 u.text.text = u.count + "/" + u.countNeeded;
             }
