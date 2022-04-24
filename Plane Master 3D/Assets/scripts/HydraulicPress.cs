@@ -5,6 +5,14 @@ using UnityEngine;
 public class HydraulicPress : MonoBehaviour
 {
     [SerializeField]
+    Build build;
+    [SerializeField]
+    List<RegularUpgrade> levels = new List<RegularUpgrade>();
+
+    [SerializeField]
+    List<MeshRenderer> colorChangingParts = new List<MeshRenderer>();
+
+    [SerializeField]
     DroppingZone droppingZone;
     [SerializeField]
     StashZone stashZone;
@@ -22,6 +30,24 @@ public class HydraulicPress : MonoBehaviour
         StartCoroutine(HydraulicWorker());
         anim = GetComponent<Animator>();
     }
+    void OnLoadLevels()
+    {
+        print("OnLoadLevels");
+        droppingZone.conditions[0].countNeeded = levels[build.level].capacity;
+        stashZone.capacity = levels[build.level].capacity;
+        stashZone.SendMessage("GenerateSortingSystem");
+        cogsPerMinute = levels[build.level].speed * 60;
+
+        foreach(MeshRenderer m in colorChangingParts)
+        {
+            m.material.SetColor("_Color", levels[build.level].newColor);
+        }
+    }
+
+    private void Update()
+    {
+        //OnLoadLevels();
+    }
 
     IEnumerator HydraulicWorker()
     {
@@ -31,6 +57,7 @@ public class HydraulicPress : MonoBehaviour
             currentMetal = droppingZone.items[droppingZone.items.Count - 1];
             droppingZone.items.RemoveAt(droppingZone.items.Count - 1);
             droppingZone.conditions[0].count -= 1;
+            droppingZone.SaveConditions();
             anim.speed = cogsPerMinute / 60;
             anim.SetBool("isProcessing", true);
             while(currentMetal != null)
