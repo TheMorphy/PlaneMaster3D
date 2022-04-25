@@ -10,7 +10,7 @@ public class DestroyWall : MonoBehaviour
 
         if (g.layer == 9)
         {
-            //Destroy(gameObject, 2);
+            Destroy(gameObject, 2);
         }
     }
 }

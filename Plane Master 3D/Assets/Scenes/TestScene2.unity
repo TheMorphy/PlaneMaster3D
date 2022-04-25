@@ -1807,6 +1807,56 @@ Transform:
   m_Father: {fileID: 880771434}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &331901951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 331901952}
+  - component: {fileID: 331901953}
+  m_Layer: 0
+  m_Name: PlaneNewParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &331901952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331901951}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &331901953
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331901951}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf12f6cb986712b4faa9f5f1b1613048, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &335386328
 GameObject:
   m_ObjectHideFlags: 0
@@ -2426,14 +2476,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f7785a5055ea542be3ce6ef1a5ee44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  truckPrefab: {fileID: 4300247679525640621, guid: bec2e0d5278ed7444ba3f099fa7d03f0, type: 3}
+  truckPrefab: {fileID: 9148171383690037135, guid: edb2024dbf172464eaf0aa1d105b2936, type: 3}
   truckSummonPosition: {fileID: 1375066949}
   planeSummonPosition: {fileID: 1702685913}
   firstDestination: {fileID: 1777217755}
   lastDestination: {fileID: 1778171819}
   truckSpeed: 3
   waitToMove: 1
-  planePrefab: {fileID: 6114754643770698215, guid: da88aea773835434aa625ecbb216f006, type: 3}
+  groundPositions:
+  - {fileID: 706235343}
+  - {fileID: 1874272066}
+  - {fileID: 899202110}
+  - {fileID: 941701149}
+  - {fileID: 1549613770}
+  planeDad: {fileID: 331901951}
 --- !u!1001 &459649033
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4369,6 +4425,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 463109fd7759838438a3cb5b5f2a0fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  build: {fileID: 0}
+  levels: []
+  colorChangingParts: []
   droppingZone: {fileID: 1610351474}
   stashZone: {fileID: 804478534}
   cogsSpawnPos: {fileID: 1175238083}
@@ -5995,6 +6054,7 @@ MonoBehaviour:
     level: 0
   allConditionsComplete: 0
   showDroppedItems: 0
+  displayTextAsCountDown: 0
   limitations: {x: 0, y: 0, z: 0}
   space: {x: 0, y: 0, z: 0}
   items: []
@@ -8164,6 +8224,7 @@ MonoBehaviour:
     level: 0
   allConditionsComplete: 0
   showDroppedItems: 1
+  displayTextAsCountDown: 0
   limitations: {x: 2, y: 2, z: 5}
   space: {x: 0.4, y: 0.066, z: 0.17}
   items: []
@@ -10431,6 +10492,7 @@ MonoBehaviour:
     level: 0
   allConditionsComplete: 0
   showDroppedItems: 0
+  displayTextAsCountDown: 0
   limitations: {x: 0, y: 0, z: 0}
   space: {x: 0, y: 0, z: 0}
   items: []
@@ -10466,6 +10528,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   build: {fileID: 1595820273}
   system: {fileID: 1582665794}
+  level: 0
+  savingKey: 
+  levels: []
 --- !u!95 &1908259892
 Animator:
   serializedVersion: 3
@@ -11180,6 +11245,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   build: {fileID: 475982594}
   system: {fileID: 915112204}
+  level: 0
+  savingKey: 
+  levels: []
 --- !u!114 &2071465396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11202,6 +11270,7 @@ MonoBehaviour:
     level: 0
   allConditionsComplete: 0
   showDroppedItems: 0
+  displayTextAsCountDown: 0
   limitations: {x: 0, y: 0, z: 0}
   space: {x: 0, y: 0, z: 0}
   items: []
@@ -11693,13 +11762,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148557860301}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -143.6, y: 137.732, z: -201.5}
   m_LocalScale: {x: 2458.0833, y: 2458.0828, z: 2458.0828}
   m_Children: []
   m_Father: {fileID: 1288098587}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &543450653099171670
 Transform:
   m_ObjectHideFlags: 0

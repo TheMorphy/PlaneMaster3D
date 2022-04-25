@@ -7,6 +7,8 @@ public class PlaneMain : MonoBehaviour
     DroppingZone dz;
     [SerializeField]
     public List<Breakable> breakables = new List<Breakable>();
+
+    Animator anim;
     
     private void OnEnable()
     {
@@ -37,6 +39,8 @@ public class PlaneMain : MonoBehaviour
             //TakeOff
             //Get The money 
             //...
+            anim = gameObject.GetComponent<Animator>();
+            anim.Play("PlaneFlyOff");
         }
     }
     

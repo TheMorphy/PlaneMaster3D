@@ -9901,7 +9901,7 @@ Transform:
   m_Children:
   - {fileID: 2293201716004812513}
   m_Father: {fileID: 3523605839147598615}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7659073094649555526
 MeshFilter:
@@ -10166,7 +10166,7 @@ Transform:
   - {fileID: 2293201717457216195}
   - {fileID: 2293201716979069675}
   m_Father: {fileID: 3523605839147598615}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2293201715903259381
 GameObject:
@@ -11437,7 +11437,7 @@ Transform:
   - {fileID: 3765276809058238801}
   - {fileID: 5204054195291772378}
   m_Father: {fileID: 3523605839147598615}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3765276808287071369
 MonoBehaviour:
@@ -11452,38 +11452,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   breakables:
-  - obj: {fileID: 8763506773982075477}
-    normalPosition: {fileID: 3765276807629277598}
-    brokenPosition: {fileID: 3765276809072653066}
-    neededRepairPercent: 10
-    health: 0
-  - obj: {fileID: 4271708995778104932}
-    normalPosition: {fileID: 3765276807641483624}
-    brokenPosition: {fileID: 3765276808994379257}
-    neededRepairPercent: 22
-    health: 0
-  - obj: {fileID: 3765276808419080523}
-    normalPosition: {fileID: 3765276807655558328}
-    brokenPosition: {fileID: 3765276808233336326}
-    neededRepairPercent: 27
-    health: 0
-  - obj: {fileID: 8076979679666408381}
-    normalPosition: {fileID: 3765276807270659031}
-    brokenPosition: {fileID: 3765276808079012481}
-    neededRepairPercent: 61.4
-    health: 0
-  - obj: {fileID: 6399913417919828611}
-    normalPosition: {fileID: 3765276808448872735}
-    brokenPosition: {fileID: 3765276808894022423}
-    neededRepairPercent: 100
-    health: 0
-  planeHealth: 0
-  planeMaxHealth: 100
-  smoothLerp: 0.05
-  fire:
-  - {fileID: 702195122190220697}
-  - {fileID: 702195123144325067}
-  fireStopPercentage: 50
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &3765276808287071370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11513,6 +11486,7 @@ MonoBehaviour:
     level: 0
   allConditionsComplete: 0
   showDroppedItems: 0
+  displayTextAsCountDown: 0
   limitations: {x: 0, y: 0, z: 0}
   space: {x: 0, y: 0, z: 0}
   items: []
@@ -11984,10 +11958,10 @@ Transform:
   m_LocalPosition: {x: -18.96, y: -0.13001251, z: -1.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 3765276808287071368}
   - {fileID: 2293201715853957744}
   - {fileID: 8534995309666750603}
   - {fileID: 7462112943076309916}
-  - {fileID: 3765276808287071368}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -12724,7 +12698,7 @@ Transform:
   - {fileID: 5130300797001870821}
   - {fileID: 6637572277976275176}
   m_Father: {fileID: 3523605839147598615}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &180652475143439949
 MeshFilter:
