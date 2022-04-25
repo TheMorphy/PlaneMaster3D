@@ -756,11 +756,11 @@ RectTransform:
   m_Father: {fileID: 876185005}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.43995047, y: -0.5002632}
-  m_SizeDelta: {x: 0.8800049, y: 0.27059937}
-  m_Pivot: {x: -0.0000000547152, y: 0.49999738}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 0.00000069197995, y: -9.135327}
+  m_SizeDelta: {x: 171, y: 18.2706}
+  m_Pivot: {x: -0.000000010244548, y: -0.0000008363277}
 --- !u!114 &78692550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5944,7 +5944,6 @@ GameObject:
   m_Component:
   - component: {fileID: 473539244}
   - component: {fileID: 473539243}
-  - component: {fileID: 473539242}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -5952,14 +5951,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &473539242
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473539241}
-  m_Enabled: 1
 --- !u!20 &473539243
 Camera:
   m_ObjectHideFlags: 0
@@ -10075,7 +10066,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 12.58429, y: 16.0318}
+  m_AnchoredPosition: {x: 12.5842285, y: 16.0318}
   m_SizeDelta: {x: -25.122894, y: 17.2706}
   m_Pivot: {x: 0.000000027008355, y: 0.49999997}
 --- !u!114 &876185006
@@ -11486,7 +11477,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00091552734, y: 329.002}
+  m_AnchoredPosition: {x: 0.0009765625, y: 329.002}
   m_SizeDelta: {x: -204.51, y: -776.805}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &943278556
@@ -17708,9 +17699,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quests:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - questName: Collect Iron
+    progress: 0
+    maxProgess: 20
+    done: 0
+    rewards:
+    - rewardType: 0
+      count: 10
+  - questName: Build a drill
+    progress: 0
+    maxProgess: 1
+    done: 0
+    rewards:
+    - rewardType: 0
+      count: 15
+  - questName: Build a press
+    progress: 0
+    maxProgess: 1
+    done: 0
+    rewards:
+    - rewardType: 0
+      count: 20
   questLevel: 0
   progressBar: {fileID: 78692549}
   progressText: {fileID: 1667609416}

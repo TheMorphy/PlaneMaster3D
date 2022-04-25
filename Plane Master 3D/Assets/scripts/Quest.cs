@@ -2,29 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Quest : MonoBehaviour
+[System.Serializable]
+public class Quest
 {
+    [Space(10)]
     public string questName;
     public int progress;
     public int maxProgess;
+    
     public bool done;
+    
+    public List<Reward> rewards = new List<Reward>();
+    
+}
 
-    public bool Condition()
+[System.Serializable]
+public class Reward
+{
+    public enum RewardType { Money }
+    public RewardType rewardType;
+    public int count;
+    
+    public void Collect()
     {
-        switch(questName)
+        switch(rewardType)
         {
-            case "Collect Iron":
-                return CollectIron();
-                break;
-            default:
-                Debug.LogError("Quest name doesn't matches a quest. Look into the public bool Condition inside Quest.cs");
-                return false;
+            case RewardType.Money:
+                Debug.Log("collected some money: " + count);
                 break;
         }
-    }
-
-    bool CollectIron()
-    {
-        return true;
     }
 }

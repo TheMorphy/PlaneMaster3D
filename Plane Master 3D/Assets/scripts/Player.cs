@@ -80,8 +80,8 @@ public class Player : MonoBehaviour
 
 
             velocity = stableForward.forward * inputY * Time.deltaTime * currentSpeed + stableForward.right * inputX * Time.deltaTime * currentSpeed +stableForward.up * velY;
-
-            transform.rotation = Quaternion.LookRotation(lookRotation);
+            if(lookRotation != Vector3.zero)
+                transform.rotation = Quaternion.LookRotation(lookRotation);
             controller.Move(velocity);
             visual3D.SetFloat("Speed", currentSpeed);
         

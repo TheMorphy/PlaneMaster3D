@@ -33,7 +33,7 @@ public class QuestSystem : MonoBehaviour
         progressBarStartWidth = progressBar.sizeDelta.x;
         LoadQuests();
     }
-
+   
     void LoadQuests()
     {
         for(int i = 0; i < quests.Count; i++)
@@ -129,6 +129,10 @@ public class QuestSystem : MonoBehaviour
     public void CollectReward()
     {
         rewardButton.gameObject.SetActive(false);
+        foreach(Reward r in currentQuest.rewards)
+        {
+            r.Collect();
+        }
         PlayerPrefs.SetInt(currentQuest.questName + "reward", 1);
         questLevel++;
         currentQuest = quests[questLevel];
