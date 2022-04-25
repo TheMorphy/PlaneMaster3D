@@ -11182,7 +11182,7 @@ MonoBehaviour:
     count: 0
     countNeeded: 15
     completed: 0
-    itemDestination: {fileID: 0}
+    itemDestination: {fileID: 4379579003284063351}
     text: {fileID: 0}
     level: 0
   - name: Iron
@@ -11429,7 +11429,7 @@ MonoBehaviour:
     count: 0
     countNeeded: 10
     completed: 0
-    itemDestination: {fileID: 0}
+    itemDestination: {fileID: 2128045678036896929}
     text: {fileID: 0}
     level: 0
   allConditionsComplete: 0
@@ -12151,6 +12151,7 @@ GameObject:
   - component: {fileID: 8149732271270163112}
   - component: {fileID: 8149732271270163113}
   - component: {fileID: 8149732271270163118}
+  - component: {fileID: 7665376351422220096}
   m_Layer: 7
   m_Name: PlaneMain
   m_TagString: Untagged
@@ -12256,6 +12257,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 3.0013685, z: 1.6560755}
   m_Center: {x: 2.382386e-16, y: -0.3170582, z: -0.32803774}
+--- !u!95 &7665376351422220096
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8149732271270163109}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf12f6cb986712b4faa9f5f1b1613048, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8149732271321800743
 GameObject:
   m_ObjectHideFlags: 0

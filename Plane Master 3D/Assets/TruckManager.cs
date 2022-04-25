@@ -15,15 +15,15 @@ public class TruckManager : MonoBehaviour
     [SerializeField] GameObject lastDestination;
     [Space]
     [SerializeField] int truckSpeed = 1, waitToMove;
-    [SerializeField] GameObject planePrefab;
-    [SerializeField]
-    List<Transform> groundPositions = new List<Transform>();
+    [SerializeField] List<Transform> groundPositions = new List<Transform>();
+
+    [SerializeField] GameObject planeDad;
 
     bool isTruckInScene, isTruckStopped, isPlaneInScene, isTruckOpen;
     GameObject truck;
     Transform changeDestination;
     ManagerTest ts;
-    private Animator anim;
+    private Animator anim, planeAnim;
 
     private void Start()
     {
@@ -62,12 +62,6 @@ public class TruckManager : MonoBehaviour
         truck = Instantiate(truckPrefab, v, transform.rotation * Quaternion.Euler(0f, -90f, 0f));
         isTruckInScene = true;
     }
-    void SummonPlane()
-    {
-        Vector3 v = planeSummonPosition.transform.position;
-        Instantiate(planePrefab, v, Quaternion.identity);
-        isPlaneInScene = true;
-    }
 
     void GoToCheckpoint(Transform target, float distanceToStop, float speed)
     {
@@ -92,9 +86,12 @@ public class TruckManager : MonoBehaviour
     {
         anim = truck.GetComponent<Animator>();
         anim.Play("TruckOpeningAnimation");
+
         yield return new WaitForSeconds(waitTime);
         if (!isTruckOpen)
         {
+            GameObject plane = truck.transform.GetChild(2).gameObject;
+            plane.transform.parent = planeDad.transform;
             ts = FindObjectOfType<ManagerTest>();
             ts.DoScript(groundPositions);
             print("call do script");

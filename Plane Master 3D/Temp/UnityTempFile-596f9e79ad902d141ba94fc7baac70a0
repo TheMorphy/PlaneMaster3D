@@ -14,14 +14,6 @@
 /reference:"C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/Managed/UnityEditor.Graphs.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll"
-/reference:"C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll"
-/reference:"C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll"
-/reference:"C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll"
-/reference:"C:/Users/magen/Documents/GitHub/Neuer Ordner/PlaneMaster3D/Plane Master 3D/Library/PackageCache/com.unity.collab-proxy@1.15.15/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll"
-/reference:"C:/Users/magen/Documents/GitHub/Neuer Ordner/PlaneMaster3D/Plane Master 3D/Library/PackageCache/com.unity.collab-proxy@1.15.15/Lib/Editor/PlasticSCM/Unity.Plastic.Newtonsoft.Json.dll"
-/reference:"C:/Users/magen/Documents/GitHub/Neuer Ordner/PlaneMaster3D/Plane Master 3D/Library/PackageCache/com.unity.collab-proxy@1.15.15/Lib/Editor/PlasticSCM/log4netPlastic.dll"
-/reference:"C:/Users/magen/Documents/GitHub/Neuer Ordner/PlaneMaster3D/Plane Master 3D/Library/PackageCache/com.unity.collab-proxy@1.15.15/Lib/Editor/PlasticSCM/unityplastic.dll"
-/reference:"C:/Users/magen/Documents/GitHub/Neuer Ordner/PlaneMaster3D/Plane Master 3D/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/Managed/UnityEngine/UnityEditor.GraphViewModule.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/Managed/UnityEngine/UnityEditor.PackageManagerUIModule.dll"
@@ -212,6 +204,11 @@
 /reference:"C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/System.Xml.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/System.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll"
+/reference:"F:/GamesForFuture/MyGames/PlaneMaster3D/Plane Master 3D/Library/PackageCache/com.unity.collab-proxy@1.15.15/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll"
+/reference:"F:/GamesForFuture/MyGames/PlaneMaster3D/Plane Master 3D/Library/PackageCache/com.unity.collab-proxy@1.15.15/Lib/Editor/PlasticSCM/Unity.Plastic.Newtonsoft.Json.dll"
+/reference:"F:/GamesForFuture/MyGames/PlaneMaster3D/Plane Master 3D/Library/PackageCache/com.unity.collab-proxy@1.15.15/Lib/Editor/PlasticSCM/log4netPlastic.dll"
+/reference:"F:/GamesForFuture/MyGames/PlaneMaster3D/Plane Master 3D/Library/PackageCache/com.unity.collab-proxy@1.15.15/Lib/Editor/PlasticSCM/unityplastic.dll"
+/reference:"F:/GamesForFuture/MyGames/PlaneMaster3D/Plane Master 3D/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll"
 /reference:Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll
 /reference:Library/ScriptAssemblies/Unity.Recorder.Base.dll
 /reference:Library/ScriptAssemblies/Unity.Recorder.Editor.dll

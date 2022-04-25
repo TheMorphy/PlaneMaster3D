@@ -9,8 +9,6 @@
 /nostdlib+
 /preferreduilang:en-US
 /langversion:8.0
-/reference:"C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll"
-/reference:"C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/Managed/UnityEngine/UnityEditor.GraphViewModule.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/Managed/UnityEngine/UnityEditor.PackageManagerUIModule.dll"
@@ -325,8 +323,10 @@ Assets\AlignManager.cs
 "Assets\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs"
 "Assets\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs"
 "Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs"
+Assets\LevelSystem.cs
 Assets\LongClickButton.cs
 Assets\ManagerTest.cs
+Assets\Money.cs
 Assets\MonitorTreeManager.cs
 Assets\PickRandomPosition.cs
 Assets\PlaneEndAnimation.cs
