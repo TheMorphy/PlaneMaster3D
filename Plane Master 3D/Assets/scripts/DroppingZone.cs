@@ -45,8 +45,6 @@ public class DroppingZone : MonoBehaviour
         {
             c.count = PlayerPrefs.GetInt(gameObject.name + c.name + "count");
         }
-        
-            
     }
 
     public void SaveConditions()
