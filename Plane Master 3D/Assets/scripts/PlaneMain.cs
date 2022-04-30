@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlaneMain : MonoBehaviour
 {
-    DroppingZone dz;
+
+	[SerializeField] GameObject planeDropZone;
+	DroppingZone dz;
     [SerializeField]
     public List<Breakable> breakables = new List<Breakable>();
 
-    public int Lenght = 6;
+    public int Lenght;
     [SerializeField] GameObject[] randomParts;
     [SerializeField] GameObject[] containerPositions;
 
@@ -16,10 +18,11 @@ public class PlaneMain : MonoBehaviour
     int randomNumber;
     public int Rand;
 
-    bool allIsRepaired = false;
+    public bool allIsRepaired = false;
     
     Animator anim;
     TruckManager tm;
+	DroppingZone dzS;
     public int RandomNumber { get => randomNumber; set => randomNumber = value; }
 
     private void OnEnable()
@@ -31,7 +34,7 @@ public class PlaneMain : MonoBehaviour
     private void Start()
     {
         AssignRandomParts();
-        tm = FindObjectOfType<TruckManager>();
+		StartCoroutine(WaitToActivate());
     }
 
     void AssignPlainMains()
@@ -56,12 +59,17 @@ public class PlaneMain : MonoBehaviour
 
         if(allIsRepaired)
         {
-            //TakeOff
-            //Get The money 
-            //...
+			//TakeOff
+			//Get The money 
+			//...
+			anim = GetComponent<Animator>();
+			anim.Play("PlaneFlyOff");
             print("all is repaired");
-            tm.ResetTruckManager();
-        }
+			planeDropZone.SetActive(false);
+			tm = FindObjectOfType<TruckManager>();
+			tm.ResetTruckManager();
+			Destroy(transform.parent.gameObject, 3);
+		}
     }
 
     public void AssignRandomParts()
@@ -86,4 +94,12 @@ public class PlaneMain : MonoBehaviour
             //print(randomNumbers[j]);
         }
     }
+
+	IEnumerator WaitToActivate()
+	{
+		yield return new WaitForSeconds(2);
+		planeDropZone.SetActive(true);
+		dzS = planeDropZone.GetComponent<DroppingZone>();
+		dzS.GetEachCondition();
+	}
 }

@@ -5,7 +5,7 @@ using System;
 
 public class DroppingZone : MonoBehaviour
 {
-
+	[SerializeField] bool isPlanePlatform;
     [SerializeField]
     public List<UpgradeCondition> conditions = new List<UpgradeCondition>();
     public bool allConditionsComplete;
@@ -19,9 +19,12 @@ public class DroppingZone : MonoBehaviour
     Transform visualStart;
     [SerializeField]
     bool debug = false;
+	[SerializeField] public List<int> conditionNumbers = new List<int>();
 
-    Vector3[] positions = new Vector3[10];
+	Vector3[] positions = new Vector3[10];
     List<int> emptySlots = new List<int>();
+
+	PlaneMain planeScript;
 
     private void Start()
     {
@@ -60,8 +63,51 @@ public class DroppingZone : MonoBehaviour
         {
             GenerateSortingSystem();
         }
-    }
-    public void ResetConditions()
+
+		if (conditions[0] != null && isPlanePlatform)
+		{
+			UpdateConditions();
+		}
+	}
+
+	public void GetEachCondition()
+	{
+		if (isPlanePlatform)
+		{
+			planeScript = FindObjectOfType<PlaneMain>();
+
+			int Lenght = planeScript.Lenght;
+
+			conditionNumbers = new List<int>(new int[Lenght]);
+
+			for (int i = 0; i < Lenght; i++)
+			{
+				int cNumb = planeScript.randomNumbers[i];
+				conditionNumbers[i] = cNumb;
+				print(cNumb);
+				DroppingZone dz = planeScript.breakables[cNumb].GetComponent<DroppingZone>();
+				conditions.Add(dz.conditions[i]);
+			}
+		}
+	}
+
+	public void UpdateConditions()
+	{
+		if(planeScript != null && !planeScript.allIsRepaired)
+		{
+			if (conditions[0].completed == true)
+			{
+				// Once first condition is completed change everything to the next condition
+
+				int numb = conditionNumbers[1];
+
+				DroppingZone dz = planeScript.breakables[numb].GetComponent<DroppingZone>();
+				conditions = dz.conditions;
+			}
+		}
+	}
+
+	public void ResetConditions()
     {
         foreach(UpgradeCondition c in conditions)
         {

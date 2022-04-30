@@ -18,7 +18,7 @@ public class WaterBall : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        print("niwajuidwnia");
+        //print("niwajuidwnia");
         if (other.gameObject.layer == 8)
         {
             
