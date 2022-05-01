@@ -7,9 +7,11 @@ using TMPro;
 
 public class LevelSystem : MonoBehaviour
 {
+    public static LevelSystem instance;
+
     #region public
     [SerializeField] GameObject levelUI, moneyUI, moneyUIFinal;
-    [SerializeField] int numberOfLevels, moneyToGet;
+    [SerializeField] public int numberOfLevels, moneyToGet;
     [SerializeField] TextMeshProUGUI moneyNumber;
     #endregion
 
@@ -19,13 +21,27 @@ public class LevelSystem : MonoBehaviour
 
     private void Start()
     {
+        if(LevelSystem.instance != null)
+        {
+            Debug.LogError("Multiple LevelSystems!!!");
+        }
+        else
+        {
+            instance = this;
+        }
+
+
         moneyNumber = moneyUI.GetComponent<TextMeshProUGUI>();
-        money = PlayerPrefs.GetInt("money");
+        money = PlayerPrefs.GetInt("Money");
+        UpdateMoney();
     }
 
-    void AddMoney()
+    public void AddMoney()
     {
         money += moneyToGet;
+        moneyToGet = 0;
+        SaveMoney();
+        UpdateMoney();
     }
 
     public void SaveMoney()
@@ -35,6 +51,6 @@ public class LevelSystem : MonoBehaviour
 
     public void UpdateMoney()
     {
-        moneyNumber.text = money.ToString();
+        moneyNumber.text = money.ToString() + "$";
     }
 }

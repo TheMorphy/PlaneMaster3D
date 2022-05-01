@@ -29,6 +29,8 @@ public class Reward
         {
             case RewardType.Money:
                 Debug.Log("collected some money: " + count);
+                LevelSystem.instance.moneyToGet = count;
+                LevelSystem.instance.AddMoney();
                 break;
         }
     }

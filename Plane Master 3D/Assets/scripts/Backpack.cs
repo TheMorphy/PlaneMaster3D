@@ -70,6 +70,10 @@ public class Backpack : MonoBehaviour
                     {
                         QuestSystem.instance.AddProgress("Collect Iron", 1);
                     }
+                    if(i.itemName == "Cog")
+                    {
+                        QuestSystem.instance.AddProgress("Collect Cogs", 1);
+                    }
                 }
             }
 
