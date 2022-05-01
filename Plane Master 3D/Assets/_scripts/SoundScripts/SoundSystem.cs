@@ -4,32 +4,32 @@ using UnityEngine;
 using UnityEngine.UI;
 public class SoundSystem : MonoBehaviour
 {
-    //Singleton
-    public static SoundSystem instance;
+	//Singleton
+	public static SoundSystem instance;
 
 
-    [SerializeField][Range(0, 100)]
-    float maxVolume; 
-    public List<Sound> sounds = new List<Sound>();
-    [Space(20)]
-    [Header("System Variables")]
-    [SerializeField]
-    Slider volumeSlider;
+	[SerializeField] [Range(0, 100)]
+	float maxVolume;
+	public List<Sound> sounds = new List<Sound>();
+	[Space(20)]
+	[Header("System Variables")]
+	[SerializeField]
+	Slider volumeSlider;
 
-    //Music Handler
-    [Header("Music")]
-    [SerializeField][Range(0, 100)]
-    float musicVolume;
-    AudioSource musicSource;
-    [SerializeField]
-    List<AudioClip> startingMusic = new List<AudioClip>(), longSessionMusic = new List<AudioClip>();
-    Slider musicVolumeSlider;
+	//Music Handler
+	[Header("Music")]
+	[SerializeField] [Range(0, 100)]
+	float musicVolume;
+	AudioSource musicSource;
+	[SerializeField]
+	List<AudioClip> startingMusic = new List<AudioClip>(), longSessionMusic = new List<AudioClip>();
+	Slider musicVolumeSlider;
 
-    [Space(100)]
-    [SerializeField]
-    bool debug;
-    
+	[Space(100)]
+	[SerializeField]
+	bool debug;
 
+	
     void UpdateVolumes()
 	{
         foreach(Sound s in sounds)
@@ -52,7 +52,7 @@ public class SoundSystem : MonoBehaviour
 	IEnumerator MusicHandler()
 	{
         List<AudioClip> playedClips = new List<AudioClip>();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(5);
         //Play random start song
         AudioClip clipToPlay = startingMusic[Random.Range(0, startingMusic.Count)];
         playedClips.Add(clipToPlay);
@@ -106,9 +106,12 @@ public class SoundSystem : MonoBehaviour
         musicVolume = musicVolumeSlider.value;
         UpdateMusicVolume();
 	}
+	private void Awake()
+	{
+		instance = this;
+	}
 
-
-    void Start()
+	void Start()
     {
         instance = this;
         musicSource = GetComponent<AudioSource>();

@@ -28,11 +28,15 @@ public class LevelSystem : MonoBehaviour
 		#endregion
 		moneyNumber = moneyUI.GetComponent<TextMeshProUGUI>();
         money = PlayerPrefs.GetInt("money");
+		UpdateMoney();
     }
 
     public void AddMoney()
     {
         money += moneyToGet;
+		moneyToGet = 0;
+		SaveMoney();
+		UpdateMoney();
     }
 
     public void SaveMoney()
