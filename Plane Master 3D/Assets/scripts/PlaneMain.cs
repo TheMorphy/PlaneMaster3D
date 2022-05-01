@@ -97,7 +97,7 @@ public class PlaneMain : MonoBehaviour
 
 	IEnumerator WaitToActivate()
 	{
-		yield return new WaitForSeconds(2);
+		yield return new WaitForSeconds(3);
 		planeDropZone.SetActive(true);
 		dzS = planeDropZone.GetComponent<DroppingZone>();
 		dzS.GetEachCondition();
