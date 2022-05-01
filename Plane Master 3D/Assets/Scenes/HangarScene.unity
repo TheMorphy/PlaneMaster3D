@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -958,6 +958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e31478da1335d4ea4d53af4873927b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlanePlatform: 0
   conditions: []
   allConditionsComplete: 0
   showDroppedItems: 0
@@ -967,6 +968,7 @@ MonoBehaviour:
   items: []
   visualStart: {fileID: 0}
   debug: 0
+  conditionNumbers: 
 --- !u!114 &89506245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2094,6 +2096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e31478da1335d4ea4d53af4873927b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlanePlatform: 0
   conditions:
   - name: Iron
     count: 0
@@ -2110,6 +2113,7 @@ MonoBehaviour:
   items: []
   visualStart: {fileID: 0}
   debug: 0
+  conditionNumbers: 
 --- !u!4 &177488841
 Transform:
   m_ObjectHideFlags: 0
@@ -4696,6 +4700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e31478da1335d4ea4d53af4873927b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlanePlatform: 0
   conditions:
   - name: Iron
     count: 0
@@ -4712,6 +4717,7 @@ MonoBehaviour:
   items: []
   visualStart: {fileID: 791762928}
   debug: 0
+  conditionNumbers: 
 --- !u!1 &418742858
 GameObject:
   m_ObjectHideFlags: 0
@@ -8845,7 +8851,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 9
+  m_fontSize: 26.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -13856,6 +13862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e31478da1335d4ea4d53af4873927b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlanePlatform: 0
   conditions:
   - name: Cog
     count: 0
@@ -13879,6 +13886,7 @@ MonoBehaviour:
   items: []
   visualStart: {fileID: 0}
   debug: 0
+  conditionNumbers: 
 --- !u!65 &1152298083
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17766,14 +17774,17 @@ MonoBehaviour:
     progress: 0
     maxProgess: 0
     done: 0
+    rewards: []
   - questName: 
     progress: 0
     maxProgess: 0
     done: 0
+    rewards: []
   - questName: 
     progress: 0
     maxProgess: 0
     done: 0
+    rewards: []
   questLevel: 0
   progressBar: {fileID: 78692549}
   progressText: {fileID: 1667609416}
@@ -18119,7 +18130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4da6d125670e6ae418099b192e8e2cc3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.48
+      value: 17.46
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4da6d125670e6ae418099b192e8e2cc3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18127,7 +18138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4da6d125670e6ae418099b192e8e2cc3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.34
+      value: 6.33
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4da6d125670e6ae418099b192e8e2cc3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19091,6 +19102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e31478da1335d4ea4d53af4873927b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlanePlatform: 0
   conditions:
   - name: Iron
     count: 0
@@ -19107,6 +19119,7 @@ MonoBehaviour:
   items: []
   visualStart: {fileID: 93676145}
   debug: 0
+  conditionNumbers: 
 --- !u!4 &1610351475
 Transform:
   m_ObjectHideFlags: 0
@@ -23463,6 +23476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e31478da1335d4ea4d53af4873927b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlanePlatform: 0
   conditions:
   - name: Iron
     count: 0
@@ -23479,6 +23493,7 @@ MonoBehaviour:
   items: []
   visualStart: {fileID: 0}
   debug: 0
+  conditionNumbers: 
 --- !u!4 &1908259890
 Transform:
   m_ObjectHideFlags: 0
@@ -24780,6 +24795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e31478da1335d4ea4d53af4873927b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlanePlatform: 0
   conditions:
   - name: Iron
     count: 0
@@ -24796,6 +24812,7 @@ MonoBehaviour:
   items: []
   visualStart: {fileID: 0}
   debug: 0
+  conditionNumbers: 
 --- !u!4 &2071465397
 Transform:
   m_ObjectHideFlags: 0
@@ -25405,6 +25422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e31478da1335d4ea4d53af4873927b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlanePlatform: 0
   conditions:
   - name: Iron
     count: 0
@@ -25421,6 +25439,7 @@ MonoBehaviour:
   items: []
   visualStart: {fileID: 0}
   debug: 0
+  conditionNumbers: 
 --- !u!4 &2143293538
 Transform:
   m_ObjectHideFlags: 0
