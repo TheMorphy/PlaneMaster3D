@@ -33,7 +33,7 @@ public class ManagerTest : MonoBehaviour
             for (int i = 0; i < ps.randomNumbers.Count; i++)
             {
                 int rand = ps.randomNumbers[i];
-                print(rand);
+                //print(rand);
                 ps.breakables[rand].transform.position = Vector3.Lerp(ps.breakables[rand].transform.position, groundPositions[i].position, 0.1f);
                 ps.breakables[rand].transform.rotation = Quaternion.Lerp(ps.breakables[rand].transform.rotation, groundPositions[i].rotation, 0.1f);
             }

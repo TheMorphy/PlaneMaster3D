@@ -327,12 +327,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e31478da1335d4ea4d53af4873927b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlanePlatform: 0
   conditions:
   - name: Iron
     count: 0
     countNeeded: 12
     completed: 0
-    itemDestination: {fileID: 3841125338952193439}
+    itemDestination: {fileID: 400925690548068879}
     text: {fileID: 0}
     level: 0
   allConditionsComplete: 0
@@ -343,6 +344,7 @@ MonoBehaviour:
   items: []
   visualStart: {fileID: 0}
   debug: 0
+  conditionNumbers: 
 --- !u!65 &6035202004244104092
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -467,13 +469,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1125384216367609578}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.87, y: -1.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5541656951148454841}
   - {fileID: 5541656951335201255}
   m_Father: {fileID: 8149732271270163114}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1197056698354734267
 GameObject:
@@ -503,6 +505,37 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3583784309300221026}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1761714263672961243
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4398509992562346779}
+  m_Layer: 0
+  m_Name: PlaneDad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4398509992562346779
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761714263672961243}
+  m_LocalRotation: {x: -0.000000010536714, y: 0.7071068, z: -0.000000010536714, w: 0.7071068}
+  m_LocalPosition: {x: -0.42, y: 3.24, z: -26.09}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8149732271270163114}
+  m_Father: {fileID: 8484506592955161909}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2476186633565104081
@@ -1208,12 +1241,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e31478da1335d4ea4d53af4873927b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlanePlatform: 0
   conditions:
   - name: Iron
     count: 0
     countNeeded: 10
     completed: 0
-    itemDestination: {fileID: 9084166917138026566}
+    itemDestination: {fileID: 400925690548068879}
     text: {fileID: 0}
     level: 0
   allConditionsComplete: 0
@@ -1224,6 +1258,7 @@ MonoBehaviour:
   items: []
   visualStart: {fileID: 0}
   debug: 0
+  conditionNumbers: 
 --- !u!65 &9018315733897239296
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1292,13 +1327,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5541656951148454838}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 1.16, z: 12.89}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 964292225277135864}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!198 &5541656951148454843
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -6096,13 +6131,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5541656951335201252}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 1.16, z: 12.89}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 964292225277135864}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!198 &5541656951335201257
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -11182,14 +11217,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7231947179219101154}
-  - component: {fileID: 7231947179219101153}
-  m_Layer: 0
+  - component: {fileID: 4748430010064702836}
+  - component: {fileID: 6527952192760108208}
+  m_Layer: 7
   m_Name: PlaneDropZone
-  m_TagString: Untagged
+  m_TagString: planedrop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7231947179219101154
 Transform:
   m_ObjectHideFlags: 0
@@ -11198,15 +11234,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7231947179219101152}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.1, y: -3.2, z: -7}
+  m_LocalPosition: {x: -0.1, y: -3.87, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7231947179268276092}
   - {fileID: 7231947180887861950}
   m_Father: {fileID: 8149732271270163114}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7231947179219101153
+--- !u!65 &4748430010064702836
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7231947179219101152}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.9981503, y: 0.20032418, z: 6.9748178}
+  m_Center: {x: 0.0028200143, y: 0.0008999109, z: -0.002130508}
+--- !u!114 &6527952192760108208
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11215,9 +11264,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7231947179219101152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdf65e7ed83f8d1438933ff8705f325b, type: 3}
+  m_Script: {fileID: 11500000, guid: c7e31478da1335d4ea4d53af4873927b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlanePlatform: 1
   conditions: []
   allConditionsComplete: 0
   showDroppedItems: 0
@@ -11227,6 +11277,7 @@ MonoBehaviour:
   items: []
   visualStart: {fileID: 0}
   debug: 0
+  conditionNumbers: 
 --- !u!1 &7231947179268276083
 GameObject:
   m_ObjectHideFlags: 0
@@ -11286,7 +11337,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 008e656cedda25b45b1c9b7d38222569, type: 2}
+  - {fileID: 2100000, guid: a97ea495d58ed5048953e60e455e43f4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11468,12 +11519,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e31478da1335d4ea4d53af4873927b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlanePlatform: 0
   conditions:
   - name: Iron
     count: 0
     countNeeded: 5
     completed: 0
-    itemDestination: {fileID: 4379579003284063351}
+    itemDestination: {fileID: 400925690548068879}
     text: {fileID: 0}
     level: 0
   allConditionsComplete: 0
@@ -11484,6 +11536,7 @@ MonoBehaviour:
   items: []
   visualStart: {fileID: 0}
   debug: 0
+  conditionNumbers: 
 --- !u!65 &5031688365502484754
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11738,12 +11791,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e31478da1335d4ea4d53af4873927b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlanePlatform: 0
   conditions:
   - name: Iron
     count: 0
     countNeeded: 10
     completed: 0
-    itemDestination: {fileID: 2128045678036896929}
+    itemDestination: {fileID: 400925690548068879}
     text: {fileID: 0}
     level: 0
   allConditionsComplete: 0
@@ -11754,6 +11808,7 @@ MonoBehaviour:
   items: []
   visualStart: {fileID: 0}
   debug: 0
+  conditionNumbers: 
 --- !u!65 &6966042683343189386
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11967,7 +12022,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8149732271270163114}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8149732270099054989
 GameObject:
@@ -12311,7 +12366,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8149732271270163114}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8149732271138154344
 GameObject:
@@ -12393,12 +12448,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e31478da1335d4ea4d53af4873927b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlanePlatform: 0
   conditions:
   - name: Iron
     count: 0
     countNeeded: 13
     completed: 0
-    itemDestination: {fileID: 8149732271138154345}
+    itemDestination: {fileID: 400925690548068879}
     text: {fileID: 0}
     level: 0
   allConditionsComplete: 0
@@ -12409,6 +12465,7 @@ MonoBehaviour:
   items: []
   visualStart: {fileID: 0}
   debug: 0
+  conditionNumbers: 
 --- !u!65 &9076379286029808331
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12465,6 +12522,7 @@ GameObject:
   - component: {fileID: 8149732271270163112}
   - component: {fileID: 8149732271270163113}
   - component: {fileID: 8149732271270163118}
+  - component: {fileID: 6160757414880243989}
   m_Layer: 7
   m_Name: PlaneMain
   m_TagString: Untagged
@@ -12479,18 +12537,18 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8149732271270163109}
-  m_LocalRotation: {x: -0.000000010536714, y: 0.7071068, z: -0.000000010536714, w: 0.7071068}
-  m_LocalPosition: {x: -0.42, y: 3.24, z: -26.09}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400925690548068879}
+  - {fileID: 7231947179219101154}
   - {fileID: 8149732270077627305}
   - {fileID: 8149732271092744300}
   - {fileID: 8149732271503515507}
   - {fileID: 964292225277135864}
-  - {fileID: 7231947179219101154}
-  m_Father: {fileID: 8484506592955161909}
-  m_RootOrder: 2
+  m_Father: {fileID: 4398509992562346779}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8149732271270163115
 MonoBehaviour:
@@ -12504,6 +12562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee8d9f09c5f3a8e498a1f5bd4eb1fc81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planeDropZone: {fileID: 7231947179219101152}
   breakables:
   - {fileID: 8344758837833585271}
   - {fileID: 3058357216803286583}
@@ -12525,6 +12584,7 @@ MonoBehaviour:
   - {fileID: 5901926495468379531}
   randomNumbers: 
   Rand: 0
+  allIsRepaired: 0
 --- !u!114 &8149732271270163112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12532,11 +12592,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8149732271270163109}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7e31478da1335d4ea4d53af4873927b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlanePlatform: 0
   conditions:
   - name: Iron
     count: 0
@@ -12560,6 +12621,7 @@ MonoBehaviour:
   items: []
   visualStart: {fileID: 0}
   debug: 0
+  conditionNumbers: 
 --- !u!65 &8149732271270163113
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12586,6 +12648,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 3.0013685, z: 1.6560755}
   m_Center: {x: 2.382386e-16, y: -0.3170582, z: -0.32803774}
+--- !u!95 &6160757414880243989
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8149732271270163109}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf12f6cb986712b4faa9f5f1b1613048, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8149732271321800743
 GameObject:
   m_ObjectHideFlags: 0
@@ -12878,7 +12959,7 @@ Transform:
   - {fileID: 8149732269970433040}
   - {fileID: 8149732271395643552}
   m_Father: {fileID: 8149732271270163114}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8149732271550598106
 GameObject:
@@ -13198,7 +13279,7 @@ Transform:
   m_Children:
   - {fileID: 3687106824128958121}
   - {fileID: 2510643761882047934}
-  - {fileID: 8149732271270163114}
+  - {fileID: 4398509992562346779}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}

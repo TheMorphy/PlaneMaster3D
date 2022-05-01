@@ -8,7 +8,7 @@ using TMPro;
 public class LevelSystem : MonoBehaviour
 {
     #region public
-    [SerializeField] GameObject levelUI, moneyUI, moneyUIFinal;
+    [SerializeField] GameObject moneyUI, moneyUIFinal;
     [SerializeField] int moneyToGet;
     [SerializeField] TextMeshProUGUI moneyNumber;
     #endregion

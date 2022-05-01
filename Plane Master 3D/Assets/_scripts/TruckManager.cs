@@ -18,7 +18,7 @@ public class TruckManager : MonoBehaviour
 
     [SerializeField] GameObject planeDad;
 
-    bool isTruckStopped, isTruckOpen, reset;
+    bool isTruckStopped, isTruckOpen, reset, asigned;
     GameObject truck, planeSon;
     Transform changeDestination;
     ManagerTest ts;
@@ -58,7 +58,10 @@ public class TruckManager : MonoBehaviour
             }
 
         // If the truck is going to move again do the closing animation
-        } else anim.SetBool("isClosed", true);
+        } else if (anim != null)
+		{
+			anim.SetBool("isClosed", true);
+		}
     }
 
     // Method that summons the truck
@@ -97,12 +100,12 @@ public class TruckManager : MonoBehaviour
         {
             if (Truck != null)
             {
-                // Assign Plane Gameobject a new Parent, other than the truck
-                planeSon = Truck.transform.GetChild(2).gameObject;
-                planeSon.transform.parent = planeDad.transform;
+				// Assign Plane Gameobject a new Parent, other than the truck
+				planeSon = Truck.transform.GetChild(2).gameObject;
+				planeSon.transform.parent = planeDad.transform;
 
-                // Move plane parts inside the truck to the groud positions
-                ts = FindObjectOfType<ManagerTest>();
+				// Move plane parts inside the truck to the groud positions
+				ts = FindObjectOfType<ManagerTest>();
                 ts.DoScript(groundPositions);
             }
         }
@@ -114,7 +117,7 @@ public class TruckManager : MonoBehaviour
             changeDestination = lastDestination.transform;
         }
 
-        print(isTruckOpen);
+        //print(isTruckOpen);
     }
 
     // Method that resets the script
@@ -122,11 +125,14 @@ public class TruckManager : MonoBehaviour
     {
         isTruckStopped = false;
         isTruckOpen = false;
+		planeSon = null;
         Truck = null;
         changeDestination = null;
         ts = null;
         pm = null;
         anim = null;
         planeAnim = null;
+		firstDestination.SetActive(true);
+		lastDestination.SetActive(false);
     }
 }

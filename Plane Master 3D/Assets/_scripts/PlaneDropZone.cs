@@ -18,8 +18,9 @@ public class PlaneDropZone : MonoBehaviour
     Transform visualStart;
     [SerializeField]
     bool debug = false;
+	[SerializeField] public List<int> conditionNumbers = new List<int>();
 
-    Vector3[] positions = new Vector3[10];
+	Vector3[] positions = new Vector3[10];
     List<int> emptySlots = new List<int>();
 
     PlaneMain planeScript;
@@ -36,7 +37,7 @@ public class PlaneDropZone : MonoBehaviour
             LoadConditions();
         }
         StartCoroutine(WaitForComplete());
-    }
+	}
 
     void LoadConditions()
     {
@@ -59,9 +60,8 @@ public class PlaneDropZone : MonoBehaviour
         {
             GenerateSortingSystem();
         }
+	}
 
-        planeScript = FindObjectOfType<PlaneMain>();
-    }
     public void ResetConditions()
     {
         foreach (UpgradeCondition c in conditions)
