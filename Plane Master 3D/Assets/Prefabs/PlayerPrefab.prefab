@@ -379,6 +379,45 @@ Transform:
   m_Father: {fileID: 464301613301658796}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1049461032470336698
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6764627428520901088}
+  - component: {fileID: 5710088324654654922}
+  m_Layer: 0
+  m_Name: AudioListener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6764627428520901088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049461032470336698}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -9.45, z: 17.68}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5417014372180672485}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &5710088324654654922
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049461032470336698}
+  m_Enabled: 1
 --- !u!1 &1293097638665053800
 GameObject:
   m_ObjectHideFlags: 0
@@ -2091,7 +2130,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5417014370305254744}
   - component: {fileID: 5417014370305254745}
-  - component: {fileID: 5417014370305254742}
   - component: {fileID: 5417014370305254747}
   m_Layer: 0
   m_Name: PlayerCam
@@ -2158,14 +2196,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &5417014370305254742
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5417014370305254743}
-  m_Enabled: 1
 --- !u!114 &5417014370305254747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2790,7 +2820,8 @@ Transform:
   m_LocalRotation: {x: -0.2841347, y: 0.008132891, z: -0.02742328, w: 0.95835763}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6764627428520901088}
   m_Father: {fileID: 5417014370305254744}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 23.877, z: 0}

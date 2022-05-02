@@ -11,41 +11,106 @@ public class LevelSystem : MonoBehaviour
 	public static LevelSystem instance;
 	#endregion
 
-	#region public
-	[SerializeField] GameObject moneyUI, moneyUIFinal;
-    [SerializeField] public int moneyToGet;
+   // [SerializeField] public int moneyToGet;
     [SerializeField] TextMeshProUGUI moneyNumber;
-    #endregion
+	[SerializeField] List<GameObject> moneyPrefabsM10;
+	//explanation:
+	//[0] = 1 money;
+	//[1] = 10 money;
+	//[2] = 100 money;
+	//...
 
-    #region private
+	[SerializeField] GameObject moneyPrefab;
+	[SerializeField] Transform moneyLerpPos;
+
+	[SerializeField]
+	Transform moneyParent;
+
+	[SerializeField]
+	[Range(0.01f, .7f)]
+	float minSmooth = 0.1f, maxSmooth = 0.15f;
+
+	[SerializeField]
+	List<AudioClip> moneyCollectSounds;
+	[SerializeField]
+	AudioSource moneyCollectSource;
+
+	[Space(10)]
+
+	[SerializeField]
+	AudioClip clickSound, releaseSound;
+	[SerializeField]
+	AudioSource clickSource;
+
     int money;
-    #endregion
+	int displayMoney;
+    
 
     private void Start()
     {
 		#region singleton
 		instance = this;
 		#endregion
-		moneyNumber = moneyUI.GetComponent<TextMeshProUGUI>();
-        money = PlayerPrefs.GetInt("money");
-		UpdateMoney();
+		LoadMoney();
+		RefreshUI();
     }
 
-    public void AddMoney()
+
+	//This is the most important function of this script
+    public void AddMoney(int moneyToAdd, Vector3 moneySpawnPosition)
     {
-        money += moneyToGet;
-		moneyToGet = 0;
+        money += moneyToAdd;
 		SaveMoney();
-		UpdateMoney();
-    }
+		RefreshUI();
+			for(int x = moneyPrefabsM10.Count - 1; x >= 0; x--)
+			{
+				int countToInstantiate = (int)(moneyToAdd / Mathf.Pow(10, x));
+				for(int p = 0; p < countToInstantiate; p++)
+				{
+					StartCoroutine(LerpMoney(moneySpawnPosition, moneyPrefabsM10[x], (int)Mathf.Pow(10, x)));
+				}
+				moneyToAdd -= countToInstantiate * (int)Mathf.Pow(10, x);
+				print(moneyToAdd);
+			}
+	}
 
-    public void SaveMoney()
+	IEnumerator LerpMoney(Vector3 moneySpawnPosition, GameObject prefab, int moneyValue)
+	{
+		Transform moneyToLerp = Instantiate(prefab, moneySpawnPosition, Quaternion.identity, moneyParent).transform;
+		float smooth = Random.Range(minSmooth, maxSmooth);
+		do
+		{
+			moneyToLerp.position = Vector3.Lerp(moneyToLerp.position, moneyLerpPos.position, smooth);
+			yield return null;
+		} while (Vector3.Distance(moneyToLerp.transform.position, moneyLerpPos.position) > 0.1f);
+		Destroy(moneyToLerp.gameObject);
+		//Play money_collect sound
+		moneyCollectSource.PlayOneShot(moneyCollectSounds[Random.Range(0, moneyCollectSounds.Count)]);
+		displayMoney += moneyValue;
+		RefreshUI();
+	}
+
+	public void PlayClickSound()
+	{
+		clickSource.PlayOneShot(clickSound);
+	}
+	public void PlayReleaseSound()
+	{
+		clickSource.PlayOneShot(releaseSound);
+	}
+	void SaveMoney()
     {
         PlayerPrefs.SetInt("Money", money);
     }
 
-    public void UpdateMoney()
+	void LoadMoney()
+	{
+		money = PlayerPrefs.GetInt("Money");
+		displayMoney = money;
+	}
+
+	void RefreshUI()
     {
-        moneyNumber.text = money.ToString();
+        moneyNumber.text = displayMoney.ToString();
     }
 }

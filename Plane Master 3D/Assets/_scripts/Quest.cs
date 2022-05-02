@@ -23,14 +23,13 @@ public class Reward
     public RewardType rewardType;
     public int count;
     
-    public void Collect()
+    public void Collect(Vector3 moneyInstantiatePos)
     {
         switch(rewardType)
         {
             case RewardType.Money:
                 Debug.Log("collected some money: " + count);
-                LevelSystem.instance.moneyToGet = count;
-                LevelSystem.instance.AddMoney();
+				LevelSystem.instance.AddMoney(count, moneyInstantiatePos);
                 break;
         }
     }
