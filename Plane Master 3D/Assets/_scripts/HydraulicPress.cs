@@ -22,7 +22,15 @@ public class HydraulicPress : MonoBehaviour
     [SerializeField] GameObject outputItem;
     [SerializeField] Item currentMetal;
     Animator anim;
-    
+    [SerializeField]
+    AudioSource soundSource;
+    [SerializeField] AudioClip soundClip;
+
+
+    public void PlayPressSound()
+	{
+        soundSource.PlayOneShot(soundClip);
+	}
 
     // Update is called once per frame
     void Start()

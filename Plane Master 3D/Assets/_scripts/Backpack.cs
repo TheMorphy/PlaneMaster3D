@@ -155,10 +155,10 @@ public class Backpack : MonoBehaviour
 
                                 items.RemoveAt(itemToDrop);
 
-                                if (items[items.Count - 1] == null)
-                                {
-                                    items.RemoveAt(items.Count - 1);
-                                }
+                                //if (items[items.Count - 1] == null)
+                               // {
+                               //     items.RemoveAt(items.Count - 1);
+                              //  }
 
                                 dropTime = itemDropInterval;
                             }

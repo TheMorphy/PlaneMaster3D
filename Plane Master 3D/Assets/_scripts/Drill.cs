@@ -28,7 +28,7 @@ public class Drill : MonoBehaviour
     }
     private void OnEnable()
     {
-        QuestSystem.instance.AddProgress("Build a drill", 1);
+        //QuestSystem.instance.AddProgress("Build a drill", 1);
     }
     IEnumerator WaitToDrop()
     {
