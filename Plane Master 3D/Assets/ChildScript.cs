@@ -8,7 +8,7 @@ public class ChildScript : MonoBehaviour
 	{
 		if (other.tag == "Player")
 		{
-			transform.parent.GetComponent<LevelSystem>().TriggerDetected(this);
+			//transform.parent.GetComponent<LevelSystem>().TriggerDetected(this);
 		}
 	}
 
@@ -16,7 +16,7 @@ public class ChildScript : MonoBehaviour
 	{
 		if (other.tag == "Player")
 		{
-			transform.parent.GetComponent<LevelSystem>().TriggerExit(this);
+			//transform.parent.GetComponent<LevelSystem>().TriggerExit(this);
 		}
 	}
 }
