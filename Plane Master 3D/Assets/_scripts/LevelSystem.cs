@@ -12,25 +12,45 @@ public class LevelSystem : MonoBehaviour
 	#endregion
 
 	#region public
-	[SerializeField] GameObject moneyUI, moneyUIFinal;
-    [SerializeField] public int moneyToGet;
+	[Space]
+	[Header("Money System")]
+	[SerializeField] GameObject moneyUI;
+	[SerializeField] GameObject moneyUIFinal;
+	[SerializeField] public int moneyToGet;
     [SerializeField] TextMeshProUGUI moneyNumber;
-    #endregion
+	[Space]
+	[Header("Truck System")]
+	[SerializeField] GameObject platformSummon;
+	[SerializeField] GameObject summonTruckButton;
+	#endregion
 
-    #region private
-    int money;
-    #endregion
+	#region private
+	int money;
+	TruckManager tmScript;
+	PlaneMain pmScript;
+	#endregion
 
-    private void Start()
+	private void Awake()
+	{
+		#region Get The Managers
+		tmScript = FindObjectOfType<TruckManager>();
+		if (tmScript == null)
+		{
+			Debug.Log("There is no Truck manager in the scene");
+		}
+		#endregion
+	}
+
+	private void Start()
     {
 		#region singleton
 		instance = this;
 		#endregion
 		moneyNumber = moneyUI.GetComponent<TextMeshProUGUI>();
         money = PlayerPrefs.GetInt("money");
-    }
+	}
 
-    public void AddMoney()
+	public void AddMoney()
     {
         money += moneyToGet;
     }
@@ -44,4 +64,42 @@ public class LevelSystem : MonoBehaviour
     {
         moneyNumber.text = money.ToString();
     }
+
+	#region Truck System
+	public void TriggerDetected(ChildScript childScript)
+	{
+		if(tmScript.Truck == null)
+		{
+			summonTruckButton.SetActive(true);
+		}
+	}
+	public void TriggerExit(ChildScript childScript)
+	{
+		if (tmScript.Truck == null)
+		{
+			summonTruckButton.SetActive(false);
+		}
+	}
+
+	private void Update()
+	{
+		if (pmScript.allIsRepaired && pmScript != null)
+		{
+			tmScript.ResetTruckManager();
+			pmScript = null;
+			Debug.Log("Reset Truck Manager");
+		}
+	}
+
+	public void TruckSystem()
+	{
+		if (tmScript.Truck == null)
+		{
+			tmScript.SummonTruck();
+			pmScript = FindObjectOfType<PlaneMain>();
+			tmScript = FindObjectOfType<TruckManager>();
+			summonTruckButton.SetActive(false);
+		}
+	}
+	#endregion
 }

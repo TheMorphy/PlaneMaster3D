@@ -29,16 +29,6 @@ public class TruckManager : MonoBehaviour
 
     private void Update()
     {
-
-        // Summon the truck
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            if (Truck == null)
-            {
-                SummonTruck();
-            }
-        }
-
         // Move truck to the first checkpoint
         if(changeDestination != null)
         {
@@ -65,7 +55,7 @@ public class TruckManager : MonoBehaviour
     }
 
     // Method that summons the truck
-    void SummonTruck()
+    public void SummonTruck()
     {
         Vector3 v = truckSummonPosition.transform.position;
         Truck = Instantiate(truckPrefab, v, transform.rotation * Quaternion.Euler(0f, -90f, 0f));

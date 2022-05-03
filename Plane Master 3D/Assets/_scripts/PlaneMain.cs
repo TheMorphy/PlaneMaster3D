@@ -66,8 +66,6 @@ public class PlaneMain : MonoBehaviour
 			anim.Play("PlaneFlyOff");
             print("all is repaired");
 			planeDropZone.SetActive(false);
-			tm = FindObjectOfType<TruckManager>();
-			tm.ResetTruckManager();
 			Destroy(transform.parent.gameObject, 3);
 		}
     }
