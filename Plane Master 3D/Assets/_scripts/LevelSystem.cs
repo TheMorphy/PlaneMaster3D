@@ -44,9 +44,17 @@ public class LevelSystem : MonoBehaviour
 
     int money;
 	int displayMoney;
-    
 
-    private void Start()
+	[Space(10)]
+	[Header("Truck System")]
+	[SerializeField] GameObject platformSummon;
+	[SerializeField] GameObject summonTruckButton;
+
+	TruckManager tmScript;
+	PlaneMain pmScript;
+
+
+	private void Start()
     {
 		#region singleton
 		instance = this;
@@ -54,10 +62,19 @@ public class LevelSystem : MonoBehaviour
 		LoadMoney();
 		RefreshUI();
     }
-
+	private void Awake()
+	{
+		#region Get The Managers
+		tmScript = FindObjectOfType<TruckManager>();
+		if (tmScript == null)
+		{
+			Debug.Log("There is no Truck manager in the scene");
+		}
+		#endregion
+	}
 
 	//This is the most important function of this script
-    public void AddMoney(int moneyToAdd, Vector3 moneySpawnPosition)
+	public void AddMoney(int moneyToAdd, Vector3 moneySpawnPosition)
     {
         money += moneyToAdd;
 		SaveMoney();
@@ -113,4 +130,44 @@ public class LevelSystem : MonoBehaviour
     {
         moneyNumber.text = displayMoney.ToString();
     }
+
+	#region Truck System
+	public void TriggerDetected(ChildScript childScript)
+	{
+		if (tmScript.Truck == null)
+		{
+			summonTruckButton.SetActive(true);
+		}
+	}
+	public void TriggerExit(ChildScript childScript)
+	{
+		if (tmScript.Truck == null)
+		{
+			summonTruckButton.SetActive(false);
+		}
+	}
+
+	private void Update()
+	{
+		//if(pmScript != null)
+		if (pmScript != null && pmScript.allIsRepaired)
+		{
+			tmScript.ResetTruckManager();
+			pmScript = null;
+			Debug.Log("Reset Truck Manager");
+		}
+	}
+
+	public void TruckSystem()
+	{
+		if (tmScript.Truck == null)
+		{
+			tmScript.SummonTruck();
+			pmScript = FindObjectOfType<PlaneMain>();
+			tmScript = FindObjectOfType<TruckManager>();
+			summonTruckButton.SetActive(false);
+		}
+	}
+	#endregion
+
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4497167, g: 0.4997837, b: 0.57563275, a: 1}
+  m_IndirectSpecularColor: {r: 0.44971663, g: 0.49978304, b: 0.575632, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4566,6 +4566,8 @@ MonoBehaviour:
   cogsPerMinute: 60
   outputItem: {fileID: 5044591279164610589, guid: 04f0065507f18b245b23340d1e55d96c, type: 3}
   currentMetal: {fileID: 0}
+  soundSource: {fileID: 0}
+  soundClip: {fileID: 0}
 --- !u!1 &890361571
 GameObject:
   m_ObjectHideFlags: 0
@@ -8260,12 +8262,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d90feeea4a47224e8e15d14187480d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyUI: {fileID: 0}
-  moneyUIFinal: {fileID: 0}
-  moneyToGet: 0
   moneyNumber: {fileID: 0}
-  platformSummon: {fileID: 1842306841}
-  summonTruckButton: {fileID: 1320586627}
+  moneyPrefabsM10: []
+  moneyPrefab: {fileID: 0}
+  moneyLerpPos: {fileID: 0}
+  moneyParent: {fileID: 0}
+  minSmooth: 0.1
+  maxSmooth: 0.15
+  moneyCollectSounds: []
+  moneyCollectSource: {fileID: 0}
+  clickSound: {fileID: 0}
+  releaseSound: {fileID: 0}
+  clickSource: {fileID: 0}
 --- !u!1 &1580462332
 GameObject:
   m_ObjectHideFlags: 0
@@ -8722,7 +8730,7 @@ Light:
     m_Type: 2
     m_Resolution: 3
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.676
     m_Bias: 0.115
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -10982,6 +10990,8 @@ MonoBehaviour:
   level: 0
   savingKey: 
   levels: []
+  soundSource: {fileID: 0}
+  buildSound: {fileID: 0}
 --- !u!95 &1908259892
 Animator:
   serializedVersion: 3
@@ -11700,6 +11710,8 @@ MonoBehaviour:
   level: 0
   savingKey: 
   levels: []
+  soundSource: {fileID: 0}
+  buildSound: {fileID: 0}
 --- !u!114 &2071465396
 MonoBehaviour:
   m_ObjectHideFlags: 0

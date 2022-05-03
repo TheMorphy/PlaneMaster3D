@@ -28,9 +28,11 @@ public class Drill : MonoBehaviour
     {
        // StartCoroutine(WaitToDrop());
     }
-    private void OnEnable()
+
+	
+	private void OnEnable()
     {
-		//QuestSystem.instance.AddProgress("Build a drill", 1);
+		QuestSystem.instance.AddProgress("Build a drill", 1);
 		//soundSource.Play();
     }
     IEnumerator WaitToDrop()

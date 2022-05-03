@@ -21,17 +21,19 @@ public class Build : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-    }
+		LoadVariables();
+	}
     private void OnEnable()
     {
         dz = GetComponent<DroppingZone>();
-        LoadVariables();
         SetConditionsToLevel();
     }
 
     void LoadVariables()
     {
-        level = PlayerPrefs.GetInt(savingKey + "c");
+		print("load vars");
+		print("load vars 2 ");
+		level = PlayerPrefs.GetInt(savingKey + "c");
         
 
         if (level < PlayerPrefs.GetInt(savingKey + "p"))

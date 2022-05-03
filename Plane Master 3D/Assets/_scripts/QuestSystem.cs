@@ -33,8 +33,15 @@ public class QuestSystem : MonoBehaviour
         progressBarStartWidth = progressBar.sizeDelta.x;
         LoadQuests();
     }
-   
-    void LoadQuests()
+
+	private void Awake()
+	{
+		print("awake");
+		if (PlayerPrefs.GetInt("Drill" + "p") < 1)
+			PlayerPrefs.SetInt("Drill" + "p", 1);
+	}
+
+	void LoadQuests()
     {
         for(int i = 0; i < quests.Count; i++)
         {
@@ -66,7 +73,7 @@ public class QuestSystem : MonoBehaviour
 
     public void AddProgress(string questName, int addedProgress)
     {
-        Quest q = FindQuestWithName(questName);
+        Quest q = FindQuestWithName(questName, false);
         if(q == null)
         {
             Debug.LogError("Cant add a Progress to a quest that doesnt Exists! I am really sorry...");
@@ -76,7 +83,7 @@ public class QuestSystem : MonoBehaviour
         {
             q.progress += addedProgress;
             SaveSpecificProgress(questName);
-            CheckForDone(questName);
+            CheckForDone(null, q);
         }
 
         if(q == currentQuest)
@@ -85,15 +92,42 @@ public class QuestSystem : MonoBehaviour
         }
     }
 
-    Quest FindQuestWithName(string questName)
+    Quest FindQuestWithName(string questName, bool returnWhenDone = true)
     {
-        for(int i = 0; i < quests.Count; i++)
-        {
-            if(quests[i].questName == questName)
-            {
-                return quests[i];
-            }
-        }
+		Quest q = null;
+
+
+		//First checks if it should return also when its already done
+		if(returnWhenDone)
+		{
+			for (int i = 0; i < quests.Count; i++)
+			{
+				if (quests[i].questName == questName)
+				{
+
+					return quests[i];
+				}
+			}
+		}
+		else 
+		{
+			for (int i = 0; i < quests.Count; i++)
+			{
+				if (quests[i].questName == questName)
+				{
+					if(!quests[i].done)
+					{
+						return quests[i];
+					}
+					else
+					{
+						q = quests[i];
+					}
+					
+				}
+			}
+		}
+        
         return null;
     }
 
@@ -108,9 +142,18 @@ public class QuestSystem : MonoBehaviour
         PlayerPrefs.SetInt(q.questName, q.progress);
     }
 
-    public void CheckForDone(string questName)
+    public void CheckForDone(string questName = null, Quest quest = null)
     {
-        Quest q = quests.Find(x => x.questName == questName);
+		Quest q;
+		if (quest == null)
+		{
+			q = FindQuestWithName(questName);
+		}
+		else
+		{
+			q = quest;
+		}
+		
         if (q == null)
         {
             Debug.LogError("Cant check nothing! sorry...");
@@ -136,6 +179,7 @@ public class QuestSystem : MonoBehaviour
         PlayerPrefs.SetInt(currentQuest.questName + "reward", 1);
         questLevel++;
         currentQuest = quests[questLevel];
+		CheckForDone(null, currentQuest);
         UpdateQuestUI();
     }
 }
