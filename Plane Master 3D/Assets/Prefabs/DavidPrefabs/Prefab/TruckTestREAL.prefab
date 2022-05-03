@@ -334,7 +334,7 @@ MonoBehaviour:
     countNeeded: 12
     completed: 0
     itemDestination: {fileID: 400925690548068879}
-    text: {fileID: 0}
+    text: {fileID: 8149732271395643558}
     level: 0
   allConditionsComplete: 0
   showDroppedItems: 0
@@ -1248,7 +1248,7 @@ MonoBehaviour:
     countNeeded: 10
     completed: 0
     itemDestination: {fileID: 400925690548068879}
-    text: {fileID: 0}
+    text: {fileID: 8149732271395643558}
     level: 0
   allConditionsComplete: 0
   showDroppedItems: 0
@@ -11526,7 +11526,7 @@ MonoBehaviour:
     countNeeded: 5
     completed: 0
     itemDestination: {fileID: 400925690548068879}
-    text: {fileID: 0}
+    text: {fileID: 8149732271395643558}
     level: 0
   allConditionsComplete: 0
   showDroppedItems: 0
@@ -11798,7 +11798,7 @@ MonoBehaviour:
     countNeeded: 10
     completed: 0
     itemDestination: {fileID: 400925690548068879}
-    text: {fileID: 0}
+    text: {fileID: 8149732271395643558}
     level: 0
   allConditionsComplete: 0
   showDroppedItems: 0
@@ -12455,7 +12455,7 @@ MonoBehaviour:
     countNeeded: 13
     completed: 0
     itemDestination: {fileID: 400925690548068879}
-    text: {fileID: 0}
+    text: {fileID: 8149732271395643558}
     level: 0
   allConditionsComplete: 0
   showDroppedItems: 0
