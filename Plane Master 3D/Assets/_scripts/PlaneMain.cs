@@ -23,6 +23,7 @@ public class PlaneMain : MonoBehaviour
     Animator anim;
     TruckManager tm;
 	DroppingZone dzS;
+
     public int RandomNumber { get => randomNumber; set => randomNumber = value; }
 
     private void OnEnable()
@@ -66,6 +67,7 @@ public class PlaneMain : MonoBehaviour
 			anim.Play("PlaneFlyOff");
             print("all is repaired");
 			planeDropZone.SetActive(false);
+			QuestSystem.instance.AddProgress("Repair a plane", 1);
 			Destroy(transform.parent.gameObject, 3);
 		}
     }
