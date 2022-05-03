@@ -15,6 +15,8 @@ public class Drill : MonoBehaviour
     Item itemToAdd;
     [SerializeField]
     Transform animParent;
+	//[SerializeField]
+	//AudioSource soundSource;
 
     //[SerializeField] GameObject itemDrop;
 
@@ -28,7 +30,8 @@ public class Drill : MonoBehaviour
     }
     private void OnEnable()
     {
-        QuestSystem.instance.AddProgress("Build a drill", 1);
+		//QuestSystem.instance.AddProgress("Build a drill", 1);
+		//soundSource.Play();
     }
     IEnumerator WaitToDrop()
     {

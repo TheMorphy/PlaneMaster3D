@@ -13,6 +13,11 @@ public class Build : MonoBehaviour
     [SerializeField]
     List<BuildLevel> levels = new List<BuildLevel>();
     bool readyForUpgrade;
+	[SerializeField]
+	AudioSource soundSource;
+	[SerializeField]
+	AudioClip buildSound;
+			
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -90,5 +95,7 @@ public class Build : MonoBehaviour
     {
         build.SetActive(false);
         system.SetActive(true);
+		if (soundSource != null)
+			soundSource.PlayOneShot(buildSound);
     }
 }

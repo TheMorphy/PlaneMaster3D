@@ -18,6 +18,11 @@ public class Backpack : MonoBehaviour
     Player player;
     [SerializeField]
     WorkerAI worker;
+	[SerializeField]
+	AudioSource itemSoundSource;
+	[SerializeField]
+	List<AudioClip> pickUpSounds = new List<AudioClip>(), dropSounds = new List<AudioClip>();
+
     
 
     //private variables
@@ -25,8 +30,9 @@ public class Backpack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(ItemHandler());
-    }
+		//StartCoroutine(ItemHandler());
+		SoundSystem.instance.sounds.Find(sound => sound.name == "ItemSounds").sources.Add(itemSoundSource);
+	}
 
     private void OnEnable()
     {
@@ -69,10 +75,13 @@ public class Backpack : MonoBehaviour
                     c.isTrigger = true;
                     if(i.itemName == "Iron")
                     {
-                        //QuestSystem.instance.AddProgress("Collect Iron", 1);
+                        QuestSystem.instance.AddProgress("Collect Iron", 1);
                     }
                     //Play pickup sound
-
+					if(itemSoundSource != null)
+					{
+						itemSoundSource.PlayOneShot(pickUpSounds[Random.Range(0, pickUpSounds.Count)]);
+					}
                 }
             }
 
@@ -103,8 +112,10 @@ public class Backpack : MonoBehaviour
                                 }
 
                                 items.RemoveAt(itemToDrop);
+								//Play Drop sound
+								itemSoundSource.PlayOneShot(dropSounds[Random.Range(0, dropSounds.Count)]);
 
-                                if(items[items.Count - 1] == null)
+								if (items[items.Count - 1] == null)
                                 {
                                     items.RemoveAt(items.Count - 1);
                                 }
@@ -144,10 +155,10 @@ public class Backpack : MonoBehaviour
 
                                 items.RemoveAt(itemToDrop);
 
-                                if (items[items.Count - 1] == null)
-                                {
-                                    items.RemoveAt(items.Count - 1);
-                                }
+                                //if (items[items.Count - 1] == null)
+                               // {
+                               //     items.RemoveAt(items.Count - 1);
+                              //  }
 
                                 dropTime = itemDropInterval;
                             }

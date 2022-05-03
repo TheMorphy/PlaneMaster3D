@@ -131,7 +131,7 @@ public class QuestSystem : MonoBehaviour
         rewardButton.gameObject.SetActive(false);
         foreach(Reward r in currentQuest.rewards)
         {
-            r.Collect();
+            r.Collect(rewardButton.transform.position);
         }
         PlayerPrefs.SetInt(currentQuest.questName + "reward", 1);
         questLevel++;
