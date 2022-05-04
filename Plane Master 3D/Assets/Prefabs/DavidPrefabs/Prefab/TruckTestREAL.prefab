@@ -12585,6 +12585,8 @@ MonoBehaviour:
   randomNumbers: 
   Rand: 0
   allIsRepaired: 0
+  disableOnFinish:
+  - {fileID: 1125384216367609578}
 --- !u!114 &8149732271270163112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12633,8 +12635,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 12.8525, y: 4.824241, z: 10.857261}
-  m_Center: {x: 0.06372881, y: 0.12881255, z: 0.037624836}
+  m_Size: {x: 12.8525, y: 4.824241, z: 13.724642}
+  m_Center: {x: 0.063728794, y: 0.12881255, z: 0.30094093}
 --- !u!65 &8149732271270163118
 BoxCollider:
   m_ObjectHideFlags: 0

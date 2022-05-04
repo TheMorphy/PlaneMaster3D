@@ -23,6 +23,9 @@ public class PlaneMain : MonoBehaviour
     Animator anim;
     TruckManager tm;
 	DroppingZone dzS;
+	[SerializeField]
+	List<GameObject> disableOnFinish = new List<GameObject>(), enableOnFinish = new List<GameObject>();
+	bool hoppedOn;
 
     public int RandomNumber { get => randomNumber; set => randomNumber = value; }
 
@@ -63,16 +66,35 @@ public class PlaneMain : MonoBehaviour
 			//TakeOff
 			//Get The money 
 			//...
-			anim = GetComponent<Animator>();
-			anim.Play("PlaneFlyOff");
-            print("all is repaired");
-			planeDropZone.SetActive(false);
-			QuestSystem.instance.AddProgress("Repair a plane", 1);
-			Destroy(transform.parent.gameObject, 3);
+			StartCoroutine(WaitForTakeOff());
+			for(int i = 0; i < disableOnFinish.Count; i++)
+			{
+				disableOnFinish[i].SetActive(false);
+			}
+			
 		}
     }
 
-    public void AssignRandomParts()
+	IEnumerator WaitForTakeOff()
+	{
+		yield return new WaitUntil(() => hoppedOn);
+		anim = GetComponent<Animator>();
+		anim.Play("PlaneFlyOff");
+		print("all is repaired");
+		planeDropZone.SetActive(false);
+		QuestSystem.instance.AddProgress("Repair a plane", 1);
+		Destroy(transform.parent.gameObject, 3);
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if(allIsRepaired)
+		{
+			hoppedOn = true;
+		}
+	}
+
+	public void AssignRandomParts()
     {
         randomNumbers = new List<int>(new int[Lenght]);
 

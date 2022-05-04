@@ -1646,7 +1646,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46.15
+  m_fontSize: 52.4
   m_fontSizeBase: 20.6
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1902,10 +1902,10 @@ RectTransform:
   m_Father: {fileID: 640037606}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 16, y: 16.0318}
-  m_SizeDelta: {x: -25.122894, y: 17.2706}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -200, y: 19.699}
+  m_SizeDelta: {x: 406.8771, y: 24.604}
   m_Pivot: {x: 0.000000027008355, y: 0.49999997}
 --- !u!114 &547602818
 MonoBehaviour:
@@ -2228,8 +2228,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 738}
-  m_SizeDelta: {x: -345.7372, y: -1760.9701}
+  m_AnchoredPosition: {x: -0.00048828125, y: 0}
+  m_SizeDelta: {x: -0.0010986, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &640037607
 MonoBehaviour:
@@ -2303,8 +2303,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -275.43997, y: 7.999692}
-  m_SizeDelta: {x: 549.58, y: 17.2706}
+  m_AnchoredPosition: {x: -203.00005, y: 12.302003}
+  m_SizeDelta: {x: 406, y: 24.604}
   m_Pivot: {x: -0.0000000547152, y: 0.49999738}
 --- !u!114 &674092989
 MonoBehaviour:
@@ -3881,7 +3881,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 43.6
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3917,7 +3917,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 36.57585, y: 31.588135, z: 0, w: 26.600586}
+  m_margin: {x: 61.28618, y: 31.588135, z: 32.05664, w: 37.95398}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4022,10 +4022,10 @@ RectTransform:
   m_Father: {fileID: 1986770746}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -190}
+  m_SizeDelta: {x: 432.1642, y: 162.1403}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1134890360
 MonoBehaviour:
@@ -6665,7 +6665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1789467589
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6683,8 +6683,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00018310547, y: 738.00165}
-  m_SizeDelta: {x: -345.74, y: -1760.9751}
+  m_AnchoredPosition: {x: 0, y: -0.000015258789}
+  m_SizeDelta: {x: 0.000061035, y: -0.000091553}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1789467590
 MonoBehaviour:
@@ -7555,7 +7555,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 55.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7591,7 +7591,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 11.67, y: 0, z: 11.900116, w: 0}
+  m_margin: {x: 44.96379, y: 8.944702, z: 53.64151, w: 28.82129}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -9006,8 +9006,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6629797300637803691, guid: 9fb37865c26d7e4449c44910acde7d0c, type: 3}
-  - {fileID: -6922793697723135513, guid: 9fb37865c26d7e4449c44910acde7d0c, type: 3}
+  - {fileID: 2100000, guid: bef0af827921e9c4b8383a02b2b279ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9277,7 +9276,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148836276263}
-  m_Mesh: {fileID: 26873347325481187, guid: 9fb37865c26d7e4449c44910acde7d0c, type: 3}
+  m_Mesh: {fileID: 26873347325481187, guid: 5ea8f99d83b7c1849b68219aca91bed5, type: 3}
 --- !u!33 &3469287836790275982
 MeshFilter:
   m_ObjectHideFlags: 0

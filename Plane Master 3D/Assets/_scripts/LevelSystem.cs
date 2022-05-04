@@ -53,6 +53,7 @@ public class LevelSystem : MonoBehaviour
 	TruckManager tmScript;
 	PlaneMain pmScript;
 
+	bool truckSystemCalled = false;
 
 	private void Start()
     {
@@ -134,9 +135,9 @@ public class LevelSystem : MonoBehaviour
 	#region Truck System
 	public void TriggerDetected(ChildScript childScript)
 	{
-		if (tmScript.Truck == null)
+		if (tmScript.Truck == null && !truckSystemCalled)
 		{
-			summonTruckButton.SetActive(true);
+			TruckSystem();
 		}
 	}
 	public void TriggerExit(ChildScript childScript)
@@ -160,6 +161,7 @@ public class LevelSystem : MonoBehaviour
 
 	public void TruckSystem()
 	{
+		truckSystemCalled = true;
 		if (tmScript.Truck == null)
 		{
 			tmScript.SummonTruck();
