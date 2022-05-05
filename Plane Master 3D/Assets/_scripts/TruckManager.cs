@@ -19,7 +19,7 @@ public class TruckManager : MonoBehaviour
     [SerializeField] GameObject planeDad;
 
     bool isTruckStopped, isTruckOpen, reset, asigned;
-    GameObject truck, planeSon;
+    public GameObject truck, planeSon;
     Transform changeDestination;
     ManagerTest ts;
     PlaneMain pm;
@@ -41,10 +41,13 @@ public class TruckManager : MonoBehaviour
             if (Truck != null)
             {
                 // Play the truck opening animation
-                anim.Play("TruckOpeningAnimation");
-                anim.SetBool("isClosed", false);
+				if(anim != null)
+				{
+					anim.Play("TruckOpeningAnimation");
+					anim.SetBool("isClosed", false);
+				}
 
-                StartCoroutine(WaitToChangeDestination());
+				StartCoroutine(WaitToChangeDestination());
             }
 
         // If the truck is going to move again do the closing animation
@@ -91,7 +94,7 @@ public class TruckManager : MonoBehaviour
             if (Truck != null)
             {
 				// Assign Plane Gameobject a new Parent, other than the truck
-				planeSon = Truck.transform.GetChild(2).gameObject;
+				//planeSon = Truck.transform.GetChild(2).gameObject;
 				planeSon.transform.parent = planeDad.transform;
 
 				// Move plane parts inside the truck to the groud positions

@@ -66,6 +66,7 @@ public class PlaneMain : MonoBehaviour
 			//TakeOff
 			//Get The money 
 			//...
+			QuestSystem.instance.AddProgress("Repair a plane", 1);
 			StartCoroutine(WaitForTakeOff());
 			for(int i = 0; i < disableOnFinish.Count; i++)
 			{
@@ -82,7 +83,7 @@ public class PlaneMain : MonoBehaviour
 		anim.Play("PlaneFlyOff");
 		print("all is repaired");
 		planeDropZone.SetActive(false);
-		QuestSystem.instance.AddProgress("Repair a plane", 1);
+		QuestSystem.instance.AddProgress("Leave the island", 1);
 		Destroy(transform.parent.gameObject, 3);
 	}
 
@@ -119,7 +120,7 @@ public class PlaneMain : MonoBehaviour
 
 	IEnumerator WaitToActivate()
 	{
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(0.1f);
 		planeDropZone.SetActive(true);
 		dzS = planeDropZone.GetComponent<DroppingZone>();
 		dzS.GetEachCondition();

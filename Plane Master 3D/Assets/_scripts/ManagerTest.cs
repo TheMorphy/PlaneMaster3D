@@ -22,8 +22,9 @@ public class ManagerTest : MonoBehaviour
     {
         int firstInt = ps.randomNumbers[0];
 
-        while(Vector3.Distance(ps.breakables[firstInt].transform.position, groundPositions[firstInt].position) > 0.1f)
+        while(Vector3.Distance(ps.breakables[firstInt].transform.position, groundPositions[firstInt].position) > 1f)
         {
+			print("MoveBreakablesToGroundDestinations");
             /*for (int i = 0; i < ps.breakables.Count; i++)
             {
                 ps.breakables[i].transform.position = Vector3.Lerp(ps.breakables[i].transform.position, groundPositions[i].position, 0.1f);
@@ -36,6 +37,10 @@ public class ManagerTest : MonoBehaviour
                 //print(rand);
                 ps.breakables[rand].transform.position = Vector3.Lerp(ps.breakables[rand].transform.position, groundPositions[i].position, 0.1f);
                 ps.breakables[rand].transform.rotation = Quaternion.Lerp(ps.breakables[rand].transform.rotation, groundPositions[i].rotation, 0.1f);
+				if(Vector3.Distance(ps.breakables[rand].transform.position, groundPositions[i].position) <= 0.1f)
+				{
+					yield break;
+				}
             }
             yield return null;
         }

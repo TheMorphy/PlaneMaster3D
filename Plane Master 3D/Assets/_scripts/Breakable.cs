@@ -16,13 +16,16 @@ public class Breakable : MonoBehaviour
 
     IEnumerator LerpToOriginalPosition()
     {
-        while(transform.position != originalPosition.position || transform.rotation != originalPosition.rotation)
+		print("HERE IS THE BREALABLEEEEEE");
+        while(transform.position != originalPosition.position)
         {
-            transform.position = Vector3.Lerp(transform.position, originalPosition.position, 0.1f);
+			print("BREAKABLE IS LERPING RN");
+			transform.position = Vector3.Lerp(transform.position, originalPosition.position, 0.1f);
             transform.rotation = Quaternion.Lerp(transform.rotation, originalPosition.rotation, 0.1f);
 
             yield return null;
         }
+		print("BREAKABLE STOPPED LERPING");
         // Call method
         planeMain.SendMessage("OnBreakableRepaired");
         yield break;

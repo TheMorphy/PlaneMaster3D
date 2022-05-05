@@ -86,6 +86,7 @@ public class DroppingZone : MonoBehaviour
 				conditionNumbers[i] = cNumb;
 				print(cNumb);
 				DroppingZone dz = planeScript.breakables[cNumb].GetComponent<DroppingZone>();
+				dz.enabled = false;
 				conditions.Add(dz.conditions[i]);
 			}
 		}
@@ -134,6 +135,8 @@ public class DroppingZone : MonoBehaviour
 
     bool AllDone()
     {
+		if (debug)
+			print("droppingZone AllDone()");
         bool output = true;
         foreach(UpgradeCondition u in conditions)
         {
@@ -156,7 +159,7 @@ public class DroppingZone : MonoBehaviour
                     u.text.gameObject.SetActive(true);
 
             }
-            else if(u.text != null)
+            else if(u.text != null && isActiveAndEnabled)
             {
                 u.text.text = u.count + "/" + u.countNeeded;
             }

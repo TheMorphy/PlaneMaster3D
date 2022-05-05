@@ -62,7 +62,8 @@ public class LevelSystem : MonoBehaviour
 		#endregion
 		LoadMoney();
 		RefreshUI();
-    }
+		//TruckSystem();
+	}
 	private void Awake()
 	{
 		#region Get The Managers
@@ -108,14 +109,18 @@ public class LevelSystem : MonoBehaviour
 		RefreshUI();
 	}
 
-	public void PlayClickSound()
+	public void PlayClickSound(Button button)
 	{
 		clickSource.PlayOneShot(clickSound);
+		
 	}
-	public void PlayReleaseSound()
+
+	public void ResetGame()
 	{
-		clickSource.PlayOneShot(releaseSound);
+		PlayerPrefs.DeleteAll();
+		SceneManager.LoadScene(0);
 	}
+	
 	void SaveMoney()
     {
         PlayerPrefs.SetInt("Money", money);
@@ -137,7 +142,7 @@ public class LevelSystem : MonoBehaviour
 	{
 		if (tmScript.Truck == null && !truckSystemCalled)
 		{
-			TruckSystem();
+			//TruckSystem();
 		}
 	}
 	public void TriggerExit(ChildScript childScript)
@@ -166,7 +171,8 @@ public class LevelSystem : MonoBehaviour
 		{
 			tmScript.SummonTruck();
 			pmScript = FindObjectOfType<PlaneMain>();
-			tmScript = FindObjectOfType<TruckManager>();
+			
+			tmScript = FindObjectOfType<TruckManager>();  //Why? xD
 			summonTruckButton.SetActive(false);
 		}
 	}
