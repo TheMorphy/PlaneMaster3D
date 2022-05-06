@@ -42,7 +42,7 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         if (fuelQuantity >= 1)
         {
             fuelQuantity = 1;
-            StartCoroutine(CompletedUI());
+            StartCoroutine(OncePlayerWins());
         }
     }
 
@@ -53,7 +53,7 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         fillImage.fillAmount = pointerDownTimer / requiredHoldTime;
     }
 
-    private IEnumerator CompletedUI()
+    private IEnumerator OncePlayerWins()
     {
         taskCompleted.SetActive(true);
         yield return new WaitForSeconds(1);

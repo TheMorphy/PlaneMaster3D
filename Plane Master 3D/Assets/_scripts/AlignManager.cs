@@ -31,6 +31,7 @@ public class AlignManager : MonoBehaviour
             if (timer >= 2f)
             {
                 timer = 2f;
+				// PLAYER WINS HERE
                 congrats.SetActive(true);
             }
         }
