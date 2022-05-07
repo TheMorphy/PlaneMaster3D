@@ -142,6 +142,7 @@ MonoBehaviour:
   fuelQuantity: 0
   fuelSlider: {fileID: 3733606615355726209}
   taskCompleted: {fileID: 0}
+  taskObject: {fileID: 0}
 --- !u!1 &3733606614188804729
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +176,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -232,7 +233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3733606614238722743
 RectTransform:
   m_ObjectHideFlags: 0
@@ -400,8 +401,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0, y: 0.0014038086}
-  m_SizeDelta: {x: 0, y: 613.52}
+  m_AnchoredPosition: {x: -52.439026, y: 0.0010070801}
+  m_SizeDelta: {x: -104.877, y: 613.52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3733606615042728290
 CanvasRenderer:
@@ -474,8 +475,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 2.5, y: 0.00061035156}
-  m_SizeDelta: {x: -5, y: 613.52}
+  m_AnchoredPosition: {x: -49.939026, y: 0.0010070801}
+  m_SizeDelta: {x: -109.88, y: 613.52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3733606615355726223
 GameObject:
