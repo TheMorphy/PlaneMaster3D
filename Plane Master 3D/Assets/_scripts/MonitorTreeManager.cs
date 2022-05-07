@@ -29,10 +29,10 @@ public class MonitorTreeManager : MonoBehaviour
     {
         if(p1 && p2 && p3 && p4)
         {
-            StartCoroutine(CompletedUI());
+            StartCoroutine(OncePlayerWins());
         }
     }
-    private IEnumerator CompletedUI()
+    private IEnumerator OncePlayerWins()
     {
         yield return new WaitForSeconds(1);
         congrats.SetActive(true);
