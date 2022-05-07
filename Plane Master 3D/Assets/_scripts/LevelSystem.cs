@@ -45,6 +45,9 @@ public class LevelSystem : MonoBehaviour
     int money;
 	int displayMoney;
 
+	public GameObject player;
+
+
 	[Space(10)]
 	[Header("Truck System")]
 	[SerializeField] GameObject platformSummon;
@@ -57,15 +60,16 @@ public class LevelSystem : MonoBehaviour
 
 	private void Start()
     {
-		#region singleton
-		instance = this;
-		#endregion
+		
 		LoadMoney();
 		RefreshUI();
 		//TruckSystem();
 	}
 	private void Awake()
 	{
+		#region singleton
+		instance = this;
+		#endregion
 		#region Get The Managers
 		tmScript = FindObjectOfType<TruckManager>();
 		if (tmScript == null)
@@ -136,6 +140,11 @@ public class LevelSystem : MonoBehaviour
     {
         moneyNumber.text = displayMoney.ToString();
     }
+
+	public void ControlPlayer(Vector3 destination, bool destroyWhenReached)
+	{
+		player.GetComponentInChildren<PlayerAI>().ActivatePlayerAI(destination, destroyWhenReached);
+	}
 
 	#region Truck System
 	public void TriggerDetected(ChildScript childScript)

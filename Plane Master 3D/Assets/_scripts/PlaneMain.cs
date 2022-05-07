@@ -26,6 +26,10 @@ public class PlaneMain : MonoBehaviour
 	[SerializeField]
 	List<GameObject> disableOnFinish = new List<GameObject>(), enableOnFinish = new List<GameObject>();
 	bool hoppedOn;
+	[SerializeField]
+	Transform hopOnPos;
+
+	GameObject player;
 
     public int RandomNumber { get => randomNumber; set => randomNumber = value; }
 
@@ -78,7 +82,7 @@ public class PlaneMain : MonoBehaviour
 
 	IEnumerator WaitForTakeOff()
 	{
-		yield return new WaitUntil(() => hoppedOn);
+		yield return new WaitUntil(() => hoppedOn && player == null);
 		anim = GetComponent<Animator>();
 		anim.Play("PlaneFlyOff");
 		print("all is repaired");
@@ -89,9 +93,11 @@ public class PlaneMain : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if(allIsRepaired)
+		if(allIsRepaired && other.tag == "Player")
 		{
 			hoppedOn = true;
+			player = other.gameObject;
+			LevelSystem.instance.ControlPlayer(hopOnPos.position, true);
 		}
 	}
 

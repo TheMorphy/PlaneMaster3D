@@ -8,7 +8,7 @@ public class PlayerStart : MonoBehaviour
     GameObject playerPrefab;
     void Start()
     {
-        Instantiate(playerPrefab, transform.position, transform.rotation); 
+        LevelSystem.instance.player = Instantiate(playerPrefab, transform.position, transform.rotation); 
     }
 
     private void OnDrawGizmosSelected()

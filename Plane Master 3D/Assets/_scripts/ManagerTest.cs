@@ -24,7 +24,7 @@ public class ManagerTest : MonoBehaviour
 
         while(Vector3.Distance(ps.breakables[firstInt].transform.position, groundPositions[firstInt].position) > 1f)
         {
-			print("MoveBreakablesToGroundDestinations");
+			//print("MoveBreakablesToGroundDestinations");
             /*for (int i = 0; i < ps.breakables.Count; i++)
             {
                 ps.breakables[i].transform.position = Vector3.Lerp(ps.breakables[i].transform.position, groundPositions[i].position, 0.1f);

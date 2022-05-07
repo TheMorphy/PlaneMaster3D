@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     public bool isMoving;
     bool isGrounded;
     float velY;
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+		
         //touch controls
         inputY = joistick.Vertical;
         inputX = joistick.Horizontal;
