@@ -19,8 +19,10 @@ public class MonitorTreeManager : MonoBehaviour
     public bool P3 { get => p3; set => p3 = value; }
     public bool P4 { get => p4; set => p4 = value; }
 
+	[SerializeField] GameObject taskObject;
 
-    private void Start()
+
+    private void OnEnable()
     {
         RandomPosition();
     }
@@ -35,7 +37,8 @@ public class MonitorTreeManager : MonoBehaviour
     private IEnumerator OncePlayerWins()
     {
         yield return new WaitForSeconds(1);
-        congrats.SetActive(true);
+		//congrats.SetActive(true);
+		taskObject.SetActive(false);
     }
 
     void RandomPosition()

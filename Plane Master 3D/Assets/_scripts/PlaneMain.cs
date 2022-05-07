@@ -70,6 +70,7 @@ public class PlaneMain : MonoBehaviour
 			//TakeOff
 			//Get The money 
 			//...
+			LevelSystem.instance.PlayMinigame();
 			QuestSystem.instance.AddProgress("Repair a plane", 1);
 			StartCoroutine(WaitForTakeOff());
 			for(int i = 0; i < disableOnFinish.Count; i++)

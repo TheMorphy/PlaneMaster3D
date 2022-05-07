@@ -16,8 +16,9 @@ public class Breakable : MonoBehaviour
 
     IEnumerator LerpToOriginalPosition()
     {
+		planeMain.SendMessage("OnBreakableRepaired");
 		//print("HERE IS THE BREALABLEEEEEE");
-        while(transform.position != originalPosition.position)
+		while (transform.position != originalPosition.position)
         {
 			//print("BREAKABLE IS LERPING RN");
 			transform.position = Vector3.Lerp(transform.position, originalPosition.position, 0.1f);
@@ -27,7 +28,7 @@ public class Breakable : MonoBehaviour
         }
 		//print("BREAKABLE STOPPED LERPING");
         // Call method
-        planeMain.SendMessage("OnBreakableRepaired");
+        
         yield break;
     }
 }

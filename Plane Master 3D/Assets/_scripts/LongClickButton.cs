@@ -13,6 +13,7 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     [SerializeField] float speed, fuelQuantity;
     [SerializeField] Slider fuelSlider;
     [SerializeField] GameObject taskCompleted;
+	[SerializeField] GameObject taskObject;
 
     private bool pointerDown;
     private float pointerDownTimer;
@@ -55,9 +56,11 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     private IEnumerator OncePlayerWins()
     {
-        taskCompleted.SetActive(true);
+		fuelQuantity = 0;
+		taskObject.SetActive(false);
+        //taskCompleted.SetActive(true);
         yield return new WaitForSeconds(1);
-        taskCompleted.SetActive(false);
-        fuelQuantity = 0;
+        //taskCompleted.SetActive(false);
+        
     }
 }

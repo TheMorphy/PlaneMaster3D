@@ -55,6 +55,8 @@ public class LevelSystem : MonoBehaviour
 
 	TruckManager tmScript;
 	PlaneMain pmScript;
+	[Header("Minigames")]
+	[SerializeField] List<GameObject> minigameObjects = new List<GameObject>();
 
 	bool truckSystemCalled = false;
 
@@ -144,6 +146,16 @@ public class LevelSystem : MonoBehaviour
 	public void ControlPlayer(Vector3 destination, bool destroyWhenReached)
 	{
 		player.GetComponentInChildren<PlayerAI>().ActivatePlayerAI(destination, destroyWhenReached);
+	}
+
+
+	public void PlayMinigame(int specification = -1)
+	{
+		if(specification < 0)
+		{
+			specification = Random.Range(0, minigameObjects.Count);
+		}
+		minigameObjects[specification].SetActive(true);
 	}
 
 	#region Truck System

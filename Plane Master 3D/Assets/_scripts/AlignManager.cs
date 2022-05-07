@@ -12,6 +12,8 @@ public class AlignManager : MonoBehaviour
 
     [SerializeField] float timer;
 
+	[SerializeField] GameObject taskObject;
+
     private float previousValue;
 
     private void Awake()
@@ -24,7 +26,7 @@ public class AlignManager : MonoBehaviour
     private void Update()
     {
         if (objectToRotate.transform.rotation.eulerAngles.z <= 3f || objectToRotate.transform.rotation.eulerAngles.z <= -3f)
-        {
+        { 
             middleLine.color = Color.green;
             objColor.color = Color.green;
             timer = timer + Time.deltaTime;
@@ -32,7 +34,8 @@ public class AlignManager : MonoBehaviour
             {
                 timer = 2f;
 				// PLAYER WINS HERE
-                congrats.SetActive(true);
+				taskObject.SetActive(false);
+                //congrats.SetActive(true);
             }
         }
         else
