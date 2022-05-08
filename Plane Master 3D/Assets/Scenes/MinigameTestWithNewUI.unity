@@ -1659,6 +1659,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 102030600}
     m_Modifications:
+    - target: {fileID: 8508636188064586704, guid: 5d47655ebc7799442ada1cd32bb96be5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8508636188808620267, guid: 5d47655ebc7799442ada1cd32bb96be5, type: 3}
       propertyPath: congrats
       value: 
@@ -1750,6 +1754,14 @@ PrefabInstance:
     - target: {fileID: 8508636188808620269, guid: 5d47655ebc7799442ada1cd32bb96be5, type: 3}
       propertyPath: m_Name
       value: AlignMinigame
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508636188808620269, guid: 5d47655ebc7799442ada1cd32bb96be5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508636188836600713, guid: 5d47655ebc7799442ada1cd32bb96be5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d47655ebc7799442ada1cd32bb96be5, type: 3}

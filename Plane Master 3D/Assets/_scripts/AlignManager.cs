@@ -25,7 +25,10 @@ public class AlignManager : MonoBehaviour
 
     private void Update()
     {
-        if (objectToRotate.transform.rotation.eulerAngles.z <= 3f || objectToRotate.transform.rotation.eulerAngles.z <= -3f)
+		float angle = objectToRotate.transform.rotation.eulerAngles.z;
+		angle = (angle > 180) ? angle - 360 : angle;
+
+		if (angle <= 4f && angle >= -4f)
         { 
             middleLine.color = Color.green;
             objColor.color = Color.green;
