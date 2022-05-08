@@ -268,31 +268,5 @@ public class Backpack : MonoBehaviour
 	}
 
 
-	//Trying to not use it anymore
-    IEnumerator ItemHandler()
-    {
-        while(false == false)
-        {
-            float nextyOffset = 0;
-            float iterations = (float)items.Count / stackSize;
-            yield return new WaitUntil(() => items.Count > 0);
-            for (int i = 0; i < Mathf.CeilToInt(iterations); i++)
-            {
-                float nextItemOffset = 0;
-                for (int a = i * stackSize; a < Mathf.Min(items.Count, stackSize * (i + 1)); a++)
-                {
-                    Vector3 destinatedPos = Vector3.up * nextItemOffset - Vector3.forward * nextyOffset;
-                    if (items[a].transform.localPosition != destinatedPos)
-                    {
-                        items[a].transform.parent = itemParent;
-                        items[a].transform.localPosition = Vector3.Lerp(items[a].transform.localPosition, destinatedPos, 0.1f);
-                        items[a].transform.localRotation = Quaternion.Lerp(items[a].transform.localRotation, Quaternion.Euler(Vector3.zero), 0.1f);
-                    }
-                    nextItemOffset += items[a].height;
-                }
-                nextyOffset += stackOffset;
-            }
-            yield return null;
-        }
-    }
+	
 }
