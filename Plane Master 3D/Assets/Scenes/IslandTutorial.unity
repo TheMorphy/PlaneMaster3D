@@ -478,7 +478,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3476963580078762503, guid: d028d11f3af54064c96db604d25a011d, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3476963580078762503, guid: d028d11f3af54064c96db604d25a011d, type: 3}
       propertyPath: m_LocalScale.x
@@ -552,7 +552,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3476963580078762503, guid: d028d11f3af54064c96db604d25a011d, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3476963580078762503, guid: d028d11f3af54064c96db604d25a011d, type: 3}
       propertyPath: m_LocalScale.x
@@ -1073,6 +1073,7 @@ GameObject:
   - component: {fileID: 128030199}
   - component: {fileID: 128030201}
   - component: {fileID: 128030200}
+  - component: {fileID: 128030202}
   m_Layer: 0
   m_Name: PalmTree2 (4)
   m_TagString: Untagged
@@ -1144,6 +1145,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128030198}
   m_Mesh: {fileID: -3034987282465221355, guid: 8c73279fb1722c442a8a8193be2c95ad, type: 3}
+--- !u!65 &128030202
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128030198}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.058027048, y: 0.059972256, z: 0.09061862}
+  m_Center: {x: 0.004148312, y: 0.0025050454, z: 0.04530956}
 --- !u!1001 &158007104
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1632,7 +1646,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1395484494323797645, guid: 0caf283676530a34e8b762bf8b7882d8, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1395484494323797645, guid: 0caf283676530a34e8b762bf8b7882d8, type: 3}
       propertyPath: m_LocalScale.x
@@ -1768,7 +1782,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 23750c4c113bc4b40afa43d813905bae, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23750c4c113bc4b40afa43d813905bae, type: 3}
       propertyPath: m_LocalScale.x
@@ -1842,7 +1856,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1395484494323797645, guid: 0caf283676530a34e8b762bf8b7882d8, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1395484494323797645, guid: 0caf283676530a34e8b762bf8b7882d8, type: 3}
       propertyPath: m_LocalScale.x
@@ -2274,6 +2288,7 @@ GameObject:
   - component: {fileID: 288565052}
   - component: {fileID: 288565054}
   - component: {fileID: 288565053}
+  - component: {fileID: 288565055}
   m_Layer: 0
   m_Name: PalmTree1 (7)
   m_TagString: Untagged
@@ -2345,6 +2360,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288565051}
   m_Mesh: {fileID: 3049565369969096491, guid: 6e192e181c0871749b3d7f0397f5690f, type: 3}
+--- !u!65 &288565055
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288565051}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.064103045, y: 0.060969673, z: 0.088428915}
+  m_Center: {x: 0.007185977, y: 0.0023447003, z: 0.04421434}
 --- !u!1001 &289595888
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2416,7 +2444,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 23750c4c113bc4b40afa43d813905bae, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23750c4c113bc4b40afa43d813905bae, type: 3}
       propertyPath: m_LocalScale.x
@@ -2728,6 +2756,7 @@ GameObject:
   - component: {fileID: 373695445}
   - component: {fileID: 373695447}
   - component: {fileID: 373695446}
+  - component: {fileID: 373695448}
   m_Layer: 0
   m_Name: PalmTree1 (6)
   m_TagString: Untagged
@@ -2799,6 +2828,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 373695444}
   m_Mesh: {fileID: 3049565369969096491, guid: 6e192e181c0871749b3d7f0397f5690f, type: 3}
+--- !u!65 &373695448
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373695444}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06410306, y: 0.06096968, z: 0.088428915}
+  m_Center: {x: 0.0071861567, y: 0.0023448041, z: 0.04421434}
 --- !u!1 &383884942
 GameObject:
   m_ObjectHideFlags: 0
@@ -3814,7 +3856,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2423748776440768604, guid: 130c2abc33f76d24d8466e097be5dc6e, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 2423748776440768604, guid: 130c2abc33f76d24d8466e097be5dc6e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4410,6 +4452,7 @@ GameObject:
   - component: {fileID: 696812622}
   - component: {fileID: 696812624}
   - component: {fileID: 696812623}
+  - component: {fileID: 696812625}
   m_Layer: 0
   m_Name: PalmTree1 (3)
   m_TagString: Untagged
@@ -4481,6 +4524,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696812621}
   m_Mesh: {fileID: 3049565369969096491, guid: 6e192e181c0871749b3d7f0397f5690f, type: 3}
+--- !u!65 &696812625
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696812621}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06410305, y: 0.060969684, z: 0.088428944}
+  m_Center: {x: 0.0071859807, y: 0.002344519, z: 0.0442146}
 --- !u!1 &706235342
 GameObject:
   m_ObjectHideFlags: 0
@@ -4789,7 +4845,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1395484494323797645, guid: 0caf283676530a34e8b762bf8b7882d8, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1395484494323797645, guid: 0caf283676530a34e8b762bf8b7882d8, type: 3}
       propertyPath: m_LocalScale.x
@@ -5931,7 +5987,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1395484494323797645, guid: 0caf283676530a34e8b762bf8b7882d8, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1395484494323797645, guid: 0caf283676530a34e8b762bf8b7882d8, type: 3}
       propertyPath: m_LocalScale.x
@@ -6372,6 +6428,7 @@ GameObject:
   - component: {fileID: 1010595049}
   - component: {fileID: 1010595051}
   - component: {fileID: 1010595050}
+  - component: {fileID: 1010595052}
   m_Layer: 0
   m_Name: PalmTree1 (9)
   m_TagString: Untagged
@@ -6443,6 +6500,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010595048}
   m_Mesh: {fileID: 3049565369969096491, guid: 6e192e181c0871749b3d7f0397f5690f, type: 3}
+--- !u!65 &1010595052
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010595048}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06410306, y: 0.06096968, z: 0.088428915}
+  m_Center: {x: 0.0071860375, y: 0.0023441038, z: 0.04421434}
 --- !u!1 &1022577806
 GameObject:
   m_ObjectHideFlags: 0
@@ -6454,6 +6524,7 @@ GameObject:
   - component: {fileID: 1022577807}
   - component: {fileID: 1022577809}
   - component: {fileID: 1022577808}
+  - component: {fileID: 1022577810}
   m_Layer: 0
   m_Name: PalmTree1 (8)
   m_TagString: Untagged
@@ -6525,6 +6596,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1022577806}
   m_Mesh: {fileID: 3049565369969096491, guid: 6e192e181c0871749b3d7f0397f5690f, type: 3}
+--- !u!65 &1022577810
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022577806}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.064103045, y: 0.06096967, z: 0.088428915}
+  m_Center: {x: 0.0071859173, y: 0.0023441932, z: 0.044214495}
 --- !u!1 &1040639063
 GameObject:
   m_ObjectHideFlags: 0
@@ -7379,6 +7463,7 @@ GameObject:
   - component: {fileID: 1195376466}
   - component: {fileID: 1195376468}
   - component: {fileID: 1195376467}
+  - component: {fileID: 1195376469}
   m_Layer: 0
   m_Name: PalmTree1 (4)
   m_TagString: Untagged
@@ -7450,6 +7535,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195376465}
   m_Mesh: {fileID: 3049565369969096491, guid: 6e192e181c0871749b3d7f0397f5690f, type: 3}
+--- !u!65 &1195376469
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195376465}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06410306, y: 0.06096968, z: 0.088428915}
+  m_Center: {x: 0.0071861567, y: 0.0023443124, z: 0.04421434}
 --- !u!1 &1201200823
 GameObject:
   m_ObjectHideFlags: 0
@@ -8314,7 +8412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3187403836240078210, guid: a3e4645e02e33f645abd3c83cd0e7980, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3187403836240078210, guid: a3e4645e02e33f645abd3c83cd0e7980, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8376,7 +8474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3187403836240078210, guid: a3e4645e02e33f645abd3c83cd0e7980, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3187403836240078210, guid: a3e4645e02e33f645abd3c83cd0e7980, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9338,7 +9436,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3476963580078762503, guid: d028d11f3af54064c96db604d25a011d, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3476963580078762503, guid: d028d11f3af54064c96db604d25a011d, type: 3}
       propertyPath: m_LocalScale.x
@@ -9414,6 +9512,7 @@ GameObject:
   - component: {fileID: 1549543632}
   - component: {fileID: 1549543634}
   - component: {fileID: 1549543633}
+  - component: {fileID: 1549543635}
   m_Layer: 0
   m_Name: PalmTree1 (10)
   m_TagString: Untagged
@@ -9485,6 +9584,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1549543631}
   m_Mesh: {fileID: 3049565369969096491, guid: 6e192e181c0871749b3d7f0397f5690f, type: 3}
+--- !u!65 &1549543635
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549543631}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06410304, y: 0.06096966, z: 0.088428915}
+  m_Center: {x: 0.0071860654, y: 0.0023445801, z: 0.04421434}
 --- !u!1 &1549613769
 GameObject:
   m_ObjectHideFlags: 0
@@ -10161,6 +10273,7 @@ GameObject:
   - component: {fileID: 1622931751}
   - component: {fileID: 1622931753}
   - component: {fileID: 1622931752}
+  - component: {fileID: 1622931754}
   m_Layer: 0
   m_Name: PalmTree2 (6)
   m_TagString: Untagged
@@ -10232,6 +10345,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1622931750}
   m_Mesh: {fileID: -3034987282465221355, guid: 8c73279fb1722c442a8a8193be2c95ad, type: 3}
+--- !u!65 &1622931754
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622931750}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.058027063, y: 0.05997227, z: 0.09061862}
+  m_Center: {x: 0.0041478667, y: 0.0025049243, z: 0.045308996}
 --- !u!1 &1632933727
 GameObject:
   m_ObjectHideFlags: 0
@@ -10336,6 +10462,7 @@ GameObject:
   - component: {fileID: 1635611017}
   - component: {fileID: 1635611019}
   - component: {fileID: 1635611018}
+  - component: {fileID: 1635611020}
   m_Layer: 0
   m_Name: PalmTree1 (11)
   m_TagString: Untagged
@@ -10407,6 +10534,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635611016}
   m_Mesh: {fileID: 3049565369969096491, guid: 6e192e181c0871749b3d7f0397f5690f, type: 3}
+--- !u!65 &1635611020
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635611016}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06410304, y: 0.060969673, z: 0.08842891}
+  m_Center: {x: 0.0071868417, y: 0.002344461, z: 0.044214647}
 --- !u!1001 &1642614071
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11221,7 +11361,7 @@ Transform:
   - {fileID: 899917978}
   - {fileID: 1288098587}
   m_Father: {fileID: 1997186306}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1741062676
 PrefabInstance:
@@ -11388,7 +11528,7 @@ PrefabInstance:
       objectReference: {fileID: 2092067929}
     - target: {fileID: 36124965483188341, guid: 0858a1abd947c2749997074030fd8cbe, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 36124965483188341, guid: 0858a1abd947c2749997074030fd8cbe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11980,6 +12120,7 @@ GameObject:
   - component: {fileID: 1825079074}
   - component: {fileID: 1825079076}
   - component: {fileID: 1825079075}
+  - component: {fileID: 1825079077}
   m_Layer: 0
   m_Name: PalmTree1 (5)
   m_TagString: Untagged
@@ -12051,6 +12192,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1825079073}
   m_Mesh: {fileID: 3049565369969096491, guid: 6e192e181c0871749b3d7f0397f5690f, type: 3}
+--- !u!65 &1825079077
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825079073}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06410306, y: 0.06096968, z: 0.088428915}
+  m_Center: {x: 0.0071862163, y: 0.0023445657, z: 0.04421434}
 --- !u!1 &1842306841
 GameObject:
   m_ObjectHideFlags: 0
@@ -12278,7 +12432,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1395484494323797645, guid: 0caf283676530a34e8b762bf8b7882d8, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1395484494323797645, guid: 0caf283676530a34e8b762bf8b7882d8, type: 3}
       propertyPath: m_LocalScale.x
@@ -12559,7 +12713,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3187403836240078210, guid: a3e4645e02e33f645abd3c83cd0e7980, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3187403836240078210, guid: a3e4645e02e33f645abd3c83cd0e7980, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12619,6 +12773,7 @@ GameObject:
   - component: {fileID: 1898002011}
   - component: {fileID: 1898002013}
   - component: {fileID: 1898002012}
+  - component: {fileID: 1898002014}
   m_Layer: 0
   m_Name: PalmTree1 (12)
   m_TagString: Untagged
@@ -12690,6 +12845,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1898002010}
   m_Mesh: {fileID: 3049565369969096491, guid: 6e192e181c0871749b3d7f0397f5690f, type: 3}
+--- !u!65 &1898002014
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898002010}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06410305, y: 0.060969677, z: 0.08842892}
+  m_Center: {x: 0.007185713, y: 0.0023450563, z: 0.044214938}
 --- !u!1 &1898390406
 GameObject:
   m_ObjectHideFlags: 0
@@ -13062,7 +13230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3187403836240078210, guid: a3e4645e02e33f645abd3c83cd0e7980, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3187403836240078210, guid: a3e4645e02e33f645abd3c83cd0e7980, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13435,7 +13603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3187403836240078210, guid: a3e4645e02e33f645abd3c83cd0e7980, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3187403836240078210, guid: a3e4645e02e33f645abd3c83cd0e7980, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13511,6 +13679,7 @@ Transform:
   m_LocalPosition: {x: 11.841207, y: -7.663061, z: 4.805381}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 6073087084460948404}
   - {fileID: 1861666453}
   - {fileID: 62506199}
   - {fileID: 48250617}
@@ -13863,6 +14032,7 @@ GameObject:
   - component: {fileID: 2106777807}
   - component: {fileID: 2106777809}
   - component: {fileID: 2106777808}
+  - component: {fileID: 2106777810}
   m_Layer: 0
   m_Name: PalmTree2 (5)
   m_TagString: Untagged
@@ -13934,6 +14104,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2106777806}
   m_Mesh: {fileID: -3034987282465221355, guid: 8c73279fb1722c442a8a8193be2c95ad, type: 3}
+--- !u!65 &2106777810
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106777806}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.058027066, y: 0.059972253, z: 0.09061859}
+  m_Center: {x: 0.004148047, y: 0.0025047185, z: 0.045309234}
 --- !u!4 &2055515717291460
 Transform:
   m_ObjectHideFlags: 0
@@ -14449,6 +14632,7 @@ GameObject:
   - component: {fileID: 543450651807265284}
   - component: {fileID: 3469287837803888033}
   - component: {fileID: 1711813854816815467}
+  - component: {fileID: 919132147868854463}
   m_Layer: 0
   m_Name: PalmTree1 (2)
   m_TagString: Untagged
@@ -14456,6 +14640,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &919132147868854463
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147868854462}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06410307, y: 0.060969703, z: 0.08842895}
+  m_Center: {x: 0.007185938, y: 0.002344664, z: 0.044214673}
 --- !u!1 &919132147996726798
 GameObject:
   m_ObjectHideFlags: 0
@@ -14485,6 +14682,7 @@ GameObject:
   - component: {fileID: 543450652568134150}
   - component: {fileID: 3469287838632652195}
   - component: {fileID: 1711813854638954857}
+  - component: {fileID: 919132148046723261}
   m_Layer: 0
   m_Name: PalmTree1 (1)
   m_TagString: Untagged
@@ -14492,6 +14690,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &919132148046723261
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148046723260}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.064103045, y: 0.060969654, z: 0.088428915}
+  m_Center: {x: 0.007186454, y: 0.0023445354, z: 0.04421432}
 --- !u!1 &919132148242263673
 GameObject:
   m_ObjectHideFlags: 0
@@ -14521,6 +14732,7 @@ GameObject:
   - component: {fileID: 543450653099171670}
   - component: {fileID: 3469287837015281907}
   - component: {fileID: 1711813856242820153}
+  - component: {fileID: 919132148556776941}
   m_Layer: 0
   m_Name: PalmTree2 (1)
   m_TagString: Untagged
@@ -14528,6 +14740,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &919132148556776941
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148556776940}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.058027036, y: 0.05997224, z: 0.09061859}
+  m_Center: {x: 0.0041481354, y: 0.002505375, z: 0.045309063}
 --- !u!1 &919132148557860301
 GameObject:
   m_ObjectHideFlags: 0
@@ -14557,6 +14782,7 @@ GameObject:
   - component: {fileID: 543450653137518600}
   - component: {fileID: 3469287836987445165}
   - component: {fileID: 1711813856145750887}
+  - component: {fileID: 919132148676893363}
   m_Layer: 0
   m_Name: PalmTree2 (2)
   m_TagString: Untagged
@@ -14564,6 +14790,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &919132148676893363
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148676893362}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.058027063, y: 0.059972275, z: 0.09061862}
+  m_Center: {x: 0.0041479263, y: 0.0025053865, z: 0.045309532}
 --- !u!1 &919132148682928320
 GameObject:
   m_ObjectHideFlags: 0
@@ -14575,6 +14814,7 @@ GameObject:
   - component: {fileID: 543450653139364474}
   - component: {fileID: 3469287836989810143}
   - component: {fileID: 1711813856148099349}
+  - component: {fileID: 919132148682928321}
   m_Layer: 0
   m_Name: PalmTree1
   m_TagString: Untagged
@@ -14582,6 +14822,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &919132148682928321
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148682928320}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06410305, y: 0.060969684, z: 0.088428944}
+  m_Center: {x: 0.0071858615, y: 0.0023445785, z: 0.044214565}
 --- !u!1 &919132148836276263
 GameObject:
   m_ObjectHideFlags: 0
@@ -14611,6 +14864,7 @@ GameObject:
   - component: {fileID: 543450652806262827}
   - component: {fileID: 3469287836790275982}
   - component: {fileID: 1711813855948524356}
+  - component: {fileID: 919132148882533010}
   m_Layer: 0
   m_Name: PalmTree2 (3)
   m_TagString: Untagged
@@ -14618,6 +14872,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &919132148882533010
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148882533009}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.05802706, y: 0.059972275, z: 0.09061862}
+  m_Center: {x: 0.004148314, y: 0.0025051446, z: 0.04530937}
 --- !u!1 &919132148891581236
 GameObject:
   m_ObjectHideFlags: 0
@@ -14665,6 +14932,7 @@ GameObject:
   - component: {fileID: 543450653214059255}
   - component: {fileID: 3469287837198198098}
   - component: {fileID: 1711813855553311128}
+  - component: {fileID: 919132149548281934}
   m_Layer: 0
   m_Name: PalmTree2
   m_TagString: Untagged
@@ -14672,6 +14940,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &919132149548281934
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149548281933}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.058027036, y: 0.05997224, z: 0.09061859}
+  m_Center: {x: 0.0041481727, y: 0.0025055092, z: 0.045308936}
 --- !u!114 &997746493167865845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16581,7 +16862,7 @@ Transform:
   m_LocalScale: {x: 0.5000001, y: 0.5, z: 0.5000001}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1854384401781784821
 GameObject:
@@ -17024,6 +17305,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
   m_IsActive: 1
+--- !u!33 &2593049743269177869
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7418755908589103598}
+  m_Mesh: {fileID: -8803937527578110353, guid: 9db300cb3be556e47b63f32dd2a4faca, type: 3}
 --- !u!114 &2630609313403767090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27776,6 +28065,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!4 &6073087084460948404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7418755908589103598}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: -11.410907, y: 11.603062, z: -3.1970809}
+  m_LocalScale: {x: 3182.5107, y: 3185.1921, z: 3265.5874}
+  m_Children: []
+  m_Father: {fileID: 1997186306}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6081912809744577461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28334,6 +28637,39 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &7418755908589103598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6073087084460948404}
+  - component: {fileID: 2593049743269177869}
+  - component: {fileID: 8663782620320503608}
+  - component: {fileID: 7418755908589103599}
+  m_Layer: 18
+  m_Name: IslandOutsideCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!64 &7418755908589103599
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7418755908589103598}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8803937527578110353, guid: 9db300cb3be556e47b63f32dd2a4faca, type: 3}
 --- !u!4 &7445014337507859272
 Transform:
   m_ObjectHideFlags: 0
@@ -28745,6 +29081,47 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!23 &8663782620320503608
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7418755908589103598}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!4 &8900910702534131597
 Transform:
   m_ObjectHideFlags: 0
