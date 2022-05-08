@@ -13,6 +13,22 @@ public class PlayerAI : MonoBehaviour
 		StartCoroutine(BringPlayerToDestination(destination, destroyWhenReached));
 	}
 
+	public void PausePlayerAI()
+	{
+		NavMeshAgent agent = GetComponent<NavMeshAgent>();
+		agent.speed = 0;
+		visual3D.SetFloat("Speed", 0);
+
+	}
+
+	public void ResumePlayerAI()
+	{
+		NavMeshAgent agent = GetComponent<NavMeshAgent>();
+		agent.speed = 4;
+		visual3D.SetFloat("Speed", 4);
+
+	}
+
 	IEnumerator BringPlayerToDestination(Vector3 destination, bool destroyWhenReached)
 	{
 		//Assign variables
@@ -20,11 +36,16 @@ public class PlayerAI : MonoBehaviour
 		NavMeshAgent agent = GetComponent<NavMeshAgent>();
 		CharacterController controller = GetComponent<CharacterController>();
 
-		//change properties of the variables
+		//enable/disable components
 		player.enabled = false;
 		controller.enabled = false;
 		agent.enabled = true;
+
+		//set the destination for the player
 		agent.SetDestination(destination);
+
+		//Make sure the animation plays at the right speed
+		visual3D.SetFloat("Speed", 4);
 
 		yield return new WaitForSeconds(0.1f);
 		//Wait

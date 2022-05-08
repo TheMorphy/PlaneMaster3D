@@ -36,7 +36,7 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             {
                 Reset();
             }*/
-            fuelQuantity += Time.deltaTime * speed;
+            fuelQuantity += Time.unscaledDeltaTime * speed;
             fuelSlider.value = fuelQuantity;
         }
 
@@ -59,7 +59,7 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 		fuelQuantity = 0;
 		taskObject.SetActive(false);
         //taskCompleted.SetActive(true);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSecondsRealtime(1);
         //taskCompleted.SetActive(false);
         
     }

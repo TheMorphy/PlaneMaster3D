@@ -8,4 +8,5 @@ public class Item : MonoBehaviour
     public float height;
     public bool pickedUp;
     public Vector3 destination;
+	[HideInInspector] public Coroutine lerpCoroutine;
 }

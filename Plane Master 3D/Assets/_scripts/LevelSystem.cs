@@ -125,6 +125,7 @@ public class LevelSystem : MonoBehaviour
 	{
 		PlayerPrefs.DeleteAll();
 		SceneManager.LoadScene(0);
+		Time.timeScale = 1;
 	}
 	
 	void SaveMoney()
@@ -156,6 +157,14 @@ public class LevelSystem : MonoBehaviour
 			specification = Random.Range(0, minigameObjects.Count);
 		}
 		minigameObjects[specification].SetActive(true);
+		StartCoroutine(WaitForMinigameDone(minigameObjects[specification]));
+	}
+	IEnumerator WaitForMinigameDone(GameObject minigame)
+	{
+		player.GetComponentInChildren<PlayerAI>().PausePlayerAI();
+		yield return new WaitWhile(() => minigame.activeSelf);
+		//OnMinigameDone
+		player.GetComponentInChildren<PlayerAI>().ResumePlayerAI();
 	}
 
 	#region Truck System

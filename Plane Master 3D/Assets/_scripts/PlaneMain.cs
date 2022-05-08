@@ -43,6 +43,7 @@ public class PlaneMain : MonoBehaviour
     {
         AssignRandomParts();
 		StartCoroutine(WaitToActivate());
+		player = LevelSystem.instance.player.transform.GetChild(1).gameObject;
     }
 
     void AssignPlainMains()
@@ -83,7 +84,8 @@ public class PlaneMain : MonoBehaviour
 
 	IEnumerator WaitForTakeOff()
 	{
-		yield return new WaitUntil(() => hoppedOn && player == null);
+		LevelSystem.instance.ControlPlayer(hopOnPos.position, true);
+		yield return new WaitUntil(() => player == null);
 		anim = GetComponent<Animator>();
 		anim.Play("PlaneFlyOff");
 		print("all is repaired");
@@ -98,7 +100,7 @@ public class PlaneMain : MonoBehaviour
 		{
 			hoppedOn = true;
 			player = other.gameObject;
-			LevelSystem.instance.ControlPlayer(hopOnPos.position, true);
+			//LevelSystem.instance.ControlPlayer(hopOnPos.position, true);
 		}
 	}
 

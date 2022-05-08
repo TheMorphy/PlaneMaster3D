@@ -22,7 +22,11 @@ public class Backpack : MonoBehaviour
 	AudioSource itemSoundSource;
 	[SerializeField]
 	List<AudioClip> pickUpSounds = new List<AudioClip>(), dropSounds = new List<AudioClip>();
-
+	[SerializeField]
+	[Range(0.01f, 1)]
+	float itemLerpTime = 0.15f;
+	[SerializeField]
+	AnimationCurve itemLerpCurve;
     
 
     //private variables
@@ -36,17 +40,17 @@ public class Backpack : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(ItemHandler());
+        //StartCoroutine(ItemHandler());	
     }
 
     private void OnDisable()
     {
-        StopCoroutine(ItemHandler());
+        //StopCoroutine(ItemHandler());
     }
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
         dropTime -= Time.deltaTime;
@@ -72,7 +76,10 @@ public class Backpack : MonoBehaviour
                 {
                     i.pickedUp = true;
                     items.Add(i);
-                    c.isTrigger = true;
+					i.transform.parent = itemParent;
+					UpdateItemDestinations(items.Count - 1);
+					c.enabled = false;
+					//AddProgress
                     if(i.itemName == "Iron")
                     {
                         QuestSystem.instance.AddProgress("Collect Iron", 1);
@@ -110,8 +117,11 @@ public class Backpack : MonoBehaviour
                                     droppingZone.AddItem(items[itemToDrop]);
                                     itemTransform.parent = u.itemDestination;
                                 }
-
                                 items.RemoveAt(itemToDrop);
+
+								//Update The destination for all the other items
+								UpdateItemDestinations(itemToDrop);
+
 								//Play Drop sound
 								itemSoundSource.PlayOneShot(dropSounds[Random.Range(0, dropSounds.Count)]);
 
@@ -180,7 +190,7 @@ public class Backpack : MonoBehaviour
         //if(destroy)
         //Destroy(item.transform.GetChild(0).gameObject);
         
-    }
+    } 
     int CheckItems(string itemName)
     {
         int output = -1;
@@ -205,6 +215,60 @@ public class Backpack : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, pickupRadius);
     }
 
+	void UpdateItemDestinations(int start = 0)
+	{
+		//print(start);
+		Vector3 pos = Vector3.zero;
+		if(start > 0 && start % stackSize > 0)
+		{
+			
+			pos = items[start - 1].destination + Vector3.up * items[start - 1].height;
+			//print(start + "|" + System.Convert.ToInt32(start / stackSize));
+		}
+
+		float iterations = (float)items.Count / stackSize;
+
+		for (int i = (int)start / stackSize; i < Mathf.CeilToInt(iterations); i++)
+		{
+			pos.z = -i * stackOffset;
+			for (int x = start; x < Mathf.Min(items.Count, stackSize * (i + 1)); x++)
+			{
+				print("posy: " + pos.y);
+				//print(start + " i: " + i + "\n" + pos);
+				items[x].destination = pos;
+
+				if (items[x].lerpCoroutine != null)
+					StopCoroutine(items[x].lerpCoroutine);
+				items[x].lerpCoroutine = StartCoroutine(BringItemToDesPosition(items[x]));
+
+				pos.y += items[x].height;
+			}
+			pos.y = 0;
+			
+			//pos.z += stackOffset;
+		}
+	}
+
+	IEnumerator BringItemToDesPosition(Item i)
+	{
+		Vector3 startPos = i.transform.localPosition;
+		Quaternion startRot = i.transform.localRotation;
+		float t = 0;
+		while(t < 1)
+		{
+			t += Time.deltaTime / itemLerpTime;
+			Vector3 curPos = Vector3.Lerp(startPos, i.destination, itemLerpCurve.Evaluate(t));
+			Quaternion curRot = Quaternion.Lerp(startRot, Quaternion.Euler(Vector3.zero), t);
+			i.transform.localPosition = curPos;
+			i.transform.localRotation = curRot;
+			
+			yield return null;
+		}
+		yield break;
+	}
+
+
+	//Trying to not use it anymore
     IEnumerator ItemHandler()
     {
         while(false == false)

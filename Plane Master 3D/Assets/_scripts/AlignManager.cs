@@ -16,7 +16,7 @@ public class AlignManager : MonoBehaviour
 
     private float previousValue;
 
-    private void Awake()
+    private void OnEnable()
     {
         slider.onValueChanged.AddListener(OnSliderChanged);
 

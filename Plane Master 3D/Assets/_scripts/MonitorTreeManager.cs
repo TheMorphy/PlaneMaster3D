@@ -29,14 +29,19 @@ public class MonitorTreeManager : MonoBehaviour
 
     private void Update()
     {
-        if(p1 && p2 && p3 && p4)
-        {
-            StartCoroutine(OncePlayerWins());
-        }
+        
     }
+
+	public void OnValueChanged()
+	{
+		if (p1 && p2 && p3 && p4)
+		{
+			StartCoroutine(OncePlayerWins());
+		}
+	}
     private IEnumerator OncePlayerWins()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSecondsRealtime(0.1f);
 		//congrats.SetActive(true);
 		taskObject.SetActive(false);
     }
