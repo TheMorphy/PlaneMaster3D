@@ -30,9 +30,9 @@ public class AlignManager : MonoBehaviour
             middleLine.color = Color.green;
             objColor.color = Color.green;
             timer = timer + Time.deltaTime;
-            if (timer >= 2f)
+            if (timer >= 1f)
             {
-                timer = 2f;
+                timer = 1f;
 				// PLAYER WINS HERE
 				taskObject.SetActive(false);
                 //congrats.SetActive(true);
