@@ -9,6 +9,6 @@ PhysicMaterial:
   m_Name: WaterBall
   dynamicFriction: 0.27
   staticFriction: 0.45
-  bounciness: 1
+  bounciness: 0.8
   frictionCombine: 0
   bounceCombine: 3

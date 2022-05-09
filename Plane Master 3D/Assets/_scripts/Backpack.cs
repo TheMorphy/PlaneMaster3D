@@ -76,6 +76,10 @@ public class Backpack : MonoBehaviour
                 {
                     i.pickedUp = true;
                     items.Add(i);
+					if(i.transform.parent.parent != null)
+					{
+						i.transform.parent.parent.SendMessage("RemoveItem", SendMessageOptions.DontRequireReceiver);
+					}
 					i.transform.parent = itemParent;
 					UpdateItemDestinations(items.Count - 1);
 					c.enabled = false;
@@ -233,7 +237,7 @@ public class Backpack : MonoBehaviour
 			pos.z = -i * stackOffset;
 			for (int x = start; x < Mathf.Min(items.Count, stackSize * (i + 1)); x++)
 			{
-				print("posy: " + pos.y);
+				//print("posy: " + pos.y);
 				//print(start + " i: " + i + "\n" + pos);
 				items[x].destination = pos;
 

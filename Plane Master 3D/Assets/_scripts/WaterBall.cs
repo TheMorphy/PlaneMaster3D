@@ -22,7 +22,7 @@ public class WaterBall : MonoBehaviour
         if (other.gameObject.layer == 8)
         {
             
-            GetComponent<Rigidbody>().AddForce((other.transform.position - transform.position).normalized * 1, ForceMode.Impulse);
+            GetComponent<Rigidbody>().AddForce((other.transform.position - transform.position).normalized * -1, ForceMode.Impulse);
         }
     }
 }

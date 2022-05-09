@@ -2184,7 +2184,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 262103
+    m_Bits: 1310679
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2620,7 +2620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backpackSize: 50
   stackSize: 10
-  stackOffset: 0.14
+  stackOffset: 0.19
   pickupRadius: 1.81
   itemDropInterval: 0.15
   items: []

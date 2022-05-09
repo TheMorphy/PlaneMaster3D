@@ -1065,7 +1065,7 @@ MeshRenderer:
   m_GameObject: {fileID: 36124964661875689}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1336,7 +1336,7 @@ MeshRenderer:
   m_GameObject: {fileID: 36124964839670545}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1543,7 +1543,7 @@ MonoBehaviour:
   capacity: 20
   items: []
   limitations: {x: 2, y: 2, z: 5}
-  space: {x: 0.4, y: 0.066, z: 0.17}
+  space: {x: 0.47, y: 0.11, z: 0.22}
   visualStart: {fileID: 36124964202798726}
   debug: 0
   positions:
@@ -2013,6 +2013,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 36124965315288154}
+  - component: {fileID: 3506700590860917783}
   m_Layer: 0
   m_Name: drill
   m_TagString: Untagged
@@ -2036,6 +2037,19 @@ Transform:
   m_Father: {fileID: 36124964602721604}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3506700590860917783
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36124965315288153}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.658569, y: 1.9586326, z: 1}
+  m_Center: {x: 0.024319429, y: 0.479316, z: 0}
 --- !u!1 &36124965446035744
 GameObject:
   m_ObjectHideFlags: 0

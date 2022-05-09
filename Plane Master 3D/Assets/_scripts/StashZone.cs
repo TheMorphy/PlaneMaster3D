@@ -29,7 +29,7 @@ public class StashZone : MonoBehaviour
         {
             //emptySlots.Add(i);
         }
-        StartCoroutine(WaitForItemPickup());
+        //StartCoroutine(WaitForItemPickup());
         GenerateSortingSystem();
     }
 
@@ -100,6 +100,17 @@ public class StashZone : MonoBehaviour
             yield return null;
         }
     }
+
+	void RemoveItem()
+	{
+		for(int i = 0; i < items.Count; i++)
+		{
+			if(items[i] != null && items[i].pickedUp)
+			{
+				items[i] = null;
+			}
+		}
+	}
 
     bool ItemPickedUp()
     {

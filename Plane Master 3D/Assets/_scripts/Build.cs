@@ -31,8 +31,8 @@ public class Build : MonoBehaviour
 
     void LoadVariables()
     {
-		print("load vars");
-		print("load vars 2 ");
+		//print("load vars");
+		//print("load vars 2 ");
 		level = PlayerPrefs.GetInt(savingKey + "c");
         
 

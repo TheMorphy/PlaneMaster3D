@@ -106,7 +106,7 @@ Transform:
   m_GameObject: {fileID: 1937304212763289206}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.49914, y: 2, z: 1.6758}
   m_Children:
   - {fileID: 4790885585584086916}
   m_Father: {fileID: 2227658537724536749}
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Iron
-  height: 0.066
+  height: 0.132
   pickedUp: 0
   destination: {x: 0, y: 0, z: 0}
 --- !u!65 &2227658537724536751

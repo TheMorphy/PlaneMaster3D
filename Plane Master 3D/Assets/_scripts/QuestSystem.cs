@@ -36,7 +36,7 @@ public class QuestSystem : MonoBehaviour
 
 	private void Awake()
 	{
-		print("awake");
+		//print("awake");
 		if (PlayerPrefs.GetInt("Drill" + "p") < 1)
 			PlayerPrefs.SetInt("Drill" + "p", 1);
 	}
