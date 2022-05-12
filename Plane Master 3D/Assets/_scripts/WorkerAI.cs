@@ -13,7 +13,7 @@ public class WorkerAI : MonoBehaviour
     WorkerLevel generationParameters;
     [SerializeField]
     WorkerLevel currentLevel;
-    public enum TaskType { Courier , Scientist }
+    public enum TaskType { Courier , Scientist , Pilot}
     [SerializeField]
     TaskType task;
     [SerializeField]
@@ -120,4 +120,15 @@ public class WorkerAI : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
     }
+
+	public void PilotGoToStandPos()
+	{
+		agent.SetDestination(getItemPos.position);
+	}
+
+	public void PilotGoToPlanePos()
+	{
+		agent.SetDestination(itemDestinationPos.position);
+	}
+
 }

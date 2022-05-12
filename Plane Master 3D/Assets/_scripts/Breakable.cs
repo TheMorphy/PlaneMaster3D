@@ -7,8 +7,14 @@ public class Breakable : MonoBehaviour
     [SerializeField]
     Transform originalPosition;
 
-    public PlaneMain planeMain;
-    void OnAllConditionsComplete()
+	[SerializeField]
+	RepairStation station;
+	[SerializeField]
+	public List<UpgradeCondition> conditions = new List<UpgradeCondition>();
+
+	public RepairStation Station { get => station; set => station = value; }
+
+	void OnAllConditionsComplete()
     {
         isRepaired = true;
         StartCoroutine(LerpToOriginalPosition());
@@ -16,7 +22,6 @@ public class Breakable : MonoBehaviour
 
     IEnumerator LerpToOriginalPosition()
     {
-		planeMain.SendMessage("OnBreakableRepaired");
 		//print("HERE IS THE BREALABLEEEEEE");
 		while (transform.position != originalPosition.position)
         {

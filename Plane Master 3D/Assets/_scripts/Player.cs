@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     bool isGrounded;
     float velY;
 
-    private void Start()
+    private void OnEnable()
     {
         controller = GetComponent<CharacterController>();
         stableForward = cam.GetChild(0);
@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
 
 
 
-
+		//print(stableForward.forward.magnitude + "r: " + stableForward.right.magnitude);
             velocity = stableForward.forward * inputY * Time.deltaTime * currentSpeed + stableForward.right * inputX * Time.deltaTime * currentSpeed +stableForward.up * velY;
             if(lookRotation != Vector3.zero)
                 transform.rotation = Quaternion.LookRotation(lookRotation);

@@ -30,7 +30,7 @@ public class Drill : MonoBehaviour
     }
 
 	
-	private void OnEnable()
+	private void start()
     {
 		QuestSystem.instance.AddProgress("Build a drill", 1);
 		//soundSource.Play();

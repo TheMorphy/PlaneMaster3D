@@ -64,10 +64,7 @@ public class DroppingZone : MonoBehaviour
             GenerateSortingSystem();
         }
 
-		if (conditions[0] != null && isPlanePlatform)
-		{
-			UpdateConditions();
-		}
+		
 	}
 
 	public void GetEachCondition()
@@ -121,7 +118,7 @@ public class DroppingZone : MonoBehaviour
 
     IEnumerator WaitForComplete()
     {
-        yield return new WaitUntil(() => !AllDone());
+        yield return new WaitUntil(() => !AllDone() || !allConditionsComplete);
         while (false == false)
         {
             yield return new WaitUntil(() => AllDone());

@@ -4332,6 +4332,7 @@ MonoBehaviour:
   releaseSound: {fileID: 8300000, guid: 39ec12feca451974db552e0ab2730bf6, type: 3}
   clickSource: {fileID: 364113226}
   player: {fileID: 0}
+  cameras: []
   platformSummon: {fileID: 2115243550}
   summonTruckButton: {fileID: 1487084007}
   minigameObjects:
@@ -16572,7 +16573,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3670952079785882726}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8320372265818936954}

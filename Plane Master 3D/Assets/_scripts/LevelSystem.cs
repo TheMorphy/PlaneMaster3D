@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Cinemachine;
 
 public class LevelSystem : MonoBehaviour
 {
@@ -47,6 +48,10 @@ public class LevelSystem : MonoBehaviour
 
 	public GameObject player;
 
+	[Header("Cameras")]
+	[SerializeField]
+	List<CinemachineVirtualCamera> cameras; // 0 = TopDownCam, 1 = HangarCam, ...
+
 
 	[Space(10)]
 	[Header("Truck System")]
@@ -59,6 +64,18 @@ public class LevelSystem : MonoBehaviour
 	[SerializeField] List<GameObject> minigameObjects = new List<GameObject>();
 
 	bool truckSystemCalled = false;
+
+
+	public void ChangeCamera(int cameraIndex)
+	{
+		for(int i = 0; i < cameras.Count; i++)
+		{
+			if (i == cameraIndex)
+				cameras[i].Priority = 1;
+			else
+				cameras[i].Priority = 0;
+		}
+	}
 
 	private void Start()
     {

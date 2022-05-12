@@ -50,7 +50,7 @@ public class PlaneMain : MonoBehaviour
     {
         foreach (Breakable b in breakables)
         {
-            b.planeMain = this;
+           // b.planeMain = this;
         }
     }
 

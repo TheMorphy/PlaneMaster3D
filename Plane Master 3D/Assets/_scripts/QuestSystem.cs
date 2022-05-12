@@ -29,13 +29,14 @@ public class QuestSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        instance = this;
+        
         progressBarStartWidth = progressBar.sizeDelta.x;
         LoadQuests();
     }
 
 	private void Awake()
 	{
+		instance = this;
 		//print("awake");
 		if (PlayerPrefs.GetInt("Drill" + "p") < 1)
 			PlayerPrefs.SetInt("Drill" + "p", 1);
@@ -76,7 +77,7 @@ public class QuestSystem : MonoBehaviour
         Quest q = FindQuestWithName(questName, false);
         if(q == null)
         {
-            Debug.LogError("Cant add a Progress to a quest that doesnt Exists! I am really sorry...");
+            Debug.Log("Cant add a Progress to a quest that doesnt Exists! I am really sorry...");
             return;
         }
         if(!q.done)
