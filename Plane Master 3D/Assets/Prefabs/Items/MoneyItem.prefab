@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5db25a66d030e3c4981d56929c484729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Iron
+  itemName: Money
   height: 0.132
   pickedUp: 0
   destination: {x: 0, y: 0, z: 0}

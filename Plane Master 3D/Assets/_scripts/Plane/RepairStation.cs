@@ -51,7 +51,7 @@ public class RepairStation : MonoBehaviour
 		if(PlayerPrefs.GetInt(name + "r1") == PlayerPrefs.GetInt(name + "r2"))
 		{
 			level = -1;
-			LevelUp();
+			StartCoroutine(WaitForLevelUp());
 			print("FirstLoadRepair");
 		}
 		else
@@ -88,7 +88,7 @@ public class RepairStation : MonoBehaviour
 		//Put Money in stash zone
 		for(int i = 0; i <= currentAircraft.Profit; i++)
 		{
-			rewardStashZone.AddItem(Instantiate(moneyPrefab, rewardStashZone.transform.position, Quaternion.identity).GetComponent<Item>());
+			rewardStashZone.AddItem(Instantiate(moneyPrefab, pilot.transform.position + Vector3.up , Quaternion.identity).GetComponent<Item>());
 			yield return new WaitForSeconds(0.04f);
 		}
 		
@@ -163,7 +163,7 @@ public class RepairStation : MonoBehaviour
 		}
 	}
 
-	IEnumerator BringBreakablesToBrokenPos(bool lerpOnlyOnePart = false)
+	IEnumerator BringBreakablesToBrokenPos()
 	{
 		yield return new WaitForSeconds(2.5f);
 
@@ -172,7 +172,7 @@ public class RepairStation : MonoBehaviour
 		Quaternion firstStartRot = breakablesToRepair[0].transform.rotation;
 		Vector3 secondStartPos = Vector3.zero;
 		Quaternion secondStartRot = Quaternion.identity;
-		if (!lerpOnlyOnePart)
+		if (breakablesToRepair.Count > 1)
 		{
 			 secondStartPos = breakablesToRepair[1].transform.position;
 			 secondStartRot = breakablesToRepair[1].transform.rotation;
@@ -191,7 +191,7 @@ public class RepairStation : MonoBehaviour
 
 			
 			breakablesToRepair[0].transform.SetPositionAndRotation(firstPos, firstRot);
-			if (!lerpOnlyOnePart)
+			if (breakablesToRepair.Count > 1)
 			{
 				breakablesToRepair[1].transform.SetPositionAndRotation(secondPos, secondRot);
 
@@ -214,16 +214,15 @@ public class RepairStation : MonoBehaviour
 		{
 			print("Use one");
 			breakablesToRepair.RemoveAt(0);
-			StartCoroutine(BringBreakablesToBrokenPos(true));
 
 		}
 		else
 		{
 			print("Use Both");
-			StartCoroutine(BringBreakablesToBrokenPos());
+			
 
 		}
-
+		StartCoroutine(BringBreakablesToBrokenPos());
 		dz.conditions = breakablesToRepair[0].conditions;
 	}
 
