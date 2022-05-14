@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using Cinemachine;
+using UnityEngine.Events;
 
 public class LevelSystem : MonoBehaviour
 {
@@ -48,6 +49,8 @@ public class LevelSystem : MonoBehaviour
 
 	public GameObject player;
 
+	
+
 	[Header("Cameras")]
 	[SerializeField]
 	List<CinemachineVirtualCamera> cameras; // 0 = TopDownCam, 1 = HangarCam, ...
@@ -62,7 +65,14 @@ public class LevelSystem : MonoBehaviour
 	PlaneMain pmScript;
 	[Header("Minigames")]
 	[SerializeField] List<GameObject> minigameObjects = new List<GameObject>();
+	/// <summary>
+	/// 0 = align
+	/// 1 = sliders
+	/// 2 = refuel
+	/// </summary>
 
+	
+	public UnityEvent OnMinigameFinish;
 	bool truckSystemCalled = false;
 
 
@@ -79,7 +89,9 @@ public class LevelSystem : MonoBehaviour
 
 	private void Start()
     {
-		
+		if (OnMinigameFinish == null)
+			OnMinigameFinish = new UnityEvent();
+
 		LoadMoney();
 		RefreshUI();
 		//TruckSystem();
@@ -178,10 +190,11 @@ public class LevelSystem : MonoBehaviour
 	}
 	IEnumerator WaitForMinigameDone(GameObject minigame)
 	{
-		player.GetComponentInChildren<PlayerAI>().PausePlayerAI();
+		//player.GetComponentInChildren<PlayerAI>().PausePlayerAI();
 		yield return new WaitWhile(() => minigame.activeSelf);
 		//OnMinigameDone
-		player.GetComponentInChildren<PlayerAI>().ResumePlayerAI();
+		OnMinigameFinish.Invoke();
+		//player.GetComponentInChildren<PlayerAI>().ResumePlayerAI();
 	}
 
 	#region Truck System

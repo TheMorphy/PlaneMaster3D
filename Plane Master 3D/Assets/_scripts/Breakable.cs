@@ -7,12 +7,16 @@ public class Breakable : MonoBehaviour
     [SerializeField]
     Transform originalPosition;
 
+    [SerializeField]
+    Vector3 paletteRotation;
+
 	[SerializeField]
 	RepairStation station;
 	[SerializeField]
 	public List<UpgradeCondition> conditions = new List<UpgradeCondition>();
 
 	public RepairStation Station { get => station; set => station = value; }
+	public Vector3 PaletteRotation { get => paletteRotation; set => paletteRotation = value; }
 
 	void OnAllConditionsComplete()
     {

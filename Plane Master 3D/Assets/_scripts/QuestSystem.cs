@@ -54,7 +54,8 @@ public class QuestSystem : MonoBehaviour
                 int value = PlayerPrefs.GetInt(quests[i].questName + "reward");
                 if(value == 0)
                 {
-                    rewardButton.gameObject.SetActive(true);
+                    //rewardButton.gameObject.SetActive(true);
+                    CollectReward();
                     break;
                 }
                 questLevel = i + 1;
@@ -165,7 +166,8 @@ public class QuestSystem : MonoBehaviour
             q.done = true;
             if (q == currentQuest)
             {
-                rewardButton.gameObject.SetActive(true);
+                //rewardButton.gameObject.SetActive(true);
+                CollectReward();
             }
         }
     }

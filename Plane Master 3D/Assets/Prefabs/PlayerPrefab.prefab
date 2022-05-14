@@ -337,7 +337,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614787306116538863}
   m_LocalRotation: {x: 0.033838045, y: 0.9218036, z: -0.3772212, w: 0.08268896}
-  m_LocalPosition: {x: -1.81, y: 10.81, z: 9.93}
+  m_LocalPosition: {x: -9.148096, y: 10.81, z: -4.2653656}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 683221147173621109}
@@ -691,11 +691,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049461032470336698}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -9.45, z: 17.68}
+  m_LocalPosition: {x: 0, y: 3.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 5417014372180672485}
-  m_RootOrder: 0
+  m_Father: {fileID: 5417014370854447685}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &5710088324654654922
 AudioListener:
@@ -4170,8 +4170,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5417014370305254743}
-  m_LocalRotation: {x: 0.033838045, y: 0.9218036, z: -0.3772212, w: 0.08268896}
-  m_LocalPosition: {x: -1.81, y: 10.81, z: 9.93}
+  m_LocalRotation: {x: -0.048636258, y: -0.9178417, z: 0.37560052, w: -0.118851006}
+  m_LocalPosition: {x: -2.51435, y: 10.81, z: 9.6064005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5417014372180672485}
@@ -4203,7 +4203,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 19.455156
+  field of view: 19.455158
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -4447,6 +4447,7 @@ Transform:
   m_Children:
   - {fileID: 1192280622329713306}
   - {fileID: 5417014372029293519}
+  - {fileID: 6764627428520901088}
   m_Father: {fileID: 5417014370350160325}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4943,8 +4944,7 @@ Transform:
   m_LocalRotation: {x: -0.2841347, y: 0.008132891, z: -0.02742328, w: 0.95835763}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 6764627428520901088}
+  m_Children: []
   m_Father: {fileID: 5417014370305254744}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 23.877, z: 0}

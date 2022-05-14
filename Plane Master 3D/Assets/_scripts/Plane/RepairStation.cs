@@ -7,6 +7,8 @@ public class RepairStation : MonoBehaviour
 	[SerializeField]
 	new string name;
 
+	[SerializeField]
+	int minigameIndex;
 
 	[SerializeField]
 	Aircraft currentAircraft;
@@ -41,7 +43,7 @@ public class RepairStation : MonoBehaviour
 	[SerializeField]
 	GameObject moneyPrefab;
 
-
+	bool minigameDone = false;
 	[SerializeField]
 	bool debug = false;
 	private void Start()
@@ -50,11 +52,13 @@ public class RepairStation : MonoBehaviour
 		anim = aircraftHolder.GetComponent<Animator>();
 		if(PlayerPrefs.GetInt(name + "r1") == PlayerPrefs.GetInt(name + "r2"))
 		{
-			level = -1;
-			StartCoroutine(WaitForLevelUp());
+			//level = -1;
+			PlayerPrefs.SetInt(name + "r1", 0);
+			PlayerPrefs.SetInt(name + "r2", 1);
+			//StartCoroutine(WaitForLevelUp());
 			print("FirstLoadRepair");
 		}
-		else
+		
 		LoadAirCraft();
 		if(overrideItemDestination != null)
 			for(int i = 0; i < aircrafts.Count; i++)
@@ -82,8 +86,21 @@ public class RepairStation : MonoBehaviour
 		}
 	}
 
+	void MinigameDone()
+	{
+		minigameDone = true;
+	}
+
 	IEnumerator WaitForLevelUp()
 	{
+		//start the minigame
+		LevelSystem.instance.PlayMinigame(minigameIndex);
+		LevelSystem.instance.OnMinigameFinish.AddListener(MinigameDone);
+
+		//wait until its finished
+		yield return new WaitUntil(() => minigameDone);
+			
+
 		pilot.PilotGoToPlanePos();
 		//Put Money in stash zone
 		for(int i = 0; i <= currentAircraft.Profit; i++)
@@ -99,12 +116,14 @@ public class RepairStation : MonoBehaviour
 		yield return new WaitForSeconds(1.2f);
 		ActivateAircraftModel(level % aircrafts.Count);
 		StartCoroutine(BringBreakablesToBrokenPos());
+		minigameDone = false;
 	}
 
 	void LevelUp()
 	{
 		
 		level += 1;
+		QuestSystem.instance.AddProgress("Repair a plane", 1);
 		PlayerPrefs.SetInt(name + "level", level);
 		PlayerPrefs.SetInt(name + "firstDone", 0);
 		dz.enabled = false;
@@ -184,15 +203,16 @@ public class RepairStation : MonoBehaviour
 		{
 			t += Time.deltaTime;
 			Vector3 firstPos = Vector3.Lerp(firstStartPos, brokenUpperPos.position, partLerpCurve.Evaluate(t));
-			Quaternion firstRot = Quaternion.Lerp(firstStartRot, brokenUpperPos.rotation, partLerpCurve.Evaluate(t));
+			Quaternion firstRot = Quaternion.Lerp(firstStartRot, Quaternion.Euler(breakablesToRepair[0].PaletteRotation), partLerpCurve.Evaluate(t));
 			
-			Vector3 secondPos = Vector3.Lerp(secondStartPos, brokenLowerPos.position, partLerpCurve.Evaluate(t));
-			Quaternion secondRot = Quaternion.Lerp(secondStartRot, brokenLowerPos.rotation, partLerpCurve.Evaluate(t));
+			
 
 			
 			breakablesToRepair[0].transform.SetPositionAndRotation(firstPos, firstRot);
 			if (breakablesToRepair.Count > 1)
 			{
+				Vector3 secondPos = Vector3.Lerp(secondStartPos, brokenLowerPos.position, partLerpCurve.Evaluate(t));
+				Quaternion secondRot = Quaternion.Lerp(secondStartRot, Quaternion.Euler(breakablesToRepair[1].PaletteRotation), partLerpCurve.Evaluate(t));
 				breakablesToRepair[1].transform.SetPositionAndRotation(secondPos, secondRot);
 
 			}
