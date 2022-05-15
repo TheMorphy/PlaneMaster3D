@@ -1,6 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
+[System.Serializable]
+public class UIItem
+{
+    public string name;
+    public int count;
+    public TextMeshProUGUI text;
+}
 
 public class Backpack : MonoBehaviour
 {
@@ -27,6 +36,29 @@ public class Backpack : MonoBehaviour
 	float itemLerpTime = 0.15f;
 	[SerializeField]
 	AnimationCurve itemLerpCurve;
+    [SerializeField]
+    List<UIItem> UIItems = new List<UIItem>();
+
+    void RefreshItemUI()
+	{
+        //Clear out the previous count
+        for (int u = 0; u < UIItems.Count; u++)
+            UIItems[u].count = 0;
+		
+        //count the items
+        for (int i = 0; i < items.Count; i++)
+            for(int u = 0; u < UIItems.Count; u++)
+                if (items[i].itemName == UIItems[u].name)
+				{
+                    UIItems[u].count += 1;
+                    break;
+				}
+
+        //refresh UI
+        for (int u = 0; u < UIItems.Count; u++)
+            UIItems[u].text.text = UIItems[u].count.ToString();
+
+    }
     
 
     //private variables
@@ -68,6 +100,7 @@ public class Backpack : MonoBehaviour
                         {
                             i.pickedUp = true;
                             items.Add(i);
+                            RefreshItemUI();
                             c.isTrigger = true;
                         }
                     }
@@ -76,6 +109,7 @@ public class Backpack : MonoBehaviour
                 {
                     i.pickedUp = true;
                     items.Add(i);
+                    RefreshItemUI();
 					if(i.transform.parent.parent != null)
 					{
 						i.transform.parent.parent.SendMessage("RemoveItem", SendMessageOptions.DontRequireReceiver);
@@ -122,7 +156,7 @@ public class Backpack : MonoBehaviour
                                     itemTransform.parent = u.itemDestination;
                                 }
                                 items.RemoveAt(itemToDrop);
-
+                                RefreshItemUI();
 								//Update The destination for all the other items
 								UpdateItemDestinations(itemToDrop);
 
@@ -234,11 +268,11 @@ public class Backpack : MonoBehaviour
 
 		for (int i = (int)start / stackSize; i < Mathf.CeilToInt(iterations); i++)
 		{
+            //set the distance betweeen the stacks 
 			pos.z = -i * stackOffset;
 			for (int x = start; x < Mathf.Min(items.Count, stackSize * (i + 1)); x++)
 			{
-				//print("posy: " + pos.y);
-				//print(start + " i: " + i + "\n" + pos);
+				//Debug.Log($"Started at: {start} \n now setting pos for x")
 				items[x].destination = pos;
 
 				if (items[x].lerpCoroutine != null)
@@ -246,6 +280,7 @@ public class Backpack : MonoBehaviour
 				items[x].lerpCoroutine = StartCoroutine(BringItemToDesPosition(items[x]));
 
 				pos.y += items[x].height;
+                start = x;
 			}
 			pos.y = 0;
 			
