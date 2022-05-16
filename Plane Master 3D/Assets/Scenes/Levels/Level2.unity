@@ -23084,6 +23084,7 @@ MonoBehaviour:
   releaseSound: {fileID: 8300000, guid: 39ec12feca451974db552e0ab2730bf6, type: 3}
   clickSource: {fileID: 2069449901}
   player: {fileID: 0}
+  workerHouse: {fileID: 2130786750}
   cameras:
   - {fileID: 1277786803}
   - {fileID: 50038085}
@@ -29450,6 +29451,37 @@ Transform:
   m_Father: {fileID: 798099832}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1270181635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1270181636}
+  m_Layer: 7
+  m_Name: System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1270181636
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270181635}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1513832076}
+  m_Father: {fileID: 2130786747}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1277786802
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34456,7 +34488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1513832076
 Transform:
   m_ObjectHideFlags: 0
@@ -34465,13 +34497,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1513832075}
   m_LocalRotation: {x: 0.0008977166, y: 0.040591147, z: 0.011066525, w: 0.99911416}
-  m_LocalPosition: {x: -0.21, y: -0.27, z: -2.02}
+  m_LocalPosition: {x: -0.21000004, y: -0.27000046, z: -2.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 605146870}
   - {fileID: 821236468}
   - {fileID: 1574914832}
-  m_Father: {fileID: 2130786747}
+  m_Father: {fileID: 1270181636}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0.051, y: 4.654, z: 1.271}
 --- !u!65 &1513832077
@@ -34505,6 +34537,7 @@ MonoBehaviour:
   - {fileID: 2067941916}
   - {fileID: 454289469}
   workerStart: {fileID: 1574914832}
+  workerHouseBuild: {fileID: 2130786750}
 --- !u!1 &1514608525
 GameObject:
   m_ObjectHideFlags: 0
@@ -51585,7 +51618,7 @@ Transform:
   m_LocalPosition: {x: 15.79, y: -10.51, z: 5.894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1513832076}
+  - {fileID: 1270181636}
   - {fileID: 137166559}
   m_Father: {fileID: 2120978471}
   m_RootOrder: 2
@@ -51712,9 +51745,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   build: {fileID: 137166558}
-  system: {fileID: 1513832075}
+  system: {fileID: 1270181635}
   level: 0
-  savingKey: Drill
+  savingKey: WorkerHouse
   levels:
   - conditions:
     - name: Iron
@@ -52184,9 +52217,13 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 36124964602721606, guid: 0858a1abd947c2749997074030fd8cbe, type: 3}
+      propertyPath: drillBuild
+      value: 
+      objectReference: {fileID: 177488839}
     - target: {fileID: 36124965483188341, guid: 0858a1abd947c2749997074030fd8cbe, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 36124965483188341, guid: 0858a1abd947c2749997074030fd8cbe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -57600,7 +57637,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7103338783324829973, guid: 9d41ef9aedeebfb4f98babf33cfee541, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7103338783324829973, guid: 9d41ef9aedeebfb4f98babf33cfee541, type: 3}
       propertyPath: m_LocalPosition.x

@@ -13,6 +13,7 @@ public class WorkerHouse : MonoBehaviour
     [SerializeField]
     List<WorkerAI> workers = new List<WorkerAI>();
     [SerializeField] Transform workerStart;
+    [SerializeField] Build workerHouseBuild;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,17 @@ public class WorkerHouse : MonoBehaviour
     {
         
     }
+
+    void OnLoadLevels()
+	{
+        if(PlayerPrefs.GetInt(workerHouseBuild.savingKey + "p") == 2)
+            QuestSystem.instance.AddProgress("Research workers house upgrade", 1);
+        if (workerHouseBuild.level > 1)
+		{
+            QuestSystem.instance.AddProgress("Upgrade workers house", 1);
+		}
+
+	}
 
     void LoadWorkers()
     {
@@ -121,4 +133,12 @@ public class WorkerHouse : MonoBehaviour
         }
         visual.enabled = false;
     }
+}
+
+[System.Serializable]
+public class WorkerHouseLevel
+{
+    public int placeholder;
+
+
 }

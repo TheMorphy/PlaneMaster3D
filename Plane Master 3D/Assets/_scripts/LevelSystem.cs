@@ -49,7 +49,7 @@ public class LevelSystem : MonoBehaviour
 
 	public GameObject player;
 
-	
+	[SerializeField] Build workerHouse;	
 
 	[Header("Cameras")]
 	[SerializeField]
@@ -75,6 +75,14 @@ public class LevelSystem : MonoBehaviour
 	public UnityEvent OnMinigameFinish;
 	bool truckSystemCalled = false;
 
+	public void EnableWorkerHouse()
+	{
+		if(workerHouse != null)
+		{
+			PlayerPrefs.SetInt(workerHouse.savingKey + "p", PlayerPrefs.GetInt(workerHouse.savingKey + "p") == 0 ? 1 : PlayerPrefs.GetInt(workerHouse.savingKey + "p"));
+			workerHouse.SendMessage("OnAddedPossibleLevel");
+		}
+	}
 
 	public void ChangeCamera(int cameraIndex)
 	{

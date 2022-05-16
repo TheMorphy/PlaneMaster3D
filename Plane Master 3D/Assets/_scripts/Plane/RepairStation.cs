@@ -124,6 +124,7 @@ public class RepairStation : MonoBehaviour
 		
 		level += 1;
 		QuestSystem.instance.AddProgress("Repair a plane", 1);
+		LevelSystem.instance.EnableWorkerHouse();
 		PlayerPrefs.SetInt(name + "level", level);
 		PlayerPrefs.SetInt(name + "firstDone", 0);
 		dz.enabled = false;

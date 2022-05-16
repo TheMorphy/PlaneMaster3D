@@ -15,6 +15,7 @@ public class Drill : MonoBehaviour
     Item itemToAdd;
     [SerializeField]
     Transform animParent;
+    [SerializeField] Build drillBuild;
 	//[SerializeField]
 	//AudioSource soundSource;
 
@@ -24,7 +25,22 @@ public class Drill : MonoBehaviour
 
     public int CurrentDrop { get => currentDrop; set => currentDrop = value; }
 
-	private void Start()
+
+
+
+
+
+    void OnLoadLevels()
+	{
+
+        if (PlayerPrefs.GetInt(drillBuild.savingKey + "p") == 2)
+            QuestSystem.instance.AddProgress("Research drill upgrade", 1);
+
+        if (drillBuild.level > 1)
+            QuestSystem.instance.AddProgress("Upgrade drill", 1);
+	}
+
+    private void Start()
     {
 		QuestSystem.instance.AddProgress("Build a drill", 1);
 		//soundSource.Play();

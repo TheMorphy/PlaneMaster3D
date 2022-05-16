@@ -22,6 +22,8 @@ public class ResearchSystem : MonoBehaviour
         LoadResearches();
     }
 
+  
+
     void LoadResearches()
     {
         level = PlayerPrefs.GetInt("researchLevel");
