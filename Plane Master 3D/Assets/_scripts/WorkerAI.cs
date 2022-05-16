@@ -42,10 +42,12 @@ public class WorkerAI : MonoBehaviour
         {
             case TaskType.Courier:
                 StartCoroutine(CourierWorker());
-                break;
+				QuestSystem.instance.AddProgress("Hire a worker", 1);
+				break;
             case TaskType.Scientist:
                 StartCoroutine(ScientistWorker());
-                break;
+				QuestSystem.instance.AddProgress("Hire a scientist", 1);
+				break;
         }
     }
 
