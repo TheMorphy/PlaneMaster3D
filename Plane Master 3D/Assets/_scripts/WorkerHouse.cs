@@ -47,6 +47,7 @@ public class WorkerHouse : MonoBehaviour
         PlayerPrefs.SetInt("worker" + index.ToString(), PlayerPrefs.GetInt("worker" + index.ToString()) + 1);
         workers[index].gameObject.SetActive(true);
         workers[index].setLevel(PlayerPrefs.GetInt("worker" + index.ToString()));
+		print("unlocked one worker");
     }
 
     private void OnTriggerEnter(Collider other)

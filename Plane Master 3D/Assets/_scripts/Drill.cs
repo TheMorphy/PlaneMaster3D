@@ -24,13 +24,7 @@ public class Drill : MonoBehaviour
 
     public int CurrentDrop { get => currentDrop; set => currentDrop = value; }
 
-    void Start()
-    {
-       // StartCoroutine(WaitToDrop());
-    }
-
-	
-	private void start()
+	private void Start()
     {
 		QuestSystem.instance.AddProgress("Build a drill", 1);
 		//soundSource.Play();

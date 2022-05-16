@@ -57,6 +57,8 @@ public class TruckManager : MonoBehaviour
 		}
     }
 
+
+
     // Method that summons the truck
     public void SummonTruck()
     {

@@ -138,7 +138,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   fillImage: {fileID: 3733606614188804731}
-  speed: 0.1
+  speed: 0.3
   fuelQuantity: 0
   fuelSlider: {fileID: 3733606615355726209}
   taskCompleted: {fileID: 0}

@@ -39,7 +39,7 @@ public class MonitorTreeManager : MonoBehaviour
 			StartCoroutine(OncePlayerWins());
 		}
 	}
-    private IEnumerator OncePlayerWins()
+    public IEnumerator OncePlayerWins()
     {
         yield return new WaitForSecondsRealtime(0.1f);
 		//congrats.SetActive(true);

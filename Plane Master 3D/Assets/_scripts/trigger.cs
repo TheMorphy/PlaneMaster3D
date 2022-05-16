@@ -33,7 +33,11 @@ public class trigger : MonoBehaviour
             mts.P4 = true;
             mts.ChangeColour4();
         }
-    }
+		if (mts.P1 && mts.P2 && mts.P3 && mts.P4)
+		{
+			StartCoroutine(mts.OncePlayerWins());
+		}
+	}
 
     private void OnTriggerExit2D(Collider2D collision)
     {
