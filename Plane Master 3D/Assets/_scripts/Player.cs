@@ -2,8 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class PlayerLevel
+{
+	public float speed;
+	public int backpackSize;
+
+}
 public class Player : MonoBehaviour
 {
+	[Header("Upgrades")]
+	[SerializeField]
+	int level;
+	[SerializeField]
+	PlayerLevel currentLevel;
+	[SerializeField]
+	List<PlayerLevel> levels = new List<PlayerLevel>();
+
+
+
     [Header("Attributes")]
     [SerializeField]
     float moveSpeed = 3f;
@@ -34,6 +51,18 @@ public class Player : MonoBehaviour
     public bool isMoving;
     bool isGrounded;
     float velY;
+
+
+
+	void LoadLevel()
+	{
+		PlayerPrefs.GetInt("PlayerLevel");
+	}
+
+	void SafeLevel()
+	{
+		PlayerPrefs.SetInt("PlayerLevel", level);
+	}
 
     private void OnEnable()
     {

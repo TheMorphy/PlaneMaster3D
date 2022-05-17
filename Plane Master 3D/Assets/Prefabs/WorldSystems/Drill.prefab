@@ -355,7 +355,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 36124963836247498}
   m_LocalRotation: {x: -0, y: -0.70710707, z: -0, w: 0.70710653}
-  m_LocalPosition: {x: -2.224, y: 0, z: -0.804}
+  m_LocalPosition: {x: -3.49, y: 0, z: -0.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8787419643424645916}
@@ -769,6 +769,7 @@ MonoBehaviour:
   - {fileID: 8787419644196716940}
   - {fileID: 8787419644057025490}
   animParent: {fileID: 36124963500526247}
+  drillBuild: {fileID: 0}
 --- !u!95 &36124964602721605
 Animator:
   serializedVersion: 3
@@ -1456,6 +1457,7 @@ MonoBehaviour:
   isPlanePlatform: 0
   conditions:
   - name: Iron
+    itemType: 0
     count: 0
     countNeeded: 3
     completed: 0
@@ -1471,6 +1473,7 @@ MonoBehaviour:
   visualStart: {fileID: 0}
   debug: 0
   conditionNumbers: 
+  itemInfos: []
 --- !u!114 &36124965483188347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1490,6 +1493,7 @@ MonoBehaviour:
   levels:
   - conditions:
     - name: Iron
+      itemType: 0
       count: 0
       countNeeded: 3
       completed: 0
@@ -1498,6 +1502,7 @@ MonoBehaviour:
       level: 0
   - conditions:
     - name: Iron
+      itemType: 0
       count: 0
       countNeeded: 10
       completed: 0
@@ -1506,6 +1511,7 @@ MonoBehaviour:
       level: 0
   - conditions:
     - name: Iron
+      itemType: 0
       count: 0
       countNeeded: 20
       completed: 0
@@ -2070,7 +2076,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8751471461271110178}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.444, y: 1.41, z: 0.036}
+  m_LocalPosition: {x: -0.43, y: 2.4334, z: 0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8751471460256902025}
@@ -2117,11 +2123,11 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -5177388603050735206, guid: 71ebafeef3c03457483266a33ab2b270, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.5372549}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 1.5362511, y: 1.0260495}
+  m_Size: {x: 3.0104291, y: 2.867357}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
