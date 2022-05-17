@@ -79,6 +79,11 @@ public class LevelSystem : MonoBehaviour
 	public UnityEvent OnMinigameFinish;
 	bool truckSystemCalled = false;
 
+	public void EnterNextLevel()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+	}
+
 	public void EnableWorkerHouse()
 	{
 		if(workerHouse != null)
@@ -106,6 +111,7 @@ public class LevelSystem : MonoBehaviour
 
 		LoadMoney();
 		RefreshUI();
+		ChangeCamera(0);
 		//TruckSystem();
 	}
 	private void Awake()

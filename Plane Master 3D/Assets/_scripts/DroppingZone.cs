@@ -127,6 +127,7 @@ public class DroppingZone : MonoBehaviour
             c.count = 0;
         }
         SaveConditions();
+		
     }
 
 
