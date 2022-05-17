@@ -64,6 +64,11 @@ public class Player : MonoBehaviour
 		PlayerPrefs.SetInt("PlayerLevel", level);
 	}
 
+	public void LevelUp()
+	{
+
+	}
+
     private void OnEnable()
     {
         controller = GetComponent<CharacterController>();
