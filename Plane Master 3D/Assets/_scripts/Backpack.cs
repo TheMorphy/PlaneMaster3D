@@ -181,7 +181,7 @@ public class Backpack : MonoBehaviour
                     DroppingZone droppingZone = c.GetComponent<DroppingZone>();
                     foreach (UpgradeCondition u in droppingZone.conditions)
                     {
-                        if (!u.completed && dropTime <= 0)
+                        if (u.completed == false && dropTime <= 0)
                         {
                             if (CheckItems(u.name) >= 0)
                             {

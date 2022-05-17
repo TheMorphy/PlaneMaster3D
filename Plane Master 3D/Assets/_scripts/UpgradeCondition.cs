@@ -7,6 +7,7 @@ using TMPro;
 public class UpgradeCondition
 {
     public string name;
+    public ItemType itemType;
     public int count = 0;
     public int countNeeded = 10;
     public bool completed = false;

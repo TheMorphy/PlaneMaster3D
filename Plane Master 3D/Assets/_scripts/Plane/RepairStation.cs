@@ -69,21 +69,49 @@ public class RepairStation : MonoBehaviour
 			
 	}
 
-	void OnAllConditionsComplete()
+	void OnConditionComplete()
 	{
-		breakablesToRepair[0].SendMessage("OnAllConditionsComplete");
-		breakablesToRepair.RemoveAt(0);
-		if(breakablesToRepair.Count > 0)
+		print("ON CONdItion CONpletet");
+		if(AllConditionsTrue(breakablesToRepair[0].conditions))
 		{
-			// 1 of 2 completed
-			dz.conditions = breakablesToRepair[0].conditions;
+			breakablesToRepair[0].SendMessage("OnAllConditionsComplete");
+			breakablesToRepair.RemoveAt(0);
+			if (breakablesToRepair.Count > 0)
+			{
+				// 1 of 2 completed
+				//dz.conditions = breakablesToRepair[0].conditions;
+				PlayerPrefs.SetInt(name + "firstDone", 1);
+			}
+			else
+			{
+				StartCoroutine(WaitForLevelUp());
+			}
+		}
+		else if(AllConditionsTrue(breakablesToRepair[1].conditions))
+		{
+			breakablesToRepair[1].SendMessage("OnAllConditionsComplete");
+			breakablesToRepair.RemoveAt(1);
+			
 			PlayerPrefs.SetInt(name + "firstDone", 1);
+		}
 
-		}
-		else
+		print("AAAAA" + AllConditionsTrue(breakablesToRepair[1].conditions));
+	}
+
+	bool AllConditionsTrue(List <UpgradeCondition> c)
+	{
+		bool output = true;
+		for(int i = 0; i < c.Count; i++)
 		{
-			StartCoroutine(WaitForLevelUp());
+			if(!c[i].completed)
+			{
+				output = false;
+				return output;
+			}
 		}
+
+		return output;
+
 	}
 
 	void MinigameDone()
@@ -152,7 +180,17 @@ public class RepairStation : MonoBehaviour
 
 		PlayerPrefs.SetInt(name + "r1", r1);
 		PlayerPrefs.SetInt(name + "r2", r2);
-		dz.conditions = breakablesToRepair[0].conditions;
+		List<UpgradeCondition> newConditions = new List<UpgradeCondition>();
+		foreach (UpgradeCondition u in breakablesToRepair[0].conditions)
+		{
+			newConditions.Add(u);
+		}
+		foreach (UpgradeCondition u in breakablesToRepair[1].conditions)
+		{
+			newConditions.Add(u);
+		}
+		dz.conditions = newConditions;
+		dz.Refresh();
 
 	}
 
@@ -244,7 +282,17 @@ public class RepairStation : MonoBehaviour
 
 		}
 		StartCoroutine(BringBreakablesToBrokenPos());
-		dz.conditions = breakablesToRepair[0].conditions;
+		List<UpgradeCondition> newConditions = new List<UpgradeCondition>();
+		foreach(UpgradeCondition u in breakablesToRepair[0].conditions)
+		{
+			newConditions.Add(u);
+		}
+		foreach(UpgradeCondition u in breakablesToRepair[1].conditions)
+		{
+			newConditions.Add(u);
+		}
+		dz.conditions = newConditions;
+		dz.Refresh();
 	}
 
 	void SaveAircraft()

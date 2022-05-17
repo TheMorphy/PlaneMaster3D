@@ -2,7 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 
+public enum ItemType { Money, Iron, Cog };
+
+[System.Serializable]
+public class ItemInfo
+{
+    public ItemType itemType;
+    public TextMeshPro itemText;
+    [HideInInspector]
+    public int count, countNeeded;
+}
 public class DroppingZone : MonoBehaviour
 {
 	[SerializeField] bool isPlanePlatform;
@@ -26,6 +37,9 @@ public class DroppingZone : MonoBehaviour
 
 	PlaneMain planeScript;
 
+    [SerializeField]
+    private List<ItemInfo> itemInfos = new List<ItemInfo>();
+
     private void Start()
     {
         
@@ -39,7 +53,8 @@ public class DroppingZone : MonoBehaviour
         {
             LoadConditions();
         }
-        StartCoroutine(WaitForComplete());
+        //StartCoroutine(WaitForComplete());
+        CheckForDone();
     }
 
     void LoadConditions()
@@ -130,6 +145,83 @@ public class DroppingZone : MonoBehaviour
         }
     }
 
+    public void Refresh()
+	{
+        CheckForDone();
+	}
+
+    void CheckForDone()
+	{
+        foreach(ItemInfo i in itemInfos)
+		{
+            i.count = 0;
+            i.countNeeded = 0;
+		}
+
+        bool allDone = true;
+        for(int c = 0; c < conditions.Count; c++)
+        {
+            UpgradeCondition u = conditions[c];
+            
+            for(int i = 0; i < itemInfos.Count; i++)
+			{
+                
+                if(u.itemType == itemInfos[i].itemType)
+				{
+                    itemInfos[i].count += u.count;
+                    itemInfos[i].countNeeded += u.countNeeded;
+                    break;
+				}
+			}
+
+
+
+
+            
+            if (u.count >= u.countNeeded)
+			{
+                if (!u.completed)
+                {
+                    u.completed = true;
+                    SendMessage("OnConditionComplete");
+                }
+            }
+            else
+                u.completed = false;
+
+            if (u.completed == false)
+                allDone = false;
+
+            if (displayTextAsCountDown)
+            {
+                u.text.text = (u.countNeeded - u.count).ToString();
+                if (u.completed)
+                {
+                    u.text.gameObject.SetActive(false);
+                }
+                else if (!u.text.gameObject.activeSelf)
+                    u.text.gameObject.SetActive(true);
+
+            }
+            else if (u.text != null && isActiveAndEnabled)
+            {
+                u.text.text = u.count + "/" + u.countNeeded;
+            }
+        }
+        //Set the text
+        for(int i = 0; i < itemInfos.Count; i++)
+		{
+            if(itemInfos[i].itemText != null)
+            itemInfos[i].itemText.text = itemInfos[i].count + "/" + itemInfos[i].countNeeded;
+		}
+
+        allConditionsComplete = allDone;
+        if (allDone)
+            SendMessage("OnAllConditionsComplete", SendMessageOptions.DontRequireReceiver);
+        
+    }
+
+    //This one is outdated 
     bool AllDone()
     {
 		if (debug)
@@ -177,6 +269,7 @@ public class DroppingZone : MonoBehaviour
             SetItemDestination(items.Count - 1);
 
         }
+        CheckForDone();
         SendMessage("OnAddItem", SendMessageOptions.DontRequireReceiver);
     }
     void SetItemDestination(int item)
