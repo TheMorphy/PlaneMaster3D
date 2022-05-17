@@ -30,20 +30,21 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     private void Update()
     {
-        if (pointerDown)
+		fuelSlider.value = fuelQuantity;
+
+		if (pointerDown)
         {
-            /*if (pointerDownTimer > requiredHoldTime)
+			/*if (pointerDownTimer > requiredHoldTime)
             {
                 Reset();
             }*/
-            fuelQuantity += Time.unscaledDeltaTime * speed;
-            fuelSlider.value = fuelQuantity;
-        }
+			fuelQuantity += Time.unscaledDeltaTime * speed;
+		}
 
         if (fuelQuantity >= 1)
         {
-            fuelQuantity = 1;
-            StartCoroutine(OncePlayerWins());
+			fuelQuantity = 0;
+			StartCoroutine(OncePlayerWins());
         }
     }
 
@@ -56,11 +57,8 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     private IEnumerator OncePlayerWins()
     {
-		fuelQuantity = 0;
+		pointerDown = false;
 		taskObject.SetActive(false);
-        //taskCompleted.SetActive(true);
-        yield return new WaitForSecondsRealtime(1);
-        //taskCompleted.SetActive(false);
-        
-    }
+		yield return new WaitForSecondsRealtime(0.2f);
+	}
 }
