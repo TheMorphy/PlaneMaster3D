@@ -6,11 +6,17 @@ using TMPro;
 [System.Serializable]
 public class UIItem
 {
-    public string name;
+	public ItemType itemType;
     public int count;
     public TextMeshProUGUI text;
 }
-
+[System.Serializable]
+public class ItemStack
+{
+	public List<Item> items = new List<Item>();
+	public ItemType itemType;
+	public TextMeshPro text;
+}
 public class Backpack : MonoBehaviour
 {
     [SerializeField]
@@ -19,9 +25,15 @@ public class Backpack : MonoBehaviour
     int stackSize = 10;
     [SerializeField]
     float stackOffset, pickupRadius, itemDropInterval;
+
     [SerializeField]
     public List<Item> items = new List<Item>();
-    [SerializeField]
+	[SerializeField]
+	public List<ItemStack> itemStacks = new List<ItemStack>();
+	[SerializeField]
+	GameObject stackTextPrefab;
+
+	[SerializeField]
     Transform itemParent;
     [SerializeField]
     Player player;
@@ -41,22 +53,22 @@ public class Backpack : MonoBehaviour
 
     void RefreshItemUI()
 	{
-        //Clear out the previous count
-        for (int u = 0; u < UIItems.Count; u++)
-            UIItems[u].count = 0;
-		
-        //count the items
-        for (int i = 0; i < items.Count; i++)
-            for(int u = 0; u < UIItems.Count; u++)
-                if (items[i].itemName == UIItems[u].name)
-				{
-                    UIItems[u].count += 1;
-                    break;
-				}
-
-        //refresh UI
-        for (int u = 0; u < UIItems.Count; u++)
-            UIItems[u].text.text = UIItems[u].count.ToString();
+		for(int u = 0; u < UIItems.Count; u++)
+		{
+			ItemStack stack = itemStacks.Find(stack => stack.itemType == UIItems[u].itemType);
+			if(stack != null)
+			{
+				UIItems[u].text.gameObject.SetActive(true);
+				UIItems[u].text.text = stack.items.Count.ToString();
+				stack.text.text = stack.items.Count.ToString();
+				stack.text.transform.SetParent(stack.items[stack.items.Count - 1].transform, false);
+			}
+			else
+			{
+				UIItems[u].text.gameObject.SetActive(false);
+			}
+		}
+        
 
     }
     
@@ -82,6 +94,37 @@ public class Backpack : MonoBehaviour
 
 
     // Update is called once per frame
+
+
+	bool tryAddItem(Item item)
+	{
+		bool added = false;
+		bool stackExist = false;
+		for(int s = 0; s < itemStacks.Count; s++)
+		{
+			if(itemStacks[s].itemType == item.itemType)
+			{
+				stackExist = true;
+				if(itemStacks[s].items.Count < stackSize || item.itemType == ItemType.Money)
+				{
+					itemStacks[s].items.Add(item);
+					added = true;
+				}
+			}
+		}
+		if(stackExist == false)
+		{
+			ItemStack newItemStack = new ItemStack();
+			itemStacks.Add(newItemStack);
+			newItemStack.items.Add(item);
+			newItemStack.itemType = item.itemType;
+			UpdateItemDestinations();
+			newItemStack.text = Instantiate(stackTextPrefab, item.transform, false).GetComponent<TextMeshPro>();
+			
+			added = true;
+		}
+		return added;
+	}
     void FixedUpdate()
     {
         
@@ -107,26 +150,36 @@ public class Backpack : MonoBehaviour
                 }
                 else if(!i.pickedUp)
                 {
-                    i.pickedUp = true;
-                    items.Add(i);
-                    RefreshItemUI();
-					if(i.transform.parent.parent != null)
+					if (tryAddItem(i))
 					{
-						i.transform.parent.parent.SendMessage("RemoveItem", SendMessageOptions.DontRequireReceiver);
+						i.pickedUp = true;
+						//integrade in new system
+
+
+
+						//
+						//items.Add(i);
+						RefreshItemUI();
+						if (i.transform.parent.parent != null)
+						{
+							i.transform.parent.parent.SendMessage("RemoveItem", SendMessageOptions.DontRequireReceiver);
+						}
+						i.transform.parent = itemParent;
+						UpdateItemDestinations();
+						c.enabled = false;
+						//AddProgress
+						if (i.itemName == "Iron")
+						{
+							QuestSystem.instance.AddProgress("Collect Iron", 1);
+						}
+						//Play pickup sound
+						if (itemSoundSource != null)
+						{
+							itemSoundSource.PlayOneShot(pickUpSounds[Random.Range(0, pickUpSounds.Count)]);
+						}
 					}
-					i.transform.parent = itemParent;
-					UpdateItemDestinations(items.Count - 1);
-					c.enabled = false;
-					//AddProgress
-                    if(i.itemName == "Iron")
-                    {
-                        QuestSystem.instance.AddProgress("Collect Iron", 1);
-                    }
-                    //Play pickup sound
-					if(itemSoundSource != null)
-					{
-						itemSoundSource.PlayOneShot(pickUpSounds[Random.Range(0, pickUpSounds.Count)]);
-					}
+					else
+						print("cant add item. Stack is full");
                 }
             }
 
@@ -139,26 +192,26 @@ public class Backpack : MonoBehaviour
                     {
                         if (!u.completed && dropTime <= 0)
                         {
-                            if (CheckItems(u.name) >= 0)
+                            if (SearchForItemType(u.itemType))
                             {
-                                int itemToDrop = CheckItems(u.name);
-                                Transform itemTransform = items[itemToDrop].transform;
+                                Item itemToDrop = DropItem(u.itemType);
+                                Transform itemTransform = itemToDrop.transform;
                                 u.count++;
                                 if (!droppingZone.showDroppedItems)
                                 {
                                     itemTransform.parent = u.itemDestination;
                                     StartCoroutine(LerpItemToDestination(itemTransform));
-                                    droppingZone.AddItem(items[itemToDrop], false);
+                                    droppingZone.AddItem(itemToDrop, false);
                                 }
                                 else
                                 {
-                                    droppingZone.AddItem(items[itemToDrop]);
+                                    droppingZone.AddItem(itemToDrop);
                                     itemTransform.parent = u.itemDestination;
                                 }
-                                items.RemoveAt(itemToDrop);
+                                
                                 RefreshItemUI();
 								//Update The destination for all the other items
-								UpdateItemDestinations(itemToDrop);
+								UpdateItemDestinations();
 
 								//Play Drop sound
 								itemSoundSource.PlayOneShot(dropSounds[Random.Range(0, dropSounds.Count)]);
@@ -183,25 +236,24 @@ public class Backpack : MonoBehaviour
                     {
                         if (u.completed == false && dropTime <= 0)
                         {
-                            if (CheckItems(u.name) >= 0)
+                            if (SearchForItemType(u.itemType))
                             {
-                                int itemToDrop = CheckItems(u.name);
+                                Item itemToDrop = DropItem(u.itemType);
                                 print("item to drop: " + itemToDrop);
-                                Transform itemTransform = items[itemToDrop].transform;
+                                Transform itemTransform = itemToDrop.transform;
                                 u.count++;
                                 if (!droppingZone.showDroppedItems)
                                 {
                                     itemTransform.parent = u.itemDestination;
                                     StartCoroutine(LerpItemToDestination(itemTransform));
-                                    droppingZone.AddItem(items[itemToDrop], false);
+                                    droppingZone.AddItem(itemToDrop, false);
                                 }
                                 else
                                 {
-                                    droppingZone.AddItem(items[itemToDrop]);
+                                    droppingZone.AddItem(itemToDrop);
                                     itemTransform.parent = u.itemDestination;
                                 }
 
-                                items.RemoveAt(itemToDrop);
 
                                 //if (items[items.Count - 1] == null)
                                // {
@@ -228,10 +280,40 @@ public class Backpack : MonoBehaviour
         //if(destroy)
         //Destroy(item.transform.GetChild(0).gameObject);
         
-    } 
-    int CheckItems(string itemName)
+    }
+
+	bool SearchForItemType(ItemType itemType)
+	{
+		for (int s = 0; s < itemStacks.Count; s++)
+		{
+			if (itemStacks[s].itemType == itemType && itemStacks[s].items.Count > 0)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+    Item DropItem(ItemType itemType)
     {
-        int output = -1;
+		Item itemToDrop;
+		for(int s = 0; s < itemStacks.Count; s++)
+		{
+			if(itemStacks[s].itemType == itemType)
+			{
+				itemToDrop = itemStacks[s].items[itemStacks[s].items.Count - 1];
+				itemStacks[s].items.RemoveAt(itemStacks[s].items.Count - 1);
+				if(itemStacks[s].items.Count == 0)
+				{
+					Destroy(itemStacks[s].text.gameObject);
+					itemStacks.RemoveAt(s);
+				}
+				return itemToDrop;
+			}
+		}
+		return null;
+
+
+		/*
         for(int i = 0; i < items.Count; i++)
         {
             if (items[i] == null)
@@ -245,7 +327,8 @@ public class Backpack : MonoBehaviour
                 output = i;
             }
         }
-        return output;
+		*/
+        
     }
 
     private void OnDrawGizmosSelected()
@@ -253,10 +336,45 @@ public class Backpack : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, pickupRadius);
     }
 
-	void UpdateItemDestinations(int start = 0)
+	void UpdateItemDestinations()
 	{
-		//print(start);
 		Vector3 pos = Vector3.zero;
+
+
+
+
+
+		for (int s = 0; s < itemStacks.Count; s++)
+		{
+			pos.z = -s * stackOffset;
+			for (int i = 0; i < itemStacks[s].items.Count; i++)
+			{
+				Item curItem = itemStacks[s].items[i];
+				curItem.destination = pos;
+
+				if (curItem.lerpCoroutine != null)
+					StopCoroutine(curItem.lerpCoroutine);
+				curItem.lerpCoroutine = StartCoroutine(BringItemToDesPosition(curItem));
+
+				pos.y += curItem.height;
+			}
+			pos.y = 0;
+		}
+
+
+
+
+
+
+
+
+
+
+
+	/*
+		//old from here
+		//print(start);
+		//Vector3 pos = Vector3.zero;
 		if(start > 0 && start % stackSize > 0)
 		{
 			
@@ -268,8 +386,10 @@ public class Backpack : MonoBehaviour
 
 		for (int i = (int)start / stackSize; i < Mathf.CeilToInt(iterations); i++)
 		{
+
             //set the distance betweeen the stacks 
 			pos.z = -i * stackOffset;
+			
 			for (int x = start; x < Mathf.Min(items.Count, stackSize * (i + 1)); x++)
 			{
 				//Debug.Log($"Started at: {start} \n now setting pos for x")
@@ -286,6 +406,7 @@ public class Backpack : MonoBehaviour
 			
 			//pos.z += stackOffset;
 		}
+	*/
 	}
 
 	IEnumerator BringItemToDesPosition(Item i)

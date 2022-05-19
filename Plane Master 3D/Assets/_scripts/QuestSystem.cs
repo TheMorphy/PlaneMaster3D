@@ -55,6 +55,7 @@ public class QuestSystem : MonoBehaviour
                 if(value == 0)
                 {
                     //rewardButton.gameObject.SetActive(true);
+					if(currentQuest != null)
                     CollectReward();
                     break;
                 }
@@ -166,7 +167,8 @@ public class QuestSystem : MonoBehaviour
             q.done = true;
             if (q == currentQuest)
             {
-                //rewardButton.gameObject.SetActive(true);
+				//rewardButton.gameObject.SetActive(true);
+				if (currentQuest != null)
                 CollectReward();
             }
         }
@@ -175,6 +177,7 @@ public class QuestSystem : MonoBehaviour
     public void CollectReward()
     {
         rewardButton.gameObject.SetActive(false);
+		
         foreach(Reward r in currentQuest.rewards)
         {
             r.Collect(rewardButton.transform.position);

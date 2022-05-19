@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     Animator visual3D;
     [SerializeField]
     Transform cam;
+	[SerializeField]
     Transform stableForward;
     Vector3 velocity, lookRotation;
     CharacterController controller;
@@ -72,7 +73,7 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         controller = GetComponent<CharacterController>();
-        stableForward = cam.GetChild(0);
+        //stableForward = cam.GetChild(0);
     }
     void Update()
     {
