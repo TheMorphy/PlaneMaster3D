@@ -13,16 +13,16 @@ public class LevelSystem : MonoBehaviour
 	public static LevelSystem instance;
 	#endregion
 
-   // [SerializeField] public int moneyToGet;
-    [SerializeField] TextMeshProUGUI moneyNumber;
-	[SerializeField] List<GameObject> moneyPrefabsM10;
+	// [SerializeField] public int moneyToGet;
+	[SerializeField] TextMeshProUGUI moneyNumber;
+	[SerializeField] public List<GameObject> moneyPrefabsM10;
 	//explanation:
 	//[0] = 1 money;
 	//[1] = 10 money;
 	//[2] = 100 money;
 	//...
 
-	[SerializeField] GameObject moneyPrefab;
+	[SerializeField] public GameObject moneyPrefab;
 	[SerializeField] Transform moneyLerpPos;
 
 	[SerializeField]
@@ -44,16 +44,16 @@ public class LevelSystem : MonoBehaviour
 	[SerializeField]
 	AudioSource clickSource;
 
-    int money;
+	int money;
 	int displayMoney;
 
 	public GameObject player;
 
 	[SerializeField] Build workerHouse;
 
-	
-	
-	
+
+
+
 
 	[Header("Cameras")]
 	[SerializeField]
@@ -75,9 +75,69 @@ public class LevelSystem : MonoBehaviour
 	/// 2 = refuel
 	/// </summary>
 
-	
+
 	public UnityEvent OnMinigameFinish;
 	bool truckSystemCalled = false;
+
+	public void EnterNextLevel()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		
+	}
+
+	public static List<Item> SpawnMoneyOverTime(int amount, Vector3 spawnPosition, Quaternion spawnRotation, int time = 0)
+	{
+		List<Item> itemList = new List<Item>();
+
+		Coroutine spawnCoroutine = LevelSystem.instance.StartCoroutine(SpawnMoneyOverTimeCoroutine((itemList) => { if (itemList.Count > 0) {} }, amount, time, spawnPosition, spawnRotation));
+		return itemList;
+	}
+
+	public static IEnumerator SpawnMoneyOverTimeCoroutine(System.Action<List<Item>> itemListCallback, int amount, float time, Vector3 spawnPosition, Quaternion spawnRotation)
+	{
+		List<Item> itemList = new List<Item>();
+		//Calculate the correct money prefabs
+
+		for (int x = LevelSystem.instance.moneyPrefabsM10.Count - 1; x >= 0; x--)
+		{
+			int countToInstantiate = (int)(amount / Mathf.Pow(10, x));
+			for (int p = 0; p < countToInstantiate; p++)
+			{
+				itemList.Add(LevelSystem.instance.moneyPrefabsM10[x].GetComponent<Item>());
+			}
+			amount -= countToInstantiate * (int)Mathf.Pow(10, x);
+		}
+
+		for(int i = 0; i < itemList.Count; i++)
+		{
+			Item spawnedItem = Instantiate(LevelSystem.instance.moneyPrefab, spawnPosition, spawnRotation).GetComponent<Item>();
+			spawnedItem = itemList[i];
+			yield return new WaitForSeconds(time / amount);
+		}
+
+
+
+
+
+
+		itemListCallback(itemList);
+
+		
+
+
+
+
+
+		Item item = new Item();
+		print(time);
+		yield return new WaitForEndOfFrame();
+		yield return item;
+	}
+
+	static void dasd(bool l = true)
+	{
+
+	}
 
 	public void EnableWorkerHouse()
 	{
@@ -106,6 +166,7 @@ public class LevelSystem : MonoBehaviour
 
 		LoadMoney();
 		RefreshUI();
+		ChangeCamera(0);
 		//TruckSystem();
 	}
 	private void Awake()

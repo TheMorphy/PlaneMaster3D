@@ -12,4 +12,5 @@ public class Item : MonoBehaviour
     [HideInInspector]
     public Vector3 destination;
 	[HideInInspector] public Coroutine lerpCoroutine;
+	public int amount;
 }

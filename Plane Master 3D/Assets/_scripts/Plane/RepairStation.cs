@@ -69,6 +69,13 @@ public class RepairStation : MonoBehaviour
 			
 	}
 
+	private void OnEnable()
+	{
+		
+	}
+
+
+
 	void OnConditionComplete()
 	{
 		print("ON CONdItion CONpletet");
@@ -87,7 +94,7 @@ public class RepairStation : MonoBehaviour
 				StartCoroutine(WaitForLevelUp());
 			}
 		}
-		else if(AllConditionsTrue(breakablesToRepair[1].conditions))
+		else if(breakablesToRepair.Count > 1 && AllConditionsTrue(breakablesToRepair[1].conditions))
 		{
 			breakablesToRepair[1].SendMessage("OnAllConditionsComplete");
 			breakablesToRepair.RemoveAt(1);
@@ -133,6 +140,7 @@ public class RepairStation : MonoBehaviour
 		//Put Money in stash zone
 		for(int i = 0; i <= currentAircraft.Profit; i++)
 		{
+			//StartCoroutine(LevelSystem.SpawnMoneyOvertime(10));
 			rewardStashZone.AddItem(Instantiate(moneyPrefab, pilot.transform.position + Vector3.up , Quaternion.identity).GetComponent<Item>());
 			yield return new WaitForSeconds(0.04f);
 		}
@@ -238,11 +246,11 @@ public class RepairStation : MonoBehaviour
 		
 
 		
-		while (t < 1 || debug)
+		while (t < 1)
 		{
 			t += Time.deltaTime;
 			Vector3 firstPos = Vector3.Lerp(firstStartPos, brokenUpperPos.position, partLerpCurve.Evaluate(t));
-			Quaternion firstRot = Quaternion.Lerp(firstStartRot, Quaternion.Euler(breakablesToRepair[0].PaletteRotation), partLerpCurve.Evaluate(t));
+			Quaternion firstRot = Quaternion.Lerp(firstStartRot, Quaternion.Euler(brokenUpperPos.rotation.eulerAngles + breakablesToRepair[0].PaletteRotation), partLerpCurve.Evaluate(t));
 			
 			
 
@@ -251,7 +259,7 @@ public class RepairStation : MonoBehaviour
 			if (breakablesToRepair.Count > 1)
 			{
 				Vector3 secondPos = Vector3.Lerp(secondStartPos, brokenLowerPos.position, partLerpCurve.Evaluate(t));
-				Quaternion secondRot = Quaternion.Lerp(secondStartRot, Quaternion.Euler(breakablesToRepair[1].PaletteRotation), partLerpCurve.Evaluate(t));
+				Quaternion secondRot = Quaternion.Lerp(secondStartRot, Quaternion.Euler(brokenLowerPos.rotation.eulerAngles + breakablesToRepair[1].PaletteRotation), partLerpCurve.Evaluate(t));
 				breakablesToRepair[1].transform.SetPositionAndRotation(secondPos, secondRot);
 
 			}

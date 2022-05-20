@@ -31,6 +31,7 @@ public class GoToNextHangar : MonoBehaviour
 
 	public void TransitionToNextHangar()
 	{
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		//SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		LevelSystem.instance.EnterNextLevel();
 	}
 }

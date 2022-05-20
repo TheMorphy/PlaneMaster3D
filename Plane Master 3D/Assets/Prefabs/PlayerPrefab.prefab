@@ -337,7 +337,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614787306116538863}
   m_LocalRotation: {x: 0.033838045, y: 0.9218036, z: -0.3772212, w: 0.08268896}
-  m_LocalPosition: {x: -9.148096, y: 10.81, z: -4.2653656}
+  m_LocalPosition: {x: -9.148096, y: 10.81, z: -4.2653646}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 683221147173621109}
@@ -4331,8 +4331,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5417014370305254743}
-  m_LocalRotation: {x: 0.49998593, y: 0.24103297, z: -0.14584018, w: 0.81893086}
-  m_LocalPosition: {x: -8.000618, y: 24.582294, z: -5.7419224}
+  m_LocalRotation: {x: -0.05569859, y: -0.89241874, z: 0.43277574, w: -0.114855}
+  m_LocalPosition: {x: -5.371973, y: 20.189999, z: 9.86113}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5417014372180672485}
@@ -4355,7 +4355,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 69.99999
+  m_FocalLength: 64.5
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -4364,7 +4364,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 19.45516
+  field of view: 21.078367
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -4643,6 +4643,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c181ab35922e564e9e1940e354d65be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
+  currentLevel:
+    speed: 0
+    backpackSize: 0
+  levels: []
   moveSpeed: 4
   moveSmooth: 0.05
   turnSmooth: 0.1
@@ -4684,6 +4689,7 @@ MonoBehaviour:
   joistick: {fileID: 4201627866416021251}
   visual3D: {fileID: 1999602925398853667}
   cam: {fileID: 5417014370305254744}
+  stableForward: {fileID: 5417014372180672485}
   isMoving: 0
 --- !u!114 &74686165849989216
 MonoBehaviour:
@@ -4846,8 +4852,10 @@ MonoBehaviour:
   stackSize: 10
   stackOffset: 0.19
   pickupRadius: 1.81
-  itemDropInterval: 0.15
+  itemDropInterval: 0.005
   items: []
+  itemStacks: []
+  stackTextPrefab: {fileID: 0}
   itemParent: {fileID: 5417014370774468439}
   player: {fileID: 5417014370854447683}
   worker: {fileID: 0}
@@ -5915,6 +5923,8 @@ MonoBehaviour:
   pickupRadius: 1.81
   itemDropInterval: 0.15
   items: []
+  itemStacks: []
+  stackTextPrefab: {fileID: 1028350452087937044, guid: a757b5e5ad358374ea007b4e3488e866, type: 3}
   itemParent: {fileID: 2795345816360211221}
   player: {fileID: 5417014370854447683}
   worker: {fileID: 0}

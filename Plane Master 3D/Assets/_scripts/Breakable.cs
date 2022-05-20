@@ -27,6 +27,7 @@ public class Breakable : MonoBehaviour
     IEnumerator LerpToOriginalPosition()
     {
 		//print("HERE IS THE BREALABLEEEEEE");
+		Vector3 toLerpPos = originalPosition != null ? originalPosition.position : Vector3.zero;
 		while (transform.position != originalPosition.position)
         {
 			//print("BREAKABLE IS LERPING RN");

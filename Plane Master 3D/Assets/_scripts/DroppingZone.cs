@@ -13,6 +13,7 @@ public class ItemInfo
     public TextMeshPro itemText;
     [HideInInspector]
     public int count, countNeeded;
+	
 }
 public class DroppingZone : MonoBehaviour
 {
@@ -36,13 +37,21 @@ public class DroppingZone : MonoBehaviour
     List<int> emptySlots = new List<int>();
 
 	PlaneMain planeScript;
+	[SerializeField]
+	SpriteRenderer progressbar;
+	private float progressBarStartSize;
 
     [SerializeField]
     private List<ItemInfo> itemInfos = new List<ItemInfo>();
 
-    private void Start()
+	private void Awake()
+	{
+		if (progressbar != null)
+			progressBarStartSize = progressbar.size.y;
+	}
+	private void Start()
     {
-        
+		
         if(showDroppedItems)
         {
             
@@ -127,6 +136,7 @@ public class DroppingZone : MonoBehaviour
             c.count = 0;
         }
         SaveConditions();
+		
     }
 
 
@@ -183,7 +193,7 @@ public class DroppingZone : MonoBehaviour
                 if (!u.completed)
                 {
                     u.completed = true;
-                    SendMessage("OnConditionComplete");
+                    SendMessage("OnConditionComplete", SendMessageOptions.DontRequireReceiver);
                 }
             }
             else
@@ -214,9 +224,25 @@ public class DroppingZone : MonoBehaviour
             if(itemInfos[i].itemText != null)
             itemInfos[i].itemText.text = itemInfos[i].count + "/" + itemInfos[i].countNeeded;
 		}
+		//Set the progress bar
+		if(progressbar != null)
+		{
+			float count = 0;
+			int countNeeded = 0;
+			for (int i = 0; i < itemInfos.Count; i++)
+			{
+				count += itemInfos[i].count;
+				countNeeded += itemInfos[i].countNeeded;
+			}
+			
+			float progress = count / countNeeded;
+			progressbar.size = new Vector2(progressbar.size.x, progress == 0 ? 0 : progressBarStartSize * progress);
+			
+		}
+		
 
-        allConditionsComplete = allDone;
-        if (allDone)
+		allConditionsComplete = allDone;
+        if (allDone && this.isActiveAndEnabled)
             SendMessage("OnAllConditionsComplete", SendMessageOptions.DontRequireReceiver);
         
     }

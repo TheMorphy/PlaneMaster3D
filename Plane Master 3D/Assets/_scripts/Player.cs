@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     Animator visual3D;
     [SerializeField]
     Transform cam;
+	[SerializeField]
     Transform stableForward;
     Vector3 velocity, lookRotation;
     CharacterController controller;
@@ -64,16 +65,26 @@ public class Player : MonoBehaviour
 		PlayerPrefs.SetInt("PlayerLevel", level);
 	}
 
+	public void LevelUp()
+	{
+
+	}
+
     private void OnEnable()
     {
         controller = GetComponent<CharacterController>();
-        stableForward = cam.GetChild(0);
+        //stableForward = cam.GetChild(0);
     }
     void Update()
-    {
+	{
 		
-        //touch controls
-        inputY = joistick.Vertical;
+			
+		StartCoroutine(LevelSystem.SpawnMoneyOvertime(10));
+			
+		
+
+		//touch controls
+		inputY = joistick.Vertical;
         inputX = joistick.Horizontal;
 
 
