@@ -76,10 +76,15 @@ public class Player : MonoBehaviour
         //stableForward = cam.GetChild(0);
     }
     void Update()
-    {
+	{
 		
-        //touch controls
-        inputY = joistick.Vertical;
+			
+		StartCoroutine(LevelSystem.SpawnMoneyOvertime(10));
+			
+		
+
+		//touch controls
+		inputY = joistick.Vertical;
         inputX = joistick.Horizontal;
 
 
