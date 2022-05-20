@@ -125,7 +125,16 @@ public class Backpack : MonoBehaviour
 		}
 		return added;
 	}
-    void FixedUpdate()
+
+	private void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Z))
+		{
+			StartCoroutine(LevelSystem.SpawnMoneyOvertime(10));
+		}
+	}
+
+	void FixedUpdate()
     {
         
         dropTime -= Time.deltaTime;

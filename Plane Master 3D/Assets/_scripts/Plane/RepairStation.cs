@@ -140,6 +140,7 @@ public class RepairStation : MonoBehaviour
 		//Put Money in stash zone
 		for(int i = 0; i <= currentAircraft.Profit; i++)
 		{
+			//StartCoroutine(LevelSystem.SpawnMoneyOvertime(10));
 			rewardStashZone.AddItem(Instantiate(moneyPrefab, pilot.transform.position + Vector3.up , Quaternion.identity).GetComponent<Item>());
 			yield return new WaitForSeconds(0.04f);
 		}

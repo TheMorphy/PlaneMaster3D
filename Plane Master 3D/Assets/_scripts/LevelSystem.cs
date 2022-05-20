@@ -13,8 +13,8 @@ public class LevelSystem : MonoBehaviour
 	public static LevelSystem instance;
 	#endregion
 
-   // [SerializeField] public int moneyToGet;
-    [SerializeField] TextMeshProUGUI moneyNumber;
+	// [SerializeField] public int moneyToGet;
+	[SerializeField] TextMeshProUGUI moneyNumber;
 	[SerializeField] List<GameObject> moneyPrefabsM10;
 	//explanation:
 	//[0] = 1 money;
@@ -44,16 +44,16 @@ public class LevelSystem : MonoBehaviour
 	[SerializeField]
 	AudioSource clickSource;
 
-    int money;
+	int money;
 	int displayMoney;
 
 	public GameObject player;
 
 	[SerializeField] Build workerHouse;
 
-	
-	
-	
+
+
+
 
 	[Header("Cameras")]
 	[SerializeField]
@@ -75,13 +75,26 @@ public class LevelSystem : MonoBehaviour
 	/// 2 = refuel
 	/// </summary>
 
-	
+
 	public UnityEvent OnMinigameFinish;
 	bool truckSystemCalled = false;
 
 	public void EnterNextLevel()
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+	}
+
+	
+
+	public static IEnumerator<Item> SpawnMoneyOvertime(float time)
+	{
+		Item item = new Item();
+		yield return item;
+	}
+
+	static void dasd(bool l = true)
+	{
+
 	}
 
 	public void EnableWorkerHouse()
