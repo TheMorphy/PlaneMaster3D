@@ -14,11 +14,21 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     [SerializeField] Slider fuelSlider;
     [SerializeField] GameObject taskCompleted;
 	[SerializeField] GameObject taskObject;
+	[SerializeField] GameObject checkMark;
+	[SerializeField] bool isMultipleRefill;
 
     private bool pointerDown;
+	private bool isRefilled;
     private float pointerDownTimer;
+	RefuelMinigameMultipleManager refuelMultipleScript;
 
-    public void OnPointerDown(PointerEventData eventData)
+	private void Start()
+	{
+		if (isMultipleRefill)
+			refuelMultipleScript = FindObjectOfType<RefuelMinigameMultipleManager>();
+	}
+
+	public void OnPointerDown(PointerEventData eventData)
     {
         pointerDown = true;
     }
@@ -41,12 +51,29 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 			fuelQuantity += Time.unscaledDeltaTime * speed;
 		}
 
-        if (fuelQuantity >= 1)
+        if (fuelQuantity >= 1 && !isMultipleRefill)
         {
 			fuelQuantity = 0;
 			StartCoroutine(OncePlayerWins());
         }
+
+		if (fuelQuantity >= 1 && isMultipleRefill && !isRefilled)
+		{
+			fuelQuantity = 1;
+			refuelMultipleScript.GetEachCompletedFill();
+			isRefilled = true;
+			checkMark.SetActive(true);
+			//StartCoroutine(OncePlayerWinsMultipleRefill());
+		}
     }
+
+	public void ResetMultipleRefills()
+	{
+		fuelQuantity = 0;
+		isRefilled = false;
+		pointerDown = false;
+		checkMark.SetActive(false);
+	}
 
     private void Reset()
     {

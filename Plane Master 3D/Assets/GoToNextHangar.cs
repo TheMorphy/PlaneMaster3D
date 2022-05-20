@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class GoToNextHangar : MonoBehaviour
 {
-
 	[SerializeField] GameObject button;
 
 	private void OnTriggerStay(Collider other)
@@ -22,6 +21,12 @@ public class GoToNextHangar : MonoBehaviour
 		{
 			button.SetActive(false);
 		}
+	}
+
+	public void BuyNextTerrain()
+	{
+		Debug.Log("Bought Terrain");
+		gameObject.SetActive(false);
 	}
 
 	public void TransitionToNextHangar()
