@@ -5,7 +5,7 @@ using UnityEngine;
 public class Drill : MonoBehaviour
 {
 
-    [SerializeField] int timeToDrop, maxDrop;
+	[SerializeField] float drillSpeed;
     [SerializeField]
     StashZone stashZone;
     [SerializeField]
@@ -28,9 +28,16 @@ public class Drill : MonoBehaviour
 
 
 
+	void OnLevelChanged()
+	{
+		drillSpeed = drillBuild.speed;
+		Animator anim = GetComponent<Animator>();
+		anim.speed = drillSpeed;
+		stashZone.capacity = drillBuild.storage;
+	}
 
 
-    void OnLoadLevels()
+	void OnLoadLevels()
 	{
 
         if (PlayerPrefs.GetInt(drillBuild.savingKey + "p") == 2)
@@ -49,7 +56,7 @@ public class Drill : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(timeToDrop);
+            yield return new WaitForSeconds(drillSpeed);
             if(stashZone.currentStashCount < stashZone.capacity)
             {
                 stashZone.AddItem(Instantiate(ironItemPrefab, RandomSpawnPos().position, Quaternion.identity).GetComponent<Item>());

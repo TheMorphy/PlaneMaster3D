@@ -17,6 +17,43 @@ public class Build : MonoBehaviour
 	AudioSource soundSource;
 	[SerializeField]
 	AudioClip buildSound;
+
+
+	[SerializeField]
+	GameObject systemMessageReceiver;
+
+
+	[SerializeField]
+	public int storage;
+	[SerializeField]
+	public float speed;
+
+
+	[Header("Levels")]
+	[SerializeField]
+	int storageLevel;
+	[SerializeField]
+	int maxStorageLevel;
+	[SerializeField]
+	int storageStandard;
+
+	[Space(10)]
+
+	[SerializeField]
+	int speedLevel;
+	[SerializeField]
+	int maxSpeedLevel;
+	[SerializeField]
+	float speedStandard;
+
+	[Header("UI")]
+	[SerializeField]
+	GameObject UpgradeUI;
+	[SerializeField]
+	GameObject upgradeReady, upgradeLocked;
+
+
+	bool upgradeZoneLocked = false;
 			
     void Start()
     {
@@ -28,6 +65,49 @@ public class Build : MonoBehaviour
         dz = GetComponent<DroppingZone>();
         SetConditionsToLevel();
     }
+
+	public void CloseUpgradeUI()
+	{
+		UpgradeUI.SetActive(false);
+	}
+
+
+
+
+	public void UpgradeSpeed()
+	{
+		speedLevel++;
+		PlayerPrefs.SetInt(name + "speedLvl", speedLevel);
+		LoadCorrectSpeed();
+	}
+
+	void LoadCorrectSpeed()
+	{
+		speed = speedStandard * Mathf.Pow(1 + 0.05f, speedLevel);
+		systemMessageReceiver.SendMessage("OnLevelChanged");
+	}
+
+
+	public void UpgradeStorage()
+	{
+		storageLevel++;
+		PlayerPrefs.SetInt(name + "storageLvl", storageLevel);
+		LoadCorrectStorage();
+	}
+	void LoadCorrectStorage()
+	{
+		storage = (int)(storageStandard * Mathf.Pow(1 + 0.05f, storageLevel));
+		systemMessageReceiver.SendMessage("OnLevelChanged");
+	}
+
+	void OnUpgradeZoneTriggered()
+	{
+		if(!upgradeZoneLocked)
+		{
+			//Open Upgrade UI
+			UpgradeUI.SetActive(true);
+		}
+	}
 
     void LoadVariables()
     {
