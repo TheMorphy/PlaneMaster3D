@@ -79,38 +79,67 @@ public class LevelSystem : MonoBehaviour
 	public UnityEvent OnMinigameFinish;
 	bool truckSystemCalled = false;
 
+	[SerializeField]
+	public List<Item> deb = new List<Item>();
+
 	public void EnterNextLevel()
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 		
 	}
 
-	public static List<Item> SpawnMoneyOverTime(int amount, Vector3 spawnPosition, Quaternion spawnRotation, int time = 0)
+	public static Item SpawnMoneyAtPosition(ref int amount, Vector3 spawnPosition)
 	{
-		List<Item> itemList = new List<Item>();
-
-		Coroutine spawnCoroutine = LevelSystem.instance.StartCoroutine(SpawnMoneyOverTimeCoroutine((itemList) => { if (itemList.Count > 0) {} }, amount, time, spawnPosition, spawnRotation));
-		return itemList;
+		for(int x = LevelSystem.instance.moneyPrefabsM10.Count -1; x >= 0; x--)
+		{
+			if((int)(amount / Mathf.Pow(10, x)) > 0)
+			{
+				amount -= (int)Mathf.Pow(10, x);
+				return Instantiate(LevelSystem.instance.moneyPrefabsM10[x], spawnPosition, Quaternion.identity).GetComponent<Item>();
+			}
+		}
+		return null;
 	}
 
-	public static IEnumerator SpawnMoneyOverTimeCoroutine(System.Action<List<Item>> itemListCallback, int amount, float time, Vector3 spawnPosition, Quaternion spawnRotation)
+	public static List<Item> SpawnMoneyOverTime(int amount, Transform spawnPos, float time = 0)
 	{
 		List<Item> itemList = new List<Item>();
-		//Calculate the correct money prefabs
+
 
 		for (int x = LevelSystem.instance.moneyPrefabsM10.Count - 1; x >= 0; x--)
 		{
 			int countToInstantiate = (int)(amount / Mathf.Pow(10, x));
 			for (int p = 0; p < countToInstantiate; p++)
 			{
-				itemList.Add(LevelSystem.instance.moneyPrefabsM10[x].GetComponent<Item>());
+				itemList.Add(new Item(LevelSystem.instance.moneyPrefabsM10[x].GetComponent<Item>())	);
+				
+				Debug.Log("added item to list");
 			}
 			amount -= countToInstantiate * (int)Mathf.Pow(10, x);
+			print(".::III" + amount);
 		}
 
-		for(int i = 0; i < itemList.Count; i++)
+
+		LevelSystem.instance.deb = itemList;
+
+		Coroutine spawnCoroutine = LevelSystem.instance.StartCoroutine(SpawnMoneyOverTimeCoroutine(itemList, amount, time, spawnPos));
+		Debug.Log($"started the coroutine. the item list has now {itemList.Count} items in it");
+		return itemList;
+	}
+
+	public static IEnumerator SpawnMoneyOverTimeCoroutine(List<Item> itemList, int amount, float time, Transform spawnPos)
+	{
+		
+		List<GameObject> objList = new List<GameObject>();
+		//Calculate the correct money prefabs
+
+		
+		
+
+		//Instantiate the money
+		for (int i = 0; i < objList.Count; i++)
 		{
-			Item spawnedItem = Instantiate(LevelSystem.instance.moneyPrefab, spawnPosition, spawnRotation).GetComponent<Item>();
+			Item spawnedItem = Instantiate(itemList[i].gameObject, spawnPos.position, spawnPos.rotation).GetComponent<Item>();
 			spawnedItem = itemList[i];
 			yield return new WaitForSeconds(time / amount);
 		}
@@ -120,7 +149,7 @@ public class LevelSystem : MonoBehaviour
 
 
 
-		itemListCallback(itemList);
+		
 
 		
 
@@ -128,10 +157,10 @@ public class LevelSystem : MonoBehaviour
 
 
 
-		Item item = new Item();
-		print(time);
-		yield return new WaitForEndOfFrame();
-		yield return item;
+		//Item item = new Item();
+		//print(time);
+		//ield return new WaitForEndOfFrame();
+		//yield return item;
 	}
 
 	static void dasd(bool l = true)
@@ -148,15 +177,9 @@ public class LevelSystem : MonoBehaviour
 		}
 	}
 
-	public void ChangeCamera(int cameraIndex)
+	public void ChangeCamera(int cameraIndex, int priority)
 	{
-		for(int i = 0; i < cameras.Count; i++)
-		{
-			if (i == cameraIndex)
-				cameras[i].Priority = 1;
-			else
-				cameras[i].Priority = 0;
-		}
+		cameras[cameraIndex].Priority = priority;
 	}
 
 	private void Start()
@@ -166,7 +189,7 @@ public class LevelSystem : MonoBehaviour
 
 		LoadMoney();
 		RefreshUI();
-		ChangeCamera(0);
+		ChangeCamera(0, 1);
 		//TruckSystem();
 	}
 	private void Awake()

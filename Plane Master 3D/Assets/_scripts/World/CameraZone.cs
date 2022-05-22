@@ -6,11 +6,25 @@ public class CameraZone : MonoBehaviour
 	int cameraIndex;
 
 
+	public void SetCameraIndex(int newindex)
+	{
+		LevelSystem.instance.ChangeCamera(cameraIndex, 0);
+		cameraIndex = newindex;
+	}
+
 	private void OnTriggerEnter(Collider other)
 	{
 		if(other.CompareTag("Player"))
 		{
-			LevelSystem.instance.ChangeCamera(cameraIndex);
+			LevelSystem.instance.ChangeCamera(cameraIndex, 2);
+		}
+	}
+
+	private void OnTriggerStay(Collider other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			LevelSystem.instance.ChangeCamera(cameraIndex, 2);
 		}
 	}
 
@@ -18,7 +32,7 @@ public class CameraZone : MonoBehaviour
 	{
 		if(other.CompareTag("Player"))
 		{
-			LevelSystem.instance.ChangeCamera(0);
+			LevelSystem.instance.ChangeCamera(cameraIndex, 0);
 		}
 	}
 }

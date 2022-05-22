@@ -11,7 +11,7 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public UnityEvent onLongClick;
     [SerializeField] private Image fillImage;
     [SerializeField] float speed, fuelQuantity;
-    [SerializeField] Slider fuelSlider;
+    [SerializeField] Image fuelSlider;
     [SerializeField] GameObject taskCompleted;
 	[SerializeField] GameObject taskObject;
 	[SerializeField] GameObject checkMark;
@@ -40,7 +40,7 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     private void Update()
     {
-		fuelSlider.value = fuelQuantity;
+		fuelSlider.fillAmount = fuelQuantity;
 
 		if (pointerDown)
         {

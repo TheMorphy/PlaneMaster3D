@@ -56,17 +56,43 @@ public class Backpack : MonoBehaviour
 		for(int u = 0; u < UIItems.Count; u++)
 		{
 			ItemStack stack = itemStacks.Find(stack => stack.itemType == UIItems[u].itemType);
-			if(stack != null)
+			if (UIItems[u].itemType == ItemType.Money)
 			{
-				UIItems[u].text.gameObject.SetActive(true);
-				UIItems[u].text.text = stack.items.Count.ToString();
-				stack.text.text = stack.items.Count.ToString();
-				stack.text.transform.SetParent(stack.items[stack.items.Count - 1].transform, false);
+				if(stack != null)
+				{
+					UIItems[u].text.gameObject.SetActive(true);
+					
+					int count = 0;
+					for(int i = 0; i < stack.items.Count; i++)
+					{
+						count += stack.items[i].amount;
+					}
+					UIItems[u].text.text = count.ToString();
+					stack.text.text = count.ToString();
+
+					stack.text.transform.SetParent(stack.items[stack.items.Count - 1].transform, false);
+				}
+				else
+				{
+					UIItems[u].text.gameObject.SetActive(false);
+				}
 			}
 			else
 			{
-				UIItems[u].text.gameObject.SetActive(false);
+				
+				if (stack != null)
+				{
+					UIItems[u].text.gameObject.SetActive(true);
+					UIItems[u].text.text = stack.items.Count.ToString();
+					stack.text.text = stack.items.Count.ToString();
+					stack.text.transform.SetParent(stack.items[stack.items.Count - 1].transform, false);
+				}
+				else
+				{
+					UIItems[u].text.gameObject.SetActive(false);
+				}
 			}
+			
 		}
         
 
@@ -163,6 +189,7 @@ public class Backpack : MonoBehaviour
 						//
 						//items.Add(i);
 						RefreshItemUI();
+						if(i.transform.parent != null)
 						if (i.transform.parent.parent != null)
 						{
 							i.transform.parent.parent.SendMessage("RemoveItem", SendMessageOptions.DontRequireReceiver);
@@ -181,8 +208,7 @@ public class Backpack : MonoBehaviour
 							itemSoundSource.PlayOneShot(pickUpSounds[Random.Range(0, pickUpSounds.Count)]);
 						}
 					}
-					else
-						print("cant add item. Stack is full");
+//						print("cant add item. Stack is full");
                 }
             }
 
@@ -199,7 +225,13 @@ public class Backpack : MonoBehaviour
                             {
                                 Item itemToDrop = DropItem(u.itemType);
                                 Transform itemTransform = itemToDrop.transform;
-                                u.count++;
+								if(itemToDrop.amount > u.countNeeded - u.count)
+								{
+									int change = itemToDrop.amount - (u.countNeeded - u.count);
+									while(change > 0)
+									LevelSystem.SpawnMoneyAtPosition(ref change, player.transform.position);
+								}
+								u.count += itemToDrop.amount;
                                 if (!droppingZone.showDroppedItems)
                                 {
                                     itemTransform.parent = u.itemDestination;

@@ -42,12 +42,17 @@ public class RepairStation : MonoBehaviour
 	StashZone rewardStashZone;
 	[SerializeField]
 	GameObject moneyPrefab;
+	[SerializeField]
+	List<Material> materialPool;
+	[SerializeField]
+	CameraZone cameraZone;
 
 	bool minigameDone = false;
 	[SerializeField]
 	bool debug = false;
 	private void Start()
 	{
+		print("start");
 		dz = GetComponent<DroppingZone>();
 		anim = aircraftHolder.GetComponent<Animator>();
 		if(PlayerPrefs.GetInt(name + "r1") == PlayerPrefs.GetInt(name + "r2"))
@@ -76,33 +81,14 @@ public class RepairStation : MonoBehaviour
 
 
 
-	void OnConditionComplete()
+	void OnAllConditionsComplete()
 	{
-		print("ON CONdItion CONpletet");
-		if(AllConditionsTrue(breakablesToRepair[0].conditions))
-		{
+		
 			breakablesToRepair[0].SendMessage("OnAllConditionsComplete");
-			breakablesToRepair.RemoveAt(0);
-			if (breakablesToRepair.Count > 0)
-			{
-				// 1 of 2 completed
-				//dz.conditions = breakablesToRepair[0].conditions;
-				PlayerPrefs.SetInt(name + "firstDone", 1);
-			}
-			else
-			{
-				StartCoroutine(WaitForLevelUp());
-			}
-		}
-		else if(breakablesToRepair.Count > 1 && AllConditionsTrue(breakablesToRepair[1].conditions))
-		{
+		
 			breakablesToRepair[1].SendMessage("OnAllConditionsComplete");
-			breakablesToRepair.RemoveAt(1);
-			
-			PlayerPrefs.SetInt(name + "firstDone", 1);
-		}
 
-		print("AAAAA" + AllConditionsTrue(breakablesToRepair[1].conditions));
+		StartCoroutine(WaitForLevelUp());
 	}
 
 	bool AllConditionsTrue(List <UpgradeCondition> c)
@@ -137,22 +123,58 @@ public class RepairStation : MonoBehaviour
 			
 
 		pilot.PilotGoToPlanePos();
+		
 		//Put Money in stash zone
-		for(int i = 0; i <= currentAircraft.Profit; i++)
+		int rewardLeft = currentAircraft.Profit;
+		while(rewardLeft > 0)
 		{
-			//StartCoroutine(LevelSystem.SpawnMoneyOvertime(10));
-			rewardStashZone.AddItem(Instantiate(moneyPrefab, pilot.transform.position + Vector3.up , Quaternion.identity).GetComponent<Item>());
+			rewardStashZone.AddItem(LevelSystem.SpawnMoneyAtPosition(ref rewardLeft, pilot.transform.position + Vector3.up));
 			yield return new WaitForSeconds(0.04f);
 		}
+			
 		
+		
+
 		yield return new WaitWhile(() => pilot.isMoving);
 		anim.Play("RollOut");
 		pilot.gameObject.SetActive(false);
 		LevelUp();
 		yield return new WaitForSeconds(1.2f);
+		// do the mat stuff here
+
+		//Set Random Material
+
+
+		int materialIndex = Random.Range(0, materialPool.Count);
+		PlayerPrefs.SetInt(name + "mat", materialIndex);
+		currentAircraft.Model.GetComponent<MeshRenderer>().material = materialPool[materialIndex];
+		for (int i = 0; i < currentAircraft.Breakables.Count; i++)
+		{
+			if (currentAircraft.Breakables[i].GetComponent<MeshRenderer>() != null)
+				currentAircraft.Breakables[i].GetComponent<MeshRenderer>().material = materialPool[materialIndex];
+			else if (currentAircraft.Breakables[i].GetComponentInChildren<MeshRenderer>() != null)
+			{
+				currentAircraft.Breakables[i].GetComponentInChildren<MeshRenderer>().material = materialPool[materialIndex];
+			}
+		}
+
 		ActivateAircraftModel(level % aircrafts.Count);
+		
+		
+
 		StartCoroutine(BringBreakablesToBrokenPos());
 		minigameDone = false;
+	}
+
+
+	void LoadMaterials()
+	{
+		int materialIndex = PlayerPrefs.GetInt(name + "mat");
+		currentAircraft.Model.GetComponent<MeshRenderer>().material = materialPool[materialIndex];
+		for (int i = 0; i < currentAircraft.Breakables.Count; i++)
+		{
+			currentAircraft.Breakables[i].GetComponent<MeshRenderer>().material = materialPool[materialIndex];
+		}
 	}
 
 	void LevelUp()
@@ -162,11 +184,17 @@ public class RepairStation : MonoBehaviour
 		QuestSystem.instance.AddProgress("Repair a plane", 1);
 		LevelSystem.instance.EnableWorkerHouse();
 		PlayerPrefs.SetInt(name + "level", level);
-		PlayerPrefs.SetInt(name + "firstDone", 0);
 		dz.enabled = false;
 		currentAircraft = aircrafts[level % aircrafts.Count];
 		print("!!!!" + level % aircrafts.Count);
+
+		cameraZone.SetCameraIndex(currentAircraft.CameraIndex);
+
 		
+
+
+
+		//
 		
 		int r1 = Random.Range(0, currentAircraft.Breakables.Count);
 		int r2 = r1;
@@ -204,6 +232,9 @@ public class RepairStation : MonoBehaviour
 
 	void GetBreakablesToRepair(int r1, int r2)
 	{
+		breakablesToRepair.Clear();
+
+
 		for (int i = currentAircraft.Breakables.Count - 1; i >= 0; i--)
 		{
 			if (i == r1 || i == r2)
@@ -238,11 +269,10 @@ public class RepairStation : MonoBehaviour
 		Quaternion firstStartRot = breakablesToRepair[0].transform.rotation;
 		Vector3 secondStartPos = Vector3.zero;
 		Quaternion secondStartRot = Quaternion.identity;
-		if (breakablesToRepair.Count > 1)
-		{
+		
 			 secondStartPos = breakablesToRepair[1].transform.position;
 			 secondStartRot = breakablesToRepair[1].transform.rotation;
-		}
+		
 		
 
 		
@@ -256,13 +286,12 @@ public class RepairStation : MonoBehaviour
 
 			
 			breakablesToRepair[0].transform.SetPositionAndRotation(firstPos, firstRot);
-			if (breakablesToRepair.Count > 1)
-			{
-				Vector3 secondPos = Vector3.Lerp(secondStartPos, brokenLowerPos.position, partLerpCurve.Evaluate(t));
-				Quaternion secondRot = Quaternion.Lerp(secondStartRot, Quaternion.Euler(brokenLowerPos.rotation.eulerAngles + breakablesToRepair[1].PaletteRotation), partLerpCurve.Evaluate(t));
-				breakablesToRepair[1].transform.SetPositionAndRotation(secondPos, secondRot);
+			
+			Vector3 secondPos = Vector3.Lerp(secondStartPos, brokenLowerPos.position, partLerpCurve.Evaluate(t));
+			Quaternion secondRot = Quaternion.Lerp(secondStartRot, Quaternion.Euler(brokenLowerPos.rotation.eulerAngles + breakablesToRepair[1].PaletteRotation), partLerpCurve.Evaluate(t));
+			breakablesToRepair[1].transform.SetPositionAndRotation(secondPos, secondRot);
 
-			}
+			
 			yield return null;
 		}
 		dz.enabled = true;
@@ -277,18 +306,7 @@ public class RepairStation : MonoBehaviour
 		currentAircraft = aircrafts[level % aircrafts.Count];
 		ActivateAircraftModel(level % aircrafts.Count);
 		GetBreakablesToRepair(PlayerPrefs.GetInt(name + "r1"), PlayerPrefs.GetInt(name + "r2"));
-		if(PlayerPrefs.GetInt(name + "firstDone") == 1)
-		{
-			print("Use one");
-			breakablesToRepair.RemoveAt(0);
-
-		}
-		else
-		{
-			print("Use Both");
-			
-
-		}
+		
 		StartCoroutine(BringBreakablesToBrokenPos());
 		List<UpgradeCondition> newConditions = new List<UpgradeCondition>();
 		foreach(UpgradeCondition u in breakablesToRepair[0].conditions)
@@ -301,6 +319,8 @@ public class RepairStation : MonoBehaviour
 		}
 		dz.conditions = newConditions;
 		dz.Refresh();
+		cameraZone.SetCameraIndex(currentAircraft.CameraIndex);
+
 	}
 
 	void SaveAircraft()

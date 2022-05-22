@@ -80,6 +80,7 @@ public class DroppingZone : MonoBehaviour
         {
             PlayerPrefs.SetInt(gameObject.name + c.name + "count", c.count);
         }
+        CheckForDone();
     }
     private void Update()
     {
@@ -236,7 +237,7 @@ public class DroppingZone : MonoBehaviour
 			}
 			
 			float progress = count / countNeeded;
-			progressbar.size = new Vector2(progressbar.size.x, progress == 0 ? 0 : progressBarStartSize * progress);
+			progressbar.size = new Vector2(progressbar.size.x, count == 0 || countNeeded == 0 ? 0 : progressBarStartSize * progress);
 			
 		}
 		

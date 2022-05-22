@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
 	{
 		
 			
-		StartCoroutine(LevelSystem.SpawnMoneyOvertime(10));
+		
 			
 		
 
