@@ -76,13 +76,20 @@ public class Build : MonoBehaviour
         anim = GetComponent<Animator>();
 		LoadVariables();
 
-        speedUpgradePrize = costStart + costIncrement * speedLevel;
+		speedLevel = PlayerPrefs.GetInt(name + "speedLvl");
+		storageLevel = PlayerPrefs.GetInt(name + "storageLvl");
+
+		LoadCorrectSpeed();
+		LoadCorrectStorage();
+
+		speedUpgradePrize = costStart + costIncrement * speedLevel;
         storageUpgradePrize = costStart + costIncrement * storageLevel;
 
         UpdateUpgradeUI();
+		
 
-    }
-    private void OnEnable()
+	}
+	private void OnEnable()
     {
         dz = GetComponent<DroppingZone>();
         SetConditionsToLevel();
@@ -102,13 +109,30 @@ public class Build : MonoBehaviour
 
     void CheckForOutOfLevels()
 	{
-        if(speedLevel + storageLevel >= PlayerPrefs.GetInt(savingKey + "p"))
+		if(level < 2)
 		{
-            CloseUpgradeUI();
-            upgradeZoneLocked = true;
-            upgradeReady.SetActive(false);
-            upgradeLocked.SetActive(true);
+			CloseUpgradeUI();
+			upgradeZoneLocked = true;
+			upgradeReady.SetActive(false);
+			upgradeLocked.SetActive(false);
 		}
+		else
+		{
+			if (speedLevel + storageLevel >= PlayerPrefs.GetInt(savingKey + "p"))
+			{
+				CloseUpgradeUI();
+				upgradeZoneLocked = true;
+				upgradeReady.SetActive(false);
+				upgradeLocked.SetActive(true);
+			}
+			else
+			{
+				upgradeZoneLocked = false;
+				upgradeReady.SetActive(true);
+				upgradeLocked.SetActive(false);
+			}
+		}
+        
 	}
 
 	public void CloseUpgradeUI()
@@ -167,31 +191,31 @@ public class Build : MonoBehaviour
         
 		//print("load vars");
 		//print("load vars 2 ");
-		level = PlayerPrefs.GetInt(savingKey + "c");
+		level = PlayerPrefs.GetInt(savingKey + "p");
         
 
         if (level < PlayerPrefs.GetInt(savingKey + "p"))
         {
-            readyForUpgrade = true;
-            build.SetActive(true);
+            //readyForUpgrade = true;
+            //build.SetActive(true);
             GetComponent<DroppingZone>().enabled = true;
         }
         else
         {
-            readyForUpgrade = false;
+            //readyForUpgrade = false;
             build.SetActive(false);
             GetComponent<DroppingZone>().enabled = false;
         }
-        if (level > 0)
-            system.SetActive(true);
+   //     if (level > 1)
+        //    system.SetActive(true);
         system.transform.GetChild(0).SendMessage("OnLoadLevels", SendMessageOptions.DontRequireReceiver);
-        /*
-                if (level > 0)
+        
+                if (level > 1)
                 {
                     GetComponent<Animator>().enabled = false;
                     build.SetActive(false);
                     system.SetActive(true);
-                    system.transform.GetChild(0).SendMessage("OnChangeLevel");
+                    //system.transform.GetChild(0).SendMessage("OnChangeLevel");
                 }
                 else
                 {
@@ -199,12 +223,15 @@ public class Build : MonoBehaviour
                     build.SetActive(true);
                     system.SetActive(false);
                 }
-        */
+
+		CheckForOutOfLevels();
+        
     }
 
     public void OnAddedPossibleLevel()
     {
         LoadVariables();
+		print("level added");
     }
     
 
@@ -215,8 +242,8 @@ public class Build : MonoBehaviour
         if (level == 0)
             anim.Play("Build");
 
-        level = PlayerPrefs.GetInt(savingKey + "c") + 1;
-        PlayerPrefs.SetInt(savingKey + "c", level);
+        level = PlayerPrefs.GetInt(savingKey + "p") + 1;
+        PlayerPrefs.SetInt(savingKey + "p", level);
         LoadVariables();
         
         SetConditionsToLevel();
@@ -227,7 +254,7 @@ public class Build : MonoBehaviour
     {
         dz.conditions = levels[level].conditions;
     }
-    public void SwitchToSystem()
+    public void SwitchToSystem() 
     {
         build.SetActive(false);
         system.SetActive(true);

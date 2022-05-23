@@ -1530,7 +1530,7 @@ MonoBehaviour:
   storageStandard: 10
   speedLevel: 0
   maxSpeedLevel: 10
-  speedStandard: 1
+  speedStandard: 0.2
   costStart: 50
   costIncrement: 50
   speedUpgradePrize: 50
@@ -3873,7 +3873,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6074823924098168867
 RectTransform:
   m_ObjectHideFlags: 0
