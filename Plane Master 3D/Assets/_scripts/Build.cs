@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Build : MonoBehaviour
 {
@@ -46,11 +47,26 @@ public class Build : MonoBehaviour
 	[SerializeField]
 	float speedStandard;
 
+    [Space(10)]
+    [SerializeField]
+    int costStart;
+    [SerializeField]
+    int costIncrement;
+
+    [SerializeField]
+    int speedUpgradePrize, storageUpgradePrize;
+
 	[Header("UI")]
 	[SerializeField]
 	GameObject UpgradeUI;
 	[SerializeField]
 	GameObject upgradeReady, upgradeLocked;
+    [SerializeField]
+    TextMeshProUGUI currentSpeedInfo, currentStorageInfo;
+    [SerializeField]
+    TextMeshProUGUI currentSpeedLevelInfo, currentStorageLevelInfo;
+    [SerializeField]
+    TextMeshProUGUI storageUpgradeCost, speedUpgradeCost;
 
 
 	bool upgradeZoneLocked = false;
@@ -59,12 +75,41 @@ public class Build : MonoBehaviour
     {
         anim = GetComponent<Animator>();
 		LoadVariables();
-	}
+
+        speedUpgradePrize = costStart + costIncrement * speedLevel;
+        storageUpgradePrize = costStart + costIncrement * storageLevel;
+
+        UpdateUpgradeUI();
+
+    }
     private void OnEnable()
     {
         dz = GetComponent<DroppingZone>();
         SetConditionsToLevel();
     }
+
+    void UpdateUpgradeUI()
+	{
+        currentSpeedLevelInfo.text = "LVL " + speedLevel;
+        currentStorageLevelInfo.text = "LVL " + storageLevel;
+
+        currentSpeedInfo.text = "Speed " + (speed * 60).ToString("0.00") + $"/min (+{ (speed * 0.05f).ToString("0.00")})";
+        currentStorageInfo.text = "Capacity " + storage.ToString() + $"(+{ Mathf.CeilToInt(storage * 0.05f)})";
+
+        storageUpgradeCost.text = storageUpgradePrize.ToString();
+        speedUpgradeCost.text = speedUpgradePrize.ToString();
+	}
+
+    void CheckForOutOfLevels()
+	{
+        if(speedLevel + storageLevel >= PlayerPrefs.GetInt(savingKey + "p"))
+		{
+            CloseUpgradeUI();
+            upgradeZoneLocked = true;
+            upgradeReady.SetActive(false);
+            upgradeLocked.SetActive(true);
+		}
+	}
 
 	public void CloseUpgradeUI()
 	{
@@ -79,12 +124,16 @@ public class Build : MonoBehaviour
 		speedLevel++;
 		PlayerPrefs.SetInt(name + "speedLvl", speedLevel);
 		LoadCorrectSpeed();
-	}
+        UpdateUpgradeUI();
+        CheckForOutOfLevels();
+    }
 
-	void LoadCorrectSpeed()
+    void LoadCorrectSpeed()
 	{
 		speed = speedStandard * Mathf.Pow(1 + 0.05f, speedLevel);
-		systemMessageReceiver.SendMessage("OnLevelChanged");
+        speedUpgradePrize = costStart + costIncrement * speedLevel;
+
+        systemMessageReceiver.SendMessage("OnLevelChanged");
 	}
 
 
@@ -93,11 +142,15 @@ public class Build : MonoBehaviour
 		storageLevel++;
 		PlayerPrefs.SetInt(name + "storageLvl", storageLevel);
 		LoadCorrectStorage();
-	}
+        UpdateUpgradeUI();
+        CheckForOutOfLevels();
+    }
 	void LoadCorrectStorage()
 	{
 		storage = (int)(storageStandard * Mathf.Pow(1 + 0.05f, storageLevel));
-		systemMessageReceiver.SendMessage("OnLevelChanged");
+        storageUpgradePrize = costStart + costIncrement * storageLevel;
+
+        systemMessageReceiver.SendMessage("OnLevelChanged");
 	}
 
 	void OnUpgradeZoneTriggered()
@@ -111,6 +164,7 @@ public class Build : MonoBehaviour
 
     void LoadVariables()
     {
+        
 		//print("load vars");
 		//print("load vars 2 ");
 		level = PlayerPrefs.GetInt(savingKey + "c");

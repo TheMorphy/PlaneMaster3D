@@ -1523,17 +1523,27 @@ MonoBehaviour:
   soundSource: {fileID: 36124965483188342}
   buildSound: {fileID: 8300000, guid: acf277032311ce24fbd93cb79aca38f7, type: 3}
   systemMessageReceiver: {fileID: 36124964602721611}
-  storage: 0
-  speed: 0
+  storage: 10
+  speed: 1
   storageLevel: 0
   maxStorageLevel: 10
   storageStandard: 10
   speedLevel: 0
   maxSpeedLevel: 10
   speedStandard: 1
+  costStart: 50
+  costIncrement: 50
+  speedUpgradePrize: 50
+  storageUpgradePrize: 50
   UpgradeUI: {fileID: 8399439919254151107}
   upgradeReady: {fileID: 898971784286892584}
   upgradeLocked: {fileID: 8149823467685596609}
+  currentSpeedInfo: {fileID: 3308715903602094507}
+  currentStorageInfo: {fileID: 5778514735016005853}
+  currentSpeedLevelInfo: {fileID: 6102226546129861633}
+  currentStorageLevelInfo: {fileID: 1809023841745730576}
+  storageUpgradeCost: {fileID: 6967391330289553834}
+  speedUpgradeCost: {fileID: 3521760847828041793}
 --- !u!95 &36124965483188346
 Animator:
   serializedVersion: 3
@@ -1688,7 +1698,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 603195334564428193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.00000047683}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2735035202818527932}
@@ -1696,7 +1706,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 59.5, y: 0.000012398}
+  m_AnchoredPosition: {x: 67.4, y: 0.000012398}
   m_SizeDelta: {x: 51.8439, y: 27.2753}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7781745066145143943
@@ -2054,7 +2064,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3390021768970710721}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.00000047683}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00004568807}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5790043304119091035}
@@ -2062,7 +2072,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 59.5, y: 0.000012398}
+  m_AnchoredPosition: {x: 67.39999, y: 0.000012398}
   m_SizeDelta: {x: 51.8439, y: 27.2753}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9055840103977244362
@@ -2970,7 +2980,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &2121087182502863162
 MonoBehaviour:
