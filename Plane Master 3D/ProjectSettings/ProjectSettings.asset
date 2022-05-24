@@ -153,7 +153,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.DefaultCompany.PlaneMaster3D
+    Android: com.MorphyStudios.PlaneMaster3D
     iPhone: com.DefaultCompany.Plane-Master-3D
   buildNumber:
     Standalone: 0

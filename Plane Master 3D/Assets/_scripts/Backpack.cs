@@ -22,7 +22,7 @@ public class Backpack : MonoBehaviour
     [SerializeField]
     public int backpackSize = 50;
     [SerializeField]
-    int stackSize = 10;
+    public int stackSize = 10;
     [SerializeField]
     float stackOffset, pickupRadius, itemDropInterval;
 
@@ -152,7 +152,114 @@ public class Backpack : MonoBehaviour
 		return added;
 	}
 
+	public bool TryPay(int amount, Vector3 payPos)
+	{
+		ItemStack moneyStack = GetItemStack(ItemType.Money);
+		if (moneyStack == null)
+		{
+			return false;
+		}
+		else
+		{
+			if(GetAmountOfItemstack(moneyStack) >= amount)
+			{
+				StartCoroutine(PayMoney(amount, moneyStack, payPos));
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	}
 
+	IEnumerator PayMoney(int amount, ItemStack stack, Vector3 payPos)
+	{
+		List<Item> itemsToLerp = new List<Item>();
+		for(int i = stack.items.Count - 1; i >= 0; i--)
+		{
+			amount -= stack.items[i].amount;
+			
+			itemsToLerp.Add(stack.items[i]);
+			stack.items.RemoveAt(i);
+			if (amount <= 0)
+			{
+				break;
+			}
+		}
+		if (stack.items.Count == 0)
+		{
+			Destroy(stack.text.gameObject);
+			itemStacks.Remove(stack);
+		}
+		RefreshItemUI();
+		float waitTime = 1 / itemsToLerp.Count;
+		//Lerp Items
+		while(itemsToLerp.Count > 0)
+		{
+			itemsToLerp[itemsToLerp.Count - 1].transform.parent = null;
+			StartCoroutine(LerpItemToPos(itemsToLerp[itemsToLerp.Count - 1], payPos));
+			itemsToLerp.RemoveAt(itemsToLerp.Count - 1);
+
+			yield return new WaitForSeconds(waitTime);
+		}
+
+		//get change
+		amount = Mathf.Abs(amount);
+		while (amount > 0)
+		{
+			Item itemToAdd = LevelSystem.SpawnMoneyAtPosition(ref amount, payPos);
+			tryAddItem(itemToAdd);
+			itemToAdd.pickedUp = true;
+			RefreshItemUI();
+			itemToAdd.transform.parent = itemParent;
+			//Play item sound
+			if (itemSoundSource != null)
+			{
+				itemSoundSource.PlayOneShot(pickUpSounds[Random.Range(0, pickUpSounds.Count)]);
+			}
+			UpdateItemDestinations();
+			yield return new WaitForSeconds(0.05f);
+		}
+			
+	}
+
+	IEnumerator LerpItemToPos(Item item, Vector3 pos)
+	{
+		float t = 0;
+		while(t < 1)
+		{
+			t += Time.deltaTime;
+			item.transform.position = Vector3.Lerp(item.transform.position, pos, itemLerpCurve.Evaluate(t));
+			yield return null;
+		}
+		Destroy(item.gameObject);
+	}
+
+	
+
+	int GetAmountOfItemstack(ItemStack stack)
+	{
+		int output = 0;
+		for(int i = 0; i < stack.items.Count; i++)
+		{
+			output += stack.items[i].amount;
+		}
+		return output;
+	}
+
+	ItemStack GetItemStack(ItemType itemType)
+	{
+		
+		for(int i = 0; i < itemStacks.Count; i++)
+		{
+			if(itemStacks[i].itemType == itemType)
+			{
+				return itemStacks[i];
+			}
+		}
+		return null;
+	}
 
 	void FixedUpdate()
     {
@@ -251,10 +358,10 @@ public class Backpack : MonoBehaviour
 								//Play Drop sound
 								itemSoundSource.PlayOneShot(dropSounds[Random.Range(0, dropSounds.Count)]);
 
-								if (items[items.Count - 1] == null)
-                                {
-                                    items.RemoveAt(items.Count - 1);
-                                }
+							//	if (items[items.Count - 1] == null)
+                            //   {
+                             //       items.RemoveAt(items.Count - 1);
+                             //   }
 
                                 dropTime = itemDropInterval;
                             }

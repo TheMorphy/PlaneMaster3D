@@ -68,8 +68,9 @@ public class Build : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI storageUpgradeCost, speedUpgradeCost;
 
-
+	Backpack playerBackpack;
 	bool upgradeZoneLocked = false;
+	bool UIActivated;
 			
     void Start()
     {
@@ -78,6 +79,10 @@ public class Build : MonoBehaviour
 
 		speedLevel = PlayerPrefs.GetInt(name + "speedLvl");
 		storageLevel = PlayerPrefs.GetInt(name + "storageLvl");
+		if (speedLevel < 1)
+			speedLevel = 1;
+		if (storageLevel < 1)
+			storageLevel = 1;
 
 		LoadCorrectSpeed();
 		LoadCorrectStorage();
@@ -118,19 +123,11 @@ public class Build : MonoBehaviour
 		}
 		else
 		{
-			if (speedLevel + storageLevel >= PlayerPrefs.GetInt(savingKey + "p"))
-			{
-				CloseUpgradeUI();
-				upgradeZoneLocked = true;
-				upgradeReady.SetActive(false);
-				upgradeLocked.SetActive(true);
-			}
-			else
-			{
+			
 				upgradeZoneLocked = false;
 				upgradeReady.SetActive(true);
 				upgradeLocked.SetActive(false);
-			}
+			
 		}
         
 	}
@@ -145,44 +142,60 @@ public class Build : MonoBehaviour
 
 	public void UpgradeSpeed()
 	{
-		speedLevel++;
-		PlayerPrefs.SetInt(name + "speedLvl", speedLevel);
-		LoadCorrectSpeed();
-        UpdateUpgradeUI();
-        CheckForOutOfLevels();
+		if(LevelSystem.instance.playerBackpack.TryPay(speedUpgradePrize, transform.position))
+		{
+			speedLevel++;
+			PlayerPrefs.SetInt(name + "speedLvl", speedLevel);
+			LoadCorrectSpeed();
+			UpdateUpgradeUI();
+			CheckForOutOfLevels();
+		}
+		
     }
 
     void LoadCorrectSpeed()
 	{
-		speed = speedStandard * Mathf.Pow(1 + 0.05f, speedLevel);
-        speedUpgradePrize = costStart + costIncrement * speedLevel;
+		speed = speedStandard * Mathf.Pow(1 + 0.05f, speedLevel -1);
+        speedUpgradePrize = costStart + costIncrement * (speedLevel - 1);
 
-        systemMessageReceiver.SendMessage("OnLevelChanged");
+        systemMessageReceiver.SendMessage("OnLevelChanged", SendMessageOptions.DontRequireReceiver);
 	}
 
 
 	public void UpgradeStorage()
 	{
-		storageLevel++;
-		PlayerPrefs.SetInt(name + "storageLvl", storageLevel);
-		LoadCorrectStorage();
-        UpdateUpgradeUI();
-        CheckForOutOfLevels();
+		if (LevelSystem.instance.playerBackpack.TryPay(storageUpgradePrize, transform.position))
+		{
+			storageLevel++;
+			PlayerPrefs.SetInt(name + "storageLvl", storageLevel);
+			LoadCorrectStorage();
+			UpdateUpgradeUI();
+			CheckForOutOfLevels();
+		}
     }
 	void LoadCorrectStorage()
 	{
 		storage = (int)(storageStandard * Mathf.Pow(1 + 0.05f, storageLevel));
         storageUpgradePrize = costStart + costIncrement * storageLevel;
 
-        systemMessageReceiver.SendMessage("OnLevelChanged");
+        systemMessageReceiver.SendMessage("OnLevelChanged", SendMessageOptions.DontRequireReceiver);
 	}
 
 	void OnUpgradeZoneTriggered()
 	{
 		if(!upgradeZoneLocked)
 		{
-			//Open Upgrade UI
+			UIActivated = false;
+		}
+	}
+
+	void OnUpgradeZoneStay(Collider collider)
+	{
+
+		if(!collider.GetComponent<Player>().isMoving && !UIActivated)
+		{
 			UpgradeUI.SetActive(true);
+			UIActivated = true;
 		}
 	}
 

@@ -49,6 +49,9 @@ public class LevelSystem : MonoBehaviour
 
 	public GameObject player;
 
+	public Backpack playerBackpack;
+	public Transform workersHouse;
+
 	[SerializeField] Build workerHouse;
 
 
@@ -87,6 +90,8 @@ public class LevelSystem : MonoBehaviour
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 		
 	}
+
+	
 
 	public static Item SpawnMoneyAtPosition(ref int amount, Vector3 spawnPosition)
 	{
@@ -165,7 +170,7 @@ public class LevelSystem : MonoBehaviour
 
 	static void dasd(bool l = true)
 	{
-
+		
 	}
 
 	public void EnableWorkerHouse()
@@ -194,6 +199,8 @@ public class LevelSystem : MonoBehaviour
 	}
 	private void Awake()
 	{
+		Application.targetFrameRate = 300;
+		
 		#region singleton
 		instance = this;
 		#endregion

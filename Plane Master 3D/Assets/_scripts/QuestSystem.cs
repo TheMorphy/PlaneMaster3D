@@ -38,8 +38,8 @@ public class QuestSystem : MonoBehaviour
 	{
 		instance = this;
 		//print("awake");
-		if (PlayerPrefs.GetInt("Drill" + "p") < 1)
-			PlayerPrefs.SetInt("Drill" + "p", 1);
+		//if (PlayerPrefs.GetInt("Drill" + "p") < 1)
+		//	PlayerPrefs.SetInt("Drill" + "p", 1);
 	}
 
 	void LoadQuests()

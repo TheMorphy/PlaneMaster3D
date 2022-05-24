@@ -1228,7 +1228,7 @@ MonoBehaviour:
   currentStashCount: 0
   capacity: 20
   items: []
-  limitations: {x: 2, y: 2, z: 5}
+  limitations: {x: 2, y: 100, z: 5}
   space: {x: 0.47, y: 0.11, z: 0.22}
   visualStart: {fileID: 36124964202798726}
   debug: 0
@@ -2844,7 +2844,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   messageToSend: OnUpgradeZoneTriggered
+  stayMessage: 
   messageReceiver: {fileID: 36124965483188344}
+  outlineAlpha: 0.43
+  outlines: []
+  outlineFadeInCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6092485239998286003
 GameObject:
   m_ObjectHideFlags: 0

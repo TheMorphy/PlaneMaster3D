@@ -537,7 +537,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 143.5, y: -48.783}
+  m_AnchoredPosition: {x: 143.5, y: -48.78296}
   m_SizeDelta: {x: 287, y: 32.5217}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7060073184462698801
@@ -4331,8 +4331,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5417014370305254743}
-  m_LocalRotation: {x: -0.05569859, y: -0.89241874, z: 0.43277574, w: -0.114855}
-  m_LocalPosition: {x: -5.371973, y: 20.189999, z: 9.86113}
+  m_LocalRotation: {x: 0.49998593, y: 0.24103299, z: -0.14584018, w: 0.8189309}
+  m_LocalPosition: {x: -8.000617, y: 24.582294, z: -5.7419224}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5417014372180672485}
@@ -4355,7 +4355,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 64.5
+  m_FocalLength: 69.99999
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -4364,7 +4364,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 21.078367
+  field of view: 19.455158
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -4691,6 +4691,7 @@ MonoBehaviour:
   cam: {fileID: 5417014370305254744}
   stableForward: {fileID: 5417014372180672485}
   isMoving: 0
+  backpack: {fileID: 1069454066394826135}
 --- !u!114 &74686165849989216
 MonoBehaviour:
   m_ObjectHideFlags: 0
