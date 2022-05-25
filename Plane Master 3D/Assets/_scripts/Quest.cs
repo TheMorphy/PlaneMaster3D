@@ -13,6 +13,8 @@ public class Quest
     public bool done;
     
     public List<Reward> rewards = new List<Reward>();
+
+    public Transform lookAtTransform;
     
 }
 

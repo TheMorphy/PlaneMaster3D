@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using TMPro;
+using Cinemachine;
 
 public class QuestSystem : MonoBehaviour
 {
@@ -26,6 +27,43 @@ public class QuestSystem : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI progressText, questName;
     [SerializeField] Button rewardButton;
+
+    [Header("Objective Camera")]
+    [SerializeField]
+    CinemachineVirtualCamera objectiveCamera;
+    Coroutine objectiveCamCoroutine;
+
+    public void GoToObjectiveCamera()
+	{
+        if(currentQuest.lookAtTransform != null)
+		{
+            objectiveCamera.Follow = currentQuest.lookAtTransform;
+            if (objectiveCamCoroutine != null)
+            {
+                StopCoroutine(objectiveCamCoroutine);
+            }
+            objectiveCamCoroutine = StartCoroutine(ObjectiveCam());
+        }
+    }
+
+    IEnumerator ObjectiveCam()
+	{
+        LevelSystem.instance.ChangeCamera(4, 10);
+        Coroutine breakCoroutine = StartCoroutine(WaitForBreakCam());
+        yield return new WaitForSeconds(3.3f);
+        StopCoroutine(breakCoroutine);
+        LevelSystem.instance.ChangeCamera(4, -1);
+
+
+    }
+
+    IEnumerator WaitForBreakCam()
+	{
+        yield return new WaitUntil(() => Input.touchCount > 0 || Input.anyKeyDown);
+        StopCoroutine(objectiveCamCoroutine);
+        LevelSystem.instance.ChangeCamera(4, -1);
+    }
+
     // Start is called before the first frame update
     void Start()
     {

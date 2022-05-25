@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1937304212763289206}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.49914, y: 2, z: 1.6758}
+  m_LocalScale: {x: 2.124731, y: 2.8346, z: 2.3751113}
   m_Children:
   - {fileID: 5582334591908776790}
   m_Father: {fileID: 2227658537724536749}
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Money
   itemType: 0
-  height: 0.06
+  height: 0.08564512
   pickedUp: 0
   destination: {x: 0, y: 0, z: 0}
   amount: 100
@@ -93,8 +93,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.35, y: 0.06, z: 0.2}
-  m_Center: {x: 0, y: 0.03, z: 0}
+  m_Size: {x: 0.35, y: 0.08564512, z: 0.2}
+  m_Center: {x: 0, y: 0.04282256, z: 0}
 --- !u!1 &5058596885039239660
 GameObject:
   m_ObjectHideFlags: 0

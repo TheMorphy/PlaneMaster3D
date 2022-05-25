@@ -4331,7 +4331,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5417014370305254743}
-  m_LocalRotation: {x: 0.49998593, y: 0.24103299, z: -0.14584018, w: 0.8189309}
+  m_LocalRotation: {x: 0.49998593, y: 0.24103297, z: -0.14584018, w: 0.81893086}
   m_LocalPosition: {x: -8.000617, y: 24.582294, z: -5.7419224}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4364,7 +4364,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 19.455158
+  field of view: 19.45516
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -4643,11 +4643,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c181ab35922e564e9e1940e354d65be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
-  currentLevel:
-    speed: 0
-    backpackSize: 0
-  levels: []
+  speedStandard: 3
+  speedIncrement: 0
+  upgradeSpeedPercentage: 0
+  speedPrizeStandard: 0
+  speedPrizeIncrement: 0
+  speedUpgradeUI:
+    levelTxt: {fileID: 0}
+    prizeText: {fileID: 0}
+  backpackStandard: 10
+  backpackIncrement: 0
+  upgradeBackpackPercentage: 0
+  backpackPrizeStandard: 0
+  backpackPrizeIncrement: 0
+  backpackUpgradeUI:
+    levelTxt: {fileID: 0}
+    prizeText: {fileID: 0}
   moveSpeed: 4
   moveSmooth: 0.05
   turnSmooth: 0.1
@@ -6440,6 +6451,7 @@ MonoBehaviour:
   progressText: {fileID: 0}
   questName: {fileID: 0}
   rewardButton: {fileID: 0}
+  objectiveCamera: {fileID: 0}
 --- !u!1 &7901445005830030653
 GameObject:
   m_ObjectHideFlags: 0
