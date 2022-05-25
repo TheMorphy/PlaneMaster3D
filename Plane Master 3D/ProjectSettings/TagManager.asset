@@ -7,6 +7,9 @@ TagManager:
   - brokenpos
   - dropzone
   - planedrop
+  - Gear1
+  - Gear2
+  - Gear3
   layers:
   - Default
   - TransparentFX
