@@ -111,11 +111,11 @@ public class WorkerAI : MonoBehaviour
             {
                 stayTimer -= 0.5f;
             }
-            if (backpack.items.Count >= backpack.backpackSize && stayTimer <= 0)
+            if (backpack.itemStacks.Count >= backpack.backpackSize && stayTimer <= 0)
             {
                 agent.SetDestination(itemDestinationPos.position);
             }
-            else if (backpack.items.Count == 0 && stayTimer <= 0)
+            else if (backpack.itemStacks.Count == 0 && stayTimer <= 0)
             {
                 agent.SetDestination(getItemPos.position);
             }

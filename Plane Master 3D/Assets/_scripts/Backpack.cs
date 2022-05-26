@@ -275,12 +275,19 @@ public class Backpack : MonoBehaviour
                 {
                     if(i.itemName == worker.itemToCarry)
                     {
-                        if (!i.pickedUp)
+                        if (tryAddItem(i) && !i.pickedUp)
                         {
                             i.pickedUp = true;
-                            items.Add(i);
+                            //items.Add(i);
                             RefreshItemUI();
-                            c.isTrigger = true;
+							if (i.transform.parent != null)
+							if (i.transform.parent.parent != null)
+							{
+								i.transform.parent.parent.SendMessage("RemoveItem", SendMessageOptions.DontRequireReceiver);
+							}
+							i.transform.parent = itemParent;
+							UpdateItemDestinations();
+                            c.enabled = false;
                         }
                     }
                 }
