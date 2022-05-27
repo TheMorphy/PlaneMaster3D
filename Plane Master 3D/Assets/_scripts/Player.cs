@@ -15,7 +15,7 @@ public class PlayerUpgradeUI
 public class Player : MonoBehaviour
 {
 	#region Speed
-	[Header("Agility")]
+	[Header("Speed")]
 	[Header("Upgrades")]
 	
 	

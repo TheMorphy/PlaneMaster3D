@@ -50,6 +50,7 @@ public class RepairStation : MonoBehaviour
 	bool minigameDone = false;
 	[SerializeField]
 	bool debug = false;
+	bool isPlayerInTrigger;
 	private void Start()
 	{
 		print("start");
@@ -114,15 +115,21 @@ public class RepairStation : MonoBehaviour
 
 	IEnumerator WaitForLevelUp()
 	{
-		//start the minigame
-		LevelSystem.instance.PlayMinigame(minigameIndex);
-		LevelSystem.instance.OnMinigameFinish.AddListener(MinigameDone);
+		
+		
+		if(isPlayerInTrigger)
+		{
+			//start the minigame
+			LevelSystem.instance.PlayMinigame(minigameIndex);
+			LevelSystem.instance.OnMinigameFinish.AddListener(MinigameDone);
 
-		//wait until its finished
-		yield return new WaitUntil(() => minigameDone);
+			//wait until its finished
+			yield return new WaitUntil(() => minigameDone);
+		}
+		
 			
 
-		pilot.PilotGoToPlanePos();
+		
 		
 		//Put Money in stash zone
 		int rewardLeft = currentAircraft.Profit;
@@ -131,9 +138,10 @@ public class RepairStation : MonoBehaviour
 			rewardStashZone.AddItem(LevelSystem.SpawnMoneyAtPosition(ref rewardLeft, pilot.transform.position + Vector3.up));
 			yield return new WaitForSeconds(0.04f);
 		}
-			
-		
-		
+
+		pilot.PilotGoToPlanePos();
+		yield return new WaitForSeconds(3);
+
 
 		yield return new WaitWhile(() => pilot.isMoving);
 		anim.Play("RollOut");
@@ -329,7 +337,23 @@ public class RepairStation : MonoBehaviour
 
 	}
 
-	
+	private void OnTriggerEnter(Collider other)
+	{
+		if(other.CompareTag("Player"))
+		{
+			isPlayerInTrigger = true;
+		}
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			isPlayerInTrigger = false;
+		}
+	}
+
+
 
 
 

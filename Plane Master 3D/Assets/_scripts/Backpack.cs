@@ -82,6 +82,7 @@ public class Backpack : MonoBehaviour
 				
 				if (stack != null)
 				{
+					
 					UIItems[u].text.gameObject.SetActive(true);
 					UIItems[u].text.text = stack.items.Count.ToString();
 					stack.text.text = stack.items.Count.ToString();
@@ -144,7 +145,8 @@ public class Backpack : MonoBehaviour
 			itemStacks.Add(newItemStack);
 			newItemStack.items.Add(item);
 			newItemStack.itemType = item.itemType;
-			UpdateItemDestinations();
+			//UpdateItemDestinations();
+			if(stackTextPrefab != null)
 			newItemStack.text = Instantiate(stackTextPrefab, item.transform, false).GetComponent<TextMeshPro>();
 			
 			added = true;
@@ -275,16 +277,16 @@ public class Backpack : MonoBehaviour
                 {
                     if(i.itemName == worker.itemToCarry)
                     {
-                        if (tryAddItem(i) && !i.pickedUp)
+                        if (!i.pickedUp && tryAddItem(i))
                         {
                             i.pickedUp = true;
                             //items.Add(i);
-                            RefreshItemUI();
+                           // RefreshItemUI();
 							if (i.transform.parent != null)
-							if (i.transform.parent.parent != null)
-							{
-								i.transform.parent.parent.SendMessage("RemoveItem", SendMessageOptions.DontRequireReceiver);
-							}
+								if (i.transform.parent.parent != null)
+								{
+									i.transform.parent.parent.SendMessage("RemoveItem", SendMessageOptions.DontRequireReceiver);
+								}
 							i.transform.parent = itemParent;
 							UpdateItemDestinations();
                             c.enabled = false;
@@ -296,12 +298,7 @@ public class Backpack : MonoBehaviour
 					if (tryAddItem(i))
 					{
 						i.pickedUp = true;
-						//integrade in new system
-
-
-
-						//
-						//items.Add(i);
+						
 						RefreshItemUI();
 						if(i.transform.parent != null)
 						if (i.transform.parent.parent != null)
@@ -326,9 +323,8 @@ public class Backpack : MonoBehaviour
                 }
             }
 
-            if(player != null)
-            {
-                if (c.gameObject.layer == 7 && c.GetComponent<DroppingZone>().enabled && !player.isMoving && dropTime <= 0)
+            
+                if (c.gameObject.layer == 7 && c.GetComponent<DroppingZone>().enabled && ((player != null && !player.isMoving) || (worker != null && !worker.isMoving)) && dropTime <= 0)
                 {
                     DroppingZone droppingZone = c.GetComponent<DroppingZone>();
                     foreach (UpgradeCondition u in droppingZone.conditions)
@@ -358,63 +354,29 @@ public class Backpack : MonoBehaviour
                                     itemTransform.parent = u.itemDestination;
                                 }
                                 
-                                RefreshItemUI();
+                                
 								//Update The destination for all the other items
 								UpdateItemDestinations();
 
 								//Play Drop sound
-								itemSoundSource.PlayOneShot(dropSounds[Random.Range(0, dropSounds.Count)]);
+								if(player != null)
+								{
+									RefreshItemUI();
+									itemSoundSource.PlayOneShot(dropSounds[Random.Range(0, dropSounds.Count)]);
+								}	
 
 							//	if (items[items.Count - 1] == null)
-                            //   {
-                             //       items.RemoveAt(items.Count - 1);
-                             //   }
+							//   {
+							//       items.RemoveAt(items.Count - 1);
+							//   }
 
-                                dropTime = itemDropInterval;
+							dropTime = itemDropInterval;
                             }
                         }
                     }
                 }
-            }
-            else if(worker != null)
-            {
-                if (c.gameObject.layer == 7 && !worker.isMoving && dropTime <= 0)
-                {
-                    DroppingZone droppingZone = c.GetComponent<DroppingZone>();
-                    foreach (UpgradeCondition u in droppingZone.conditions)
-                    {
-                        if (u.completed == false && dropTime <= 0)
-                        {
-                            if (SearchForItemType(u.itemType))
-                            {
-                                Item itemToDrop = DropItem(u.itemType);
-                                print("item to drop: " + itemToDrop);
-                                Transform itemTransform = itemToDrop.transform;
-                                u.count++;
-                                if (!droppingZone.showDroppedItems)
-                                {
-                                    itemTransform.parent = u.itemDestination;
-                                    StartCoroutine(LerpItemToDestination(itemTransform));
-                                    droppingZone.AddItem(itemToDrop, false);
-                                }
-                                else
-                                {
-                                    droppingZone.AddItem(itemToDrop);
-                                    itemTransform.parent = u.itemDestination;
-                                }
-
-
-                                //if (items[items.Count - 1] == null)
-                               // {
-                               //     items.RemoveAt(items.Count - 1);
-                              //  }
-
-                                dropTime = itemDropInterval;
-                            }
-                        }
-                    }
-                }
-            }
+            
+            
             
         }
     }
@@ -453,6 +415,7 @@ public class Backpack : MonoBehaviour
 				itemStacks[s].items.RemoveAt(itemStacks[s].items.Count - 1);
 				if(itemStacks[s].items.Count == 0)
 				{
+					if(itemStacks[s].text != null)
 					Destroy(itemStacks[s].text.gameObject);
 					itemStacks.RemoveAt(s);
 				}
@@ -565,6 +528,8 @@ public class Backpack : MonoBehaviour
 		float t = 0;
 		while(t < 1)
 		{
+			if (worker != null)
+				print("Hallo");
 			t += Time.deltaTime / itemLerpTime;
 			Vector3 curPos = Vector3.Lerp(startPos, i.destination, itemLerpCurve.Evaluate(t));
 			Quaternion curRot = Quaternion.Lerp(startRot, Quaternion.Euler(Vector3.zero), t);

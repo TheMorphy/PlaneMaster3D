@@ -85,6 +85,62 @@ public class LevelSystem : MonoBehaviour
 	[SerializeField]
 	public List<Item> deb = new List<Item>();
 
+	//[HideInInspector]
+	public WorkerAI currentWorker;
+	[SerializeField]
+	GameObject workersUpgradeUI;
+	[SerializeField]
+	GameObject hireUI, upgradeUI;
+
+
+	public void CloseWorkersUpgradeUI()
+	{
+		workersUpgradeUI.SetActive(false);
+		if(currentWorker.isHired)
+			currentWorker.stopped = false;
+		currentWorker = null;
+	}
+	public void OpenWorkersUpgradeUI()
+	{
+		workersUpgradeUI.SetActive(true);
+		currentWorker.stopped = true;
+		if(currentWorker.isHired)
+		{
+			print("worker is hired");
+			upgradeUI.SetActive(true);
+			hireUI.SetActive(false);
+		}
+		else
+		{
+			print("worker is NOT hired");
+			upgradeUI.SetActive(false);
+			hireUI.SetActive(true);
+		}
+	}
+	public void TriggerCurrentWorkersSpeedUpgrade()
+	{
+		currentWorker.SpeedUpgrade();
+	}
+
+	public void TriggerCurrentWorkersStorageUpgrade()
+	{
+		currentWorker.StorageUpgrade();
+	}
+
+	public void CloseHiredUI()
+	{
+		upgradeUI.SetActive(true);
+		hireUI.SetActive(false);
+	}
+	public void TriggerCurrentWorkersHire()
+	{
+		currentWorker.Hire();
+	}
+
+
+
+
+
 	public void EnterNextLevel()
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
