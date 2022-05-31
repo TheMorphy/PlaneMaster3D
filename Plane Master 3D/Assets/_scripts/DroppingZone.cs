@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using TMPro;
 
-public enum ItemType { Money, Iron, Cog };
+public enum ItemType { Money, Iron, Cog , Copper , CopperCog, Circuit};
 
 [System.Serializable]
 public class ItemInfo
@@ -70,7 +70,7 @@ public class DroppingZone : MonoBehaviour
     {
         foreach (UpgradeCondition c in conditions)
         {
-            c.count = PlayerPrefs.GetInt(gameObject.name + c.name + "count");
+            c.count = PlayerPrefs.GetInt(transform.position.magnitude + c.name + "count");
         }
     }
 
@@ -78,7 +78,7 @@ public class DroppingZone : MonoBehaviour
     {
         foreach (UpgradeCondition c in conditions)
         {
-            PlayerPrefs.SetInt(gameObject.name + c.name + "count", c.count);
+            PlayerPrefs.SetInt(transform.position.magnitude + c.name + "count", c.count);
         }
         CheckForDone();
     }

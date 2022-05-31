@@ -16,6 +16,7 @@ public class Gate : MonoBehaviour
     {
         dz = GetComponent<DroppingZone>();
         anim = GetComponent<Animator>();
+		LoadState();
     }
 
     void OnAllConditionsComplete()
@@ -34,7 +35,8 @@ public class Gate : MonoBehaviour
 		}
         else
 		{
-
+			anim.SetBool("GateOpen", false);
+			disableOnOpen.SetActive(true);
 		}
 	}
 }

@@ -77,8 +77,8 @@ public class Build : MonoBehaviour
         anim = GetComponent<Animator>();
 		LoadVariables();
 
-		speedLevel = PlayerPrefs.GetInt(name + "speedLvl");
-		storageLevel = PlayerPrefs.GetInt(name + "storageLvl");
+		speedLevel = PlayerPrefs.GetInt(savingKey + "speedLvl");
+		storageLevel = PlayerPrefs.GetInt(savingKey + "storageLvl");
 		if (speedLevel < 1)
 			speedLevel = 1;
 		if (storageLevel < 1)
@@ -145,7 +145,7 @@ public class Build : MonoBehaviour
 		if(LevelSystem.instance.playerBackpack.TryPay(speedUpgradePrize, transform.position))
 		{
 			speedLevel++;
-			PlayerPrefs.SetInt(name + "speedLvl", speedLevel);
+			PlayerPrefs.SetInt(savingKey + "speedLvl", speedLevel);
 			LoadCorrectSpeed();
 			UpdateUpgradeUI();
 			CheckForOutOfLevels();
@@ -167,7 +167,7 @@ public class Build : MonoBehaviour
 		if (LevelSystem.instance.playerBackpack.TryPay(storageUpgradePrize, transform.position))
 		{
 			storageLevel++;
-			PlayerPrefs.SetInt(name + "storageLvl", storageLevel);
+			PlayerPrefs.SetInt(savingKey + "storageLvl", storageLevel);
 			LoadCorrectStorage();
 			UpdateUpgradeUI();
 			CheckForOutOfLevels();
