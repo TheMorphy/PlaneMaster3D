@@ -301,7 +301,7 @@ public class DroppingZone : MonoBehaviour
     }
     void SetItemDestination(int item)
     {
-        items[item].destination = positions[item];
+        items[item].destination = positions.Length > item ? positions[item] : positions[0];
         Coroutine c = StartCoroutine(LerpItemToDestination(item));
     }
     IEnumerator LerpItemToDestination(int i)

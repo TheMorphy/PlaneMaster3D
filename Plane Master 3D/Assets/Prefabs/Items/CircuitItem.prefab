@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Circuit
-  itemType: 4
+  itemType: 5
   height: 0.07404216
   pickedUp: 0
   destination: {x: 0, y: 0, z: 0}

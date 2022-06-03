@@ -526,7 +526,7 @@ public class Backpack : MonoBehaviour
 		Vector3 startPos = i.transform.localPosition;
 		Quaternion startRot = i.transform.localRotation;
 		float t = 0;
-		while(t < 1)
+		while(t < 1 && i != null)
 		{
 			if (worker != null)
 				print("Hallo");

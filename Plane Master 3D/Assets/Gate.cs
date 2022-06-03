@@ -24,6 +24,7 @@ public class Gate : MonoBehaviour
         PlayerPrefs.SetInt(savingKey, 1);
         anim.SetBool("GateOpen", true);
         disableOnOpen.SetActive(false);
+		
 	}
 
     void LoadState()
