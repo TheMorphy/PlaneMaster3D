@@ -117,6 +117,7 @@ public class LevelSystem : MonoBehaviour
 			hireUI.SetActive(true);
 		}
 	}
+	/*
 	public void TriggerCurrentWorkersSpeedUpgrade()
 	{
 		currentWorker.SpeedUpgrade();
@@ -136,7 +137,7 @@ public class LevelSystem : MonoBehaviour
 	{
 		currentWorker.Hire();
 	}
-
+	*/
 
 
 

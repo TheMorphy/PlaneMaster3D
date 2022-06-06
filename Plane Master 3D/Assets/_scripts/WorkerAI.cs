@@ -81,12 +81,14 @@ class UpgradeVariables
 
 public class WorkerAI : MonoBehaviour
 {
+	public int level;
+	#region other vars
 	[SerializeField]
 	string savingKey;
 	[Space(10)]
 
 	[SerializeField]
-    Backpack backpack;
+    public Backpack backpack;
     [SerializeField]
     List<WorkerLevel> levels = new List<WorkerLevel>();
     [SerializeField]
@@ -107,7 +109,7 @@ public class WorkerAI : MonoBehaviour
     [SerializeField]
     Animator visual3D;
 
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
     public bool isMoving;
     [SerializeField]
     ResearchSystem researchSystem;
@@ -118,6 +120,7 @@ public class WorkerAI : MonoBehaviour
 	TextMeshProUGUI hireCostText;
 	//[HideInInspector]
 	public bool isHired;
+#endregion
 	[Header("Upgrades")]
 	[SerializeField]
 	UpgradeVariables speed;
@@ -181,7 +184,7 @@ public class WorkerAI : MonoBehaviour
 		if(LevelSystem.instance.playerBackpack.TryPay(hireCost, transform.position))
 		{
 			PlayerPrefs.SetInt(savingKey, 1);
-			LevelSystem.instance.CloseHiredUI();
+			//LevelSystem.instance.CloseHiredUI();
 			isHired = true;
 		}
 	}
@@ -190,7 +193,8 @@ public class WorkerAI : MonoBehaviour
 	{
 		
 	}
-
+	#region triggerstuff
+	/*
 	private void OnTriggerStay(Collider other)
 	{
 		if (other.CompareTag("Player"))
@@ -233,6 +237,8 @@ public class WorkerAI : MonoBehaviour
 			outline = StartCoroutine(DeactivateOutline());
 		}
 	}
+	*/
+	#endregion
 
 	IEnumerator ActivateOutline()
 	{
