@@ -99,9 +99,9 @@ public class WorkerAI : MonoBehaviour
     [SerializeField]
     TaskType task;
     [SerializeField]
-    Transform getItemPos, itemDestinationPos;
+    public Transform getItemPos, itemDestinationPos;
     [SerializeField]
-    public string itemToCarry;
+    public ItemType itemToCarry;
 
     [SerializeField]
     float movementSpeed = 2, animSmooth, stayTime;
@@ -150,14 +150,14 @@ public class WorkerAI : MonoBehaviour
 				QuestSystem.instance.AddProgress("Hire a scientist", 1);
 				break;
         }
-		speed.savingKeyPrefix = savingKey;
-		storage.savingKeyPrefix = savingKey;
+		//speed.savingKeyPrefix = savingKey;
+		//storage.savingKeyPrefix = savingKey;
 
-		agent.speed = speed.Load();
-		backpack.stackSize = storage.LoadInt();
+		//agent.speed = speed.Load();
+		//backpack.stackSize = storage.LoadInt();
 
-		isHired = PlayerPrefs.GetInt(savingKey) == 1 ? true : false;
-		stopped = !isHired;
+		//isHired = PlayerPrefs.GetInt(savingKey) == 1 ? true : false;
+		//stopped = !isHired;
 
 	}
 
@@ -275,8 +275,8 @@ public class WorkerAI : MonoBehaviour
         }
       //  backpack.backpackSize = levels[level].backpackSize;
       //  agent.speed = levels[level].speed;
-        currentLevel.backpackSize = levels[level].backpackSize;
-        currentLevel.speed = levels[level].speed;
+        //currentLevel.backpackSize = levels[level].backpackSize;
+        //currentLevel.speed = levels[level].speed;
     }
 
     void Update()
@@ -314,6 +314,7 @@ public class WorkerAI : MonoBehaviour
 
     IEnumerator CourierWorker()
     {
+		yield return new WaitWhile(() => getItemPos == null);
         while(true)
         {
             if (isMoving)

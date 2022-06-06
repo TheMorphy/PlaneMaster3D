@@ -35,14 +35,23 @@ public class WorkerField : MonoBehaviour
 	{
         SetBought(true);
         workerAI = hireZone.SpawnNewWorker();
+		workerAI.level = 1;
+		hireZone.SaveWorkers();
+		hireZone.ReloadStats();
 	}
 
     void Upgrade()
 	{
+		workerAI.level++;
+		hireZone.ReloadStats();
+		hireZone.SaveWorkers();
+		
 	}
 
     public void SetBought(bool isBought)
 	{
+		bought = isBought;
+		print("Set Bought");
         if(isBought)
 		{
             for(int i = 0; i < disableOnBought.Count; i++)

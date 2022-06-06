@@ -275,7 +275,7 @@ public class Backpack : MonoBehaviour
                 Item i = c.GetComponent<Item>();
                 if(worker != null)
                 {
-                    if(i.itemName == worker.itemToCarry)
+                    if(i.itemType == worker.itemToCarry)
                     {
                         if (!i.pickedUp && tryAddItem(i))
                         {
