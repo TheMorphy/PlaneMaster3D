@@ -80,7 +80,7 @@ public class DroppingZone : MonoBehaviour
         {
             PlayerPrefs.SetInt(transform.position.magnitude + c.name + "count", c.count);
         }
-        CheckForDone();
+        //CheckForDone();
     }
     private void Update()
     {
@@ -135,8 +135,10 @@ public class DroppingZone : MonoBehaviour
         foreach(UpgradeCondition c in conditions)
         {
             c.count = 0;
+			c.completed = false;
         }
         SaveConditions();
+		CheckForDone();
 		
     }
 
@@ -149,7 +151,7 @@ public class DroppingZone : MonoBehaviour
         {
             yield return new WaitUntil(() => AllDone());
             allConditionsComplete = true;
-            SendMessage("OnAllConditionsComplete", SendMessageOptions.DontRequireReceiver);
+            //SendMessage("OnAllConditionsComplete", SendMessageOptions.DontRequireReceiver);
             yield return new WaitUntil(() => !AllDone());
             allConditionsComplete = false;
             yield return null;

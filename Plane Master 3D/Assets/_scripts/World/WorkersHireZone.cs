@@ -41,9 +41,13 @@ public class WorkersHireZone : MonoBehaviour
 	[SerializeField]
 	Transform workersMenu;
 	[SerializeField]
+	GameObject workersCanvas;
+	[SerializeField]
 	Transform workersSpawnPosition;
 	bool alreadyOpened;
 	DroppingZone droppingZone;
+	[SerializeField]
+	RepairStationOrganizer repairStationOrganizer;
 
 	private void Start()
 	{
@@ -51,25 +55,25 @@ public class WorkersHireZone : MonoBehaviour
 		droppingZone = GetComponent<DroppingZone>();
 		droppingZone.conditions[0].count = 0;
 
+		if (repairStationOrganizer.level <= workerFields.Count)
+		{
+			droppingZone.conditions[0].count = 100;
+			repairStationOrganizer.OnLevelUp.AddListener(Onlvlup);
+			
+		}
+			
 	}
 
-	private void Update()
-	{
-		if(Input.GetButtonDown("Fire2"))
-		{
-			AddNewWorkerField();
-		}
-	}
+	
 
 	public void ReloadStats()
 	{
 		for(int i = 0; i < workerFields.Count; i++)
 		{
 			WorkerField current = workerFields[i];
-			current.price = Mathf.CeilToInt(priceStandard * Mathf.Pow(1 + priceIncrement ,(workerFields[i].workerAI != null ? workerFields[i].workerAI.level - 1 : 0)));
+			current.SetPrice(Mathf.CeilToInt(priceStandard * Mathf.Pow(1 + priceIncrement , workerFields[i].workerAI != null ? workerFields[i].workerAI.level - 1 : 0)));
 			if(current.workerAI != null)
 			{
-				print(Mathf.Repeat(i, tasks.Count - 1));
 				current.workerAI.agent.speed = speedStandard + (current.workerAI.level - 1) * speedIncrement;
 				current.workerAI.backpack.stackSize = storageStandard + (current.workerAI.level - 1) * storageIncrement;
 				current.workerAI.itemToCarry = tasks[(int)Mathf.Repeat(i, tasks.Count - 1)].itemToCarry;
@@ -88,6 +92,7 @@ public class WorkersHireZone : MonoBehaviour
 		workerFields.Add(fieldToAdd);
 
 		ReloadStats();
+		
 	}
 
 	void LoadWorkers()
@@ -117,8 +122,11 @@ public class WorkersHireZone : MonoBehaviour
 
 				fieldToLoad.hireZone = this;
 				fieldToLoad.SetBought(bought);
+				fieldToLoad.SetPrice(Mathf.CeilToInt(priceStandard * Mathf.Pow(1 + priceIncrement, loadedLevel - 1)));
+				workerFields.Add(fieldToLoad);
+      
 			}
-			
+
 		}
 	}
 
@@ -142,28 +150,43 @@ public class WorkersHireZone : MonoBehaviour
 
 	public void CloseWorkersMenu()
 	{
-		workersMenu.gameObject.SetActive(false);
+		workersCanvas.SetActive(false);
 	}
 
 	void OnAllConditionsComplete()
 	{
-		AddNewWorkerField();
-		droppingZone.ResetConditions();
-		droppingZone.conditions[0].count = 0;
+		
+		if (repairStationOrganizer.level > workerFields.Count)
+		{
+			AddNewWorkerField();
+			droppingZone.ResetConditions();
+		}
+		
+		repairStationOrganizer.OnLevelUp.AddListener(Onlvlup);
 	}
 
-	private void OnTriggerStay(Collider other)
+	void Onlvlup()
+	{
+		
+		if(droppingZone.conditions[0].count == droppingZone.conditions[0].countNeeded)
+		{
+			print("onLevelup");
+			droppingZone.ResetConditions();
+		}
+	}
+
+	private void Stay(Collider other)
 	{
 		if(other.CompareTag("Player"))
 		{
 			if(!other.GetComponent<Player>().isMoving && !alreadyOpened)
 			{
-				workersMenu.gameObject.SetActive(true);
+				workersCanvas.SetActive(true);
 
 
 				alreadyOpened = true;
 			}
-			else
+			else if(other.GetComponent<Player>().isMoving)
 			{
 				alreadyOpened = false;
 			}

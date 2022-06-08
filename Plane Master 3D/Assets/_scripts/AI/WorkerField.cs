@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
 
 public class WorkerField : MonoBehaviour
 {
@@ -16,19 +17,31 @@ public class WorkerField : MonoBehaviour
 
     bool bought;
 
-    public int price;
+    int price;
+	[SerializeField]
+	TextMeshProUGUI priceText;
     public WorkersHireZone hireZone;
+
+	public void SetPrice(int newPrice)
+	{
+		price = newPrice;
+		priceText.text = "$" + price.ToString();
+	}
 
     public void ButtonClick()
 	{
-        if(bought)
+		if(LevelSystem.instance.playerBackpack.TryPay(price, hireZone.transform.position))
 		{
-            Upgrade();
+			if (bought)
+			{
+				Upgrade();
+			}
+			else
+			{
+				Buy();
+			}
 		}
-        else
-		{
-            Buy();
-		}
+        
 	}
 
     void Buy()
@@ -43,8 +56,9 @@ public class WorkerField : MonoBehaviour
     void Upgrade()
 	{
 		workerAI.level++;
-		hireZone.ReloadStats();
 		hireZone.SaveWorkers();
+		hireZone.ReloadStats();
+		
 		
 	}
 
