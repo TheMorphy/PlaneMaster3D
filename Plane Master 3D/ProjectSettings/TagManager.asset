@@ -10,6 +10,7 @@ TagManager:
   - Gear1
   - Gear2
   - Gear3
+  - redspot
   layers:
   - Default
   - TransparentFX
