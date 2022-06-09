@@ -60,7 +60,7 @@ public class Backpack : MonoBehaviour
 			{
 				if(stack != null)
 				{
-					UIItems[u].text.gameObject.SetActive(true);
+					UIItems[u].text.transform.parent.gameObject.SetActive(true);
 					
 					int count = 0;
 					for(int i = 0; i < stack.items.Count; i++)
@@ -74,7 +74,7 @@ public class Backpack : MonoBehaviour
 				}
 				else
 				{
-					UIItems[u].text.gameObject.SetActive(false);
+					UIItems[u].text.transform.parent.gameObject.SetActive(false);
 				}
 			}
 			else
@@ -82,15 +82,15 @@ public class Backpack : MonoBehaviour
 				
 				if (stack != null)
 				{
-					
-					UIItems[u].text.gameObject.SetActive(true);
+
+					UIItems[u].text.transform.parent.gameObject.SetActive(true);
 					UIItems[u].text.text = stack.items.Count.ToString();
 					stack.text.text = stack.items.Count.ToString();
 					stack.text.transform.SetParent(stack.items[stack.items.Count - 1].transform, false);
 				}
 				else
 				{
-					UIItems[u].text.gameObject.SetActive(false);
+					UIItems[u].text.transform.parent.gameObject.SetActive(false);
 				}
 			}
 			
@@ -224,6 +224,52 @@ public class Backpack : MonoBehaviour
 			yield return new WaitForSeconds(0.05f);
 		}
 			
+	}
+
+	void CheckForChangableMoney()
+	{
+		ItemStack i = itemStacks.Find(i => i.itemType == ItemType.Money);
+		if(i != null)
+		{
+			List<int> usedPowsOf10 = new List<int>();
+			for(int a = 0; a < i.items.Count; a++)
+			{
+				bool used = false;
+				for(int b = 0; b < usedPowsOf10.Count; b++)
+				{
+					if(i.items[a].amount == Mathf.Pow(10, b))
+					{
+						usedPowsOf10[b]++;
+						used = true;
+					}
+					
+				}
+				if(!used)
+				{
+					int exp = (int)Mathf.Log(i.items[a].amount);
+					for (int c = usedPowsOf10.Count - 1; c < exp; c++)
+					{
+						usedPowsOf10.Add(0);
+					}
+					usedPowsOf10.Add(1);
+				}
+				
+			}
+
+			for(int d = 0; d < usedPowsOf10.Count; d++)
+			{
+				if(usedPowsOf10[d] >= 10)
+				{
+					 List<Item> listOfMarkedItems = i.items.FindAll(s => s.amount == Mathf.Pow(10, d));
+					for(int e = 0; e < 10; e++)
+					{
+						i.items.Remove(listOfMarkedItems[e]);
+
+					}
+					listOfMarkedItems.RemoveRange(0, 10);
+				}
+			}
+		}
 	}
 
 	IEnumerator LerpItemToPos(Item item, Vector3 pos)

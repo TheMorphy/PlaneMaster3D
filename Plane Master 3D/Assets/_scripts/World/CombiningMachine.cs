@@ -30,6 +30,10 @@ public class CombiningMachine : MonoBehaviour
 	Transform combinePosition;
 	[SerializeField]
 	Transform itemDestination;
+	[SerializeField]
+	Animator anim;
+
+	bool circuitFinished;
 
 
 
@@ -51,13 +55,24 @@ public class CombiningMachine : MonoBehaviour
         
     }
 
+	void FinishCircuit()
+	{
+		circuitFinished = true;
+	}
 
 	IEnumerator Machine()
 	{
 		while(true)
 		{
+			
+			if(!(droppingZone.conditions[0].count > 0 && droppingZone.conditions[1].count > 0 && stashZone.currentStashCount < stashZone.capacity))
+				anim.SetBool("Printing", false);
+			circuitFinished = false;
 			yield return new WaitUntil(() => droppingZone.conditions[0].count > 0 && droppingZone.conditions[1].count > 0 && stashZone.currentStashCount < stashZone.capacity);
+			anim.SetBool("Printing", true);
+			anim.speed = speed;
 			yield return null;
+			
 			Item item1 = Instantiate(inputPrefab1, itemDestination.position, Quaternion.identity).GetComponent<Item>();
 			Item item2 = Instantiate(inputPrefab2, itemDestination.position, Quaternion.identity).GetComponent<Item>();
 			Vector3 start1 = item1.transform.position, start2 = item2.transform.position;
@@ -78,11 +93,13 @@ public class CombiningMachine : MonoBehaviour
 			float t = 0;
 			while(t < 1)
 			{
-				t += Time.deltaTime * speed;
+				t += Time.deltaTime * speed * 5;
 				item1.transform.position = Vector3.Lerp(start1, combinePosition.position, t);
 				item2.transform.position = Vector3.Lerp(start2, combinePosition.position, t);
 				yield return null;
 			}
+			anim.GetComponent<PrinterAnimation>().OnAnimationEvent.AddListener(FinishCircuit);
+			yield return new WaitUntil(() => circuitFinished);
 			item1.gameObject.SetActive(false);
 			item2.gameObject.SetActive(false);
 			Destroy(item1.gameObject, 10f);
