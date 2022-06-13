@@ -68,9 +68,16 @@ public class Backpack : MonoBehaviour
 						count += stack.items[i].amount;
 					}
 					UIItems[u].text.text = count.ToString();
-					stack.text.text = count.ToString();
+					
 
-					stack.text.transform.SetParent(stack.items[stack.items.Count - 1].transform, false);
+					if(stack.text != null)
+					{
+						stack.text.text = count.ToString();
+
+						stack.text.transform.SetParent(stack.items[stack.items.Count - 1].transform, false);
+						stack.text.enabled = true;
+						stack.text.GetComponent<LookAtCamera>().enabled = true;
+					}
 				}
 				else
 				{
@@ -136,6 +143,7 @@ public class Backpack : MonoBehaviour
 				{
 					itemStacks[s].items.Add(item);
 					added = true;
+					CheckForChangableMoney();
 				}
 			}
 		}
@@ -150,6 +158,7 @@ public class Backpack : MonoBehaviour
 			newItemStack.text = Instantiate(stackTextPrefab, item.transform, false).GetComponent<TextMeshPro>();
 			
 			added = true;
+			
 		}
 		return added;
 	}
@@ -223,21 +232,22 @@ public class Backpack : MonoBehaviour
 			UpdateItemDestinations();
 			yield return new WaitForSeconds(0.05f);
 		}
-			
+		CheckForChangableMoney();
 	}
 
 	void CheckForChangableMoney()
 	{
-		ItemStack i = itemStacks.Find(i => i.itemType == ItemType.Money);
-		if(i != null)
+		UpdateItemDestinations();
+		ItemStack stack = itemStacks.Find(i => i.itemType == ItemType.Money);
+		if(stack != null)
 		{
 			List<int> usedPowsOf10 = new List<int>();
-			for(int a = 0; a < i.items.Count; a++)
+			for(int a = 0; a < stack.items.Count; a++)
 			{
 				bool used = false;
 				for(int b = 0; b < usedPowsOf10.Count; b++)
 				{
-					if(i.items[a].amount == Mathf.Pow(10, b))
+					if(stack.items[a].amount == Mathf.Pow(10, b))
 					{
 						usedPowsOf10[b]++;
 						used = true;
@@ -246,8 +256,9 @@ public class Backpack : MonoBehaviour
 				}
 				if(!used)
 				{
-					int exp = (int)Mathf.Log(i.items[a].amount);
-					for (int c = usedPowsOf10.Count - 1; c < exp; c++)
+					int exp = (int)Mathf.Log10(stack.items[a].amount);
+					print("exp " + exp);
+					for (int c = usedPowsOf10.Count; c < exp; c++)
 					{
 						usedPowsOf10.Add(0);
 					}
@@ -258,16 +269,37 @@ public class Backpack : MonoBehaviour
 
 			for(int d = 0; d < usedPowsOf10.Count; d++)
 			{
-				if(usedPowsOf10[d] >= 10)
-				{
-					 List<Item> listOfMarkedItems = i.items.FindAll(s => s.amount == Mathf.Pow(10, d));
-					for(int e = 0; e < 10; e++)
+				if(LevelSystem.instance.moneyPrefabsM10.Count > d + 1)
+					if(usedPowsOf10[d] >= 10)
 					{
-						i.items.Remove(listOfMarkedItems[e]);
-
+						 List<Item> listOfMarkedItems = stack.items.FindAll(s => s.amount == Mathf.Pow(10, d));
+						for(int e = 0; e < 10; e++)
+						{
+							RemoveItemFromStack(listOfMarkedItems[e], stack);
+						
+						}
+						print("Prefab: " + d + 1);
+						Item itemToAdd = Instantiate(LevelSystem.instance.moneyPrefabsM10[d + 1], transform.position, transform.rotation).GetComponent<Item>();
+						itemToAdd.transform.parent = itemParent;
+						itemToAdd.pickedUp = true;
+						tryAddItem(itemToAdd);
+						listOfMarkedItems.RemoveRange(0, 10);
 					}
-					listOfMarkedItems.RemoveRange(0, 10);
-				}
+			}
+		}
+		UpdateItemDestinations();
+	}
+
+	void RemoveItemFromStack(Item item, ItemStack stack)
+	{
+		for(int i = 0; i < stack.items.Count; i++)
+		{
+			if(item == stack.items[i])
+			{
+				stack.items.RemoveAt(i);
+				Destroy(item.gameObject);
+				
+				return;
 			}
 		}
 	}
@@ -311,8 +343,7 @@ public class Backpack : MonoBehaviour
 
 	void FixedUpdate()
     {
-        
-        dropTime -= Time.deltaTime;
+		dropTime -= Time.deltaTime;
         //Check For Item to pick up
         foreach (Collider c in Physics.OverlapSphere(transform.position, pickupRadius))
         {
