@@ -27,6 +27,8 @@ public class WorkersHireZone : MonoBehaviour
 
 	[SerializeField]
 	List<WorkerField> workerFields = new List<WorkerField>();
+	[SerializeField]
+	public int maxLevel = 5;
 
 	[SerializeField]
 	List<WorkerTask> tasks = new List<WorkerTask>();
@@ -38,12 +40,13 @@ public class WorkersHireZone : MonoBehaviour
 
 	[SerializeField]
 	int storageStandard;
+	[SerializeField]
 	int storageIncrement;
 
-	[SerializeField]
+	/*[SerializeField]
 	int priceStandard;
 	[SerializeField]
-	float priceIncrement;
+	float priceIncrement;*/
 	[SerializeField]
 	List<WorkerStats> workerStats = new List<WorkerStats>();
 
@@ -83,8 +86,7 @@ public class WorkersHireZone : MonoBehaviour
 		for(int i = 0; i < workerFields.Count; i++)
 		{
 			WorkerField current = workerFields[i];
-			current.SetPrice(Mathf.CeilToInt(current.workerAI == null ? workerStats[i].costHire : workerStats[i].costStandard + (current.workerAI.level - 1 * workerStats[i].costIncrement)));
-			print("Price is set to: " + Mathf.CeilToInt(current.workerAI == null ? workerStats[i].costHire : workerStats[i].costStandard + ((current.workerAI.level - 1) * workerStats[i].costIncrement)));
+			current.SetPrice(Mathf.CeilToInt(current.workerAI == null ? workerStats[i].costHire : workerStats[i].costStandard + ((current.workerAI.level - 1) * workerStats[i].costIncrement)));
 			if(current.workerAI != null)
 			{
 				current.workerAI.agent.speed = speedStandard * Mathf.Pow(1 + speedIncrement, current.workerAI.level - 1);
@@ -129,13 +131,13 @@ public class WorkersHireZone : MonoBehaviour
 					fieldToLoad.workerAI.getItemPos = tasks[(int)Mathf.Repeat(i, tasks.Count - 1)].getPos;
 					fieldToLoad.workerAI.level = loadedLevel;
 
-					fieldToLoad.workerAI.agent.speed = speedStandard + speedIncrement * (loadedLevel - 1);
+					fieldToLoad.workerAI.agent.speed = speedStandard * Mathf.Pow(1 + speedIncrement, fieldToLoad.workerAI.level - 1);
 					fieldToLoad.workerAI.backpack.stackSize = storageStandard + storageIncrement * (loadedLevel - 1);
 				}
 
 				fieldToLoad.hireZone = this;
 				fieldToLoad.SetBought(bought);
-				fieldToLoad.SetPrice(Mathf.CeilToInt(fieldToLoad.workerAI == null ? workerStats[i].costHire : workerStats[i].costStandard + (fieldToLoad.workerAI.level - 1 * workerStats[i].costIncrement)));
+				fieldToLoad.SetPrice(Mathf.CeilToInt(fieldToLoad.workerAI == null ? workerStats[i].costHire : workerStats[i].costStandard + ((fieldToLoad.workerAI.level - 1) * workerStats[i].costIncrement)));
 				workerFields.Add(fieldToLoad);
       
 			}

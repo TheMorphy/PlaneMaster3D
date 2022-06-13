@@ -17,8 +17,9 @@ public class Player : MonoBehaviour
 	#region Speed
 	[Header("Speed")]
 	[Header("Upgrades")]
-	
-	
+
+	[SerializeField]
+	int maxLevel = 5;
 	[SerializeField]
 	float speedStandard = 3f;
 	int speedLevel = 1;
@@ -123,7 +124,7 @@ public class Player : MonoBehaviour
 
 	public void TryUpgradePlayerSpeed()
 	{
-		
+		if(speedLevel < maxLevel)
 		if(backpack.TryPay(speedPrize, LevelSystem.instance.workersHouse.position))
 		{
 			//Upgrade speed
@@ -136,7 +137,7 @@ public class Player : MonoBehaviour
 
 	void SetSpeedPrice()
 	{
-		speedPrize = (int)(speedPrizeStandard * Mathf.Pow(1 + speedPrizeIncrement, speedLevel - 1));
+		speedPrize = Mathf.CeilToInt(speedPrizeStandard + (speedLevel - 1) * speedPrizeIncrement); //(int)(speedPrizeStandard * Mathf.Pow(1 + speedPrizeIncrement, speedLevel - 1));
 		speedUpgradeUI.prizeText.text = speedPrize.ToString();
 	}
 	float GetSpeedByLevel(int level)
@@ -158,6 +159,7 @@ public class Player : MonoBehaviour
 	#region Backpack
 	public void TryUpgradeBackpack()
 	{
+		if(backpackLevel < maxLevel)
 		if (backpack.TryPay(backpackPrize, LevelSystem.instance.workersHouse.position))
 		{
 			//Upgrade speed
@@ -170,7 +172,7 @@ public class Player : MonoBehaviour
 
 	void SetBackpackPrice()
 	{
-		backpackPrize = (int)(backpackPrizeStandard * Mathf.Pow(1 + backpackPrizeIncrement, backpackLevel - 1));
+		backpackPrize = Mathf.CeilToInt(backpackPrizeStandard + (backpackLevel - 1) * backpackPrizeIncrement);//(int)(backpackPrizeStandard * Mathf.Pow(1 + backpackPrizeIncrement, backpackLevel - 1));
 		backpackUpgradeUI.prizeText.text = backpackPrize.ToString();
 	}
 	float GetStorageByLevel(int level)

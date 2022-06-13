@@ -37,6 +37,11 @@ public class Build : MonoBehaviour
 	int maxStorageLevel;
 	[SerializeField]
 	int storageStandard;
+	[SerializeField]
+	int storageIncrement;
+
+	[SerializeField]
+	List<int> levelCost = new List<int>();
 
 	[Space(10)]
 
@@ -46,6 +51,8 @@ public class Build : MonoBehaviour
 	int maxSpeedLevel;
 	[SerializeField]
 	float speedStandard;
+	[SerializeField]
+	float speedIncrement;
 
     [Space(10)]
     [SerializeField]
@@ -87,8 +94,10 @@ public class Build : MonoBehaviour
 		LoadCorrectSpeed();
 		LoadCorrectStorage();
 
-		speedUpgradePrize = costStart + costIncrement * speedLevel;
-        storageUpgradePrize = costStart + costIncrement * storageLevel;
+		//speedUpgradePrize = costStart + costIncrement * speedLevel;
+		//storageUpgradePrize = costStart + costIncrement * storageLevel;
+		speedUpgradePrize = levelCost[speedLevel];
+		storageUpgradePrize = levelCost[storageLevel];
 
         UpdateUpgradeUI();
 		
@@ -142,7 +151,8 @@ public class Build : MonoBehaviour
 
 	public void UpgradeSpeed()
 	{
-		if(LevelSystem.instance.playerBackpack.TryPay(speedUpgradePrize, transform.position))
+		if (storageLevel < levelCost.Count)
+		if (LevelSystem.instance.playerBackpack.TryPay(speedUpgradePrize, transform.position))
 		{
 			speedLevel++;
 			PlayerPrefs.SetInt(savingKey + "speedLvl", speedLevel);
@@ -155,8 +165,9 @@ public class Build : MonoBehaviour
 
     void LoadCorrectSpeed()
 	{
-		speed = speedStandard * Mathf.Pow(1 + 0.05f, speedLevel -1);
-        speedUpgradePrize = costStart + costIncrement * (speedLevel - 1);
+		speed = speedStandard + (speedLevel - 1) * speedIncrement;
+		//speedUpgradePrize = costStart + costIncrement * (speedLevel - 1);
+		speedUpgradePrize = levelCost[speedLevel];
 
         systemMessageReceiver.SendMessage("OnLevelChanged", SendMessageOptions.DontRequireReceiver);
 	}
@@ -164,6 +175,7 @@ public class Build : MonoBehaviour
 
 	public void UpgradeStorage()
 	{
+		if(storageLevel < levelCost.Count)
 		if (LevelSystem.instance.playerBackpack.TryPay(storageUpgradePrize, transform.position))
 		{
 			storageLevel++;
@@ -175,8 +187,9 @@ public class Build : MonoBehaviour
     }
 	void LoadCorrectStorage()
 	{
-		storage = (int)(storageStandard * Mathf.Pow(1 + 0.05f, storageLevel));
-        storageUpgradePrize = costStart + costIncrement * storageLevel;
+		storage = Mathf.CeilToInt(storageStandard + (storageLevel -1) * storageIncrement);
+		//storageUpgradePrize = costStart + costIncrement * storageLevel;
+		storageUpgradePrize = levelCost[storageLevel];
 
         systemMessageReceiver.SendMessage("OnLevelChanged", SendMessageOptions.DontRequireReceiver);
 	}

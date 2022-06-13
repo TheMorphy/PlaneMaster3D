@@ -30,18 +30,20 @@ public class WorkerField : MonoBehaviour
 
     public void ButtonClick()
 	{
-		if(LevelSystem.instance.playerBackpack.TryPay(price, hireZone.transform.position))
+		if (!bought || workerAI.level < hireZone.maxLevel)
 		{
-			if (bought)
+			if (LevelSystem.instance.playerBackpack.TryPay(price, hireZone.transform.position))
 			{
-				Upgrade();
-			}
-			else
-			{
-				Buy();
+				if (bought)
+				{
+					Upgrade();
+				}
+				else
+				{
+					Buy();
+				}
 			}
 		}
-        
 	}
 
     void Buy()
@@ -55,11 +57,13 @@ public class WorkerField : MonoBehaviour
 
     void Upgrade()
 	{
-		workerAI.level++;
-		hireZone.SaveWorkers();
-		hireZone.ReloadStats();
 		
 		
+			workerAI.level++;
+			hireZone.SaveWorkers();
+			hireZone.ReloadStats();
+		
+
 	}
 
     public void SetBought(bool isBought)
