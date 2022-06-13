@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using TMPro;
 
 [System.Serializable]
-class UpgradeVariables
+public class UpgradeVariables
 {
 	[HideInInspector]
 	public string savingKeyPrefix = "";
@@ -115,7 +115,7 @@ public class WorkerAI : MonoBehaviour
     ResearchSystem researchSystem;
 
 	[SerializeField]
-	int hireCost;
+	public int hireCost;
 	[SerializeField]
 	TextMeshProUGUI hireCostText;
 	//[HideInInspector]
@@ -123,10 +123,11 @@ public class WorkerAI : MonoBehaviour
 #endregion
 	[Header("Upgrades")]
 	[SerializeField]
-	UpgradeVariables speed;
+	public UpgradeVariables speed;
 
 	[SerializeField]
-	UpgradeVariables storage;
+	public UpgradeVariables storage;
+
 
 	public bool stopped;
 
