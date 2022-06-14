@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class PlayerUpgradeUI
@@ -114,6 +115,8 @@ public class Player : MonoBehaviour
 		SetBackpackPrice();
 
 
+
+
 	}
 	void SaveLevel()
 	{
@@ -148,6 +151,8 @@ public class Player : MonoBehaviour
 	{
 		moveSpeed = upgradeSpeedPercentage ? speedStandard * Mathf.Pow(1 + speedIncrement, speedLevel - 1) : speedStandard + speedIncrement * (speedLevel -1);
 		speedUpgradeUI.levelTxt.text = "LVL " + speedLevel;
+		if(speedUpgradeUI.levelTxt.GetComponentInParent<Button>() != null && speedLevel >= maxLevel)
+			speedUpgradeUI.levelTxt.GetComponentInParent<Button>().interactable = false;
 	}
 
 
@@ -183,6 +188,9 @@ public class Player : MonoBehaviour
 	{
 		backpack.stackSize = upgradeBackpackPercentage ? (int)(backpackStandard * Mathf.Pow(1 + backpackIncrement, backpackLevel - 1)) : (int)(backpackStandard + backpackIncrement * (backpackLevel - 1));
 		backpackUpgradeUI.levelTxt.text = "LVL " + backpackLevel;
+		if (backpackUpgradeUI.levelTxt.GetComponentInParent<Button>() != null && backpackLevel >= maxLevel)
+			backpackUpgradeUI.levelTxt.GetComponentInParent<Button>().interactable = false;
+
 	}
 	#endregion
 	#endregion
@@ -192,7 +200,7 @@ public class Player : MonoBehaviour
 
 
 
-	private void OnEnable()
+	private void Start()
     {
         controller = GetComponent<CharacterController>();
 		LoadLevel();

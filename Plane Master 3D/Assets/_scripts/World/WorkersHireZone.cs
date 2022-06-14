@@ -61,7 +61,28 @@ public class WorkersHireZone : MonoBehaviour
 	DroppingZone droppingZone;
 	[SerializeField]
 	RepairStationOrganizer repairStationOrganizer;
+	[SerializeField]
+	Animator doorAnim;
+	[SerializeField]
+	float workerOpenGateDistance;
 
+	public int WorkerFieldIndex(WorkerField workerField)
+	{
+		return workerFields.FindIndex(w => w == workerField);
+	}
+
+	private void OnDrawGizmosSelected()
+	{
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawWireSphere(transform.position, workerOpenGateDistance);
+	}
+
+	private void Awake()
+	{
+		
+		
+
+	}
 	private void Start()
 	{
 		LoadWorkers();
@@ -75,11 +96,33 @@ public class WorkersHireZone : MonoBehaviour
 			
 		}
 
-		
+		StartCoroutine(CheckDoor());
 			
 	}
 
-	
+	IEnumerator CheckDoor()
+	{
+		yield return new WaitUntil(() => IsWorkerInRange());
+		doorAnim.SetBool("open", true);
+		yield return new WaitUntil(() => !IsWorkerInRange());
+		doorAnim.SetBool("open", false);
+	}
+
+	bool IsWorkerInRange()
+	{
+		for(int i = 0; i < workerFields.Count; i++)
+		{
+			if(workerFields[i].workerAI != null)
+			{
+				if(Vector3.Distance(workerFields[i].workerAI.transform.position, transform.position) < workerOpenGateDistance)
+				{
+					return true;
+				}
+			}
+			
+		}
+		return false;
+	}
 
 	public void ReloadStats()
 	{
@@ -87,6 +130,7 @@ public class WorkersHireZone : MonoBehaviour
 		{
 			WorkerField current = workerFields[i];
 			current.SetPrice(Mathf.CeilToInt(current.workerAI == null ? workerStats[i].costHire : workerStats[i].costStandard + ((current.workerAI.level - 1) * workerStats[i].costIncrement)));
+			current.SetBought(current.workerAI != null);
 			if(current.workerAI != null)
 			{
 				current.workerAI.agent.speed = speedStandard * Mathf.Pow(1 + speedIncrement, current.workerAI.level - 1);
@@ -116,10 +160,15 @@ public class WorkersHireZone : MonoBehaviour
 		string[] saves = savedString.Split('.');
 		for(int i = 0; i < saves.Length; i++)
 		{
+			
 			if(saves[i] != "")
 			{
 				print("saves: " + saves[i]);
-				WorkerField fieldToLoad = Instantiate(standardWorkerField, workersMenu).GetComponent<WorkerField>();
+					WorkerField fieldToLoad;
+				if (i < workerFields.Count)
+					fieldToLoad = workerFields[i];  //Instantiate(standardWorkerField, workersMenu).GetComponent<WorkerField>();
+				else
+					break;
 				int loadedLevel = System.Convert.ToInt32(saves[i]);
 				bool bought = loadedLevel > 0;
 				print("bought" + bought);
@@ -138,7 +187,7 @@ public class WorkersHireZone : MonoBehaviour
 				fieldToLoad.hireZone = this;
 				fieldToLoad.SetBought(bought);
 				fieldToLoad.SetPrice(Mathf.CeilToInt(fieldToLoad.workerAI == null ? workerStats[i].costHire : workerStats[i].costStandard + ((fieldToLoad.workerAI.level - 1) * workerStats[i].costIncrement)));
-				workerFields.Add(fieldToLoad);
+				//workerFields.Add(fieldToLoad);
       
 			}
 
@@ -158,8 +207,10 @@ public class WorkersHireZone : MonoBehaviour
 	}
 
 	public WorkerAI SpawnNewWorker()
-	{
+	{ 
+		StartCoroutine(CheckDoor());
 		return Instantiate(workerAIPrefab, workersSpawnPosition).GetComponent<WorkerAI>();
+		
 	}
 
 

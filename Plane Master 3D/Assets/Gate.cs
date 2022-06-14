@@ -24,7 +24,16 @@ public class Gate : MonoBehaviour
         PlayerPrefs.SetInt(savingKey, 1);
         anim.SetBool("GateOpen", true);
         disableOnOpen.SetActive(false);
-		
+
+		if(savingKey == "eastgate2")
+		{
+			QuestSystem.instance.AddProgress("Open fake gate", 1);
+		}
+		if (savingKey == "eastgate")
+		{
+			QuestSystem.instance.AddProgress("Open gate", 1);
+		}
+
 	}
 
     void LoadState()
@@ -33,6 +42,10 @@ public class Gate : MonoBehaviour
 		{
             anim.SetBool("GateOpen", true);
             disableOnOpen.SetActive(false);
+			if (savingKey == "eastgate")
+			{
+				QuestSystem.instance.AddProgress("Open gate", 1);
+			}
 		}
         else
 		{

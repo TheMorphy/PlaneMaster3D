@@ -97,6 +97,7 @@ public class Backpack : MonoBehaviour
 				}
 				else
 				{
+					if(UIItems[u].text.transform.parent != null)
 					UIItems[u].text.transform.parent.gameObject.SetActive(false);
 				}
 			}
@@ -114,6 +115,7 @@ public class Backpack : MonoBehaviour
     {
 		//StartCoroutine(ItemHandler());
 		SoundSystem.instance.sounds.Find(sound => sound.name == "ItemSounds").sources.Add(itemSoundSource);
+		RefreshItemUI();
 	}
 
     private void OnEnable()

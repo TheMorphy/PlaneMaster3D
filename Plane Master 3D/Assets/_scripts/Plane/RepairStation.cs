@@ -71,25 +71,53 @@ public class RepairStation : MonoBehaviour
 				for(int b = 0; b < aircrafts[i].Breakables.Count; b++)
 					for (int c = 0; c < aircrafts[i].Breakables[b].conditions.Count; c++)
 						aircrafts[i].Breakables[b].conditions[c].itemDestination = overrideItemDestination;
-				
-			
+
+
+		CheckForProgress();
+
+		anim.SetFloat("kind", currentAircraft.Model.CompareTag("Rocket") ? 1 : 0);
+
+
+
 	}
 
-	private void OnEnable()
+
+	void CheckForProgress()
 	{
-		
-	}
+		switch (name)
+		{
+			case "JetStation":
+				QuestSystem.instance.AddProgress("Buy first repair zone", 1);
+				break;
+			case "Boeing555":
+				QuestSystem.instance.AddProgress("Buy second repair zone", 1);
+				break;
+			case "Boeing701":
+				QuestSystem.instance.AddProgress("Buy third repair zone", 1);
+				break;
+			case "Boeing21121":
+				QuestSystem.instance.AddProgress("Buy fourth repair zone", 1);
+				break;
+			case "Boeing22":
+				QuestSystem.instance.AddProgress("Buy fifth repair zone", 1);
+				break;
+			case "Boeing111":
+				QuestSystem.instance.AddProgress("Buy sixth repair zone", 1);
+				break;
 
+		}
+	}
 
 
 	void OnAllConditionsComplete()
 	{
-		
+			if (breakablesToRepair.Count > 0)
 			breakablesToRepair[0].SendMessage("OnAllConditionsComplete");
-		
+			if(breakablesToRepair.Count > 1)
 			breakablesToRepair[1].SendMessage("OnAllConditionsComplete");
 
 		StartCoroutine(WaitForLevelUp());
+		CheckForProgress();
 	}
 
 	bool AllConditionsTrue(List <UpgradeCondition> c)
@@ -125,6 +153,22 @@ public class RepairStation : MonoBehaviour
 
 			//wait until its finished
 			yield return new WaitUntil(() => minigameDone);
+
+			switch (name)
+			{
+				case "Boeing555":
+					QuestSystem.instance.AddProgress("Repair plane in second repair zone", 1);
+					break;
+				case "Boeing701":
+					QuestSystem.instance.AddProgress("Repair plane in third repair zone", 1);
+					break;
+
+				default:
+					QuestSystem.instance.AddProgress("Repair a plane", 1);
+					break;
+			}
+
+			
 		}
 		
 			
@@ -145,6 +189,9 @@ public class RepairStation : MonoBehaviour
 
 		yield return new WaitWhile(() => pilot.isMoving);
 		anim.Play("RollOut");
+		anim.SetFloat("kind", currentAircraft.Model.CompareTag("Rocket") ? 1 : 0);
+
+		
 		pilot.gameObject.SetActive(false);
 		LevelUp();
 		yield return new WaitForSeconds(1.2f);
@@ -155,7 +202,8 @@ public class RepairStation : MonoBehaviour
 
 		int materialIndex = Random.Range(0, materialPool.Count);
 		PlayerPrefs.SetInt(name + "mat", materialIndex);
-		currentAircraft.Model.GetComponent<MeshRenderer>().material = materialPool[materialIndex];
+		if(currentAircraft.Model.GetComponent<MeshRenderer>() != null)
+			currentAircraft.Model.GetComponent<MeshRenderer>().material = materialPool[materialIndex];
 		for (int i = 0; i < currentAircraft.Breakables.Count; i++)
 		{
 			if (currentAircraft.Breakables[i].GetComponent<MeshRenderer>() != null)
@@ -194,7 +242,7 @@ public class RepairStation : MonoBehaviour
 		PlayerPrefs.SetInt(name + "level", level);
 		dz.enabled = false;
 		currentAircraft = aircrafts[level % aircrafts.Count];
-		print("!!!!" + level % aircrafts.Count);
+		//print("!!!!" + level % aircrafts.Count);
 
 		cameraZone.SetCameraIndex(currentAircraft.CameraIndex);
 
@@ -206,7 +254,7 @@ public class RepairStation : MonoBehaviour
 		
 		int r1 = Random.Range(0, currentAircraft.Breakables.Count);
 		int r2 = r1;
-		while(r2 == r1 && currentAircraft.Breakables.Count > 2)
+		while(r2 == r1 && currentAircraft.Breakables.Count >= 2)
 		{
 			r2 = Random.Range(0, currentAircraft.Breakables.Count);
 		}

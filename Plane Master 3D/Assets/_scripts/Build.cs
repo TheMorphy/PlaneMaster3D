@@ -100,6 +100,11 @@ public class Build : MonoBehaviour
 		storageUpgradePrize = levelCost[storageLevel];
 
         UpdateUpgradeUI();
+
+		if(savingKey == "Press02")
+		{
+			QuestSystem.instance.AddProgress("Build wire press", 1);
+		}
 		
 
 	}
@@ -123,22 +128,63 @@ public class Build : MonoBehaviour
 
     void CheckForOutOfLevels()
 	{
-		if(level < 2)
-		{
-			CloseUpgradeUI();
-			upgradeZoneLocked = true;
-			upgradeReady.SetActive(false);
-			upgradeLocked.SetActive(false);
-		}
-		else
+		if(savingKey == "Drill")
 		{
 			
-				upgradeZoneLocked = false;
-				upgradeReady.SetActive(true);
-				upgradeLocked.SetActive(false);
-			
+			if (storageLevel + speedLevel >= 2)
+				QuestSystem.instance.AddProgress("Upgrade iron drill", 1);
+			if (storageLevel + speedLevel >= 3)
+				QuestSystem.instance.AddProgress("Upgrade iron drill to level 3", 1);
+			if (storageLevel + speedLevel >= 4)
+				QuestSystem.instance.AddProgress("Upgrade iron drill to level 4", 1);
+			if (storageLevel + speedLevel >= 5)
+				QuestSystem.instance.AddProgress("Upgrade iron drill to level 5", 1);
+			if (storageLevel + speedLevel >= 6)
+				QuestSystem.instance.AddProgress("Upgrade iron drill to level 6", 1);
+
 		}
-        
+		else if(savingKey =="Drill02")
+		{
+			if (storageLevel + speedLevel >= 2)
+				QuestSystem.instance.AddProgress("Upgrade copper drill", 1);
+			if (storageLevel + speedLevel >= 3)
+				QuestSystem.instance.AddProgress("Upgrade copper drill to level 3", 1);
+			if (storageLevel + speedLevel >= 4)
+				QuestSystem.instance.AddProgress("Upgrade copper drill to level 4", 1);
+			if (storageLevel + speedLevel >= 5)
+				QuestSystem.instance.AddProgress("Upgrade copper drill to level 5", 1);
+			if (storageLevel + speedLevel >= 6)
+				QuestSystem.instance.AddProgress("Upgrade copper drill to level 6", 1);
+
+		}
+		else if(savingKey == "Press")
+		{
+			if (storageLevel + speedLevel >= 2)
+				QuestSystem.instance.AddProgress("Upgrade gear press", 1);
+			if (storageLevel + speedLevel >= 3)
+				QuestSystem.instance.AddProgress("Upgrade gear press to level 3", 1);
+			if (storageLevel + speedLevel >= 4)
+				QuestSystem.instance.AddProgress("Upgrade gear press to level 4", 1);
+			if (storageLevel + speedLevel >= 5)
+				QuestSystem.instance.AddProgress("Upgrade gear press to level 5", 1);
+
+		}
+		else if(savingKey == "Press02")
+		{
+			if (storageLevel + speedLevel >= 2)
+				QuestSystem.instance.AddProgress("Upgrade copper wire press", 1);
+			if (storageLevel + speedLevel >= 3)
+				QuestSystem.instance.AddProgress("Upgrade gear press to level 3", 1);
+			if (storageLevel + speedLevel >= 4)
+				QuestSystem.instance.AddProgress("Upgrade gear press to level 4", 1);
+
+		}
+
+
+		
+
+
+
 	}
 
 	public void CloseUpgradeUI()
@@ -159,6 +205,7 @@ public class Build : MonoBehaviour
 			LoadCorrectSpeed();
 			UpdateUpgradeUI();
 			CheckForOutOfLevels();
+			
 		}
 		
     }
@@ -183,6 +230,7 @@ public class Build : MonoBehaviour
 			LoadCorrectStorage();
 			UpdateUpgradeUI();
 			CheckForOutOfLevels();
+			QuestSystem.instance.AddProgress("Upgrade Iron drill", 1);
 		}
     }
 	void LoadCorrectStorage()
@@ -274,6 +322,7 @@ public class Build : MonoBehaviour
         
         SetConditionsToLevel();
         dz.ResetConditions();
+		dz.enabled = false;
     }
 
     void SetConditionsToLevel()

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Drill : MonoBehaviour
 {
 
+
 	[SerializeField] float drillSpeed;
     [SerializeField]
     StashZone stashZone;
@@ -49,9 +50,19 @@ public class Drill : MonoBehaviour
 
     private void Start()
     {
-		QuestSystem.instance.AddProgress("Build a drill", 1);
-		//soundSource.Play();
-    }
+
+		
+
+		string drillName = drillBuild.savingKey;
+		if (drillName == "Drill")
+		{
+			QuestSystem.instance.AddProgress("Build Iron Drill", 1);
+		}
+		else if (drillName == "Drill02")
+		{
+			QuestSystem.instance.AddProgress("Build copper drill", 1);
+		}
+	}
     IEnumerator WaitToDrop()
     {
         while (true)

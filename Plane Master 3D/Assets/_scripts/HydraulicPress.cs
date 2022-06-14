@@ -37,7 +37,8 @@ public class HydraulicPress : MonoBehaviour
     {
         StartCoroutine(HydraulicWorker());
         anim = GetComponent<Animator>();
-    }
+		QuestSystem.instance.AddProgress("Build gear press", 1);
+	}
     void OnLoadLevels()
     {
         print("OnLoadLevels");
@@ -75,6 +76,7 @@ public class HydraulicPress : MonoBehaviour
             currentMetal = droppingZone.items[droppingZone.items.Count - 1];
             droppingZone.items.RemoveAt(droppingZone.items.Count - 1);
             droppingZone.conditions[0].count -= 1;
+			droppingZone.Refresh();
             droppingZone.SaveConditions();
             anim.speed = cogsPerMinute / 60;
             anim.SetBool("isProcessing", true);

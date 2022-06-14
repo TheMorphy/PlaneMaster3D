@@ -11,6 +11,7 @@ TagManager:
   - Gear2
   - Gear3
   - redspot
+  - Rocket
   layers:
   - Default
   - TransparentFX
