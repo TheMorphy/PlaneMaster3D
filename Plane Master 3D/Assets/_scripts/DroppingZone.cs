@@ -62,8 +62,9 @@ public class DroppingZone : MonoBehaviour
         {
             LoadConditions();
         }
-        //StartCoroutine(WaitForComplete());
-        //CheckForDone();
+		//StartCoroutine(WaitForComplete());
+		//CheckForDone();
+		RefreshProgressbar(0, 1);
     }
 
     void LoadConditions()
@@ -237,10 +238,8 @@ public class DroppingZone : MonoBehaviour
 				count += itemInfos[i].count;
 				countNeeded += itemInfos[i].countNeeded;
 			}
-			
-			float progress = count / countNeeded;
-			progressbar.size = new Vector2(progressbar.size.x, count == 0 || countNeeded == 0 ? 0 : progressBarStartSize * progress);
-			
+
+			RefreshProgressbar(count, countNeeded);		
 		}
 		
 
@@ -250,8 +249,15 @@ public class DroppingZone : MonoBehaviour
         
     }
 
-    //This one is outdated 
-    bool AllDone()
+	void RefreshProgressbar(float count, float countNeeded)
+	{
+		float progress = count / countNeeded;
+		progressbar.size = new Vector2(progressbar.size.x, count == 0 || countNeeded == 0 ? 0 : progressBarStartSize * progress);
+
+	}
+
+	//This one is outdated 
+	bool AllDone()
     {
 		if (debug)
 			print("droppingZone AllDone()");

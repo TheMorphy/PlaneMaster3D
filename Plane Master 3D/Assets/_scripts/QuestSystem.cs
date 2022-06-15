@@ -58,6 +58,7 @@ public class QuestSystem : MonoBehaviour
 
     IEnumerator WaitForBreakCam()
 	{
+		yield return new WaitWhile(() => Input.touchCount > 0);
         yield return new WaitUntil(() => Input.touchCount > 0 || Input.anyKeyDown);
         StopCoroutine(objectiveCamCoroutine);
         LevelSystem.instance.ChangeCamera(4, -1);
