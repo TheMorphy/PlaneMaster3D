@@ -64,6 +64,7 @@ public class DroppingZone : MonoBehaviour
         }
 		//StartCoroutine(WaitForComplete());
 		//CheckForDone();
+		if(progressbar != null)
 		RefreshProgressbar(0, 1);
     }
 

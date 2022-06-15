@@ -7531,7 +7531,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7103338783324829975}
         m_TargetAssemblyTypeName: Build, Assembly-CSharp
         m_MethodName: CloseUpgradeUI
         m_Mode: 1
