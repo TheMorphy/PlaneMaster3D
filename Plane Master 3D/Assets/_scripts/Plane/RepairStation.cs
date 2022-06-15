@@ -163,9 +163,7 @@ public class RepairStation : MonoBehaviour
 					QuestSystem.instance.AddProgress("Repair plane in third repair zone", 1);
 					break;
 
-				default:
-					QuestSystem.instance.AddProgress("Repair a plane", 1);
-					break;
+			
 			}
 
 			
