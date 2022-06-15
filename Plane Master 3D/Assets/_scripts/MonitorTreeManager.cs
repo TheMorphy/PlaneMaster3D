@@ -11,25 +11,40 @@ public class MonitorTreeManager : MonoBehaviour
     [SerializeField] GameObject[] positionsB;
     [SerializeField] GameObject[] positionsC;
     [SerializeField] GameObject[] positionsD;
+	[Space(10)]
+	[SerializeField] GameObject button1, button2, button3, button4;
 
-    private bool p1, p2, p3, p4;
+	Vector2 button1InitialPosition, button2InitialPosition, button3InitialPosition, button4InitialPosition;
+
+
+	private bool p1, p2, p3, p4;
 
     public bool P1 { get => p1; set => p1 = value; }
     public bool P2 { get => p2; set => p2 = value; }
     public bool P3 { get => p3; set => p3 = value; }
     public bool P4 { get => p4; set => p4 = value; }
 
-	[SerializeField] GameObject taskObject;
+	private void Start()
+	{
+		RandomPosition();
+		button1.GetComponent<Slider>().value = 0;
+		button2.GetComponent<Slider>().value = 0;
+		button3.GetComponent<Slider>().value = 0;
+		button4.GetComponent<Slider>().value = 0;
+	}
 
+	private void ResetTheGame()
+	{
+		RandomPosition();
+		button1.GetComponent<Slider>().value = 0;
+		button2.GetComponent<Slider>().value = 0;
+		button3.GetComponent<Slider>().value = 0;
+		button4.GetComponent<Slider>().value = 0;
+	}
 
-    private void OnEnable()
+	private void OnEnable()
     {
-        RandomPosition();
-    }
-
-    private void Update()
-    {
-        
+        //RandomPosition();
     }
 
 	public void OnValueChanged()
@@ -43,7 +58,8 @@ public class MonitorTreeManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(0.1f);
 		//congrats.SetActive(true);
-		taskObject.SetActive(false);
+		ResetTheGame();
+		gameObject.SetActive(false);
     }
 
     void RandomPosition()
