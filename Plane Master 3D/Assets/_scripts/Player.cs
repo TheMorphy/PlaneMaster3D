@@ -11,6 +11,8 @@ public class PlayerUpgradeUI
 	public TextMeshProUGUI levelTxt;
 	[SerializeField]
 	public TextMeshProUGUI prizeText;
+	[SerializeField]
+	public Button button;
 
 }
 public class Player : MonoBehaviour
@@ -151,8 +153,8 @@ public class Player : MonoBehaviour
 	{
 		moveSpeed = upgradeSpeedPercentage ? speedStandard * Mathf.Pow(1 + speedIncrement, speedLevel - 1) : speedStandard + speedIncrement * (speedLevel -1);
 		speedUpgradeUI.levelTxt.text = "LVL " + speedLevel;
-		if(speedUpgradeUI.levelTxt.GetComponentInParent<Button>() != null && speedLevel >= maxLevel)
-			speedUpgradeUI.levelTxt.GetComponentInParent<Button>().interactable = false;
+		if(speedLevel >= maxLevel)
+			speedUpgradeUI.button.interactable = false;
 	}
 
 
@@ -188,8 +190,8 @@ public class Player : MonoBehaviour
 	{
 		backpack.stackSize = upgradeBackpackPercentage ? (int)(backpackStandard * Mathf.Pow(1 + backpackIncrement, backpackLevel - 1)) : (int)(backpackStandard + backpackIncrement * (backpackLevel - 1));
 		backpackUpgradeUI.levelTxt.text = "LVL " + backpackLevel;
-		if (backpackUpgradeUI.levelTxt.GetComponentInParent<Button>() != null && backpackLevel >= maxLevel)
-			backpackUpgradeUI.levelTxt.GetComponentInParent<Button>().interactable = false;
+		if (backpackLevel >= maxLevel)
+			backpackUpgradeUI.button.interactable = false;
 
 	}
 	#endregion

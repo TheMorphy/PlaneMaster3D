@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRepaired: 0
-  originalPosition: {fileID: 0}
+  originalPosition: {fileID: 6489382250099622950}
   paletteRotation: {x: 0, y: 0, z: 0}
   station: {fileID: 0}
   conditions: []
@@ -593,7 +593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRepaired: 0
-  originalPosition: {fileID: 0}
+  originalPosition: {fileID: 6489382249403627577}
   paletteRotation: {x: 0, y: 0, z: 0}
   station: {fileID: 0}
   conditions: []

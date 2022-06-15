@@ -38,6 +38,8 @@ public class HydraulicPress : MonoBehaviour
         StartCoroutine(HydraulicWorker());
         anim = GetComponent<Animator>();
 		QuestSystem.instance.AddProgress("Build gear press", 1);
+
+		OnLevelChanged();
 	}
     void OnLoadLevels()
     {

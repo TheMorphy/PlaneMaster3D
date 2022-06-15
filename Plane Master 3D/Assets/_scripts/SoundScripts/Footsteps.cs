@@ -23,6 +23,9 @@ public class Footsteps : MonoBehaviour
 
 	private void Step()
 	{
+		if(source == null)
+			source = GetComponent<AudioSource>();
+
 		List<AudioClip> currentClips = null;
 		RaycastHit hit;
 		if(Physics.Raycast(checkForGround.position, -checkForGround.up, out hit))
@@ -38,13 +41,14 @@ public class Footsteps : MonoBehaviour
 				case 17:
 					currentClips = grasClips;
 					break;
-				case 0:
+				default:
 					currentClips = stoneClips;
 					break;
 
 			}
+			source.PlayOneShot(currentClips[Random.Range(0, currentClips.Count)]);
 		}
 
-		source.PlayOneShot(currentClips[Random.Range(0, currentClips.Count)]);
+		
 	}
 }

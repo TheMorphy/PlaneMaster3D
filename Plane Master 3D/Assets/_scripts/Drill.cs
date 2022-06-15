@@ -34,7 +34,8 @@ public class Drill : MonoBehaviour
 		drillSpeed = drillBuild.speed;
 		Animator anim = GetComponent<Animator>();
 		anim.speed = drillSpeed;
-		stashZone.capacity = drillBuild.storage;	
+		stashZone.capacity = drillBuild.storage;
+		stashZone.SendMessage("GenerateSortingSystem");
 	}
 
 

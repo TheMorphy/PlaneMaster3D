@@ -5,6 +5,7 @@ using UnityEngine;
 public class Gate : MonoBehaviour
 {
     DroppingZone dz;
+	[SerializeField]
     Animator anim;
     [SerializeField]
     string savingKey;

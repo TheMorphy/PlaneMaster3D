@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class Build : MonoBehaviour
 {
@@ -74,6 +75,7 @@ public class Build : MonoBehaviour
     TextMeshProUGUI currentSpeedLevelInfo, currentStorageLevelInfo;
     [SerializeField]
     TextMeshProUGUI storageUpgradeCost, speedUpgradeCost;
+	[SerializeField] Button storageButton, speedButton;
 
 	Backpack playerBackpack;
 	bool upgradeZoneLocked = false;
@@ -96,8 +98,9 @@ public class Build : MonoBehaviour
 
 		//speedUpgradePrize = costStart + costIncrement * speedLevel;
 		//storageUpgradePrize = costStart + costIncrement * storageLevel;
-		speedUpgradePrize = levelCost[speedLevel];
-		storageUpgradePrize = levelCost[storageLevel];
+
+		speedUpgradePrize = levelCost[Mathf.Clamp(speedLevel, 0, levelCost.Count - 1)];
+		storageUpgradePrize = levelCost[Mathf.Clamp(storageLevel, 0, levelCost.Count - 1)];
 
         UpdateUpgradeUI();
 
@@ -105,6 +108,7 @@ public class Build : MonoBehaviour
 		{
 			QuestSystem.instance.AddProgress("Build wire press", 1);
 		}
+		CheckForOutOfLevels();
 		
 
 	}
@@ -124,6 +128,16 @@ public class Build : MonoBehaviour
 
         storageUpgradeCost.text = storageUpgradePrize.ToString();
         speedUpgradeCost.text = speedUpgradePrize.ToString();
+
+		if (storageLevel >= levelCost.Count )
+		{
+			storageButton.interactable = false;
+		}
+
+		if (speedLevel >= levelCost.Count)
+		{
+			speedButton.interactable = false;
+		}
 	}
 
     void CheckForOutOfLevels()
@@ -182,7 +196,7 @@ public class Build : MonoBehaviour
 
 
 		
-
+		
 
 
 	}
@@ -197,16 +211,21 @@ public class Build : MonoBehaviour
 
 	public void UpgradeSpeed()
 	{
-		if (storageLevel < levelCost.Count)
-		if (LevelSystem.instance.playerBackpack.TryPay(speedUpgradePrize, transform.position))
+		if (speedLevel < levelCost.Count)
 		{
-			speedLevel++;
-			PlayerPrefs.SetInt(savingKey + "speedLvl", speedLevel);
-			LoadCorrectSpeed();
-			UpdateUpgradeUI();
-			CheckForOutOfLevels();
-			
+			if (LevelSystem.instance.playerBackpack.TryPay(speedUpgradePrize, transform.position))
+			{
+				speedLevel++;
+				PlayerPrefs.SetInt(savingKey + "speedLvl", speedLevel);
+				LoadCorrectSpeed();
+				UpdateUpgradeUI();
+				CheckForOutOfLevels();
+
+
+
+			}
 		}
+		
 		
     }
 
@@ -214,7 +233,8 @@ public class Build : MonoBehaviour
 	{
 		speed = speedStandard + (speedLevel - 1) * speedIncrement;
 		//speedUpgradePrize = costStart + costIncrement * (speedLevel - 1);
-		speedUpgradePrize = levelCost[speedLevel];
+		
+		speedUpgradePrize = levelCost[Mathf.Clamp(speedLevel, 0, levelCost.Count - 1)];
 
         systemMessageReceiver.SendMessage("OnLevelChanged", SendMessageOptions.DontRequireReceiver);
 	}
@@ -223,23 +243,26 @@ public class Build : MonoBehaviour
 	public void UpgradeStorage()
 	{
 		if(storageLevel < levelCost.Count)
-		if (LevelSystem.instance.playerBackpack.TryPay(storageUpgradePrize, transform.position))
 		{
-			storageLevel++;
-			PlayerPrefs.SetInt(savingKey + "storageLvl", storageLevel);
-			LoadCorrectStorage();
-			UpdateUpgradeUI();
-			CheckForOutOfLevels();
-			QuestSystem.instance.AddProgress("Upgrade Iron drill", 1);
+			if (LevelSystem.instance.playerBackpack.TryPay(storageUpgradePrize, transform.position))
+			{
+				storageLevel++;
+				PlayerPrefs.SetInt(savingKey + "storageLvl", storageLevel);
+				LoadCorrectStorage();
+				UpdateUpgradeUI();
+				CheckForOutOfLevels();
+				QuestSystem.instance.AddProgress("Upgrade Iron drill", 1);
+			}
 		}
+		
     }
 	void LoadCorrectStorage()
 	{
 		storage = Mathf.CeilToInt(storageStandard + (storageLevel -1) * storageIncrement);
 		//storageUpgradePrize = costStart + costIncrement * storageLevel;
-		storageUpgradePrize = levelCost[storageLevel];
+		storageUpgradePrize = levelCost[Mathf.Clamp(storageLevel, 0, levelCost.Count - 1)];
 
-        systemMessageReceiver.SendMessage("OnLevelChanged", SendMessageOptions.DontRequireReceiver);
+		systemMessageReceiver.SendMessage("OnLevelChanged", SendMessageOptions.DontRequireReceiver);
 	}
 
 	void OnUpgradeZoneTriggered()
@@ -289,13 +312,15 @@ public class Build : MonoBehaviour
                     GetComponent<Animator>().enabled = false;
                     build.SetActive(false);
                     system.SetActive(true);
-                    //system.transform.GetChild(0).SendMessage("OnChangeLevel");
-                }
+					upgradeReady.SetActive(true);
+			//system.transform.GetChild(0).SendMessage("OnChangeLevel");
+				}
                 else
                 {
                     GetComponent<DroppingZone>().enabled = true;
                     build.SetActive(true);
-                    system.SetActive(false);
+					upgradeReady.SetActive(false);
+					system.SetActive(false);
                 }
 
 		CheckForOutOfLevels();
@@ -327,7 +352,7 @@ public class Build : MonoBehaviour
 
     void SetConditionsToLevel()
     {
-        dz.conditions = levels[level].conditions;
+        //dz.conditions = levels[level].conditions;
     }
     public void SwitchToSystem() 
     {
@@ -335,5 +360,6 @@ public class Build : MonoBehaviour
         system.SetActive(true);
 		if (soundSource != null)
 			soundSource.PlayOneShot(buildSound);
-    }
+		upgradeReady.SetActive(true);
+	}
 }

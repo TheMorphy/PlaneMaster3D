@@ -768,7 +768,7 @@ MonoBehaviour:
   - {fileID: 8787419644196716940}
   - {fileID: 8787419644057025490}
   animParent: {fileID: 36124963500526247}
-  drillBuild: {fileID: 0}
+  drillBuild: {fileID: 36124965483188347}
 --- !u!95 &36124964602721605
 Animator:
   serializedVersion: 3
@@ -1539,7 +1539,7 @@ MonoBehaviour:
   speedUpgradePrize: 50
   storageUpgradePrize: 50
   UpgradeUI: {fileID: 8399439919254151107}
-  upgradeReady: {fileID: 898971784286892584}
+  upgradeReady: {fileID: 5614341620473581446}
   upgradeLocked: {fileID: 8149823467685596609}
   currentSpeedInfo: {fileID: 3308715903602094507}
   currentStorageInfo: {fileID: 5778514735016005853}
@@ -1547,6 +1547,8 @@ MonoBehaviour:
   currentStorageLevelInfo: {fileID: 1809023841745730576}
   storageUpgradeCost: {fileID: 6967391330289553834}
   speedUpgradeCost: {fileID: 3521760847828041793}
+  storageButton: {fileID: 0}
+  speedButton: {fileID: 0}
 --- !u!95 &36124965483188346
 Animator:
   serializedVersion: 3
@@ -4131,7 +4133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6074823924098168867
 RectTransform:
   m_ObjectHideFlags: 0

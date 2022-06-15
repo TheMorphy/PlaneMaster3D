@@ -108,7 +108,7 @@ public class WorkerAI : MonoBehaviour
     float stayTimer;
     [SerializeField]
     Animator visual3D;
-
+		
     public NavMeshAgent agent;
     public bool isMoving;
     [SerializeField]
@@ -136,7 +136,7 @@ public class WorkerAI : MonoBehaviour
 	Outline workersOutline;
 	Coroutine outline;
 
-    void OnEnable()
+    void Awake()
     {
 		
         agent = GetComponent<NavMeshAgent>();
@@ -346,6 +346,7 @@ public class WorkerAI : MonoBehaviour
 
 	public void PilotGoToPlanePos()
 	{
+		if(agent != null)
 		agent.SetDestination(itemDestinationPos.position);
 	}
 

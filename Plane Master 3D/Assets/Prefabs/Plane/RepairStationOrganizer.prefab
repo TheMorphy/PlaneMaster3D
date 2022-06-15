@@ -16034,7 +16034,7 @@ MonoBehaviour:
   animSmooth: 0.4
   stayTime: 1
   visual3D: {fileID: 1526551001996190048}
-  agent: {fileID: 0}
+  agent: {fileID: 1526551001298082752}
   isMoving: 0
   researchSystem: {fileID: 0}
   hireCost: 0
@@ -17832,7 +17832,7 @@ MonoBehaviour:
   animSmooth: 0.4
   stayTime: 1
   visual3D: {fileID: 1526551000435666648}
-  agent: {fileID: 0}
+  agent: {fileID: 1526551001376486666}
   isMoving: 0
   researchSystem: {fileID: 0}
   hireCost: 0
@@ -19453,7 +19453,7 @@ MonoBehaviour:
   animSmooth: 0.4
   stayTime: 1
   visual3D: {fileID: 1526551001323363397}
-  agent: {fileID: 0}
+  agent: {fileID: 1526551001464842879}
   isMoving: 0
   researchSystem: {fileID: 0}
   hireCost: 0
@@ -21856,7 +21856,7 @@ MonoBehaviour:
   animSmooth: 0.4
   stayTime: 1
   visual3D: {fileID: 1526551000687608859}
-  agent: {fileID: 0}
+  agent: {fileID: 1526551001575604712}
   isMoving: 0
   researchSystem: {fileID: 0}
   hireCost: 0
@@ -22772,7 +22772,7 @@ MonoBehaviour:
   animSmooth: 0.4
   stayTime: 1
   visual3D: {fileID: 1526551002001337464}
-  agent: {fileID: 0}
+  agent: {fileID: 1526551001646414481}
   isMoving: 0
   researchSystem: {fileID: 0}
   hireCost: 0
@@ -36010,7 +36010,7 @@ MonoBehaviour:
   animSmooth: 0.4
   stayTime: 1
   visual3D: {fileID: 1526551001342128743}
-  agent: {fileID: 0}
+  agent: {fileID: 1526551002339970793}
   isMoving: 0
   researchSystem: {fileID: 0}
   hireCost: 0
