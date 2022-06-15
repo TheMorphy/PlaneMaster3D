@@ -72,44 +72,60 @@ public class WorkerField : MonoBehaviour
 			hireZone.SaveWorkers();
 			hireZone.ReloadStats();
 		
-		if (workerAI.level >= 5)
-        {
-            switch (hireZone.WorkerFieldIndex(this))
-            {
-                case 0:
-                    QuestSystem.instance.AddProgress("Upgrade first worker to level 5", 1);
-                    break;
-                case 1:
-                    QuestSystem.instance.AddProgress("Upgrade second worker to level 5", 1);
-                    break;
-                case 2:
-                    QuestSystem.instance.AddProgress("Upgrade third worker to level 5", 1);
-                    break;
-                case 3:
-                    QuestSystem.instance.AddProgress("Upgrade fourth worker to level 5", 1);
-                    break;
-                case 4:
-					QuestSystem.instance.AddProgress("Upgrade fifth worker to level 5", 1);
-					break;
-                case 5:
-                    QuestSystem.instance.AddProgress("Upgrade sixth worker to level 5", 1);
-                    break;
-            }
-        }
-		else if(workerAI.level >= 3)
+		
+		if(hireZone.savingKey == "Box02")
 		{
-			switch (hireZone.WorkerFieldIndex(this))
+			if (workerAI.level >= 3)
 			{
-				case 4:
-					QuestSystem.instance.AddProgress("Upgrade fifth worker to level 3", 1);
+				switch (hireZone.WorkerFieldIndex(this))
+				{
+					case 1:
+						QuestSystem.instance.AddProgress("Upgrade fifth worker to level 3", 1);
 
-					break;
-				case 5:
-					QuestSystem.instance.AddProgress("Upgrade sixth worker to level 3", 1);
-					break;
+						break;
+					case 2:
+						QuestSystem.instance.AddProgress("Upgrade sixth worker to level 3", 1);
+						break;
+				}
+
 			}
-
+			if (workerAI.level >= 5)
+			{
+				switch (hireZone.WorkerFieldIndex(this))
+				{
+					
+					case 0:
+						QuestSystem.instance.AddProgress("Upgrade fourth worker to level 5", 1);
+						break;
+					case 1:
+						QuestSystem.instance.AddProgress("Upgrade fifth worker to level 5", 1);
+						break;
+					case 2:
+						QuestSystem.instance.AddProgress("Upgrade sixth worker to level 5", 1);
+						break;
+				}
+			}
 		}
+		else
+		{
+			if (workerAI.level >= 5)
+			{
+				switch (hireZone.WorkerFieldIndex(this))
+				{
+					case 0:
+						QuestSystem.instance.AddProgress("Upgrade first worker to level 5", 1);
+						break;
+					case 1:
+						QuestSystem.instance.AddProgress("Upgrade second worker to level 5", 1);
+						break;
+					case 2:
+						QuestSystem.instance.AddProgress("Upgrade third worker to level 5", 1);
+						break;
+					
+				}
+			}
+		}
+		
 	}
 
     public void SetBought(bool isBought)

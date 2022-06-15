@@ -20,6 +20,7 @@ class WorkerStats
 
 public class WorkersHireZone : MonoBehaviour
 {
+	public string savingKey;
 	[SerializeField]
 	GameObject standardWorkerField;
 	[SerializeField]

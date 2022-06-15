@@ -63,9 +63,9 @@ public class DroppingZone : MonoBehaviour
             LoadConditions();
         }
 		//StartCoroutine(WaitForComplete());
-		//CheckForDone();
-		if(progressbar != null)
-		RefreshProgressbar(0, 1);
+		CheckForDone();
+		//if(progressbar != null)
+		//RefreshProgressbar(0, 1);
     }
 
     void LoadConditions()
@@ -242,13 +242,19 @@ public class DroppingZone : MonoBehaviour
 
 			RefreshProgressbar(count, countNeeded);		
 		}
-		
 
+		if (conditions.Count == 0)
+			return;
 		allConditionsComplete = allDone;
         if (allDone && this.isActiveAndEnabled)
             SendMessage("OnAllConditionsComplete", SendMessageOptions.DontRequireReceiver);
         
     }
+
+	void RefreshGroundUI()
+	{
+
+	}
 
 	void RefreshProgressbar(float count, float countNeeded)
 	{
