@@ -361,8 +361,16 @@ public class RepairStation : MonoBehaviour
 
 		currentAircraft = aircrafts[level % aircrafts.Count];
 		ActivateAircraftModel(level % aircrafts.Count);
-		GetBreakablesToRepair(PlayerPrefs.GetInt(name + "r1"), PlayerPrefs.GetInt(name + "r2"));
-		
+		//GetBreakablesToRepair(PlayerPrefs.GetInt(name + "r1"), PlayerPrefs.GetInt(name + "r2"));
+
+		int r1 = Random.Range(0, currentAircraft.Breakables.Count);
+		int r2 = r1;
+		while (r2 == r1 && currentAircraft.Breakables.Count >= 2)
+		{
+			r2 = Random.Range(0, currentAircraft.Breakables.Count);
+		}
+		GetBreakablesToRepair(r1, r2);
+
 		StartCoroutine(BringBreakablesToBrokenPos());
 		List<UpgradeCondition> newConditions = new List<UpgradeCondition>();
 		foreach(UpgradeCondition u in breakablesToRepair[0].conditions)

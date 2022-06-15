@@ -63,7 +63,7 @@ public class DroppingZone : MonoBehaviour
             LoadConditions();
         }
         //StartCoroutine(WaitForComplete());
-        CheckForDone();
+        //CheckForDone();
     }
 
     void LoadConditions()

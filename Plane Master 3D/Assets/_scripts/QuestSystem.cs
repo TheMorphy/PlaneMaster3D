@@ -26,7 +26,6 @@ public class QuestSystem : MonoBehaviour
     float progressBarStartWidth;
     [SerializeField]
     TextMeshProUGUI progressText, questName;
-    [SerializeField] Button rewardButton;
 
     [Header("Objective Camera")]
     [SerializeField]
@@ -214,12 +213,8 @@ public class QuestSystem : MonoBehaviour
 
     public void CollectReward()
     {
-        rewardButton.gameObject.SetActive(false);
 		
-        foreach(Reward r in currentQuest.rewards)
-        {
-            r.Collect(rewardButton.transform.position);
-        }
+        
         PlayerPrefs.SetInt(currentQuest.questName + "reward", 1);
         questLevel++;
         currentQuest = quests[questLevel];
