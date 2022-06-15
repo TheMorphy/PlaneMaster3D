@@ -2335,6 +2335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9158714025105858914}
   - component: {fileID: 1492298904634520033}
+  - component: {fileID: 2428973541316014620}
   m_Layer: 0
   m_Name: HPPlane
   m_TagString: Untagged
@@ -2373,6 +2374,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 33.21, y: 56.576588, z: 163.12859}
   m_Center: {x: 38.390007, y: 7.6882963, z: 56.460354}
+--- !u!65 &2428973541316014620
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8381648937964207064}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 190.14894, y: 56.576588, z: 40.315872}
+  m_Center: {x: 38.349716, y: 7.6882963, z: 26.084845}
 --- !u!1 &8437663514221648471
 GameObject:
   m_ObjectHideFlags: 0

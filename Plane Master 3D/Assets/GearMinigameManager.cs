@@ -43,10 +43,7 @@ public class GearMinigameManager : MonoBehaviour
 			ResetMinigame();
 		}
 
-		if (gearCount >= maxGearCount)
-		{
-			congratulationsCanvas.SetActive(true);
-		}
+		
 	}
 
 	void ChangeGearHolePosition()
@@ -125,6 +122,10 @@ public class GearMinigameManager : MonoBehaviour
 				gearCount += 1;
 				Debug.Log("Right Hole!");
 			}
+		}
+		if (gearCount >= maxGearCount)
+		{
+			gameObject.SetActive(false);
 		}
 	}
 

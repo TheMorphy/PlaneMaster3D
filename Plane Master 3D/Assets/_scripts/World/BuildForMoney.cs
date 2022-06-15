@@ -17,6 +17,9 @@ public class BuildForMoney : MonoBehaviour
 	[SerializeField]
 	string savingKey;
 
+	[SerializeField]
+	bool activeStart = false;
+
 
 	private void Start()
 	{
@@ -37,9 +40,11 @@ public class BuildForMoney : MonoBehaviour
 	void OnAllConditionsComplete()
 	{
 		PlayerPrefs.SetInt(savingKey, 2);
+		if(messageReceiver != null)
 		messageReceiver.SendMessage("OnBoughtStation");
 		LoadProgress();
 	}
+
 
 	public void SetAsBought()
 	{
@@ -69,5 +74,7 @@ public class BuildForMoney : MonoBehaviour
 				interactableToUnlock.SetActive(true);
 				break;
 		}
+		if (activeStart)
+			gameObject.SetActive(true);
 	}
 }
