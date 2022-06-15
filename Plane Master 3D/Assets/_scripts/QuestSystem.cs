@@ -221,5 +221,6 @@ public class QuestSystem : MonoBehaviour
         currentQuest = quests[questLevel];
 		CheckForDone(null, currentQuest);
         UpdateQuestUI();
+		GoToObjectiveCamera();
     }
 }
