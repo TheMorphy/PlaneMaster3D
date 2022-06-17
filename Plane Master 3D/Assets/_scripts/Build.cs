@@ -291,26 +291,16 @@ public class Build : MonoBehaviour
 		level = PlayerPrefs.GetInt(savingKey + "p");
         
 
-        if (level < PlayerPrefs.GetInt(savingKey + "p"))
-        {
-            //readyForUpgrade = true;
-            //build.SetActive(true);
-            GetComponent<DroppingZone>().enabled = true;
-        }
-        else
-        {
-            //readyForUpgrade = false;
-            build.SetActive(false);
-            GetComponent<DroppingZone>().enabled = false;
-        }
+        
    //     if (level > 1)
         //    system.SetActive(true);
         system.transform.GetChild(0).SendMessage("OnLoadLevels", SendMessageOptions.DontRequireReceiver);
         
-                if (level > 1)
+                if (level >= 1)
                 {
                     GetComponent<Animator>().enabled = false;
-                    build.SetActive(false);
+					GetComponent<DroppingZone>().enabled = false;
+					build.SetActive(false);
                     system.SetActive(true);
 					upgradeReady.SetActive(true);
 			//system.transform.GetChild(0).SendMessage("OnChangeLevel");

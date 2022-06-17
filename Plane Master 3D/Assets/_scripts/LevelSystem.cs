@@ -92,6 +92,19 @@ public class LevelSystem : MonoBehaviour
 	[SerializeField]
 	GameObject hireUI, upgradeUI;
 
+	[SerializeField]
+	public List<GameObject> itemPrefabs = new List<GameObject>();
+
+	public Drill ironDrill;
+	public HydraulicPress cogPress;
+	public Drill copperDrill;
+	public HydraulicPress copperCogPress;
+	public CombiningMachine combineMashine;
+	[Space(10)]
+	public List<RepairStation> repairStations;
+	public List<Transform> itemGrabSpots;
+	public List<StashZone> stashZones = new List<StashZone>();
+
 
 	public void CloseWorkersUpgradeUI()
 	{
@@ -268,6 +281,7 @@ public class LevelSystem : MonoBehaviour
 			Debug.Log("There is no Truck manager in the scene");
 		}
 		#endregion
+		
 	}
 
 	//This is the most important function of this script

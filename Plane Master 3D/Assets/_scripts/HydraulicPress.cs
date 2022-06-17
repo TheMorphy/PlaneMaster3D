@@ -39,6 +39,7 @@ public class HydraulicPress : MonoBehaviour
         anim = GetComponent<Animator>();
 		QuestSystem.instance.AddProgress("Build gear press", 1);
 
+        droppingZone.Refresh();
 		OnLevelChanged();
 	}
     void OnLoadLevels()

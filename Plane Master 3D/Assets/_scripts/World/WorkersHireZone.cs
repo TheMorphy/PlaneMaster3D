@@ -80,9 +80,18 @@ public class WorkersHireZone : MonoBehaviour
 
 	private void Awake()
 	{
-		
-		
+		//LoadWorkers();
 
+
+	}
+	public void SetTask(WorkerField workerField)
+	{
+		int fieldIndex = WorkerFieldIndex(workerField);
+
+		workerField.workerAI.itemToCarry = tasks[fieldIndex].itemToCarry;
+		workerField.workerAI.getItemPos = tasks[fieldIndex].getPos;
+		workerField.workerAI.itemDestinationPos = tasks[fieldIndex].bringPos;
+		
 	}
 	private void Start()
 	{
@@ -157,7 +166,7 @@ public class WorkersHireZone : MonoBehaviour
 
 	void LoadWorkers()
 	{
-		string savedString = PlayerPrefs.GetString("workers");
+		string savedString = PlayerPrefs.GetString(savingKey + "workers");
 		string[] saves = savedString.Split('.');
 		for(int i = 0; i < saves.Length; i++)
 		{
@@ -176,9 +185,12 @@ public class WorkersHireZone : MonoBehaviour
 				if (bought)
 				{
 					fieldToLoad.workerAI = SpawnNewWorker();
-					fieldToLoad.workerAI.itemToCarry = tasks[(int)Mathf.Repeat(i, tasks.Count - 1)].itemToCarry;
-					fieldToLoad.workerAI.itemDestinationPos = tasks[(int)Mathf.Repeat(i, tasks.Count - 1)].bringPos;
-					fieldToLoad.workerAI.getItemPos = tasks[(int)Mathf.Repeat(i, tasks.Count - 1)].getPos;
+					fieldToLoad.workerAI.backpack.savingKey = savingKey + i;
+					fieldToLoad.workerAI.repairStation = savingKey == "Box01" ? LevelSystem.instance.repairStations[i] : LevelSystem.instance.repairStations[i + 3];
+					
+					fieldToLoad.workerAI.itemToCarry = tasks[(int)Mathf.Repeat(i, tasks.Count)].itemToCarry;
+					fieldToLoad.workerAI.itemDestinationPos = tasks[(int)Mathf.Repeat(i, tasks.Count)].bringPos;
+					fieldToLoad.workerAI.getItemPos = tasks[(int)Mathf.Repeat(i, tasks.Count)].getPos;
 					fieldToLoad.workerAI.level = loadedLevel;
 
 					fieldToLoad.workerAI.agent.speed = speedStandard * Mathf.Pow(1 + speedIncrement, fieldToLoad.workerAI.level - 1);
@@ -200,10 +212,10 @@ public class WorkersHireZone : MonoBehaviour
 		string saveString = "";
 		for(int i = 0; i < workerFields.Count; i++)
 		{
-			saveString += ".";
-			saveString += (workerFields[i].workerAI != null ? workerFields[i].workerAI.level : 0).ToString();
+			
+			saveString += (workerFields[i].workerAI != null ? workerFields[i].workerAI.level : 0).ToString() + ".";
 		}
-		PlayerPrefs.SetString("workers", saveString);
+		PlayerPrefs.SetString(savingKey + "workers", saveString);
 		print(saveString);
 	}
 

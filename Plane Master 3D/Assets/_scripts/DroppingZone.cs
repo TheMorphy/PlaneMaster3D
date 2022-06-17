@@ -48,11 +48,12 @@ public class DroppingZone : MonoBehaviour
 	{
 		if (progressbar != null)
 			progressBarStartSize = progressbar.size.y;
-	}
+        
+    }
 	private void Start()
     {
-		
-        if(showDroppedItems)
+        LoadConditions();
+        if (showDroppedItems)
         {
             
             Array.Resize(ref positions, conditions[0].countNeeded);
@@ -60,30 +61,84 @@ public class DroppingZone : MonoBehaviour
         }
         else
         {
-            LoadConditions();
+            
         }
-		//StartCoroutine(WaitForComplete());
-		CheckForDone();
+        
+        //StartCoroutine(WaitForComplete());
+        CheckForDone();
 		//if(progressbar != null)
 		//RefreshProgressbar(0, 1);
     }
 
     void LoadConditions()
     {
-        foreach (UpgradeCondition c in conditions)
+        //foreach (UpgradeCondition c in conditions)
+        //   {
+        //      c.count = PlayerPrefs.GetInt(transform.position.sqrMagnitude + c.name + "count");
+        //  }
+
+        List<ItemType> itemTypes = GetUsedItemtypes();
+        for (int i = 0; i < itemTypes.Count; i++)
         {
-            c.count = PlayerPrefs.GetInt(transform.position.magnitude + c.name + "count");
+            int amountToAdd = PlayerPrefs.GetInt(transform.position.sqrMagnitude + itemTypes[i].ToString() + "count");
+            List<UpgradeCondition> conditionsOfType = conditions.FindAll(c => c.itemType == itemTypes[i]);
+            foreach(UpgradeCondition u in conditionsOfType)
+			{
+                u.count += ClampAndRemove(ref amountToAdd, 0, u.countNeeded);
+                if (amountToAdd == 0)
+                    break;
+			}
         }
+
+
     }
+
+    int ClampAndRemove(ref int value, int min, int max)
+	{
+        int output = Mathf.Clamp(value, min, max);
+        value -= output;
+        return output;
+	}
 
     public void SaveConditions()
     {
-        foreach (UpgradeCondition c in conditions)
-        {
-            PlayerPrefs.SetInt(transform.position.magnitude + c.name + "count", c.count);
-        }
+        List<ItemType> itemTypes = GetUsedItemtypes();
+        for(int i = 0; i < itemTypes.Count; i++)
+		{
+            PlayerPrefs.SetInt(transform.position.sqrMagnitude + itemTypes[i].ToString() + "count", GetAmountOfItemType(itemTypes[i])); 
+		}
+
+
+    //    foreach (UpgradeCondition c in conditions)
+    //    {
+    //        PlayerPrefs.SetInt(transform.position.sqrMagnitude + c.name + "count", c.count);
+     //   }
         //CheckForDone();
     }
+
+    List<ItemType> GetUsedItemtypes()
+	{
+        List<ItemType> types = new List<ItemType>();
+        for (int i = 0; i < conditions.Count; i++)
+        {
+            if (!types.Contains(conditions[i].itemType))
+			{
+                types.Add(conditions[i].itemType);
+			}
+		}
+        return types;
+	}
+
+    int GetAmountOfItemType(ItemType itemType)
+	{
+        int output = 0;
+        List<UpgradeCondition> conditionsToGet = conditions.FindAll(c => c.itemType == itemType);
+        for(int i = 0; i < conditionsToGet.Count; i++)
+		{
+            output += conditionsToGet[i].count;
+		}
+        return output;
+	}
     private void Update()
     {
         if(debug)

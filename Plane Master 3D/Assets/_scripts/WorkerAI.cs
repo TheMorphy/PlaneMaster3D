@@ -87,6 +87,8 @@ public class WorkerAI : MonoBehaviour
 	string savingKey;
 	[Space(10)]
 
+	public RepairStation repairStation;
+
 	[SerializeField]
     public Backpack backpack;
     [SerializeField]
@@ -136,9 +138,10 @@ public class WorkerAI : MonoBehaviour
 	Outline workersOutline;
 	Coroutine outline;
 
-    void Awake()
+	UpgradeCondition currentCondition;
+
+    void Start()
     {
-		
         agent = GetComponent<NavMeshAgent>();
         switch (task)
         {
@@ -151,6 +154,7 @@ public class WorkerAI : MonoBehaviour
 				QuestSystem.instance.AddProgress("Hire a scientist", 1);
 				break;
         }
+		
 		//speed.savingKeyPrefix = savingKey;
 		//storage.savingKeyPrefix = savingKey;
 
@@ -184,9 +188,9 @@ public class WorkerAI : MonoBehaviour
 	{
 		if(LevelSystem.instance.playerBackpack.TryPay(hireCost, transform.position))
 		{
-			PlayerPrefs.SetInt(savingKey, 1);
+			//PlayerPrefs.SetInt(savingKey, 1);
 			//LevelSystem.instance.CloseHiredUI();
-			isHired = true;
+			//isHired = true;
 		}
 	}
 
@@ -292,8 +296,48 @@ public class WorkerAI : MonoBehaviour
     private void FixedUpdate()
     {
         isMoving = agent.remainingDistance > agent.stoppingDistance;
+		if(task == TaskType.Courier)
+		CheckForNeededResources();
 
-    }
+	}
+
+	public static int GetIndexFromItemtype(ItemType itemType)
+	{
+		return LevelSystem.instance.itemPrefabs.FindIndex(i => i.GetComponent<Item>().itemType == itemType);
+	}
+
+	void CheckForNeededResources()
+	{
+		List<UpgradeCondition> conditions = repairStation.GetComponent<DroppingZone>().conditions;
+		for(int i = 0; i < conditions.Count; i++)
+		{
+			if (conditions[i].count < conditions[i].countNeeded)
+			{
+				print(LevelSystem.instance.stashZones[GetIndexFromItemtype(conditions[i].itemType)]);
+				if(LevelSystem.instance.stashZones[GetIndexFromItemtype(conditions[i].itemType)].currentStashCount > 0)
+				{
+					print("yep, successfull");
+					itemToCarry = conditions[i].itemType;
+					getItemPos = LevelSystem.instance.itemGrabSpots[LevelSystem.instance.itemPrefabs.FindIndex(p => p.GetComponent<Item>().itemType == conditions[i].itemType)];
+					currentCondition = conditions[i];
+					return;
+				}
+			}
+		}
+		for (int i = 0; i < conditions.Count; i++)
+		{
+			if (conditions[i].count < conditions[i].countNeeded)
+			{
+				
+				itemToCarry = conditions[i].itemType;
+				getItemPos = LevelSystem.instance.itemGrabSpots[LevelSystem.instance.itemPrefabs.FindIndex(p => p.GetComponent<Item>().itemType == conditions[i].itemType)];
+				currentCondition = conditions[i];
+				return;
+				
+			}
+		}
+
+	}
 
     IEnumerator ScientistWorker()
     {
@@ -318,6 +362,7 @@ public class WorkerAI : MonoBehaviour
 		yield return new WaitWhile(() => getItemPos == null);
         while(true)
         {
+			CheckForNeededResources();
             if (isMoving)
             {
                 stayTimer = stayTime;
@@ -326,14 +371,14 @@ public class WorkerAI : MonoBehaviour
             {
                 stayTimer -= 0.5f;
             }
-            if (backpack.itemStacks.Count > 0 && stayTimer <= 0)
+            if (stayTimer <= 0 && backpack.itemStacks.Find(i => i.itemType == itemToCarry) != null)
             {
                 agent.SetDestination(itemDestinationPos.position);
             }
-            else if (backpack.itemStacks.Count == 0 && stayTimer <= 0)
+            else if (backpack.itemStacks.Find(i => i.itemType == itemToCarry) == null)
             {
                 agent.SetDestination(getItemPos.position);
-				yield return new WaitUntil(() => backpack.itemStacks.Count > 0 && backpack.itemStacks[0].items.Count == backpack.stackSize);
+				//yield return new WaitUntil(() => backpack.itemStacks.Count > 0 && backpack.itemStacks[0].items.Count == backpack.stackSize);
             }
             yield return new WaitForSeconds(0.5f);
         }

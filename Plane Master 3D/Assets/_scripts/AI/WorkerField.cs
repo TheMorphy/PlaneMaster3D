@@ -59,6 +59,11 @@ public class WorkerField : MonoBehaviour
 	{
         SetBought(true);
         workerAI = hireZone.SpawnNewWorker();
+		workerAI.backpack.savingKey = hireZone.savingKey + hireZone.WorkerFieldIndex(this);
+
+		hireZone.SetTask(this);
+
+		workerAI.repairStation = hireZone.savingKey == "Box01" ? LevelSystem.instance.repairStations[hireZone.WorkerFieldIndex(this)] : LevelSystem.instance.repairStations[hireZone.WorkerFieldIndex(this) + 3];
 		workerAI.level = 1;
 		hireZone.SaveWorkers();
 		hireZone.ReloadStats();

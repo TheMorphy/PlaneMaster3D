@@ -19,6 +19,7 @@ public class ItemStack
 }
 public class Backpack : MonoBehaviour
 {
+	public string savingKey;
     [SerializeField]
     public int backpackSize = 50;
     [SerializeField]
@@ -74,7 +75,8 @@ public class Backpack : MonoBehaviour
 					{
 						stack.text.text = count.ToString();
 
-						stack.text.transform.SetParent(stack.items[stack.items.Count - 1].transform, false);
+						stack.text.transform.parent = itemParent;
+						stack.text.transform.localPosition = stack.items[stack.items.Count - 1].destination;
 						stack.text.enabled = true;
 						stack.text.GetComponent<LookAtCamera>().enabled = true;
 					}
@@ -86,20 +88,23 @@ public class Backpack : MonoBehaviour
 			}
 			else
 			{
-				
-				if (stack != null)
-				{
+				if (UIItems[u].text != null)
+					if (stack != null)
+					{
 
-					UIItems[u].text.transform.parent.gameObject.SetActive(true);
-					UIItems[u].text.text = stack.items.Count.ToString();
-					stack.text.text = stack.items.Count.ToString();
-					stack.text.transform.SetParent(stack.items[stack.items.Count - 1].transform, false);
-				}
-				else
-				{
-					if(UIItems[u].text.transform.parent != null)
-					UIItems[u].text.transform.parent.gameObject.SetActive(false);
-				}
+						UIItems[u].text.transform.parent.gameObject.SetActive(true);
+						UIItems[u].text.text = stack.items.Count.ToString();
+						stack.text.text = stack.items.Count.ToString();
+						//stack.text.transform.SetParent(stack.items[stack.items.Count - 1].transform, false);
+						stack.text.transform.parent = itemParent;
+						stack.text.transform.localPosition = stack.items[stack.items.Count - 1].destination;
+					}
+					else
+					{
+					
+						if(UIItems[u].text.transform.parent != null)
+						UIItems[u].text.transform.parent.gameObject.SetActive(false);
+					}
 			}
 			
 		}
@@ -108,14 +113,103 @@ public class Backpack : MonoBehaviour
     }
     
 
-    //private variables
-    float dropTime;
+	void SaveBackpack()
+	{
+		
+		string saveString = "";
+		foreach(GameObject g in LevelSystem.instance.itemPrefabs)
+		{
+			ItemStack stack = itemStacks.Find(i => i.itemType == g.GetComponent<Item>().itemType);
+			if (stack != null)
+			{
+				if (stack.itemType == ItemType.Money)
+				{
+					int moneyAmount = 0;
+					for (int i = 0; i < stack.items.Count; i++)
+					{
+						moneyAmount += stack.items[i].amount;
+					}
+					saveString += moneyAmount + ".";
+				}
+				else
+					saveString += (stack != null ? stack.items.Count : 0) + ".";
+			}
+			else
+				saveString += 0 + ".";
+			
+		}
+
+
+		PlayerPrefs.SetString(savingKey, saveString);
+		print("Saving String: " + saveString);
+	}
+
+	void LoadBackpack()
+	{
+		
+		string saveString = PlayerPrefs.GetString(savingKey);
+		print("Loaded string: " + saveString);
+		int i = 0;
+		string[] s = saveString.Split('.');
+		foreach(GameObject g in LevelSystem.instance.itemPrefabs)
+		{
+			if(i == 0)
+			{
+				int moneyAmount = System.Convert.ToInt32(i < s.Length ? s[i] == "" ? "0" : s[i] : "0");
+				while(moneyAmount > 0)
+				{
+					Item moneyToAdd = LevelSystem.SpawnMoneyAtPosition(ref moneyAmount, itemParent.position);
+					moneyToAdd.transform.parent = itemParent;
+					moneyToAdd.pickedUp = true;
+					tryAddItem(moneyToAdd);
+
+				}
+			}
+			else
+			{
+				ItemType type = g.GetComponent<Item>().itemType;
+				int amount = System.Convert.ToInt32(i < s.Length ? s[i] == "" ? "0" : s[i] : "0");
+				if (amount > 0)
+				{
+
+					for (int a = 0; a < amount; a++)
+					{
+						Item addedItem = Instantiate(LevelSystem.instance.itemPrefabs[i], itemParent.position, itemParent.rotation).GetComponent<Item>();
+						addedItem.transform.parent = itemParent;
+						addedItem.pickedUp = true;
+						tryAddItem(addedItem);
+					}
+
+				}
+			}
+			
+			i++;
+		}
+	}
+
+	private void OnApplicationPause(bool pause)
+	{
+		if(pause)
+		SaveBackpack();
+	}
+
+	private void OnApplicationQuit()
+	{
+		SaveBackpack();
+	}
+
+	//private variables
+	float dropTime;
     // Start is called before the first frame update
     void Start()
     {
 		//StartCoroutine(ItemHandler());
 		SoundSystem.instance.sounds.Find(sound => sound.name == "ItemSounds").sources.Add(itemSoundSource);
+		if (player != null)
+			savingKey = "PlayerBackpack";
+		LoadBackpack();
 		RefreshItemUI();
+		
 	}
 
     private void OnEnable()
@@ -146,6 +240,7 @@ public class Backpack : MonoBehaviour
 					itemStacks[s].items.Add(item);
 					added = true;
 					CheckForChangableMoney();
+					SaveBackpack();
 				}
 			}
 		}

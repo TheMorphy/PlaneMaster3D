@@ -51,10 +51,16 @@ public class RepairStation : MonoBehaviour
 	[SerializeField]
 	bool debug = false;
 	bool isPlayerInTrigger;
+	private void Awake()
+	{
+		dz = GetComponent<DroppingZone>();
+
+		LoadAirCraft();
+
+	}
 	private void Start()
 	{
 		print("start");
-		dz = GetComponent<DroppingZone>();
 		anim = aircraftHolder.GetComponent<Animator>();
 		if(PlayerPrefs.GetInt(name + "r1") == PlayerPrefs.GetInt(name + "r2"))
 		{
@@ -65,7 +71,6 @@ public class RepairStation : MonoBehaviour
 			print("FirstLoadRepair");
 		}
 		
-		LoadAirCraft();
 		if(overrideItemDestination != null)
 			for(int i = 0; i < aircrafts.Count; i++)
 				for(int b = 0; b < aircrafts[i].Breakables.Count; b++)
