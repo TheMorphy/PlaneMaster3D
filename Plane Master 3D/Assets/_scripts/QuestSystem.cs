@@ -85,20 +85,15 @@ public class QuestSystem : MonoBehaviour
         for(int i = 0; i < quests.Count; i++)
         {
             quests[i].progress = PlayerPrefs.GetInt(quests[i].questName);
-            if(quests[i].progress >= quests[i].maxProgess)
+            if (quests[i].progress >= quests[i].maxProgess)
             {
                 quests[i].done = true;
-                
-                int value = PlayerPrefs.GetInt(quests[i].questName + "reward");
-                if(value == 0)
-                {
-                    //rewardButton.gameObject.SetActive(true);
-					if(currentQuest != null)
-                    CollectReward();
-                    break;
-                }
+
+
                 questLevel = i + 1;
             }
+            else
+                break;
         }
         currentQuest = quests[questLevel];
         UpdateQuestUI();
