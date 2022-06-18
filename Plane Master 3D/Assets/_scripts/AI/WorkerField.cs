@@ -7,30 +7,31 @@ using TMPro;
 
 public class WorkerField : MonoBehaviour
 {
-    public WorkerAI workerAI;
+	public WorkerAI workerAI;
+
+	[Space(10)]
+	[Header("If is the buy button:")]
     [SerializeField]
     List<GameObject> disableOnBought = new List<GameObject>();
     [SerializeField]
     List<GameObject> enableWhenBought = new List<GameObject>();
-
     bool bought;
-
     int price;
 	[SerializeField]
 	TextMeshProUGUI priceText;
     public WorkersHireZone hireZone;
+	[Space(10)]
+	[SerializeField] GameObject[] upgradeButtonObjects;
 
 	[Space(10)]
-	[Header("If is the buy button:")]
-	[SerializeField] GameObject[] upgradeButtonObjects;
-	[Space(10)]
 	[Header ("If is an upgrade button:")]
-	[SerializeField] bool isUpgradeButton;
+	[SerializeField] bool isUpgradeButton, isSpeedButton;
 	[SerializeField] TextMeshProUGUI levelText;
 	int speedLevel, backpackLevel;
 	int maxSpeedLevel, maxBackpackLevel;
+	int totalUpgrades;
 
-	WorkerField workerFieldScript;
+	[SerializeField] WorkerField[] workerFieldScripts;
 
 	private void Start()
 	{
@@ -39,14 +40,19 @@ public class WorkerField : MonoBehaviour
 			bought = true;
 			maxBackpackLevel = 5;
 			maxSpeedLevel = 5;
+			ChangeLevelUI();
 		}
 
-		for (int i = 0; i < upgradeButtonObjects.Length; i++)
+		//totalUpgrades = upgradeButtonObjects.Length;
+		//workerFieldScripts = new WorkerField[totalUpgrades];
+
+		for(int i = 0; i < workerFieldScripts.Length; i++)
 		{
-			workerFieldScript = upgradeButtonObjects[i].GetComponent<WorkerField>();
+			workerFieldScripts[i] = upgradeButtonObjects[i].GetComponent<WorkerField>();
 		}
 	}
 
+	//Not Using For Now
 	public void SetPrice(int newPrice)
 	{
 		price = newPrice;
@@ -80,26 +86,53 @@ public class WorkerField : MonoBehaviour
 		}
 	}
 
+	void ChangeLevelUI()
+	{
+		if (workerAI != null)
+		{
+			if (isSpeedButton)
+			{
+				levelText.text = "Lvl " + speedLevel;
+			}
+			else
+				levelText.text = "Lvl " + backpackLevel;
+		}
+	}
+
 	// Storage Button
-	void StorageButtonClick()
+	public void SpeedButtonClick()
 	{
 		if(speedLevel < maxSpeedLevel)
 		{
 			if (LevelSystem.instance.playerBackpack.TryPay(price, hireZone.transform.position))
 			{
+				workerAI.SpeedUpgrade();
 				Upgrade();
+				speedLevel++;
+				ChangeLevelUI();
+				if (speedLevel >= maxSpeedLevel)
+				{
+					gameObject.GetComponent<Button>().interactable = false;
+				}
 			}
 		}
 	}
 
 	// Storage Button
-	void SpeedButtonClick()
+	public void StorageButtonClick()
 	{
 		if (backpackLevel < maxBackpackLevel)
 		{
 			if (LevelSystem.instance.playerBackpack.TryPay(price, hireZone.transform.position))
 			{
+				workerAI.StorageUpgrade();
 				Upgrade();
+				backpackLevel++;
+				ChangeLevelUI();
+				if (backpackLevel >= maxBackpackLevel)
+				{
+					gameObject.GetComponent<Button>().interactable = false;
+				}
 			}
 		}
 	}
@@ -108,7 +141,11 @@ public class WorkerField : MonoBehaviour
 	{
         SetBought(true);
         workerAI = hireZone.SpawnNewWorker();
-		workerFieldScript.workerAI = workerAI;
+
+		for(int i = 0; i < workerFieldScripts.Length; i++)
+		{
+			workerFieldScripts[i].workerAI = workerAI;
+		}
 
 		workerAI.backpack.savingKey = hireZone.savingKey + hireZone.WorkerFieldIndex(this);
 

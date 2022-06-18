@@ -563,7 +563,9 @@ MonoBehaviour:
   - {fileID: 3806821814701601906}
   - {fileID: 6143090782897591542}
   isUpgradeButton: 0
+  isSpeedButton: 0
   levelText: {fileID: 0}
+  workerFieldScripts: []
 --- !u!1 &3806821813463707172
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,7 +884,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3806821814701601908}
         m_TargetAssemblyTypeName: WorkerField, Assembly-CSharp
-        m_MethodName: ButtonClick
+        m_MethodName: SpeedButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -917,7 +919,9 @@ MonoBehaviour:
   hireZone: {fileID: 0}
   upgradeButtonObjects: []
   isUpgradeButton: 1
+  isSpeedButton: 1
   levelText: {fileID: 3946850528540023926}
+  workerFieldScripts: []
 --- !u!1 &3806821815043968606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,7 +1183,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7333566846547179329}
         m_TargetAssemblyTypeName: WorkerField, Assembly-CSharp
-        m_MethodName: ButtonClick
+        m_MethodName: StorageButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1233,7 +1237,9 @@ MonoBehaviour:
   hireZone: {fileID: 0}
   upgradeButtonObjects: []
   isUpgradeButton: 1
+  isSpeedButton: 0
   levelText: {fileID: 6143090784931107440}
+  workerFieldScripts: []
 --- !u!1 &6143090782901469360
 GameObject:
   m_ObjectHideFlags: 0

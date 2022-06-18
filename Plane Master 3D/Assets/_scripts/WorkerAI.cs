@@ -296,8 +296,8 @@ public class WorkerAI : MonoBehaviour
     private void FixedUpdate()
     {
         isMoving = agent.remainingDistance > agent.stoppingDistance;
-		if(task == TaskType.Courier)
-		CheckForNeededResources();
+		//if(task == TaskType.Courier)
+		//CheckForNeededResources();
 
 	}
 
