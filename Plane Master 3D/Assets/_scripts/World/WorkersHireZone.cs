@@ -187,11 +187,12 @@ public class WorkersHireZone : MonoBehaviour
 					fieldToLoad.workerAI = SpawnNewWorker();
 					fieldToLoad.workerAI.backpack.savingKey = savingKey + i;
 					fieldToLoad.workerAI.repairStation = savingKey == "Box01" ? LevelSystem.instance.repairStations[i] : LevelSystem.instance.repairStations[i + 3];
-					
+					/*
 					fieldToLoad.workerAI.itemToCarry = tasks[(int)Mathf.Repeat(i, tasks.Count)].itemToCarry;
 					fieldToLoad.workerAI.itemDestinationPos = tasks[(int)Mathf.Repeat(i, tasks.Count)].bringPos;
-					fieldToLoad.workerAI.getItemPos = tasks[(int)Mathf.Repeat(i, tasks.Count)].getPos;
-					fieldToLoad.workerAI.level = loadedLevel;
+					fieldToLoad.workerAI.getItemPos = tasks[(int)Mathf.Repeat(i, tasks.Count)].getPos; */
+					SetTask(fieldToLoad);
+					fieldToLoad.workerAI.level = loadedLevel; 
 
 					fieldToLoad.workerAI.agent.speed = speedStandard * Mathf.Pow(1 + speedIncrement, fieldToLoad.workerAI.level - 1);
 					fieldToLoad.workerAI.backpack.stackSize = storageStandard + storageIncrement * (loadedLevel - 1);
