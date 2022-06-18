@@ -160,8 +160,7 @@ public class WorkersHireZone : MonoBehaviour
 		fieldToAdd.hireZone = this;
 		workerFields.Add(fieldToAdd);
 
-		ReloadStats();
-		
+		//ReloadStats();
 	}
 
 	void LoadWorkers()

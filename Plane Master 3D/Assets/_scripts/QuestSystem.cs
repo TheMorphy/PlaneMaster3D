@@ -32,7 +32,11 @@ public class QuestSystem : MonoBehaviour
     CinemachineVirtualCamera objectiveCamera;
     Coroutine objectiveCamCoroutine;
 
-    public void GoToObjectiveCamera()
+	//David Change
+	[SerializeField] GameObject floatingJoystickObject, goToObjectiveButton;
+	Player playerScript;
+
+	public void GoToObjectiveCamera()
 	{
         if(currentQuest.lookAtTransform != null)
 		{
@@ -49,7 +53,10 @@ public class QuestSystem : MonoBehaviour
 	{
         LevelSystem.instance.ChangeCamera(4, 10);
         Coroutine breakCoroutine = StartCoroutine(WaitForBreakCam());
-        yield return new WaitForSeconds(3.3f);
+		floatingJoystickObject.SetActive(false);
+		goToObjectiveButton.SetActive(false);
+		playerScript.NumberToChangeSpeed = 0;
+		yield return new WaitForSeconds(3.3f);
         StopCoroutine(breakCoroutine);
         LevelSystem.instance.ChangeCamera(4, -1);
 
@@ -58,17 +65,21 @@ public class QuestSystem : MonoBehaviour
 
     IEnumerator WaitForBreakCam()
 	{
-		yield return new WaitWhile(() => Input.touchCount > 0);
-        yield return new WaitUntil(() => Input.touchCount > 0 || Input.anyKeyDown);
-        StopCoroutine(objectiveCamCoroutine);
+		//yield return new WaitWhile(() => Input.touchCount > 0);
+		//yield return new WaitUntil(() => Input.touchCount > 0 || Input.anyKeyDown);
+		yield return new WaitForSeconds(3.3f);
+		floatingJoystickObject.SetActive(true);
+		goToObjectiveButton.SetActive(true);
+		playerScript.NumberToChangeSpeed = 1;
+		StopCoroutine(objectiveCamCoroutine);
         LevelSystem.instance.ChangeCamera(4, -1);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
-        progressBarStartWidth = progressBar.sizeDelta.x;
+		playerScript = FindObjectOfType<Player>();
+		progressBarStartWidth = progressBar.sizeDelta.x;
         LoadQuests();
     }
 

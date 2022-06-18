@@ -13,14 +13,39 @@ public class WorkerField : MonoBehaviour
     [SerializeField]
     List<GameObject> enableWhenBought = new List<GameObject>();
 
-    
-
     bool bought;
 
     int price;
 	[SerializeField]
-	TextMeshProUGUI priceText, levelText;
+	TextMeshProUGUI priceText;
     public WorkersHireZone hireZone;
+
+	[Space(10)]
+	[Header("If is the buy button:")]
+	[SerializeField] GameObject[] upgradeButtonObjects;
+	[Space(10)]
+	[Header ("If is an upgrade button:")]
+	[SerializeField] bool isUpgradeButton;
+	[SerializeField] TextMeshProUGUI levelText;
+	int speedLevel, backpackLevel;
+	int maxSpeedLevel, maxBackpackLevel;
+
+	WorkerField workerFieldScript;
+
+	private void Start()
+	{
+		if (isUpgradeButton)
+		{
+			bought = true;
+			maxBackpackLevel = 5;
+			maxSpeedLevel = 5;
+		}
+
+		for (int i = 0; i < upgradeButtonObjects.Length; i++)
+		{
+			workerFieldScript = upgradeButtonObjects[i].GetComponent<WorkerField>();
+		}
+	}
 
 	public void SetPrice(int newPrice)
 	{
@@ -34,31 +59,57 @@ public class WorkerField : MonoBehaviour
 				GetComponent<Button>().interactable = false;
 			}
 		}
-		
 	}
 
-    public void ButtonClick()
+    public void BuyButtonClick()
 	{
-		if (!bought || workerAI.level < hireZone.maxLevel)
+		if (!bought /*|| workerAI.level < hireZone.maxLevel*/)
 		{
 			if (LevelSystem.instance.playerBackpack.TryPay(price, hireZone.transform.position))
 			{
-				if (bought)
+				Buy();
+				/*if (bought)
 				{
 					Upgrade();
 				}
 				else
 				{
-					Buy();
-				}
+
+				}*/
 			}
 		}
 	}
 
-    void Buy()
+	// Storage Button
+	void StorageButtonClick()
+	{
+		if(speedLevel < maxSpeedLevel)
+		{
+			if (LevelSystem.instance.playerBackpack.TryPay(price, hireZone.transform.position))
+			{
+				Upgrade();
+			}
+		}
+	}
+
+	// Storage Button
+	void SpeedButtonClick()
+	{
+		if (backpackLevel < maxBackpackLevel)
+		{
+			if (LevelSystem.instance.playerBackpack.TryPay(price, hireZone.transform.position))
+			{
+				Upgrade();
+			}
+		}
+	}
+
+	void Buy()
 	{
         SetBought(true);
         workerAI = hireZone.SpawnNewWorker();
+		workerFieldScript.workerAI = workerAI;
+
 		workerAI.backpack.savingKey = hireZone.savingKey + hireZone.WorkerFieldIndex(this);
 
 		hireZone.SetTask(this);
@@ -66,16 +117,15 @@ public class WorkerField : MonoBehaviour
 		workerAI.repairStation = hireZone.savingKey == "Box01" ? LevelSystem.instance.repairStations[hireZone.WorkerFieldIndex(this)] : LevelSystem.instance.repairStations[hireZone.WorkerFieldIndex(this) + 3];
 		workerAI.level = 1;
 		hireZone.SaveWorkers();
-		hireZone.ReloadStats();
+		//hireZone.ReloadStats();
 	}
 
     void Upgrade()
 	{
-		
-		
-			workerAI.level++;
-			hireZone.SaveWorkers();
-			hireZone.ReloadStats();
+		workerAI.level++;
+		print(workerAI.level);
+		hireZone.SaveWorkers();
+		//hireZone.ReloadStats();
 		
 		
 		if(hireZone.savingKey == "Box02")

@@ -9,10 +9,9 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 {
     public float requiredHoldTime;
     public UnityEvent onLongClick;
-    [SerializeField] private Image fillImage;
+    //[SerializeField] private Image fillImage;
     [SerializeField] float speed, fuelQuantity;
     [SerializeField] Image fuelSlider;
-    [SerializeField] GameObject taskCompleted;
 	[SerializeField] GameObject taskObject;
 	[SerializeField] GameObject checkMark;
 	[SerializeField] bool isMultipleRefill;
@@ -79,7 +78,7 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     {
         pointerDown = false;
         pointerDownTimer = 0;
-        fillImage.fillAmount = pointerDownTimer / requiredHoldTime;
+        //fillImage.fillAmount = pointerDownTimer / requiredHoldTime;
     }
 
     private IEnumerator OncePlayerWins()
