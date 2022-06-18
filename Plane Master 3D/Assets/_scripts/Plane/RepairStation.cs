@@ -51,6 +51,10 @@ public class RepairStation : MonoBehaviour
 	[SerializeField]
 	bool debug = false;
 	bool isPlayerInTrigger;
+
+	//David Changes
+	[SerializeField] GameObject[] specificToolToEnable;
+
 	private void Awake()
 	{
 		dz = GetComponent<DroppingZone>();
@@ -316,6 +320,11 @@ public class RepairStation : MonoBehaviour
 			{
 				aircrafts[i].Model.SetActive(false);
 			}
+		}
+
+		if (specificToolToEnable[0] != null)
+		{
+			specificToolToEnable[0].SetActive(true);
 		}
 	}
 

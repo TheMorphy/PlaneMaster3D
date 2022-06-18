@@ -91,13 +91,19 @@ public class Player : MonoBehaviour
     Transform stableForward;
     Vector3 velocity, lookRotation;
     CharacterController controller;
-    float inputX, inputY;
-    float currentSpeed;
+	[HideInInspector]
+    public float inputX, inputY;
+	[HideInInspector]
+	public float currentSpeed;
     [HideInInspector]
     public bool isMoving;
     bool isGrounded;
     float velY;
 	public Backpack backpack;
+
+	int numberToChangeSpeed = 1;
+
+	public int NumberToChangeSpeed { get => numberToChangeSpeed; set => numberToChangeSpeed = value; }
 	#endregion
 
 
@@ -230,7 +236,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed * joistickReplyCurve.Evaluate(joistick.Direction.magnitude) , moveSmooth);
+            currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed * joistickReplyCurve.Evaluate(joistick.Direction.magnitude) , moveSmooth) * NumberToChangeSpeed;
         }
             if (Mathf.Max(Mathf.Abs(inputY), Mathf.Abs(inputX)) > 0)
             {

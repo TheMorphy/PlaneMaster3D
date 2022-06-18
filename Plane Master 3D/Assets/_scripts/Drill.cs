@@ -17,6 +17,7 @@ public class Drill : MonoBehaviour
     [SerializeField]
     Transform animParent;
     [SerializeField] Build drillBuild;
+	[SerializeField] GameObject invisibleWallBeforeDrill;
 	//[SerializeField]
 	//AudioSource soundSource;
 
@@ -51,8 +52,8 @@ public class Drill : MonoBehaviour
 
     private void Start()
     {
+		invisibleWallBeforeDrill.SetActive(false);
 
-		
 
 		string drillName = drillBuild.savingKey;
 		if (drillName == "Drill")

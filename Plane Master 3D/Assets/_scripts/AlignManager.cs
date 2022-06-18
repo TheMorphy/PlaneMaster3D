@@ -5,23 +5,20 @@ using UnityEngine.UI;
 
 public class AlignManager : MonoBehaviour
 {
-    [SerializeField] GameObject objectToRotate, congrats;
+	[SerializeField] GameObject objectToRotate;
     [SerializeField] Slider slider;
     [SerializeField] Image middleLine, objColor;
-    [SerializeField] float speed, sliderPosition, publicValue;
 
-    [SerializeField] float timer;
-
-	[SerializeField] GameObject taskObject;
+    float timer;
 
     private float previousValue;
 
-    private void OnEnable()
+    private void Start()
     {
         slider.onValueChanged.AddListener(OnSliderChanged);
 
         previousValue = slider.value;
-    }
+	}
 
     private void Update()
     {
@@ -35,10 +32,10 @@ public class AlignManager : MonoBehaviour
             timer = timer + Time.deltaTime;
             if (timer >= 1f)
             {
-                timer = 1f;
+                timer = 0f;
 				// PLAYER WINS HERE
-				taskObject.SetActive(false);
-                //congrats.SetActive(true);
+				slider.value = 0;
+				gameObject.SetActive(false);
             }
         }
         else
