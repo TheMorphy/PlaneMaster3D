@@ -24,14 +24,15 @@ public class WorkerField : MonoBehaviour
 	[SerializeField] GameObject[] upgradeButtonObjects;
 
 	[Space(10)]
-	[Header ("If is an upgrade button:")]
+	[Header("If is an upgrade button:")]
+	[SerializeField] TextMeshProUGUI info;
 	[SerializeField] bool isUpgradeButton, isSpeedButton;
 	[SerializeField] TextMeshProUGUI levelText;
-	int speedLevel, backpackLevel;
+	public int speedLevel, backpackLevel;
 	int maxSpeedLevel, maxBackpackLevel;
 	int totalUpgrades;
 
-	[SerializeField] WorkerField[] workerFieldScripts;
+	[SerializeField] public WorkerField[] workerFieldScripts;
 
 	private void Start()
 	{

@@ -139,12 +139,14 @@ public class WorkersHireZone : MonoBehaviour
 		for(int i = 0; i < workerFields.Count; i++)
 		{
 			WorkerField current = workerFields[i];
-			current.SetPrice(Mathf.CeilToInt(current.workerAI == null ? workerStats[i].costHire : workerStats[i].costStandard + ((current.workerAI.level - 1) * workerStats[i].costIncrement)));
+			current.workerFieldScripts[0].SetPrice(Mathf.CeilToInt(current.workerAI == null ? workerStats[i].costHire : workerStats[i].costStandard + ((current.backpackLevel - 1) * workerStats[i].costIncrement)));
+			current.workerFieldScripts[1].SetPrice(Mathf.CeilToInt(current.workerAI == null ? workerStats[i].costHire : workerStats[i].costStandard + ((current.speedLevel - 1) * workerStats[i].costIncrement)));
+			//current.SetPrice(Mathf.CeilToInt(current.workerAI == null ? workerStats[i].costHire : workerStats[i].costStandard + ((current.workerAI.level - 1) * workerStats[i].costIncrement)));
 			current.SetBought(current.workerAI != null);
 			if(current.workerAI != null)
 			{
-				current.workerAI.agent.speed = speedStandard * Mathf.Pow(1 + speedIncrement, current.workerAI.level - 1);
-				current.workerAI.backpack.stackSize = storageStandard + (current.workerAI.level - 1) * storageIncrement;
+				current.workerAI.agent.speed = speedStandard * Mathf.Pow(1 + speedIncrement, current.speedLevel - 1);
+				current.workerAI.backpack.stackSize = storageStandard + (current.backpackLevel - 1) * storageIncrement;
 				current.workerAI.itemToCarry = tasks[(int)Mathf.Repeat(i, tasks.Count - 1)].itemToCarry;
 				current.workerAI.itemDestinationPos = tasks[(int)Mathf.Repeat(i, tasks.Count - 1)].bringPos;
 				current.workerAI.getItemPos = tasks[(int)Mathf.Repeat(i, tasks.Count - 1)].getPos;
@@ -165,6 +167,7 @@ public class WorkersHireZone : MonoBehaviour
 
 	void LoadWorkers()
 	{
+		
 		string savedString = PlayerPrefs.GetString(savingKey + "workers");
 		string[] saves = savedString.Split('.');
 		for(int i = 0; i < saves.Length; i++)
@@ -178,12 +181,18 @@ public class WorkersHireZone : MonoBehaviour
 					fieldToLoad = workerFields[i];  //Instantiate(standardWorkerField, workersMenu).GetComponent<WorkerField>();
 				else
 					break;
-				int loadedLevel = System.Convert.ToInt32(saves[i]);
-				bool bought = loadedLevel > 0;
+				string[] levels = saves[i].Split('|');
+				int loadedStorageLevel = System.Convert.ToInt32(levels[0]);
+				int loadedSpeedLevel = System.Convert.ToInt32(levels[1]);
+				//int loadedLevel = System.Convert.ToInt32(saves[i]);
+				bool bought = Mathf.Max(loadedSpeedLevel, loadedStorageLevel) > 0;
 				print("bought" + bought);
 				if (bought)
 				{
-					fieldToLoad.workerAI = SpawnNewWorker();
+					WorkerAI loadedWorker = SpawnNewWorker();
+					fieldToLoad.workerAI = loadedWorker;
+					fieldToLoad.workerFieldScripts[0].workerAI = loadedWorker;
+					fieldToLoad.workerFieldScripts[1].workerAI = loadedWorker;
 					fieldToLoad.workerAI.backpack.savingKey = savingKey + i;
 					fieldToLoad.workerAI.repairStation = savingKey == "Box01" ? LevelSystem.instance.repairStations[i] : LevelSystem.instance.repairStations[i + 3];
 					/*
@@ -191,13 +200,18 @@ public class WorkersHireZone : MonoBehaviour
 					fieldToLoad.workerAI.itemDestinationPos = tasks[(int)Mathf.Repeat(i, tasks.Count)].bringPos;
 					fieldToLoad.workerAI.getItemPos = tasks[(int)Mathf.Repeat(i, tasks.Count)].getPos; */
 					SetTask(fieldToLoad);
-					fieldToLoad.workerAI.level = loadedLevel; 
+					fieldToLoad.workerFieldScripts[0].backpackLevel = loadedStorageLevel;
 
-					fieldToLoad.workerAI.agent.speed = speedStandard * Mathf.Pow(1 + speedIncrement, fieldToLoad.workerAI.level - 1);
-					fieldToLoad.workerAI.backpack.stackSize = storageStandard + storageIncrement * (loadedLevel - 1);
+					fieldToLoad.workerFieldScripts[1].speedLevel = loadedSpeedLevel;
+					
+
+					fieldToLoad.workerAI.agent.speed = speedStandard * Mathf.Pow(1 + speedIncrement, loadedSpeedLevel - 1);
+					fieldToLoad.workerAI.backpack.stackSize = storageStandard + storageIncrement * (loadedStorageLevel - 1);
 				}
 
 				fieldToLoad.hireZone = this;
+				fieldToLoad.workerFieldScripts[0].SetPrice(Mathf.CeilToInt(fieldToLoad.workerAI == null ? workerStats[i].costHire : workerStats[i].costStandard + ((fieldToLoad.workerFieldScripts[0].backpackLevel - 1) * workerStats[i].costIncrement)));
+
 				fieldToLoad.SetBought(bought);
 				fieldToLoad.SetPrice(Mathf.CeilToInt(fieldToLoad.workerAI == null ? workerStats[i].costHire : workerStats[i].costStandard + ((fieldToLoad.workerAI.level - 1) * workerStats[i].costIncrement)));
 				//workerFields.Add(fieldToLoad);
@@ -213,7 +227,8 @@ public class WorkersHireZone : MonoBehaviour
 		for(int i = 0; i < workerFields.Count; i++)
 		{
 			
-			saveString += (workerFields[i].workerAI != null ? workerFields[i].workerAI.level : 0).ToString() + ".";
+			saveString += (workerFields[i].workerAI != null ? workerFields[i].workerFieldScripts[0].backpackLevel : 0).ToString() + "|";
+			saveString += (workerFields[i].workerAI != null ? workerFields[i].workerFieldScripts[1].speedLevel : 0).ToString() + ".";
 		}
 		PlayerPrefs.SetString(savingKey + "workers", saveString);
 		print(saveString);
