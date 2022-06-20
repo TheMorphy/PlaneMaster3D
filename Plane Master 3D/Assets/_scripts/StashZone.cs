@@ -52,9 +52,11 @@ public class StashZone : MonoBehaviour
     }
     public void AddItem(Item item)
     {
+		if(item.pickedUp == false)
         if(items.Count < capacity)
         {
             items.Add(item);
+			
             item.transform.parent = visualStart;
             SetItemDestination(items.Count - 1);
         }
@@ -157,6 +159,7 @@ public class StashZone : MonoBehaviour
             {
                 for (int z = (int)limitations.z; z > 0; z--)
                 {
+					if(positions.Length > count)
                     positions[count] = nextPos;
                     nextPos.z += space.z;
                     count++;

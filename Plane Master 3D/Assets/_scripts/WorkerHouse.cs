@@ -18,7 +18,7 @@ public class WorkerHouse : MonoBehaviour
     void Start()
     {
         LoadWorkers();
-		QuestSystem.instance.AddProgress("Build a workers house", 1);
+		//QuestSystem.instance.AddProgress("Build a workers house", 1);
 	}
 
     // Update is called once per frame

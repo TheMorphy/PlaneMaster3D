@@ -75,7 +75,7 @@ public class Backpack : MonoBehaviour
 					{
 						stack.text.text = count.ToString();
 
-						stack.text.transform.parent = itemParent;
+						stack.text.transform.parent = stack.items[0].transform;
 						stack.text.transform.localPosition = stack.items[stack.items.Count - 1].destination;
 						stack.text.enabled = true;
 						stack.text.GetComponent<LookAtCamera>().enabled = true;
@@ -283,6 +283,7 @@ public class Backpack : MonoBehaviour
 
 	IEnumerator PayMoney(int amount, ItemStack stack, Vector3 payPos)
 	{
+		//Debug.LogError("amount: " + amount);
 		List<Item> itemsToLerp = new List<Item>();
 		for(int i = stack.items.Count - 1; i >= 0; i--)
 		{
@@ -313,6 +314,7 @@ public class Backpack : MonoBehaviour
 		}
 
 		//get change
+		
 		amount = Mathf.Abs(amount);
 		while (amount > 0)
 		{

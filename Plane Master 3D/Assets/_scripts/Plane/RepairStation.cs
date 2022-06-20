@@ -74,13 +74,19 @@ public class RepairStation : MonoBehaviour
 			//StartCoroutine(WaitForLevelUp());
 			print("FirstLoadRepair");
 		}
-		
-		if(overrideItemDestination != null)
-			for(int i = 0; i < aircrafts.Count; i++)
-				for(int b = 0; b < aircrafts[i].Breakables.Count; b++)
-					for (int c = 0; c < aircrafts[i].Breakables[b].conditions.Count; c++)
-						aircrafts[i].Breakables[b].conditions[c].itemDestination = overrideItemDestination;
+		try
+		{
+			if (overrideItemDestination != null)
+				for (int i = 0; i < aircrafts.Count; i++)
+					for (int b = 0; b < aircrafts[i].Breakables.Count; b++)
+						for (int c = 0; c < aircrafts[i].Breakables[b].conditions.Count; c++)
+							aircrafts[i].Breakables[b].conditions[c].itemDestination = overrideItemDestination;
 
+		}
+		catch
+		{
+
+		}
 
 		CheckForProgress();
 
@@ -95,9 +101,7 @@ public class RepairStation : MonoBehaviour
 	{
 		switch (name)
 		{
-			case "JetStation":
-				QuestSystem.instance.AddProgress("Buy first repair zone", 1);
-				break;
+			
 			case "Boeing555":
 				QuestSystem.instance.AddProgress("Buy second repair zone", 1);
 				break;

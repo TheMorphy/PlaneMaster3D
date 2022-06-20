@@ -52,6 +52,7 @@ public class Drill : MonoBehaviour
 
     private void Start()
     {
+		if(invisibleWallBeforeDrill != null)
 		invisibleWallBeforeDrill.SetActive(false);
 
 

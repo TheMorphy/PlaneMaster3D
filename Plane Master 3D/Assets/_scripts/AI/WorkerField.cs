@@ -25,7 +25,7 @@ public class WorkerField : MonoBehaviour
 
 	[Space(10)]
 	[Header("If is an upgrade button:")]
-	[SerializeField] TextMeshProUGUI info;
+	[SerializeField] TextMeshProUGUI capacityInfo, speedInfo;
 	[SerializeField] bool isUpgradeButton, isSpeedButton;
 	[SerializeField] TextMeshProUGUI levelText;
 	public int speedLevel, backpackLevel;
@@ -41,32 +41,113 @@ public class WorkerField : MonoBehaviour
 			bought = true;
 			maxBackpackLevel = 5;
 			maxSpeedLevel = 5;
-			ChangeLevelUI();
+			//ChangeLevelUI();
 		}
 
 		//totalUpgrades = upgradeButtonObjects.Length;
 		//workerFieldScripts = new WorkerField[totalUpgrades];
 
-		for(int i = 0; i < workerFieldScripts.Length; i++)
+		/*for(int i = 0; i < workerFieldScripts.Length; i++)
 		{
 			workerFieldScripts[i] = upgradeButtonObjects[i].GetComponent<WorkerField>();
-		}
+		}*/
 	}
 
 	//Not Using For Now
-	public void SetPrice(int newPrice)
+	public void SetPrice(int newPrice, int backpackValue, float speedValue)
 	{
 		price = newPrice;
+		workerFieldScripts[0].price = newPrice;
+		workerFieldScripts[1].price = newPrice;
+
+		workerFieldScripts[0].priceText.text = price.ToString();
+		workerFieldScripts[1].priceText.text = price.ToString();
 		priceText.text = "$" + price.ToString();
+
+		totalUpgrades = backpackLevel + speedLevel;
+
+		workerFieldScripts[0].backpackLevel = backpackLevel;
+		workerFieldScripts[1].backpackLevel = backpackLevel;
+		workerFieldScripts[0].speedLevel = speedLevel;
+		workerFieldScripts[1].speedLevel = speedLevel;
+
+
+
+		workerFieldScripts[0].levelText.text = "Lvl " + backpackLevel.ToString();
+		workerFieldScripts[1].levelText.text = "Lvl " + speedLevel.ToString();
 		if(workerAI != null)
 		{
-			levelText.text = "Lvl " + workerAI.level.ToString();
-			if (workerAI.level >= 5)
+			capacityInfo.text = "Backpack: " + backpackValue;
+
+			speedInfo.text = "Speed: " + Mathf.CeilToInt((speedValue / hireZone.speedStandard) * 100) + "%";
+
+		}
+		if (backpackLevel >= 5)
+		{
+			workerFieldScripts[0].GetComponent<Button>().interactable = false;
+		}
+		if(speedLevel >= 5)
+		{
+			workerFieldScripts[1].GetComponent<Button>().interactable = false;
+		}
+
+
+		if (hireZone.savingKey == "Box02")
+		{
+			if (totalUpgrades >= 3)
 			{
-				GetComponent<Button>().interactable = false;
+				switch (hireZone.WorkerFieldIndex(this))
+				{
+					case 1:
+						QuestSystem.instance.AddProgress("Upgrade fifth worker to level 3", 1);
+
+						break;
+					case 2:
+						QuestSystem.instance.AddProgress("Upgrade sixth worker to level 3", 1);
+						break;
+				}
+
+			}
+			if (totalUpgrades >= 5)
+			{
+				switch (hireZone.WorkerFieldIndex(this))
+				{
+
+					case 0:
+						QuestSystem.instance.AddProgress("Upgrade fourth worker to level 5", 1);
+						break;
+					case 1:
+						QuestSystem.instance.AddProgress("Upgrade fifth worker to level 5", 1);
+						break;
+					case 2:
+						QuestSystem.instance.AddProgress("Upgrade sixth worker to level 5", 1);
+						break;
+				}
 			}
 		}
+		else
+		{
+			if (totalUpgrades >= 5)
+			{
+				switch (hireZone.WorkerFieldIndex(this))
+				{
+					case 0:
+						QuestSystem.instance.AddProgress("Upgrade first worker to level 5", 1);
+						break;
+					case 1:
+						QuestSystem.instance.AddProgress("Upgrade second worker to level 5", 1);
+						break;
+					case 2:
+						QuestSystem.instance.AddProgress("Upgrade third worker to level 5", 1);
+						break;
+
+				}
+			}
+		}
+
 	}
+
+	
 
     public void BuyButtonClick()
 	{
@@ -107,14 +188,20 @@ public class WorkerField : MonoBehaviour
 		{
 			if (LevelSystem.instance.playerBackpack.TryPay(price, hireZone.transform.position))
 			{
-				workerAI.SpeedUpgrade();
-				Upgrade();
+				//workerAI.SpeedUpgrade();
+				
 				speedLevel++;
-				ChangeLevelUI();
+				for (int i = 0; i < workerFieldScripts.Length; i++)
+				{
+					workerFieldScripts[i].speedLevel = speedLevel;
+
+				}
+				//ChangeLevelUI();
 				if (speedLevel >= maxSpeedLevel)
 				{
 					gameObject.GetComponent<Button>().interactable = false;
 				}
+				Upgrade();
 			}
 		}
 	}
@@ -126,26 +213,38 @@ public class WorkerField : MonoBehaviour
 		{
 			if (LevelSystem.instance.playerBackpack.TryPay(price, hireZone.transform.position))
 			{
-				workerAI.StorageUpgrade();
-				Upgrade();
+				//workerAI.StorageUpgrade();
+				
 				backpackLevel++;
-				ChangeLevelUI();
+				for(int i = 0; i < workerFieldScripts.Length; i++)
+				{
+					workerFieldScripts[i].backpackLevel = backpackLevel;
+					
+				}
+				//ChangeLevelUI();
 				if (backpackLevel >= maxBackpackLevel)
 				{
 					gameObject.GetComponent<Button>().interactable = false;
 				}
+				Upgrade();
+				hireZone.SaveWorkers();
 			}
 		}
 	}
 
-	void Buy()
+	public void Buy()
 	{
         SetBought(true);
         workerAI = hireZone.SpawnNewWorker();
 
-		for(int i = 0; i < workerFieldScripts.Length; i++)
+		backpackLevel = 1;
+		speedLevel = 1;
+
+		for (int i = 0; i < workerFieldScripts.Length; i++)
 		{
 			workerFieldScripts[i].workerAI = workerAI;
+			workerFieldScripts[i].backpackLevel = 1;
+			workerFieldScripts[i].speedLevel = 1;
 		}
 
 		workerAI.backpack.savingKey = hireZone.savingKey + hireZone.WorkerFieldIndex(this);
@@ -154,70 +253,21 @@ public class WorkerField : MonoBehaviour
 
 		workerAI.repairStation = hireZone.savingKey == "Box01" ? LevelSystem.instance.repairStations[hireZone.WorkerFieldIndex(this)] : LevelSystem.instance.repairStations[hireZone.WorkerFieldIndex(this) + 3];
 		workerAI.level = 1;
+		
 		hireZone.SaveWorkers();
-		//hireZone.ReloadStats();
+		hireZone.ReloadStats();
 	}
 
     void Upgrade()
 	{
-		workerAI.level++;
+		//workerAI.level++;
+		totalUpgrades = speedLevel + backpackLevel;
 		print(workerAI.level);
 		hireZone.SaveWorkers();
-		//hireZone.ReloadStats();
+		hireZone.ReloadStats();
 		
 		
-		if(hireZone.savingKey == "Box02")
-		{
-			if (workerAI.level >= 3)
-			{
-				switch (hireZone.WorkerFieldIndex(this))
-				{
-					case 1:
-						QuestSystem.instance.AddProgress("Upgrade fifth worker to level 3", 1);
-
-						break;
-					case 2:
-						QuestSystem.instance.AddProgress("Upgrade sixth worker to level 3", 1);
-						break;
-				}
-
-			}
-			if (workerAI.level >= 5)
-			{
-				switch (hireZone.WorkerFieldIndex(this))
-				{
-					
-					case 0:
-						QuestSystem.instance.AddProgress("Upgrade fourth worker to level 5", 1);
-						break;
-					case 1:
-						QuestSystem.instance.AddProgress("Upgrade fifth worker to level 5", 1);
-						break;
-					case 2:
-						QuestSystem.instance.AddProgress("Upgrade sixth worker to level 5", 1);
-						break;
-				}
-			}
-		}
-		else
-		{
-			if (workerAI.level >= 5)
-			{
-				switch (hireZone.WorkerFieldIndex(this))
-				{
-					case 0:
-						QuestSystem.instance.AddProgress("Upgrade first worker to level 5", 1);
-						break;
-					case 1:
-						QuestSystem.instance.AddProgress("Upgrade second worker to level 5", 1);
-						break;
-					case 2:
-						QuestSystem.instance.AddProgress("Upgrade third worker to level 5", 1);
-						break;
-					
-				}
-			}
-		}
+		
 		
 	}
 

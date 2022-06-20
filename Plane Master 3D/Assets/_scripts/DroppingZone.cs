@@ -82,6 +82,11 @@ public class DroppingZone : MonoBehaviour
         {
             int amountToAdd = PlayerPrefs.GetInt(transform.position.sqrMagnitude + itemTypes[i].ToString() + "count");
             List<UpgradeCondition> conditionsOfType = conditions.FindAll(c => c.itemType == itemTypes[i]);
+			if(showDroppedItems)
+			{
+				
+			}
+			else
             foreach(UpgradeCondition u in conditionsOfType)
 			{
                 u.count += ClampAndRemove(ref amountToAdd, 0, u.countNeeded);

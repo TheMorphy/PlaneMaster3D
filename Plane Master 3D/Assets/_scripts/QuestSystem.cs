@@ -123,13 +123,13 @@ public class QuestSystem : MonoBehaviour
         Quest q = FindQuestWithName(questName, false);
         if(q == null)
         {
-//            Debug.Log("Cant add a Progress to a quest that doesnt Exists! I am really sorry...");
+            Debug.LogError("Cant add a Progress to a quest that doesnt Exists! I am really sorry...");
             return;
         }
         if(!q.done)
         {
             q.progress += addedProgress;
-            SaveSpecificProgress(questName);
+            
             CheckForDone(null, q);
         }
 
@@ -137,7 +137,8 @@ public class QuestSystem : MonoBehaviour
         {
             UpdateQuestUI();
         }
-    }
+		SaveSpecificProgress(questName);
+	}
 
     Quest FindQuestWithName(string questName, bool returnWhenDone = true)
     {

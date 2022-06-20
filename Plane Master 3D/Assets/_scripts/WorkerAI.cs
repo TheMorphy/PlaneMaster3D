@@ -309,6 +309,13 @@ public class WorkerAI : MonoBehaviour
 	void CheckForNeededResources()
 	{
 		List<UpgradeCondition> conditions = repairStation.GetComponent<DroppingZone>().conditions;
+
+		if(conditions.Find(c => c.itemType == itemToCarry && c.count < c.countNeeded) != null)
+		{
+			return;
+		}
+
+
 		for(int i = 0; i < conditions.Count; i++)
 		{
 			if (conditions[i].count < conditions[i].countNeeded)
@@ -369,9 +376,9 @@ public class WorkerAI : MonoBehaviour
             }
             else
             {
-                stayTimer -= 0.5f;
+                stayTimer -= 1f;
             }
-            if (stayTimer <= 0 && backpack.itemStacks.Find(i => i.itemType == itemToCarry) != null)
+            if (stayTimer <= 0 && backpack.itemStacks.Find(i => i.itemType == itemToCarry) != null && stayTimer < -2)
             {
                 agent.SetDestination(itemDestinationPos.position);
             }
@@ -380,7 +387,7 @@ public class WorkerAI : MonoBehaviour
                 agent.SetDestination(getItemPos.position);
 				//yield return new WaitUntil(() => backpack.itemStacks.Count > 0 && backpack.itemStacks[0].items.Count == backpack.stackSize);
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
         }
     }
 

@@ -251,7 +251,7 @@ public class Build : MonoBehaviour
 				LoadCorrectStorage();
 				UpdateUpgradeUI();
 				CheckForOutOfLevels();
-				QuestSystem.instance.AddProgress("Upgrade Iron drill", 1);
+				QuestSystem.instance.AddProgress("Upgrade iron drill", 1);
 			}
 		}
 		
@@ -302,6 +302,7 @@ public class Build : MonoBehaviour
 					GetComponent<DroppingZone>().enabled = false;
 					build.SetActive(false);
                     system.SetActive(true);
+				if(upgradeReady != null)
 					upgradeReady.SetActive(true);
 			//system.transform.GetChild(0).SendMessage("OnChangeLevel");
 				}

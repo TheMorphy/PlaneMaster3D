@@ -562,10 +562,16 @@ MonoBehaviour:
   upgradeButtonObjects:
   - {fileID: 3806821814701601906}
   - {fileID: 6143090782897591542}
+  capacityInfo: {fileID: 6143090783641127053}
+  speedInfo: {fileID: 6143090782901469362}
   isUpgradeButton: 0
   isSpeedButton: 0
   levelText: {fileID: 0}
-  workerFieldScripts: []
+  speedLevel: 0
+  backpackLevel: 0
+  workerFieldScripts:
+  - {fileID: 7333566846547179329}
+  - {fileID: 3806821814701601908}
 --- !u!1 &3806821813463707172
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,10 +924,16 @@ MonoBehaviour:
   priceText: {fileID: 3505564783152446809}
   hireZone: {fileID: 0}
   upgradeButtonObjects: []
+  capacityInfo: {fileID: 6143090783641127053}
+  speedInfo: {fileID: 6143090782901469362}
   isUpgradeButton: 1
   isSpeedButton: 1
   levelText: {fileID: 3946850528540023926}
-  workerFieldScripts: []
+  speedLevel: 0
+  backpackLevel: 0
+  workerFieldScripts:
+  - {fileID: 7333566846547179329}
+  - {fileID: 2852058050074104506}
 --- !u!1 &3806821815043968606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1236,10 +1248,16 @@ MonoBehaviour:
   priceText: {fileID: 6143090784101572811}
   hireZone: {fileID: 0}
   upgradeButtonObjects: []
+  capacityInfo: {fileID: 6143090783641127053}
+  speedInfo: {fileID: 6143090782901469362}
   isUpgradeButton: 1
   isSpeedButton: 0
   levelText: {fileID: 6143090784931107440}
-  workerFieldScripts: []
+  speedLevel: 0
+  backpackLevel: 0
+  workerFieldScripts:
+  - {fileID: 3806821814701601908}
+  - {fileID: 2852058050074104506}
 --- !u!1 &6143090782901469360
 GameObject:
   m_ObjectHideFlags: 0
