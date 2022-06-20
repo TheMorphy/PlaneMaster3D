@@ -31,7 +31,7 @@ public class QuestSystem : MonoBehaviour
     [SerializeField]
     CinemachineVirtualCamera objectiveCamera;
     Coroutine objectiveCamCoroutine;
-
+	bool nonbreakCamTriggered = false;
 	//David Change
 	[SerializeField] GameObject floatingJoystickObject, goToObjectiveButton;
 	Player playerScript;
@@ -52,22 +52,31 @@ public class QuestSystem : MonoBehaviour
     IEnumerator ObjectiveCam()
 	{
         LevelSystem.instance.ChangeCamera(4, 10);
-        Coroutine breakCoroutine = StartCoroutine(WaitForBreakCam());
+		Coroutine breakCoroutine = null;
+		if(questLevel != 1 || nonbreakCamTriggered)
+			breakCoroutine = StartCoroutine(WaitForBreakCam());
 		floatingJoystickObject.SetActive(false);
 		goToObjectiveButton.SetActive(false);
 		playerScript.NumberToChangeSpeed = 0;
 		yield return new WaitForSeconds(3.3f);
-        StopCoroutine(breakCoroutine);
-        LevelSystem.instance.ChangeCamera(4, -1);
-
+		if(breakCoroutine != null)
+			StopCoroutine(breakCoroutine);
+		floatingJoystickObject.SetActive(true);
+		goToObjectiveButton.SetActive(true);
+		playerScript.NumberToChangeSpeed = 1;
+		LevelSystem.instance.ChangeCamera(4, -1);
+		nonbreakCamTriggered = true;
 
     }
 
     IEnumerator WaitForBreakCam()
 	{
-		//yield return new WaitWhile(() => Input.touchCount > 0);
-		//yield return new WaitUntil(() => Input.touchCount > 0 || Input.anyKeyDown);
-		yield return new WaitForSeconds(3.3f);
+		
+		yield return new WaitWhile(() => Input.touchCount > 0);
+		yield return new WaitUntil(() => Input.touchCount > 0 || Input.anyKeyDown);
+
+		
+		
 		floatingJoystickObject.SetActive(true);
 		goToObjectiveButton.SetActive(true);
 		playerScript.NumberToChangeSpeed = 1;
