@@ -13,7 +13,7 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     [SerializeField] float speed, fuelQuantity;
     [SerializeField] Image fuelSlider;
 	[SerializeField] GameObject taskObject;
-	[SerializeField] GameObject checkMark;
+	//[SerializeField] GameObject checkMark;
 	[SerializeField] bool isMultipleRefill;
 
     private bool pointerDown;
@@ -61,7 +61,7 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 			fuelQuantity = 1;
 			refuelMultipleScript.GetEachCompletedFill();
 			isRefilled = true;
-			checkMark.SetActive(true);
+			//checkMark.SetActive(true);
 			//StartCoroutine(OncePlayerWinsMultipleRefill());
 		}
     }
@@ -71,7 +71,7 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 		fuelQuantity = 0;
 		isRefilled = false;
 		pointerDown = false;
-		checkMark.SetActive(false);
+		//checkMark.SetActive(false);
 	}
 
     private void Reset()
