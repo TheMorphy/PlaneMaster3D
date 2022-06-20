@@ -894,22 +894,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventID: 6
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 634353310}
-          m_TargetAssemblyTypeName: GearMoveScript, Assembly-CSharp
-          m_MethodName: DropHandler
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &634353310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1155,22 +1139,6 @@ MonoBehaviour:
         - m_Target: {fileID: 668022701}
           m_TargetAssemblyTypeName: GearMoveScript, Assembly-CSharp
           m_MethodName: DragHandler
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 6
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 668022701}
-          m_TargetAssemblyTypeName: GearMoveScript, Assembly-CSharp
-          m_MethodName: DropHandler
           m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1993,19 +1961,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327512184}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.86999995, y: 0.86999995, z: 0.86999995}
   m_Children:
   - {fileID: 1496932549}
   - {fileID: 893261782}
-  m_Father: {fileID: 1876188690}
+  m_Father: {fileID: 1426879355}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000019550323, y: 357}
-  m_SizeDelta: {x: 1914.199, y: 849.427}
+  m_AnchoredPosition: {x: -1.8849, y: 261}
+  m_SizeDelta: {x: 1622.668, y: 720.06006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1375926839
 GameObject:
@@ -2184,6 +2152,43 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_TargetDisplay: 0
+--- !u!1 &1426879354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1426879355}
+  m_Layer: 5
+  m_Name: GearsParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1426879355
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426879354}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1327512185}
+  - {fileID: 1638366999}
+  m_Father: {fileID: 1876188690}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -22.732}
+  m_SizeDelta: {x: 100, y: 145.464}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1438834070
 GameObject:
   m_ObjectHideFlags: 0
@@ -2483,22 +2488,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventID: 6
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1551788391}
-          m_TargetAssemblyTypeName: GearMoveScript, Assembly-CSharp
-          m_MethodName: DropHandler
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1551788391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2590,12 +2579,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1876188690}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -18.599, y: -92.994}
+  m_SizeDelta: {x: 1765.626, y: 1352.32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1552056849
 MonoBehaviour:
@@ -2617,7 +2606,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 295ad2d5f79291e429b7fe695fcb2d69, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2663,19 +2652,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1638366998}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.86999995, y: 0.86999995, z: 0.86999995}
   m_Children:
   - {fileID: 1667334622}
   - {fileID: 1806072682}
-  m_Father: {fileID: 1876188690}
+  m_Father: {fileID: 1426879355}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000019550323, y: -502}
-  m_SizeDelta: {x: 1914.199, y: 849.427}
+  m_AnchoredPosition: {x: -1.8849, y: -376}
+  m_SizeDelta: {x: 1622.668, y: 720.06}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1667334621
 GameObject:
@@ -2964,16 +2953,15 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1327512185}
-  - {fileID: 1638366999}
   - {fileID: 1552056848}
+  - {fileID: 1426879355}
   m_Father: {fileID: 102030600}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -4.133, y: -80.595}
+  m_SizeDelta: {x: 1827.622, y: 1261.392}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1876188691
 MonoBehaviour:

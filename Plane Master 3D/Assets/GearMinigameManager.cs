@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GearMinigameManager : MonoBehaviour
 {
@@ -119,6 +120,7 @@ public class GearMinigameManager : MonoBehaviour
 				gears[i].GetComponent<GearMoveScript>().isInHole = true;
 				gears[i].GetComponent<GearMoveScript>().enabled = false;
 				gears[i].transform.position = gearHoles[i].transform.position;
+				gears[i].GetComponent<Image>().raycastTarget = false;
 				gearCount += 1;
 				Debug.Log("Right Hole!");
 			}
