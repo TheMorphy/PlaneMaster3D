@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RepairStation : MonoBehaviour
 {
@@ -55,6 +56,8 @@ public class RepairStation : MonoBehaviour
 	//David Changes
 	[SerializeField] GameObject[] specificToolToEnable;
 
+	[SerializeField] GameObject[] specificWorkerButtonToEnable;
+
 	private void Awake()
 	{
 		dz = GetComponent<DroppingZone>();
@@ -65,6 +68,12 @@ public class RepairStation : MonoBehaviour
 	private void Start()
 	{
 		print("start");
+
+		for (int i = 0; i < specificToolToEnable.Length; i++)
+		{
+			specificWorkerButtonToEnable[i].GetComponent<Button>().interactable = true;
+		}
+
 		anim = aircraftHolder.GetComponent<Animator>();
 		if(PlayerPrefs.GetInt(name + "r1") == PlayerPrefs.GetInt(name + "r2"))
 		{

@@ -71,8 +71,6 @@ public class WorkerField : MonoBehaviour
 		workerFieldScripts[0].speedLevel = speedLevel;
 		workerFieldScripts[1].speedLevel = speedLevel;
 
-
-
 		workerFieldScripts[0].levelText.text = "Lvl " + backpackLevel.ToString();
 		workerFieldScripts[1].levelText.text = "Lvl " + speedLevel.ToString();
 		if(workerAI != null)
@@ -90,7 +88,6 @@ public class WorkerField : MonoBehaviour
 		{
 			workerFieldScripts[1].GetComponent<Button>().interactable = false;
 		}
-
 
 		if (hireZone.savingKey == "Box02")
 		{
@@ -146,8 +143,6 @@ public class WorkerField : MonoBehaviour
 		}
 
 	}
-
-	
 
     public void BuyButtonClick()
 	{
