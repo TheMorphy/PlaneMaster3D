@@ -14909,6 +14909,7 @@ MonoBehaviour:
   cameraZone: {fileID: 0}
   debug: 0
   specificToolToEnable: []
+  specificWorkerButtonToEnable: []
 --- !u!114 &1526551001206012197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25126,6 +25127,7 @@ MonoBehaviour:
   cameraZone: {fileID: 0}
   debug: 0
   specificToolToEnable: []
+  specificWorkerButtonToEnable: []
 --- !u!114 &1526551001772099285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27011,6 +27013,7 @@ MonoBehaviour:
   cameraZone: {fileID: 0}
   debug: 0
   specificToolToEnable: []
+  specificWorkerButtonToEnable: []
 --- !u!114 &1526551001878078508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27711,6 +27714,7 @@ MonoBehaviour:
   cameraZone: {fileID: 0}
   debug: 0
   specificToolToEnable: []
+  specificWorkerButtonToEnable: []
 --- !u!114 &1526551001908725759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31263,7 +31267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: JetStation
-  minigameIndex: 2
+  minigameIndex: 0
   currentAircraft:
     model: {fileID: 0}
     profit: 0
@@ -31327,6 +31331,7 @@ MonoBehaviour:
   cameraZone: {fileID: 0}
   debug: 0
   specificToolToEnable: []
+  specificWorkerButtonToEnable: []
 --- !u!114 &1526551002117833949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35890,6 +35895,7 @@ MonoBehaviour:
   cameraZone: {fileID: 0}
   debug: 0
   specificToolToEnable: []
+  specificWorkerButtonToEnable: []
 --- !u!114 &1526551002338172029
 MonoBehaviour:
   m_ObjectHideFlags: 0
