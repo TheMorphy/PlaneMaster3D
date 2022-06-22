@@ -37,16 +37,6 @@ public class GearMinigameManager : MonoBehaviour
 		ChangeGearStartingPosition();
 	}
 
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.X))
-		{
-			ResetMinigame();
-		}
-
-		
-	}
-
 	void ChangeGearHolePosition()
 	{
 		Vector2 holeStartingPosition;
@@ -98,17 +88,6 @@ public class GearMinigameManager : MonoBehaviour
 		}
 	}
 
-	IEnumerator WaitAndStartMinigame()
-	{
-		if (hasReset)
-		{
-			ChangeGearHolePosition();
-			ChangeGearStartingPosition();
-		}
-		yield return new WaitForSeconds(0.2f);
-		hasReset = false;
-	}
-
 	public IEnumerator WaitToMoveGear()
 	{
 		Debug.Log("Move Gear");
@@ -127,16 +106,27 @@ public class GearMinigameManager : MonoBehaviour
 		}
 		if (gearCount >= maxGearCount)
 		{
+			ResetMinigame();
 			gameObject.SetActive(false);
 		}
 	}
 
 	void ResetMinigame()
 	{
-		ChangeGearStartingPosition();
+		gearCount = 0;
 
 		randomNumbers.Remove(0);
 		randomNumbers.Remove(1);
 		randomNumbers.Remove(2);
+
+		//ChangeGearHolePosition();
+		//ChangeGearStartingPosition();
+
+		for (int i = 0; i < gears.Count; i++)
+		{
+			gears[i].GetComponent<GearMoveScript>().enabled = true;
+			gears[i].GetComponent<GearMoveScript>().isInHole = false;
+			gears[i].GetComponent<Image>().raycastTarget = true;
+		}
 	}
 }
