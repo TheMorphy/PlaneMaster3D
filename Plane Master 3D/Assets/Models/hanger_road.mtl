@@ -1,0 +1,5 @@
+newmtl color_atlas
+map_Kd color_pallete.jpg
+Kd 1 1 1
+d 1
+

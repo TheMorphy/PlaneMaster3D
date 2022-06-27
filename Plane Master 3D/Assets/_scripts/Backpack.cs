@@ -70,10 +70,10 @@ public class Backpack : MonoBehaviour
 					}
 					UIItems[u].text.text = count.ToString();
 					
-
+				
 					if(stack.text != null)
 					{
-						stack.text.text = count.ToString();
+						//stack.text.text = count.ToString();
 
 						stack.text.transform.parent = stack.items[0].transform;
 						stack.text.transform.localPosition = stack.items[stack.items.Count - 1].destination;
@@ -94,10 +94,10 @@ public class Backpack : MonoBehaviour
 
 						UIItems[u].text.transform.parent.gameObject.SetActive(true);
 						UIItems[u].text.text = stack.items.Count.ToString();
-						stack.text.text = stack.items.Count.ToString();
+						//stack.text.text = stack.items.Count.ToString();
 						//stack.text.transform.SetParent(stack.items[stack.items.Count - 1].transform, false);
-						stack.text.transform.parent = itemParent;
-						stack.text.transform.localPosition = stack.items[stack.items.Count - 1].destination;
+						//stack.text.transform.parent = itemParent;
+						//stack.text.transform.localPosition = stack.items[stack.items.Count - 1].destination;
 					}
 					else
 					{
@@ -239,8 +239,9 @@ public class Backpack : MonoBehaviour
 				{
 					itemStacks[s].items.Add(item);
 					added = true;
+					if(itemStacks[s].items.Count >= 10)
 					CheckForChangableMoney();
-					SaveBackpack();
+					//SaveBackpack();
 				}
 			}
 		}
@@ -298,7 +299,7 @@ public class Backpack : MonoBehaviour
 		}
 		if (stack.items.Count == 0)
 		{
-			Destroy(stack.text.gameObject);
+			//Destroy(stack.text.gameObject);
 			itemStacks.Remove(stack);
 		}
 		RefreshItemUI();
@@ -559,9 +560,13 @@ public class Backpack : MonoBehaviour
 
     IEnumerator LerpItemToDestination(Transform item, bool destroy = true)
     {
-        while(item.transform.localPosition != Vector3.zero)
+		float t = 0;
+		Vector3 startPos = item.transform.localPosition;
+
+		while (item.transform.localPosition != Vector3.zero)
         {
-            item.transform.localPosition = Vector3.Lerp(item.transform.localPosition, Vector3.zero, 0.1f);
+			t += Time.deltaTime;
+            item.transform.localPosition = Vector3.Lerp(startPos, Vector3.zero, itemLerpCurve.Evaluate(t));
             yield return null;
         }
         //if(destroy)
@@ -638,11 +643,16 @@ public class Backpack : MonoBehaviour
 			for (int i = 0; i < itemStacks[s].items.Count; i++)
 			{
 				Item curItem = itemStacks[s].items[i];
-				curItem.destination = pos;
+				if (curItem.transform.localPosition != pos)
+				{
+					curItem.destination = pos;
 
-				if (curItem.lerpCoroutine != null)
-					StopCoroutine(curItem.lerpCoroutine);
-				curItem.lerpCoroutine = StartCoroutine(BringItemToDesPosition(curItem));
+
+					if (curItem.lerpCoroutine != null)
+						StopCoroutine(curItem.lerpCoroutine);
+					curItem.lerpCoroutine = StartCoroutine(BringItemToDesPosition(curItem));
+
+				}
 
 				pos.y += curItem.height;
 			}
