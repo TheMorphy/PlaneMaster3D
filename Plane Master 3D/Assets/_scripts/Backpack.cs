@@ -81,10 +81,10 @@ public class Backpack : MonoBehaviour
 						stack.text.GetComponent<LookAtCamera>().enabled = true;
 					}
 				}
-				/*else
+				else
 				{
-					UIItems[u].text.transform.parent.gameObject.SetActive(false);
-				}*/
+					UIItems[u].text.text = "0";
+				}
 			}
 			else
 			{

@@ -3,7 +3,22 @@ guid: 0f5f2421544b32448833e601c3973f62
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WorkshopBase
+    second: {fileID: 2100000, guid: d9d70bf714392b14dbfc045f5702230b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WorkshopDoor
+    second: {fileID: 2100000, guid: 15be4179268f43949a09a8b8868e70d5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WorkshopFloor
+    second: {fileID: 2100000, guid: 542f8262492cb2f49b20e2e7e659fa7e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
