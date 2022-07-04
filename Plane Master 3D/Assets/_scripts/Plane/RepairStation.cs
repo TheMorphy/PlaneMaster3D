@@ -209,6 +209,10 @@ public class RepairStation : MonoBehaviour
 
 		yield return new WaitWhile(() => pilot.isMoving);
 		anim.Play("RollOut");
+		foreach (BoxCollider collider in currentAircraft.Model.GetComponents<BoxCollider>())
+		{
+			collider.enabled = false;
+		}
 		anim.SetFloat("kind", currentAircraft.Model.CompareTag("Rocket") ? 1 : 0);
 
 		

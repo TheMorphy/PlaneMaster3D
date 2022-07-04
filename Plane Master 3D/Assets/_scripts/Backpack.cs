@@ -73,7 +73,7 @@ public class Backpack : MonoBehaviour
 				
 					if(stack.text != null)
 					{
-						//stack.text.text = count.ToString();
+						stack.text.text = count.ToString();
 
 						stack.text.transform.parent = stack.items[0].transform;
 						stack.text.transform.localPosition = stack.items[stack.items.Count - 1].destination;
@@ -94,10 +94,10 @@ public class Backpack : MonoBehaviour
 
 						UIItems[u].text.transform.parent.gameObject.SetActive(true);
 						UIItems[u].text.text = stack.items.Count.ToString();
-						//stack.text.text = stack.items.Count.ToString();
+						stack.text.text = stack.items.Count.ToString();
 						//stack.text.transform.SetParent(stack.items[stack.items.Count - 1].transform, false);
-						//stack.text.transform.parent = itemParent;
-						//stack.text.transform.localPosition = stack.items[stack.items.Count - 1].destination;
+						stack.text.transform.parent = itemParent;
+						stack.text.transform.localPosition = stack.items[stack.items.Count - 1].destination;
 					}
 					else
 					{
@@ -299,7 +299,7 @@ public class Backpack : MonoBehaviour
 		}
 		if (stack.items.Count == 0)
 		{
-			//Destroy(stack.text.gameObject);
+			Destroy(stack.text.gameObject);
 			itemStacks.Remove(stack);
 		}
 		RefreshItemUI();
@@ -475,8 +475,6 @@ public class Backpack : MonoBehaviour
 					if (tryAddItem(i))
 					{
 						i.pickedUp = true;
-						
-						RefreshItemUI();
 						if(i.transform.parent != null)
 						if (i.transform.parent.parent != null)
 						{
@@ -484,6 +482,7 @@ public class Backpack : MonoBehaviour
 						}
 						i.transform.parent = itemParent;
 						UpdateItemDestinations();
+						RefreshItemUI();
 						c.enabled = false;
 						//AddProgress
 						if (i.itemName == "Iron")
@@ -645,7 +644,6 @@ public class Backpack : MonoBehaviour
 				Item curItem = itemStacks[s].items[i];
 				if (curItem.transform.localPosition != pos)
 				{
-					curItem.destination = pos;
 
 
 					if (curItem.lerpCoroutine != null)
@@ -654,6 +652,7 @@ public class Backpack : MonoBehaviour
 
 				}
 
+				curItem.destination = pos;
 				pos.y += curItem.height;
 			}
 			pos.y = 0;
