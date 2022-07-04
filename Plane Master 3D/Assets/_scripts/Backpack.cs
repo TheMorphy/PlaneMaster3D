@@ -20,6 +20,8 @@ public class ItemStack
 public class Backpack : MonoBehaviour
 {
 	public string savingKey;
+	[SerializeField]
+	bool optimizeForExtremeScenario = true;
     [SerializeField]
     public int backpackSize = 50;
     [SerializeField]
@@ -337,6 +339,8 @@ public class Backpack : MonoBehaviour
 
 	void CheckForChangableMoney()
 	{
+		if (optimizeForExtremeScenario)
+			return;
 		UpdateItemDestinations();
 		ItemStack stack = itemStacks.Find(i => i.itemType == ItemType.Money);
 		if(stack != null)
@@ -444,12 +448,22 @@ public class Backpack : MonoBehaviour
 	void FixedUpdate()
     {
 		dropTime -= Time.deltaTime;
-        //Check For Item to pick up
+		//Check For Item to pick up
+		int iteration = 0;
         foreach (Collider c in Physics.OverlapSphere(transform.position, pickupRadius))
         {
+			
+			
             if(c.GetComponent<Item>() != null && items.Count < backpackSize)
             {
-                Item i = c.GetComponent<Item>();
+				if (optimizeForExtremeScenario)
+				{
+					iteration++;
+					if (iteration > 5)
+						break;
+				}
+
+				Item i = c.GetComponent<Item>();
                 if(worker != null)
                 {
                     if(i.itemType == worker.itemToCarry)
