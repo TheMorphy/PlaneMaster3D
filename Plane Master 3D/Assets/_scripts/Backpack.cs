@@ -22,6 +22,7 @@ public class Backpack : MonoBehaviour
 	public string savingKey;
 	[SerializeField]
 	bool optimizeForExtremeScenario = true;
+	
     [SerializeField]
     public int backpackSize = 50;
     [SerializeField]
@@ -236,15 +237,32 @@ public class Backpack : MonoBehaviour
 		{
 			if(itemStacks[s].itemType == item.itemType)
 			{
-				stackExist = true;
-				if(itemStacks[s].items.Count < stackSize || item.itemType == ItemType.Money)
+				if(optimizeForExtremeScenario)
 				{
-					itemStacks[s].items.Add(item);
-					added = true;
-					if(itemStacks[s].items.Count >= 10)
-					CheckForChangableMoney();
-					//SaveBackpack();
+					
+					if (itemStacks[s].items.Count < stackSize)
+					{
+						stackExist = true;
+						itemStacks[s].items.Add(item);
+						added = true;
+						if (itemStacks[s].items.Count >= 10)
+							CheckForChangableMoney();
+						//SaveBackpack();
+					}
 				}
+				else
+				{
+					stackExist = true;
+					if (itemStacks[s].items.Count < stackSize || item.itemType == ItemType.Money)
+					{
+						itemStacks[s].items.Add(item);
+						added = true;
+						if (itemStacks[s].items.Count >= 10)
+							CheckForChangableMoney();
+						//SaveBackpack();
+					}
+				}
+				
 			}
 		}
 		if(stackExist == false)
@@ -253,7 +271,7 @@ public class Backpack : MonoBehaviour
 			itemStacks.Add(newItemStack);
 			newItemStack.items.Add(item);
 			newItemStack.itemType = item.itemType;
-			//UpdateItemDestinations();
+			UpdateItemDestinations();
 			if(stackTextPrefab != null)
 			newItemStack.text = Instantiate(stackTextPrefab, item.transform, false).GetComponent<TextMeshPro>();
 			
@@ -456,12 +474,7 @@ public class Backpack : MonoBehaviour
 			
             if(c.GetComponent<Item>() != null && items.Count < backpackSize)
             {
-				if (optimizeForExtremeScenario)
-				{
-					iteration++;
-					if (iteration > 5)
-						break;
-				}
+				
 
 				Item i = c.GetComponent<Item>();
                 if(worker != null)
@@ -486,6 +499,12 @@ public class Backpack : MonoBehaviour
                 }
                 else if(!i.pickedUp)
                 {
+					if (optimizeForExtremeScenario)
+					{
+						iteration++;
+						if (iteration > 5)
+							break;
+					}
 					if (tryAddItem(i))
 					{
 						i.pickedUp = true;
