@@ -510,14 +510,15 @@ public class Backpack : MonoBehaviour
 					if (tryAddItem(i))
 					{
 						i.pickedUp = true;
-						if(i.transform.parent != null)
+						/*if(i.transform.parent != null)
 						if (i.transform.parent.parent != null)
 						{
 							i.transform.parent.parent.SendMessage("RemoveItem", SendMessageOptions.DontRequireReceiver);
-						}
+						}*/
 						i.transform.parent = itemParent;
 						UpdateItemDestinations();
 						RefreshItemUI();
+						
 						c.enabled = false;
 						//AddProgress
 						if (i.itemName == "Iron")
@@ -678,6 +679,7 @@ public class Backpack : MonoBehaviour
 			for (int i = 0; i < itemStacks[s].items.Count; i++)
 			{
 				Item curItem = itemStacks[s].items[i];
+				curItem.destination = pos;
 				if (curItem.transform.localPosition != pos)
 				{
 
@@ -688,7 +690,7 @@ public class Backpack : MonoBehaviour
 
 				}
 
-				curItem.destination = pos;
+				
 				pos.y += curItem.height;
 			}
 			pos.y = 0;
@@ -744,6 +746,7 @@ public class Backpack : MonoBehaviour
 
 	IEnumerator BringItemToDesPosition(Item i)
 	{
+		
 		Vector3 startPos = i.transform.localPosition;
 		Quaternion startRot = i.transform.localRotation;
 		float t = 0;
