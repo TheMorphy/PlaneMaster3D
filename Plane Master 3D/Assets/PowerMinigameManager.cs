@@ -17,7 +17,7 @@ public class PowerMinigameManager : MonoBehaviour
 
 	int totalSpots = 0;
 
-	public void OnHandleDrag()
+	/*public void OnHandleDrag()
 	{
 
 		Debug.Log("Drag");
@@ -72,5 +72,10 @@ public class PowerMinigameManager : MonoBehaviour
 		Vector3 rot = new Vector3(0, 0, 0);
 
 		middleButton.transform.eulerAngles = rot;
+	}*/
+
+	public void ButtonClick()
+	{
+		gameObject.SetActive(false);
 	}
 }
