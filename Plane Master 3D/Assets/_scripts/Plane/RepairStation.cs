@@ -60,6 +60,8 @@ public class RepairStation : MonoBehaviour
 
 	[SerializeField]
 	GameObject partyEmoji;
+	[SerializeField]
+	bool minigamesEnabled = false;
 
 	private void Awake()
 	{
@@ -170,7 +172,7 @@ public class RepairStation : MonoBehaviour
 	{
 		
 		
-		if(isPlayerInTrigger)
+		if(isPlayerInTrigger && minigamesEnabled)
 		{
 			//start the minigame
 			LevelSystem.instance.PlayMinigame(minigameIndex);
@@ -179,25 +181,25 @@ public class RepairStation : MonoBehaviour
 			//wait until its finished
 			yield return new WaitUntil(() => minigameDone);
 
-			switch (name)
-			{
-				case "Boeing555":
-					QuestSystem.instance.AddProgress("Repair plane in second repair zone", 1);
-					break;
-				case "Boeing701":
-					QuestSystem.instance.AddProgress("Repair plane in third repair zone", 1);
-					break;
-
 			
-			}
 
 			
 		}
-		
-			
 
-		
-		
+
+		switch (name)
+		{
+			case "Boeing555":
+				QuestSystem.instance.AddProgress("Repair plane in second repair zone", 1);
+				break;
+			case "Boeing701":
+				QuestSystem.instance.AddProgress("Repair plane in third repair zone", 1);
+				break;
+
+
+		}
+
+
 		//Put Money in stash zone
 		int rewardLeft = currentAircraft.Profit;
 		while(rewardLeft > 0)

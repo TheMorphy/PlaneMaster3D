@@ -57,6 +57,7 @@ public class Backpack : MonoBehaviour
 
     void RefreshItemUI()
 	{
+		return;
 		for(int u = 0; u < UIItems.Count; u++)
 		{
 			ItemStack stack = itemStacks.Find(stack => stack.itemType == UIItems[u].itemType);
@@ -100,7 +101,7 @@ public class Backpack : MonoBehaviour
 						if(stack.text != null)
 							stack.text.text = stack.items.Count.ToString();
 						//stack.text.transform.SetParent(stack.items[stack.items.Count - 1].transform, false);
-						stack.text.transform.parent = itemParent;
+							stack.text.transform.parent = itemParent;
 						stack.text.transform.localPosition = stack.items[stack.items.Count - 1].destination;
 					}
 					else
@@ -150,7 +151,7 @@ public class Backpack : MonoBehaviour
 
 	void LoadBackpack()
 	{
-		return;
+		
 		string saveString = PlayerPrefs.GetString(savingKey);
 		print("Loaded string: " + saveString);
 		int i = 0;
