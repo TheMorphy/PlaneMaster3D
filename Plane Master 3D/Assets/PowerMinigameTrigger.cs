@@ -58,7 +58,7 @@ public class PowerMinigameTrigger : MonoBehaviour
 	{
 		timeRemaining = 0;
 		PowerMinigameManager powerManagerScript = parentObject.GetComponent<PowerMinigameManager>();
-		powerManagerScript.Restart();
+		//powerManagerScript.Restart();
 		fillImage.color = Color.red;
 		fillImage.fillAmount = 0;
 		parentObject.SetActive(false);
