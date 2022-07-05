@@ -39,19 +39,27 @@ public class DroppingZone : MonoBehaviour
 	PlaneMain planeScript;
 	[SerializeField]
 	SpriteRenderer progressbar;
+    [SerializeField]
 	private float progressBarStartSize;
+    bool setted = false;
 
     [SerializeField]
     private List<ItemInfo> itemInfos = new List<ItemInfo>();
 
 	private void Awake()
 	{
-		if (progressbar != null)
-			progressBarStartSize = progressbar.size.y;
-        
+        if (progressbar != null)
+		{
+            progressBarStartSize = progressbar.size.y;
+            setted = true;
+
+        }
     }
 	private void Start()
     {
+        
+
+
         LoadConditions();
         if (showDroppedItems)
         {
@@ -301,20 +309,22 @@ public class DroppingZone : MonoBehaviour
                     itemInfos[i].itemText.text = itemInfos[i].count + "/" + itemInfos[i].countNeeded;
             }
         }
-        
-		//Set the progress bar
-		if(progressbar != null)
-		{
-			float count = 0;
-			int countNeeded = 0;
-			for (int i = 0; i < itemInfos.Count; i++)
-			{
-				count += itemInfos[i].count;
-				countNeeded += itemInfos[i].countNeeded;
-			}
 
-			RefreshProgressbar(count, countNeeded);		
-		}
+        //Set the progress bar
+        if (progressbar != null)
+        {
+            float count = 0;
+            int countNeeded = 0;
+            for (int i = 0; i < itemInfos.Count; i++)
+            {
+                count += itemInfos[i].count;
+                countNeeded += itemInfos[i].countNeeded;
+            }
+
+            RefreshProgressbar(count, countNeeded);
+        }
+        else
+            Debug.LogError("AhHhhhhdahdhahdwhahdhadw");
 
 		if (conditions.Count == 0)
 			return;
@@ -331,7 +341,10 @@ public class DroppingZone : MonoBehaviour
 
 	void RefreshProgressbar(float count, float countNeeded)
 	{
+        if (!setted)
+            return;
 		float progress = count / countNeeded;
+        print(progress);
 		progressbar.size = new Vector2(progressbar.size.x, count == 0 || countNeeded == 0 ? 0 : progressBarStartSize * progress);
 
 	}
