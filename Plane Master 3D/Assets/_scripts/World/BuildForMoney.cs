@@ -45,6 +45,7 @@ public class BuildForMoney : MonoBehaviour
 		LoadProgress();
 	}
 
+	
 
 	public void SetAsBought()
 	{
@@ -54,6 +55,7 @@ public class BuildForMoney : MonoBehaviour
 
 	void LoadProgress()
 	{
+		
 		int progress = PlayerPrefs.GetInt(savingKey);
 		switch (progress)
 		{

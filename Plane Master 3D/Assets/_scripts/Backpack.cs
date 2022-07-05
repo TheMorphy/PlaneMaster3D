@@ -97,7 +97,8 @@ public class Backpack : MonoBehaviour
 
 						UIItems[u].text.transform.parent.gameObject.SetActive(true);
 						UIItems[u].text.text = stack.items.Count.ToString();
-						stack.text.text = stack.items.Count.ToString();
+						if(stack.text != null)
+							stack.text.text = stack.items.Count.ToString();
 						//stack.text.transform.SetParent(stack.items[stack.items.Count - 1].transform, false);
 						stack.text.transform.parent = itemParent;
 						stack.text.transform.localPosition = stack.items[stack.items.Count - 1].destination;
@@ -118,7 +119,7 @@ public class Backpack : MonoBehaviour
 
 	void SaveBackpack()
 	{
-		
+		return;
 		string saveString = "";
 		foreach(GameObject g in LevelSystem.instance.itemPrefabs)
 		{
@@ -149,7 +150,7 @@ public class Backpack : MonoBehaviour
 
 	void LoadBackpack()
 	{
-		
+		return;
 		string saveString = PlayerPrefs.GetString(savingKey);
 		print("Loaded string: " + saveString);
 		int i = 0;
@@ -617,6 +618,7 @@ public class Backpack : MonoBehaviour
 		}
 		return false;
 	}
+
     Item DropItem(ItemType itemType)
     {
 		Item itemToDrop;

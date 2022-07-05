@@ -58,6 +58,9 @@ public class RepairStation : MonoBehaviour
 
 	[SerializeField] GameObject[] specificWorkerButtonToEnable;
 
+	[SerializeField]
+	GameObject partyEmoji;
+
 	private void Awake()
 	{
 		dz = GetComponent<DroppingZone>();
@@ -204,6 +207,7 @@ public class RepairStation : MonoBehaviour
 		}
 
 		pilot.PilotGoToPlanePos();
+		partyEmoji.SetActive(true);
 		yield return new WaitForSeconds(3);
 
 
@@ -217,6 +221,7 @@ public class RepairStation : MonoBehaviour
 
 		
 		pilot.gameObject.SetActive(false);
+		partyEmoji.SetActive(false);
 		LevelUp();
 		yield return new WaitForSeconds(1.2f);
 		// do the mat stuff here

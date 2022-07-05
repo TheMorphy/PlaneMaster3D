@@ -267,7 +267,7 @@ public class DroppingZone : MonoBehaviour
             if (u.completed == false)
                 allDone = false;
 
-            if (displayTextAsCountDown)
+            /*if (displayTextAsCountDown)
             {
                 u.text.text = (u.countNeeded - u.count).ToString();
                 if (u.completed)
@@ -278,17 +278,30 @@ public class DroppingZone : MonoBehaviour
                     u.text.gameObject.SetActive(true);
 
             }
-            else if (u.text != null && isActiveAndEnabled)
+            if (u.text != null && isActiveAndEnabled)
             {
                 u.text.text = u.count + "/" + u.countNeeded;
-            }
+            }*/
         }
         //Set the text
-        for(int i = 0; i < itemInfos.Count; i++)
+        if(displayTextAsCountDown)
 		{
-            if(itemInfos[i].itemText != null)
-            itemInfos[i].itemText.text = itemInfos[i].count + "/" + itemInfos[i].countNeeded;
-		}
+            for (int i = 0; i < itemInfos.Count; i++)
+            {
+                if (itemInfos[i].itemText != null)
+                    itemInfos[i].itemText.text = (itemInfos[i].countNeeded - itemInfos[i].count).ToString();
+            }
+
+        }
+        else
+		{
+            for (int i = 0; i < itemInfos.Count; i++)
+            {
+                if (itemInfos[i].itemText != null)
+                    itemInfos[i].itemText.text = itemInfos[i].count + "/" + itemInfos[i].countNeeded;
+            }
+        }
+        
 		//Set the progress bar
 		if(progressbar != null)
 		{
