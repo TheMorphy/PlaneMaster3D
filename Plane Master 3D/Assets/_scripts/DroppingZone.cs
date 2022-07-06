@@ -118,7 +118,7 @@ public class DroppingZone : MonoBehaviour
         List<ItemType> itemTypes = GetUsedItemtypes();
         for(int i = 0; i < itemTypes.Count; i++)
 		{
-            PlayerPrefs.SetInt(transform.position.sqrMagnitude + itemTypes[i].ToString() + "count", GetAmountOfItemType(itemTypes[i])); 
+            PlayerPrefs.SetInt(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name +  transform.position.sqrMagnitude + itemTypes[i].ToString() + "count", GetAmountOfItemType(itemTypes[i])); 
 		}
 
 
@@ -323,8 +323,6 @@ public class DroppingZone : MonoBehaviour
 
             RefreshProgressbar(count, countNeeded);
         }
-        else
-            Debug.LogError("AhHhhhhdahdhahdwhahdhadw");
 
 		if (conditions.Count == 0)
 			return;

@@ -63,6 +63,11 @@ public class RepairStation : MonoBehaviour
 	[SerializeField]
 	bool minigamesEnabled = false;
 
+	[SerializeField]
+	GameObject textBG;
+	[SerializeField]
+	float timePilotDropsMoney = 1;
+
 	private void Awake()
 	{
 		dz = GetComponent<DroppingZone>();
@@ -170,9 +175,11 @@ public class RepairStation : MonoBehaviour
 
 	IEnumerator WaitForLevelUp()
 	{
-		
-		
-		if(isPlayerInTrigger && minigamesEnabled)
+		if(textBG != null)
+		textBG.SetActive(false);
+
+
+		if (isPlayerInTrigger && minigamesEnabled)
 		{
 			//start the minigame
 			LevelSystem.instance.PlayMinigame(minigameIndex);
@@ -205,12 +212,12 @@ public class RepairStation : MonoBehaviour
 		while(rewardLeft > 0)
 		{
 			rewardStashZone.AddItem(LevelSystem.SpawnMoneyAtPosition(ref rewardLeft, pilot.transform.position + Vector3.up));
-			yield return new WaitForSeconds(0.04f);
+			yield return new WaitForSeconds(timePilotDropsMoney / currentAircraft.Profit);
 		}
 
 		pilot.PilotGoToPlanePos();
 		partyEmoji.SetActive(true);
-		yield return new WaitForSeconds(3);
+		//yield return new WaitForSeconds(3);
 
 
 		yield return new WaitWhile(() => pilot.isMoving);
@@ -389,6 +396,9 @@ public class RepairStation : MonoBehaviour
 		dz.enabled = true;
 		pilot.gameObject.SetActive(true);
 		pilot.PilotGoToStandPos();
+		if (textBG != null)
+			textBG.SetActive(true);
+
 	}
 
 	void LoadAirCraft()
