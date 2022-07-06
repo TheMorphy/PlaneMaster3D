@@ -132,7 +132,7 @@ public class QuestSystem : MonoBehaviour
         Quest q = FindQuestWithName(questName, false);
         if(q == null)
         {
-            Debug.LogError("Cant add a Progress to a quest that doesnt Exists! I am really sorry...");
+            //Debug.LogError("Cant add a Progress to a quest that doesnt Exists! I am really sorry...");
             return;
         }
         if(!q.done)

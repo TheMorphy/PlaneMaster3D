@@ -81,7 +81,7 @@ MonoBehaviour:
   height: 0.08564512
   pickedUp: 0
   destination: {x: 0, y: 0, z: 0}
-  amount: 1
+  amount: 100
 --- !u!65 &2227658537724536751
 BoxCollider:
   m_ObjectHideFlags: 0
