@@ -5,33 +5,27 @@ using UnityEngine;
 
 public class GoToNextHangar : MonoBehaviour
 {
-	[SerializeField] GameObject button;
+	DroppingZone dz;
+	[SerializeField]
+	Animator anim;
+	[SerializeField]
+	GameObject disableOnOpen;
+	[SerializeField]
+	GameObject disableOnOpen2;
 
-	private void OnTriggerStay(Collider other)
+	// Start is called before the first frame update
+	void Start()
 	{
-		if (other.gameObject.layer == 8)
-		{
-			button.SetActive(true);
-		}
+		dz = GetComponent<DroppingZone>();
+		anim = GetComponent<Animator>();
 	}
 
-	private void OnTriggerExit(Collider other)
+	void OnAllConditionsComplete()
 	{
-		if (other.gameObject.layer == 8)
-		{
-			button.SetActive(false);
-		}
-	}
+		anim.SetBool("GateOpen", true);
+		disableOnOpen.SetActive(false);
+		disableOnOpen2.SetActive(false);
 
-	public void BuyNextTerrain()
-	{
-		Debug.Log("Bought Terrain");
-		gameObject.SetActive(false);
-	}
-
-	public void TransitionToNextHangar()
-	{
-		//SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-		LevelSystem.instance.EnterNextLevel();
+		LevelLoader.instance.LoadNextLevel();
 	}
 }

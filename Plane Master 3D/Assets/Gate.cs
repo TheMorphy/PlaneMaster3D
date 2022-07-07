@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Gate : MonoBehaviour
 {
@@ -11,9 +12,11 @@ public class Gate : MonoBehaviour
     string savingKey;
     [SerializeField]
     GameObject disableOnOpen;
+	[SerializeField]
+	GameObject disableOnOpen2;
 
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+	void Start()
     {
         dz = GetComponent<DroppingZone>();
         anim = GetComponent<Animator>();
@@ -22,11 +25,13 @@ public class Gate : MonoBehaviour
 
     void OnAllConditionsComplete()
 	{
-        PlayerPrefs.SetInt(savingKey, 1);
+		//PlayerPrefs.SetInt(savingKey, 1);
+
         anim.SetBool("GateOpen", true);
         disableOnOpen.SetActive(false);
+		//disableOnOpen2.SetActive(false);
 
-		if(savingKey == "eastgate2")
+		if (savingKey == "eastgate2")
 		{
 			QuestSystem.instance.AddProgress("Open fake gate", 1);
 		}
@@ -34,15 +39,15 @@ public class Gate : MonoBehaviour
 		{
 			QuestSystem.instance.AddProgress("Open gate", 1);
 		}
-
 	}
 
-    void LoadState()
+	void LoadState()
 	{
-        if(PlayerPrefs.GetInt(savingKey) == 1)
+		if (PlayerPrefs.GetInt(savingKey) == 1)
 		{
             anim.SetBool("GateOpen", true);
             disableOnOpen.SetActive(false);
+			disableOnOpen2.SetActive(false);
 			if (savingKey == "eastgate")
 			{
 				QuestSystem.instance.AddProgress("Open gate", 1);
@@ -52,6 +57,7 @@ public class Gate : MonoBehaviour
 		{
 			anim.SetBool("GateOpen", false);
 			disableOnOpen.SetActive(true);
+			disableOnOpen2.SetActive(true);
 		}
 	}
 }

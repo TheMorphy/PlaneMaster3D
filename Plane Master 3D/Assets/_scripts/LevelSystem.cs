@@ -105,6 +105,9 @@ public class LevelSystem : MonoBehaviour
 	public List<Transform> itemGrabSpots;
 	public List<StashZone> stashZones = new List<StashZone>();
 
+	[HideInInspector]
+	public bool hasTransitioned;
+
 
 	public void CloseWorkersUpgradeUI()
 	{
@@ -152,16 +155,10 @@ public class LevelSystem : MonoBehaviour
 	}
 	*/
 
-
-
-
 	public void EnterNextLevel()
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-		
 	}
-
-	
 
 	public static Item SpawnMoneyAtPosition(ref int amount, Vector3 spawnPosition)
 	{
@@ -270,7 +267,9 @@ public class LevelSystem : MonoBehaviour
 	private void Awake()
 	{
 		Application.targetFrameRate = 300;
-		
+
+		hasTransitioned = false;
+
 		#region singleton
 		instance = this;
 		#endregion
