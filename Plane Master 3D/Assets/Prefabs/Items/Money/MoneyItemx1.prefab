@@ -81,7 +81,7 @@ MonoBehaviour:
   height: 0.08564512
   pickedUp: 0
   destination: {x: 0, y: 0, z: 0}
-  amount: 100
+  amount: 500
 --- !u!65 &2227658537724536751
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -154,7 +154,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 148f9deb1a688e14bb2174b7d449b8d9, type: 2}
+  - {fileID: 2100000, guid: 9e89b9e24fd28174e91d5bc45c2f36af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
