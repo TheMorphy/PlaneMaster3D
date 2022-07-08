@@ -216,8 +216,9 @@ public class RepairStation : MonoBehaviour
 		}
 
 		pilot.PilotGoToPlanePos();
+
 		partyEmoji.SetActive(true);
-		//yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(1f);
 
 
 		yield return new WaitWhile(() => pilot.isMoving);
