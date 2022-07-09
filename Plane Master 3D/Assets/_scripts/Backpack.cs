@@ -510,11 +510,11 @@ public class Backpack : MonoBehaviour
 					if (tryAddItem(i))
 					{
 						i.pickedUp = true;
-						/*if(i.transform.parent != null)
+						if(i.transform.parent != null)
 						if (i.transform.parent.parent != null)
 						{
 							i.transform.parent.parent.SendMessage("RemoveItem", SendMessageOptions.DontRequireReceiver);
-						}*/
+						}
 						i.transform.parent = itemParent;
 						UpdateItemDestinations();
 						RefreshItemUI();
