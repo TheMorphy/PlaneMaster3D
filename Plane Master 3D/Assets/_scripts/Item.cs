@@ -6,7 +6,7 @@ public class Item : MonoBehaviour
 {
     public string itemName;
     public ItemType itemType;
-    public float height;
+    public float height, width = 0.23f;
     //[HideInInspector]
     public bool pickedUp;
     //[HideInInspector]

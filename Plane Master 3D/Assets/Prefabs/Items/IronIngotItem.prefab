@@ -160,6 +160,7 @@ MonoBehaviour:
   itemName: Iron
   itemType: 1
   height: 0.1363131
+  width: 0.23
   pickedUp: 0
   destination: {x: 0, y: 0, z: 0}
   amount: 1

@@ -79,6 +79,7 @@ MonoBehaviour:
   itemName: Money
   itemType: 0
   height: 0.08564512
+  width: 0.23
   pickedUp: 0
   destination: {x: 0, y: 0, z: 0.88}
   amount: 10

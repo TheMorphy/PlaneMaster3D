@@ -161,6 +161,7 @@ MonoBehaviour:
   itemName: Circuit
   itemType: 5
   height: 0.07404216
+  width: 0.23
   pickedUp: 0
   destination: {x: 0, y: 0, z: 0}
   amount: 1
