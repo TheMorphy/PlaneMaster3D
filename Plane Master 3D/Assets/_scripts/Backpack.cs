@@ -471,7 +471,7 @@ public class Backpack : MonoBehaviour
 		dropTime -= Time.deltaTime;
 		//Check For Item to pick up
 		int iteration = 0;
-        foreach (Collider c in Physics.OverlapSphere(transform.position, pickupRadius))
+        foreach (Collider c in Physics.OverlapSphere(player.transform.position, pickupRadius))
         {
 			
 			
