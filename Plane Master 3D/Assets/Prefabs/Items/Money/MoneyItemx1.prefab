@@ -79,6 +79,7 @@ MonoBehaviour:
   itemName: Money
   itemType: 0
   height: 0.08564512
+  width: 0.23
   pickedUp: 0
   destination: {x: 0, y: 0, z: 0}
   amount: 500
@@ -93,8 +94,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.35, y: 0.08564512, z: 0.2}
-  m_Center: {x: 0, y: 0.03, z: 0}
+  m_Size: {x: 0.90609497, y: 0.15474531, z: 0.5049432}
+  m_Center: {x: 0.005022019, y: 0.0645501, z: 0.013739973}
 --- !u!1 &5058596885039239660
 GameObject:
   m_ObjectHideFlags: 0

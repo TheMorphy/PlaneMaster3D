@@ -342,7 +342,7 @@ public class DroppingZone : MonoBehaviour
         if (!setted)
             return;
 		float progress = count / countNeeded;
-        print(progress);
+        //print(progress);
 		progressbar.size = new Vector2(progressbar.size.x, count == 0 || countNeeded == 0 ? 0 : progressBarStartSize * progress);
 
 	}

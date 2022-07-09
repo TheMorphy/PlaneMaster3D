@@ -510,11 +510,11 @@ public class Backpack : MonoBehaviour
 					if (tryAddItem(i))
 					{
 						i.pickedUp = true;
-						/*if(i.transform.parent != null)
+						if(i.transform.parent != null)
 						if (i.transform.parent.parent != null)
 						{
 							i.transform.parent.parent.SendMessage("RemoveItem", SendMessageOptions.DontRequireReceiver);
-						}*/
+						}
 						i.transform.parent = itemParent;
 						UpdateItemDestinations();
 						RefreshItemUI();
@@ -669,13 +669,18 @@ public class Backpack : MonoBehaviour
 	{
 		Vector3 pos = Vector3.zero;
 
-
+		float offset = 0;
 
 
 
 		for (int s = 0; s < itemStacks.Count; s++)
 		{
-			pos.z = -s * stackOffset;
+			
+			
+			
+			//if(s != 0)
+				offset -= itemStacks[s].items[0].width / 2;
+			pos.z = offset;
 			for (int i = 0; i < itemStacks[s].items.Count; i++)
 			{
 				Item curItem = itemStacks[s].items[i];
@@ -693,6 +698,7 @@ public class Backpack : MonoBehaviour
 				
 				pos.y += curItem.height;
 			}
+			offset -= itemStacks[s].items[0].width / 2;
 			pos.y = 0;
 		}
 
