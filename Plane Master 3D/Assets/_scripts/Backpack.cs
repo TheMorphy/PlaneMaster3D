@@ -663,7 +663,7 @@ public class Backpack : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(transform.position, pickupRadius);
+        Gizmos.DrawWireSphere(player.transform.position, pickupRadius);
     }
 
 	void UpdateItemDestinations()
