@@ -321,6 +321,7 @@ public class Backpack : MonoBehaviour
 		}
 		if (stack.items.Count == 0)
 		{
+			if(stack.text != null)
 			Destroy(stack.text.gameObject);
 			itemStacks.Remove(stack);
 		}
@@ -684,19 +685,24 @@ public class Backpack : MonoBehaviour
 			for (int i = 0; i < itemStacks[s].items.Count; i++)
 			{
 				Item curItem = itemStacks[s].items[i];
-				curItem.destination = pos;
-				if (curItem.transform.localPosition != pos)
+				if(curItem != null)
 				{
+					curItem.destination = pos;
+					if (curItem.transform.localPosition != pos)
+					{
 
 
-					if (curItem.lerpCoroutine != null)
-						StopCoroutine(curItem.lerpCoroutine);
-					curItem.lerpCoroutine = StartCoroutine(BringItemToDesPosition(curItem));
+						if (curItem.lerpCoroutine != null)
+							StopCoroutine(curItem.lerpCoroutine);
+						curItem.lerpCoroutine = StartCoroutine(BringItemToDesPosition(curItem));
 
+					}
+
+
+					pos.y += curItem.height;
 				}
-
+					
 				
-				pos.y += curItem.height;
 			}
 			offset -= itemStacks[s].items[0].width / 2;
 			pos.y = 0;
