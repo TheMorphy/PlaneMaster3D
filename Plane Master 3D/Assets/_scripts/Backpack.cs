@@ -471,7 +471,7 @@ public class Backpack : MonoBehaviour
 		dropTime -= Time.deltaTime;
 		//Check For Item to pick up
 		int iteration = 0;
-        foreach (Collider c in Physics.OverlapSphere(player.transform.position, pickupRadius))
+        foreach (Collider c in Physics.OverlapSphere(player != null ? player.transform.position : worker.transform.position, pickupRadius))
         {
 			
 			
@@ -663,7 +663,7 @@ public class Backpack : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(player.transform.position, pickupRadius);
+        Gizmos.DrawWireSphere(player != null ? player.transform.position : worker.transform.position, pickupRadius);
     }
 
 	void UpdateItemDestinations()

@@ -97,9 +97,9 @@ public class WorkerAI : MonoBehaviour
     WorkerLevel generationParameters;
     [SerializeField]
     WorkerLevel currentLevel;
-    public enum TaskType { Courier , Scientist , Pilot}
+    public enum TaskType { Courier , Scientist , Pilot, Follower}
     [SerializeField]
-    TaskType task;
+    public TaskType task;
     [SerializeField]
     public Transform getItemPos, itemDestinationPos;
     [SerializeField]
@@ -140,7 +140,11 @@ public class WorkerAI : MonoBehaviour
 
 	UpgradeCondition currentCondition;
 
-    void Start()
+	[SerializeField]
+	float followWorkerPathfindingInterval = 0.1f;
+
+
+	void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         switch (task)
@@ -152,6 +156,9 @@ public class WorkerAI : MonoBehaviour
             case TaskType.Scientist:
                 StartCoroutine(ScientistWorker());
 				QuestSystem.instance.AddProgress("Hire a scientist", 1);
+				break;
+			case TaskType.Follower:
+				StartCoroutine(FollowWorker());
 				break;
         }
 		
@@ -344,6 +351,16 @@ public class WorkerAI : MonoBehaviour
 			}
 		}
 
+	}
+
+	IEnumerator FollowWorker()
+	{
+		while(true)
+		{
+			yield return new WaitForSeconds(followWorkerPathfindingInterval);
+			agent.SetDestination(LevelSystem.instance.player.transform.position);
+
+		}
 	}
 
     IEnumerator ScientistWorker()
