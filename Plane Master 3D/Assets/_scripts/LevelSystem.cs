@@ -354,6 +354,7 @@ public class LevelSystem : MonoBehaviour
 
 	public void PlayMinigame(int specification = -1)
 	{
+		Debug.Log("Test");
 		if(specification < 0)
 		{
 			specification = Random.Range(0, minigameObjects.Count);

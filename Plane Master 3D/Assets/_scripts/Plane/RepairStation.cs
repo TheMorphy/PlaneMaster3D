@@ -181,16 +181,13 @@ public class RepairStation : MonoBehaviour
 
 		if (isPlayerInTrigger && minigamesEnabled)
 		{
+			Debug.Log("TRIGGER THE MINIGAME");
 			//start the minigame
 			LevelSystem.instance.PlayMinigame(minigameIndex);
 			LevelSystem.instance.OnMinigameFinish.AddListener(MinigameDone);
 
 			//wait until its finished
 			yield return new WaitUntil(() => minigameDone);
-
-			
-
-			
 		}
 
 
