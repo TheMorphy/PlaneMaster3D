@@ -388,6 +388,10 @@ public class LevelSystem : MonoBehaviour
 
 	private void Update()
 	{
+		if(Input.GetKeyDown(KeyCode.R))
+		{
+			ResetGame();
+		}
 		//if(pmScript != null)
 		if (pmScript != null && pmScript.allIsRepaired)
 		{

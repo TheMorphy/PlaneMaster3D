@@ -912,6 +912,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   savingKey: DrillToZone01
+  repairStation: {fileID: 0}
   backpack: {fileID: 3824567382448785695}
   levels:
   - backpackSize: 0
@@ -944,7 +945,7 @@ MonoBehaviour:
   getItemPos: {fileID: 0}
   itemDestinationPos: {fileID: 0}
   itemToCarry: 0
-  movementSpeed: 2
+  movementSpeed: 10
   animSmooth: 0.4
   stayTime: 1
   visual3D: {fileID: 7239820541431355984}
@@ -958,7 +959,7 @@ MonoBehaviour:
     savingKeyPrefix: 
     savingKey: Speed
     level: 0
-    standard: 2
+    standard: 10
     increment: 0.3
     incrementPercentage: 0
     costCurrent: 0
@@ -982,6 +983,7 @@ MonoBehaviour:
     textCost: {fileID: 0}
   stopped: 0
   workersOutline: {fileID: 4166671969377983135}
+  followWorkerPathfindingInterval: 0.1
 --- !u!195 &3824567381178944125
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -992,7 +994,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.3
-  m_Speed: 3.5
+  m_Speed: 6.74
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 2000
@@ -1093,6 +1095,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c3b793712f4d144ea439c8c11f41f16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  savingKey: 
+  optimizeForExtremeScenario: 1
   backpackSize: 1
   stackSize: 1
   stackOffset: 0.14

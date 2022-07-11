@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/NewGameAd3.unity
+    guid: 52a231695d10949e48442a654252b667
+  - enabled: 1
     path: Assets/Scenes/NewGameLevels/NewLevel1.unity
     guid: faac961378ff88b408f6f972c6b68585
   - enabled: 1
