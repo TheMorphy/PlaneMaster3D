@@ -8,11 +8,12 @@ public class SecondAdManager : MonoBehaviour
 	[SerializeField] GameObject bomb, spawnPoint, failedUI;
 
 	[SerializeField] Animator cameraAnimation;
+	[SerializeField] float startDelay;
 
 	public void ExplodeTheRocket()
 	{
-		AddRigidbody();
-		SpawnBomb();
+		
+		
 		StartCoroutine(WaitToFailLevel());
 	}
 
@@ -22,19 +23,25 @@ public class SecondAdManager : MonoBehaviour
 		{
 			GameObject gObject = partsToAddRbAndCollider[i];
 			gObject.GetComponent<Rigidbody>().isKinematic = false;
-			gObject.GetComponent<BoxCollider>().enabled = true;
+			gObject.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
+			gObject.GetComponent<Collider>().enabled = true;
 		}
 	}
 
-	void SpawnBomb()
+	Bomb SpawnBomb()
 	{
-		Instantiate(bomb, spawnPoint.transform);
+		return Instantiate(bomb, spawnPoint.transform).GetComponent<Bomb>();
 	}
 
 	IEnumerator WaitToFailLevel()
 	{
+		yield return new WaitForSeconds(startDelay);
 		cameraAnimation.SetTrigger("HasExploded");
-		yield return new WaitForSeconds(0.5f);
+		Bomb bomb = SpawnBomb();
+		yield return new WaitForSeconds(0.12f);
+		AddRigidbody();
+		bomb.KnockBack();
+		yield return new WaitForSeconds(0.5f - 0.12f);
 		failedUI.SetActive(true);
 		//yield return new WaitForSeconds(1f);
 		//Time.timeScale = 0;

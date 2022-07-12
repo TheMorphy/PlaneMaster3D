@@ -8,15 +8,15 @@ public class Bomb : MonoBehaviour
 	[SerializeField] GameObject exp;
 	[SerializeField] float expForce, radius;
 
-	private void OnCollisionEnter(Collision other)
+	private void OnEnable()
 	{
 		GameObject _exp = Instantiate(exp, transform.position, transform.rotation);
 		Destroy(_exp, 3);
-		KnockBack();
-		Destroy(gameObject);
+		//KnockBack();
+		//Destroy(gameObject);
 	}
 
-	void KnockBack()
+	public void KnockBack()
 	{
 		Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
 

@@ -211,7 +211,7 @@ public class RepairStation : MonoBehaviour
 			rewardStashZone.AddItem(LevelSystem.SpawnMoneyAtPosition(ref rewardLeft, pilot.transform.position + Vector3.up));
 			yield return new WaitForSeconds(timePilotDropsMoney / currentAircraft.Profit);
 		}
-
+		yield return new WaitForSeconds(0.4f);
 		pilot.PilotGoToPlanePos();
 
 		partyEmoji.SetActive(true);
