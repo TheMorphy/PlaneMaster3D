@@ -119,6 +119,20 @@ public class WorkersHireZone : MonoBehaviour
 		doorAnim.SetBool("open", false);
 	}
 
+	public IEnumerator PlaceWorker()
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			StartCoroutine(CheckDoor());
+			WorkerAI ai = Instantiate(workerAIPrefab, workersSpawnPosition).GetComponent<WorkerAI>();
+			WorkerField placebo = new WorkerField();
+			placebo.workerAI = ai;
+			workerFields.Add(placebo);
+			ai.task = WorkerAI.TaskType.Follower;
+			yield return null;
+		}
+	}
+
 	public void PressAd03HireButton()
 	{
 		StartCoroutine(CheckDoor());
@@ -127,6 +141,7 @@ public class WorkersHireZone : MonoBehaviour
 		placebo.workerAI = ai;
 		workerFields.Add(placebo);
 		ai.task = WorkerAI.TaskType.Follower;
+		StartCoroutine(PlaceWorker());
 	}
 	bool IsWorkerInRange()
 	{
