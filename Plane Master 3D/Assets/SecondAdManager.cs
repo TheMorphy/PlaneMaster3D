@@ -21,8 +21,8 @@ public class SecondAdManager : MonoBehaviour
 		for (int i = 0; i < partsToAddRbAndCollider.Length; i++)
 		{
 			GameObject gObject = partsToAddRbAndCollider[i];
-			gObject.AddComponent<Rigidbody>();
-			gObject.AddComponent<BoxCollider>();
+			gObject.GetComponent<Rigidbody>().isKinematic = false;
+			gObject.GetComponent<BoxCollider>().enabled = true;
 		}
 	}
 
