@@ -76,6 +76,13 @@ public class PowerMinigameManager : MonoBehaviour
 
 	public void ButtonClick()
 	{
+		StartCoroutine(WaitForDisable());
+	}
+
+	IEnumerator WaitForDisable()
+	{
+		yield return new WaitForSeconds(1.1f);
 		gameObject.SetActive(false);
+
 	}
 }

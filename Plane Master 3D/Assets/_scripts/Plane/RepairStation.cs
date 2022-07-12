@@ -256,6 +256,8 @@ public class RepairStation : MonoBehaviour
 
 		StartCoroutine(BringBreakablesToBrokenPos());
 		minigameDone = false;
+		yield return new WaitForSeconds(10);
+		aircraftHolder.gameObject.SetActive(false);
 	}
 
 
