@@ -12,13 +12,13 @@ EditorBuildSettings:
     path: Assets/Scenes/NewGameLevels/NewLevel2.unity
     guid: c2c77c8464e2d324587af2887c7ec6e3
   - enabled: 1
-    path: Assets/Scenes/NewGameLevels/NewLevel3.unity
+    path: Assets/Scenes/NewLevel3.unity
     guid: 234783678d09105438ec186a6551df11
   - enabled: 1
     path: Assets/Scenes/Ad2Scene.unity
     guid: b8151fa894905354c9597e49d3e6edad
   - enabled: 1
-    path: Assets/Scenes/NewGameAd3.unity
+    path: Assets/Scenes/NewGameLevels/LVL3OLD.unity
     guid: 52a231695d10949e48442a654252b667
   - enabled: 1
     path: Assets/Scenes/Levels/BACKUP LVL2.unity
