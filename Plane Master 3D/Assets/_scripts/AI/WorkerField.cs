@@ -269,7 +269,7 @@ public class WorkerField : MonoBehaviour
     public void SetBought(bool isBought)
 	{
 		bought = isBought;
-		print("Set Bought");
+		//print("Set Bought");
         if(isBought)
 		{
             for(int i = 0; i < disableOnBought.Count; i++)

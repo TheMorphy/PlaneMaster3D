@@ -79,11 +79,10 @@ public class Backpack : MonoBehaviour
 					{
 						stack.text.text = count.ToString();
 
-						stack.text.transform.parent = stack.items[0].transform;
-						stack.text.transform.localPosition = stack.items[stack.items.Count - 1].destination;
-						stack.text.enabled = true;
-						stack.text.GetComponent<LookAtCamera>().enabled = true;
 					}
+					stack.text.transform.parent = itemParent;
+					stack.text.transform.localPosition = stack.items[stack.items.Count - 1].destination;
+
 				}
 				else
 				{
@@ -145,14 +144,14 @@ public class Backpack : MonoBehaviour
 
 
 		PlayerPrefs.SetString(savingKey, saveString);
-		print("Saving String: " + saveString);
+		//print("Saving String: " + saveString);
 	}
 
 	void LoadBackpack()
 	{
 		
 		string saveString = PlayerPrefs.GetString(savingKey);
-		print("Loaded string: " + saveString);
+		//print("Loaded string: " + saveString);
 		int i = 0;
 		string[] s = saveString.Split('.');
 		foreach(GameObject g in LevelSystem.instance.itemPrefabs)
@@ -381,7 +380,7 @@ public class Backpack : MonoBehaviour
 				if(!used)
 				{
 					int exp = (int)Mathf.Log10(stack.items[a].amount);
-					print("exp " + exp);
+					//print("exp " + exp);
 					for (int c = usedPowsOf10.Count; c < exp; c++)
 					{
 						usedPowsOf10.Add(0);

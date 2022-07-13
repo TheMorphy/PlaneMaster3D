@@ -385,7 +385,7 @@ public class DroppingZone : MonoBehaviour
 
     public void AddItem(Item item, bool translateItem = true)
     {
-        SaveConditions();
+        
         items.Add(item);
         if (translateItem)
         {
@@ -394,13 +394,19 @@ public class DroppingZone : MonoBehaviour
             SetItemDestination(items.Count - 1);
 
         }
-        CheckForDone();
         SendMessage("OnAddItem", SendMessageOptions.DontRequireReceiver);
-    }
+		SaveConditions();
+	}
     void SetItemDestination(int item)
     {
-        items[item].destination = positions.Length > item ? positions[item] : positions[0];
-        Coroutine c = StartCoroutine(LerpItemToDestination(item));
+		if(positions.Length == 0)
+			Array.Resize(ref positions, conditions[0].countNeeded);
+
+		//items[item].destination = positions.Length > item ? positions[item] : positions[0];
+		items[item].destination = conditions[0].itemDestination.localPosition;
+		items[item].transform.parent = conditions[0].itemDestination.transform;
+
+		Coroutine c = StartCoroutine(LerpItemToDestination(item));
     }
     IEnumerator LerpItemToDestination(int i)
     {
@@ -422,7 +428,12 @@ public class DroppingZone : MonoBehaviour
     }
     void GenerateSortingSystem()
     {
-        Vector3 nextPos = Vector3.zero;
+		if (showDroppedItems)
+		{
+
+			Array.Resize(ref positions, conditions[0].countNeeded);
+		}
+			Vector3 nextPos = Vector3.zero;
         int count = 0;
         for (int y = (int)limitations.y; y > 0; y--)
         {
@@ -430,6 +441,7 @@ public class DroppingZone : MonoBehaviour
             {
                 for (int z = (int)limitations.z; z > 0; z--)
                 {
+					
                     positions[count] = nextPos;
                     nextPos.z += space.z;
                     count++;

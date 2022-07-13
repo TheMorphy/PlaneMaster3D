@@ -45,12 +45,12 @@ public class HydraulicPress : MonoBehaviour
     void OnLoadLevels()
     {
         print("OnLoadLevels");
-        //droppingZone.conditions[0].countNeeded = levels[build.level].capacity;
-     //   stashZone.capacity = levels[build.level].capacity;
-        //stashZone.SendMessage("GenerateSortingSystem");
-    //    cogsPerMinute = levels[build.level].speed * 60;
-
-        foreach(MeshRenderer m in colorChangingParts)
+		//droppingZone.conditions[0].countNeeded = levels[build.level].capacity;
+		//stashZone.capacity = levels[build.level].capacity;
+		//stashZone.SendMessage("GenerateSortingSystem");
+		//cogsPerMinute = levels[build.level].speed * 60;
+		OnLevelChanged();
+		foreach (MeshRenderer m in colorChangingParts)
         {
             m.material.SetColor("_Color", levels[build.level].newColor);
         }
@@ -66,6 +66,7 @@ public class HydraulicPress : MonoBehaviour
 		stashZone.capacity = build.storage;
 		cogsPerMinute = build.speed * 60;
 		droppingZone.conditions[0].countNeeded = build.storage;
+		droppingZone.Refresh(); 
 		stashZone.SendMessage("GenerateSortingSystem");
 		
 	}

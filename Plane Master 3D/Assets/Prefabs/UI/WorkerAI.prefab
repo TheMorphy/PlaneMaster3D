@@ -1096,7 +1096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savingKey: 
-  optimizeForExtremeScenario: 1
+  optimizeForExtremeScenario: 0
   backpackSize: 1
   stackSize: 1
   stackOffset: 0.14

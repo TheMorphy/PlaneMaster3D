@@ -25,11 +25,11 @@ public class Gate : MonoBehaviour
 
     void OnAllConditionsComplete()
 	{
-		//PlayerPrefs.SetInt(savingKey, 1);
+		PlayerPrefs.SetInt(savingKey, 1);
 
         anim.SetBool("GateOpen", true);
         disableOnOpen.SetActive(false);
-		//disableOnOpen2.SetActive(false);
+		disableOnOpen2.SetActive(false);
 
 		if (savingKey == "eastgate2")
 		{

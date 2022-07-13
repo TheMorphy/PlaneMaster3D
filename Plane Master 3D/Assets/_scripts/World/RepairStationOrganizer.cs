@@ -16,7 +16,7 @@ public class RepairStationOrganizer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		level = Mathf.Max(PlayerPrefs.GetInt("RepairStationOrganizerLevel"), level);
+		level = Mathf.Max(PlayerPrefs.GetInt(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "RepairStationOrganizerLevel"), level);
 		for(int i = 0; i < level; i++)
 		{
 			stations[i].SetAsBought();
@@ -29,11 +29,12 @@ public class RepairStationOrganizer : MonoBehaviour
 
 	void OnBoughtStation()
 	{
+		
 		level++;
 		OnLevelUp.Invoke();
-		PlayerPrefs.SetInt("RepairStationOrganizerLevel", level);
-		if(stations.Count < level)
+		PlayerPrefs.SetInt(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "RepairStationOrganizerLevel", level);
 		stations[level].ActivateBuyZone();
+		print("StationBought" + stations[level]);
 	}
 
     

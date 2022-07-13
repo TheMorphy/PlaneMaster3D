@@ -78,9 +78,9 @@ public class RepairStation : MonoBehaviour
 	}
 	private void Start()
 	{
-		print("start");
+		//print("start");
 
-		for (int i = 0; i < specificToolToEnable.Length; i++)
+		for (int i = 0; i < specificWorkerButtonToEnable.Length; i++)
 		{
 			specificWorkerButtonToEnable[i].GetComponent<Button>().interactable = true;
 		}
@@ -91,21 +91,17 @@ public class RepairStation : MonoBehaviour
 			PlayerPrefs.SetInt(name + "r1", 0);
 			PlayerPrefs.SetInt(name + "r2", 1);
 			//StartCoroutine(WaitForLevelUp());
-			print("FirstLoadRepair");
+			//print("FirstLoadRepair");
 		}
-		try
-		{
+		
 			if (overrideItemDestination != null)
 				for (int i = 0; i < aircrafts.Count; i++)
 					for (int b = 0; b < aircrafts[i].Breakables.Count; b++)
 						for (int c = 0; c < aircrafts[i].Breakables[b].conditions.Count; c++)
 							aircrafts[i].Breakables[b].conditions[c].itemDestination = overrideItemDestination;
 
-		}
-		catch
-		{
-
-		}
+		
+		
 
 		CheckForProgress();
 
@@ -256,6 +252,8 @@ public class RepairStation : MonoBehaviour
 
 		StartCoroutine(BringBreakablesToBrokenPos());
 		minigameDone = false;
+		dz.SaveConditions();
+		
 	}
 
 

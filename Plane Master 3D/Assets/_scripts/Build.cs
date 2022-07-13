@@ -64,18 +64,18 @@ public class Build : MonoBehaviour
     [SerializeField]
     int speedUpgradePrize, storageUpgradePrize;
 
-	//[Header("UI")]
-	//[SerializeField]
-	//GameObject UpgradeUI;
-	//[SerializeField]
-	//GameObject upgradeReady, upgradeLocked;
- //   [SerializeField]
- //   TextMeshProUGUI currentSpeedInfo, currentStorageInfo;
- //   [SerializeField]
- //   TextMeshProUGUI currentSpeedLevelInfo, currentStorageLevelInfo;
- //   [SerializeField]
- //   TextMeshProUGUI storageUpgradeCost, speedUpgradeCost;
-	//[SerializeField] Button storageButton, speedButton;
+	[Header("UI")]
+	[SerializeField]
+	GameObject UpgradeUI;
+	[SerializeField]
+	GameObject upgradeReady, upgradeLocked;
+    [SerializeField]
+    TextMeshProUGUI currentSpeedInfo, currentStorageInfo;
+    [SerializeField]
+    TextMeshProUGUI currentSpeedLevelInfo, currentStorageLevelInfo;
+    [SerializeField]
+    TextMeshProUGUI storageUpgradeCost, speedUpgradeCost;
+	[SerializeField] Button storageButton, speedButton;
 
 	Backpack playerBackpack;
 	bool upgradeZoneLocked = false;
@@ -84,7 +84,7 @@ public class Build : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-		LoadVariables();
+		
 
 		speedLevel = PlayerPrefs.GetInt(savingKey + "speedLvl");
 		storageLevel = PlayerPrefs.GetInt(savingKey + "storageLvl");
@@ -96,21 +96,21 @@ public class Build : MonoBehaviour
 		LoadCorrectSpeed();
 		LoadCorrectStorage();
 
-		//speedUpgradePrize = costStart + costIncrement * speedLevel;
-		//storageUpgradePrize = costStart + costIncrement * storageLevel;
+		speedUpgradePrize = costStart + costIncrement * speedLevel;
+		storageUpgradePrize = costStart + costIncrement * storageLevel;
 
 		speedUpgradePrize = levelCost[Mathf.Clamp(speedLevel, 0, levelCost.Count - 1)];
 		storageUpgradePrize = levelCost[Mathf.Clamp(storageLevel, 0, levelCost.Count - 1)];
 
-        //UpdateUpgradeUI();
+        UpdateUpgradeUI();
 
 		if(savingKey == "Press02")
 		{
 			QuestSystem.instance.AddProgress("Build wire press", 1);
 		}
 		CheckForOutOfLevels();
-		
 
+		LoadVariables();
 	}
 	private void OnEnable()
     {
@@ -118,27 +118,27 @@ public class Build : MonoBehaviour
         SetConditionsToLevel();
     }
 
- //   void UpdateUpgradeUI()
-	//{
- //       currentSpeedLevelInfo.text = "LVL " + speedLevel;
- //       currentStorageLevelInfo.text = "LVL " + storageLevel;
+	void UpdateUpgradeUI()
+	{
+		currentSpeedLevelInfo.text = "LVL " + speedLevel;
+		currentStorageLevelInfo.text = "LVL " + storageLevel;
 
- //       currentSpeedInfo.text = "Speed " + (speed * 60).ToString("0.00") + $"/min (+{ (speed * 0.05f).ToString("0.00")})";
- //       currentStorageInfo.text = "Capacity " + storage.ToString() + $"(+{ Mathf.CeilToInt(storage * 0.05f)})";
+		currentSpeedInfo.text = "Speed " + (speed * 60).ToString("0.00") + $"/min (+{ (speed * 0.05f).ToString("0.00")})";
+		currentStorageInfo.text = "Capacity " + storage.ToString() + $"(+{ Mathf.CeilToInt(storage * 0.05f)})";
 
- //       storageUpgradeCost.text = storageUpgradePrize.ToString();
- //       speedUpgradeCost.text = speedUpgradePrize.ToString();
+		storageUpgradeCost.text = storageUpgradePrize.ToString();
+		speedUpgradeCost.text = speedUpgradePrize.ToString();
 
-	//	if (storageLevel >= levelCost.Count )
-	//	{
-	//		storageButton.interactable = false;
-	//	}
+		if (storageLevel >= levelCost.Count)
+		{
+			storageButton.interactable = false;
+		}
 
-	//	if (speedLevel >= levelCost.Count)
-	//	{
-	//		speedButton.interactable = false;
-	//	}
-	//}
+		if (speedLevel >= levelCost.Count)
+		{
+			speedButton.interactable = false;
+		}
+	}
 
     void CheckForOutOfLevels()
 	{
@@ -203,7 +203,7 @@ public class Build : MonoBehaviour
 
 	public void CloseUpgradeUI()
 	{
-		//UpgradeUI.SetActive(false);
+		UpgradeUI.SetActive(false);
 	}
 
 
@@ -218,7 +218,7 @@ public class Build : MonoBehaviour
 				speedLevel++;
 				PlayerPrefs.SetInt(savingKey + "speedLvl", speedLevel);
 				LoadCorrectSpeed();
-				//UpdateUpgradeUI();
+				UpdateUpgradeUI();
 				CheckForOutOfLevels();
 
 
@@ -232,7 +232,7 @@ public class Build : MonoBehaviour
     void LoadCorrectSpeed()
 	{
 		speed = speedStandard + (speedLevel - 1) * speedIncrement;
-		//speedUpgradePrize = costStart + costIncrement * (speedLevel - 1);
+		speedUpgradePrize = costStart + costIncrement * (speedLevel - 1);
 		
 		speedUpgradePrize = levelCost[Mathf.Clamp(speedLevel, 0, levelCost.Count - 1)];
 
@@ -249,7 +249,7 @@ public class Build : MonoBehaviour
 				storageLevel++;
 				PlayerPrefs.SetInt(savingKey + "storageLvl", storageLevel);
 				LoadCorrectStorage();
-				//UpdateUpgradeUI();
+				UpdateUpgradeUI();
 				CheckForOutOfLevels();
 				QuestSystem.instance.AddProgress("Upgrade iron drill", 1);
 			}
@@ -259,7 +259,7 @@ public class Build : MonoBehaviour
 	void LoadCorrectStorage()
 	{
 		storage = Mathf.CeilToInt(storageStandard + (storageLevel -1) * storageIncrement);
-		//storageUpgradePrize = costStart + costIncrement * storageLevel;
+		storageUpgradePrize = costStart + costIncrement * storageLevel;
 		storageUpgradePrize = levelCost[Mathf.Clamp(storageLevel, 0, levelCost.Count - 1)];
 
 		systemMessageReceiver.SendMessage("OnLevelChanged", SendMessageOptions.DontRequireReceiver);
@@ -278,7 +278,7 @@ public class Build : MonoBehaviour
 
 		if(!collider.GetComponent<Player>().isMoving && !UIActivated)
 		{
-			//UpgradeUI.SetActive(true);
+			UpgradeUI.SetActive(true);
 			UIActivated = true;
 		}
 	}
@@ -302,9 +302,9 @@ public class Build : MonoBehaviour
 					GetComponent<DroppingZone>().enabled = false;
 					build.SetActive(false);
                     system.SetActive(true);
-				//if(upgradeReady != null)
-					//upgradeReady.SetActive(true);
-			//system.transform.GetChild(0).SendMessage("OnChangeLevel");
+				if(upgradeReady != null)
+					upgradeReady.SetActive(true);
+				system.transform.GetChild(0).SendMessage("OnChangeLevel");
 				}
                 else
                 {
@@ -351,6 +351,6 @@ public class Build : MonoBehaviour
         system.SetActive(true);
 		if (soundSource != null)
 			soundSource.PlayOneShot(buildSound);
-		//upgradeReady.SetActive(true);
+		upgradeReady.SetActive(true);
 	}
 }
