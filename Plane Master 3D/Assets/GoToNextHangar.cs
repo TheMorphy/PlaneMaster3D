@@ -23,9 +23,12 @@ public class GoToNextHangar : MonoBehaviour
 	void OnAllConditionsComplete()
 	{
 		anim.SetBool("GateOpen", true);
-		disableOnOpen.SetActive(false);
-		disableOnOpen2.SetActive(false);
 
+		if (disableOnOpen!=null && disableOnOpen2 != null)
+		{
+			disableOnOpen.SetActive(false);
+			disableOnOpen2.SetActive(false);
+		}
 		LevelLoader.instance.LoadNextLevel();
 	}
 }

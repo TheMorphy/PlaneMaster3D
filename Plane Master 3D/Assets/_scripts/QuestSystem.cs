@@ -11,6 +11,7 @@ public class QuestSystem : MonoBehaviour
     [HideInInspector]
     public static QuestSystem instance;
 
+	[SerializeField] bool questSystemWithCam;
 
     [SerializeField]
     List<Quest> quests = new List<Quest>();
@@ -237,6 +238,9 @@ public class QuestSystem : MonoBehaviour
         currentQuest = quests[questLevel];
 		CheckForDone(null, currentQuest);
         UpdateQuestUI();
-		GoToObjectiveCamera();
+		if (questSystemWithCam)
+		{
+			GoToObjectiveCamera();
+		}
     }
 }

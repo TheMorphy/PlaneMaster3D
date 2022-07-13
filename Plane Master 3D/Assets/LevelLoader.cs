@@ -15,16 +15,20 @@ public class LevelLoader : MonoBehaviour
 
 	private void Start()
 	{
-		instance = this;
-	}
+		Debug.Log("start");
 
-	/*private void Update()
-	{
-		if (Input.GetMouseButtonDown(0))
+		if (instance == null)
 		{
-			LoadNextLevel();
+			instance = this;
+			if (SceneManager.GetActiveScene().buildIndex != PlayerPrefs.GetInt("currentLevel"))
+			{
+				SceneManager.LoadScene(PlayerPrefs.GetInt("currentLevel"));
+			}
 		}
-	}*/
+		else
+			Destroy(gameObject);
+
+	}
 
 	public void LoadNextLevel()
 	{
@@ -39,6 +43,8 @@ public class LevelLoader : MonoBehaviour
 		PlayerPrefs.DeleteAll();
 
 		yield return new WaitForSeconds(transitionTime);
+
+		PlayerPrefs.SetInt("currentLevel", SceneManager.GetActiveScene().buildIndex + 1);
 
 		SceneManager.LoadScene(levelIndex);
 	}
