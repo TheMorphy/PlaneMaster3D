@@ -12,6 +12,14 @@ public class Footsteps : MonoBehaviour
 
 
 	private AudioSource source;
+
+	[SerializeField]
+	bool displayFootDust;
+	[SerializeField]
+	GameObject footDust;
+
+	[SerializeField]
+	Transform footLeft, footRight;
 	private void Start()
 	{
 		source = GetComponent<AudioSource>();
@@ -19,6 +27,20 @@ public class Footsteps : MonoBehaviour
 		Sound sound = SoundSystem.instance.sounds.Find(sound => sound.name == "Footsteps");
 		sound.sources.Add(source);
 		SoundSystem.instance.SendMessage("UpdateVolumes");
+	}
+
+	void StepLeft()
+	{
+		if (displayFootDust)
+			Destroy(Instantiate(footDust, footLeft.position, Quaternion.identity), 2);
+		Step();
+	}
+
+	void StepRight()
+	{
+		if (displayFootDust)
+			Destroy(Instantiate(footDust, footRight.position, Quaternion.identity), 2);
+		Step();
 	}
 
 	private void Step()

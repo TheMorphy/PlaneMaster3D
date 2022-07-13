@@ -762,8 +762,6 @@ public class Backpack : MonoBehaviour
 		float t = 0;
 		while(t < 1 && i != null)
 		{
-			if (worker != null)
-				print("Hallo");
 			t += Time.deltaTime / itemLerpTime;
 			Vector3 curPos = Vector3.Lerp(startPos, i.destination, itemLerpCurve.Evaluate(t));
 			Quaternion curRot = Quaternion.Lerp(startRot, Quaternion.Euler(Vector3.zero), t);

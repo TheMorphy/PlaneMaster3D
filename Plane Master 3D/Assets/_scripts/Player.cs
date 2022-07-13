@@ -106,7 +106,6 @@ public class Player : MonoBehaviour
 	public int NumberToChangeSpeed { get => numberToChangeSpeed; set => numberToChangeSpeed = value; }
 	#endregion
 
-
 	#region Player Upgrade
 	void LoadLevel()
 	{
