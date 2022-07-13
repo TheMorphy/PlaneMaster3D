@@ -106,7 +106,7 @@ Transform:
   m_GameObject: {fileID: 1937304212763289206}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8280272, y: 2.438768, z: 2.0434432}
+  m_LocalScale: {x: 3.7229605, y: 4.966795, z: 4.161677}
   m_Children:
   - {fileID: 4790885585584086916}
   - {fileID: 6143693076680065745}
@@ -161,7 +161,7 @@ MonoBehaviour:
   itemName: Circuit
   itemType: 5
   height: 0.07404216
-  width: 0.23
+  width: 0.25
   pickedUp: 0
   destination: {x: 0, y: 0, z: 0}
   amount: 1
@@ -237,7 +237,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 148f9deb1a688e14bb2174b7d449b8d9, type: 2}
+  - {fileID: 2100000, guid: 2169dec36cefdec4c9f0a36ab1e018df, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

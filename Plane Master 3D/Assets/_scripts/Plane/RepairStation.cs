@@ -71,6 +71,7 @@ public class RepairStation : MonoBehaviour
 	private void Awake()
 	{
 		dz = GetComponent<DroppingZone>();
+		anim = aircraftHolder.GetComponent<Animator>();
 
 		LoadAirCraft();
 
@@ -84,7 +85,6 @@ public class RepairStation : MonoBehaviour
 			specificWorkerButtonToEnable[i].GetComponent<Button>().interactable = true;
 		}
 
-		anim = aircraftHolder.GetComponent<Animator>();
 		if(PlayerPrefs.GetInt(name + "r1") == PlayerPrefs.GetInt(name + "r2"))
 		{
 			//level = -1;
@@ -144,9 +144,9 @@ public class RepairStation : MonoBehaviour
 	void OnAllConditionsComplete()
 	{
 			if (breakablesToRepair.Count > 0)
-			breakablesToRepair[0].SendMessage("OnAllConditionsComplete");
+			breakablesToRepair[0].SendMessage("OnAllConditionsComplete", SendMessageOptions.DontRequireReceiver);
 			if(breakablesToRepair.Count > 1)
-			breakablesToRepair[1].SendMessage("OnAllConditionsComplete");
+			breakablesToRepair[1].SendMessage("OnAllConditionsComplete", SendMessageOptions.DontRequireReceiver);
 
 		StartCoroutine(WaitForLevelUp());
 		CheckForProgress();
@@ -256,8 +256,6 @@ public class RepairStation : MonoBehaviour
 
 		StartCoroutine(BringBreakablesToBrokenPos());
 		minigameDone = false;
-		yield return new WaitForSeconds(10);
-		aircraftHolder.gameObject.SetActive(false);
 	}
 
 
@@ -353,7 +351,7 @@ public class RepairStation : MonoBehaviour
 			}
 		}
 
-		if (specificToolToEnable[0] != null)
+		if (specificToolToEnable.Length > 0 && specificToolToEnable[0] != null)
 		{
 			specificToolToEnable[0].SetActive(true);
 		}
@@ -428,7 +426,7 @@ public class RepairStation : MonoBehaviour
 			newConditions.Add(u);
 		}
 		dz.conditions = newConditions;
-		dz.Refresh();
+		//dz.Refresh();
 		cameraZone.SetCameraIndex(currentAircraft.CameraIndex);
 
 	}

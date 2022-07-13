@@ -70,7 +70,7 @@ public class BuildForMoney : MonoBehaviour
 				interactableToUnlock.SetActive(false);
 				break;
 			case 2:
-				//
+				//Interactable bought
 				gameObject.SetActive(true);
 				buyArea.SetActive(false);
 				interactableToUnlock.SetActive(true);

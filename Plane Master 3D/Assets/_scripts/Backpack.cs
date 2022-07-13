@@ -57,7 +57,7 @@ public class Backpack : MonoBehaviour
 
     void RefreshItemUI()
 	{
-		return;
+		
 		for(int u = 0; u < UIItems.Count; u++)
 		{
 			ItemStack stack = itemStacks.Find(stack => stack.itemType == UIItems[u].itemType);
@@ -120,7 +120,6 @@ public class Backpack : MonoBehaviour
 
 	void SaveBackpack()
 	{
-		return;
 		string saveString = "";
 		foreach(GameObject g in LevelSystem.instance.itemPrefabs)
 		{

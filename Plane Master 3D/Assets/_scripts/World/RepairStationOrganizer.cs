@@ -32,6 +32,7 @@ public class RepairStationOrganizer : MonoBehaviour
 		level++;
 		OnLevelUp.Invoke();
 		PlayerPrefs.SetInt("RepairStationOrganizerLevel", level);
+		if(stations.Count < level)
 		stations[level].ActivateBuyZone();
 	}
 

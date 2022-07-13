@@ -245,7 +245,7 @@ public class LevelSystem : MonoBehaviour
 		if(workerHouse != null)
 		{
 			PlayerPrefs.SetInt(workerHouse.savingKey + "p", PlayerPrefs.GetInt(workerHouse.savingKey + "p") == 0 ? 1 : PlayerPrefs.GetInt(workerHouse.savingKey + "p"));
-			workerHouse.SendMessage("OnAddedPossibleLevel");
+			workerHouse.SendMessage("OnAddedPossibleLevel", SendMessageOptions.DontRequireReceiver);
 		}
 	}
 

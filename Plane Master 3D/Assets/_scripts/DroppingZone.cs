@@ -80,15 +80,15 @@ public class DroppingZone : MonoBehaviour
 
     void LoadConditions()
     {
-        //foreach (UpgradeCondition c in conditions)
-        //   {
-        //      c.count = PlayerPrefs.GetInt(transform.position.sqrMagnitude + c.name + "count");
-        //  }
+		/*foreach (UpgradeCondition c in conditions)
+           {
+              c.count = PlayerPrefs.GetInt(transform.position.sqrMagnitude + c.name + "count");
+          }*/
 
         List<ItemType> itemTypes = GetUsedItemtypes();
         for (int i = 0; i < itemTypes.Count; i++)
         {
-            int amountToAdd = PlayerPrefs.GetInt(transform.position.sqrMagnitude + itemTypes[i].ToString() + "count");
+            int amountToAdd = PlayerPrefs.GetInt(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + transform.position.sqrMagnitude + itemTypes[i].ToString() + "count");
             List<UpgradeCondition> conditionsOfType = conditions.FindAll(c => c.itemType == itemTypes[i]);
 			if(showDroppedItems)
 			{
@@ -122,11 +122,11 @@ public class DroppingZone : MonoBehaviour
 		}
 
 
-    //    foreach (UpgradeCondition c in conditions)
-    //    {
-    //        PlayerPrefs.SetInt(transform.position.sqrMagnitude + c.name + "count", c.count);
-     //   }
-        //CheckForDone();
+        /*foreach (UpgradeCondition c in conditions)
+        {
+            PlayerPrefs.SetInt(transform.position.sqrMagnitude + c.name + "count", c.count);
+        }*/
+        CheckForDone();
     }
 
     List<ItemType> GetUsedItemtypes()
@@ -208,7 +208,6 @@ public class DroppingZone : MonoBehaviour
 			c.completed = false;
         }
         SaveConditions();
-		CheckForDone();
 		
     }
 

@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1937304212763289206}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.124731, y: 2.8346, z: 2.3751113}
+  m_LocalScale: {x: 3.6120427, y: 4.81882, z: 4.0376887}
   m_Children:
   - {fileID: 5582334591908776790}
   m_Father: {fileID: 2227658537724536749}
@@ -79,7 +79,7 @@ MonoBehaviour:
   itemName: Money
   itemType: 0
   height: 0.08564512
-  width: 0.23
+  width: 0.25
   pickedUp: 0
   destination: {x: 0, y: 0, z: 0}
   amount: 100
