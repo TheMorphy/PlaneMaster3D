@@ -304,7 +304,7 @@ public class Build : MonoBehaviour
                     system.SetActive(true);
 				if(upgradeReady != null)
 					upgradeReady.SetActive(true);
-				system.transform.GetChild(0).SendMessage("OnChangeLevel");
+				system.transform.GetChild(0).SendMessage("OnChangeLevel", SendMessageOptions.DontRequireReceiver);
 				}
                 else
                 {

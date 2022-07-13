@@ -49,7 +49,6 @@ public class HydraulicPress : MonoBehaviour
 		//stashZone.capacity = levels[build.level].capacity;
 		//stashZone.SendMessage("GenerateSortingSystem");
 		//cogsPerMinute = levels[build.level].speed * 60;
-		OnLevelChanged();
 		foreach (MeshRenderer m in colorChangingParts)
         {
             m.material.SetColor("_Color", levels[build.level].newColor);
@@ -74,10 +73,12 @@ public class HydraulicPress : MonoBehaviour
 
 	IEnumerator HydraulicWorker()
     {
-        while(false == false)
+        while(true)
         {
+			
             yield return new WaitUntil(() => droppingZone.items.Count > 0 && currentMetal == null && stashZone.currentStashCount < stashZone.capacity);
-            currentMetal = droppingZone.items[droppingZone.items.Count - 1];
+			Debug.LogWarning("AFTER");
+			currentMetal = droppingZone.items[droppingZone.items.Count - 1];
             droppingZone.items.RemoveAt(droppingZone.items.Count - 1);
             droppingZone.conditions[0].count -= 1;
 			droppingZone.Refresh();
