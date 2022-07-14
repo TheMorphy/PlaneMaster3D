@@ -102,7 +102,7 @@ public class Build : MonoBehaviour
 		speedUpgradePrize = levelCost[Mathf.Clamp(speedLevel, 0, levelCost.Count - 1)];
 		storageUpgradePrize = levelCost[Mathf.Clamp(storageLevel, 0, levelCost.Count - 1)];
 
-        
+        UpdateUpgradeUI();
 
 		if(savingKey == "Press02")
 		{
@@ -111,7 +111,6 @@ public class Build : MonoBehaviour
 		CheckForOutOfLevels();
 
 		LoadVariables();
-		UpdateUpgradeUI();
 	}
 	private void OnEnable()
     {
