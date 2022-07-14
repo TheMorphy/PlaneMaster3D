@@ -20,10 +20,10 @@ public class LevelLoader : MonoBehaviour
 		if (instance == null)
 		{
 			instance = this;
-			if (SceneManager.GetActiveScene().buildIndex != PlayerPrefs.GetInt("currentLevel"))
-			{
-				SceneManager.LoadScene(PlayerPrefs.GetInt("currentLevel"));
-			}
+			//if (SceneManager.GetActiveScene().buildIndex != PlayerPrefs.GetInt("currentLevel"))
+			//{
+				//SceneManager.LoadScene(PlayerPrefs.GetInt("currentLevel"));
+			//}	
 		}
 		else
 			Destroy(gameObject);
