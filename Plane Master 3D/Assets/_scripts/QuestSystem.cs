@@ -238,7 +238,7 @@ public class QuestSystem : MonoBehaviour
         currentQuest = quests[questLevel];
 		CheckForDone(null, currentQuest);
         UpdateQuestUI();
-		if (questSystemWithCam)
+		if (questSystemWithCam && !nonbreakCamTriggered)
 		{
 			GoToObjectiveCamera();
 		}

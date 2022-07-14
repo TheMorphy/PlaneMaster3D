@@ -1810,6 +1810,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: aad9fcebb064a4b97ac000fc3e865ae7, type: 3}
   - {fileID: 8300000, guid: 2fb0a26393f964188a0c17a24810ed7d, type: 3}
   checkForGround: {fileID: 0}
+  displayFootDust: 0
+  footDust: {fileID: 0}
+  footLeft: {fileID: 0}
+  footRight: {fileID: 0}
 --- !u!82 &1526551000435666649
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6790,6 +6794,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: aad9fcebb064a4b97ac000fc3e865ae7, type: 3}
   - {fileID: 8300000, guid: 2fb0a26393f964188a0c17a24810ed7d, type: 3}
   checkForGround: {fileID: 0}
+  displayFootDust: 0
+  footDust: {fileID: 0}
+  footLeft: {fileID: 0}
+  footRight: {fileID: 0}
 --- !u!82 &1526551000687608860
 AudioSource:
   m_ObjectHideFlags: 0
@@ -18290,6 +18298,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: aad9fcebb064a4b97ac000fc3e865ae7, type: 3}
   - {fileID: 8300000, guid: 2fb0a26393f964188a0c17a24810ed7d, type: 3}
   checkForGround: {fileID: 0}
+  displayFootDust: 0
+  footDust: {fileID: 0}
+  footLeft: {fileID: 0}
+  footRight: {fileID: 0}
 --- !u!82 &1526551001323363398
 AudioSource:
   m_ObjectHideFlags: 0
@@ -18706,6 +18718,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: aad9fcebb064a4b97ac000fc3e865ae7, type: 3}
   - {fileID: 8300000, guid: 2fb0a26393f964188a0c17a24810ed7d, type: 3}
   checkForGround: {fileID: 0}
+  displayFootDust: 0
+  footDust: {fileID: 0}
+  footLeft: {fileID: 0}
+  footRight: {fileID: 0}
 --- !u!82 &1526551001342128744
 AudioSource:
   m_ObjectHideFlags: 0
@@ -30870,6 +30886,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: aad9fcebb064a4b97ac000fc3e865ae7, type: 3}
   - {fileID: 8300000, guid: 2fb0a26393f964188a0c17a24810ed7d, type: 3}
   checkForGround: {fileID: 0}
+  displayFootDust: 0
+  footDust: {fileID: 0}
+  footLeft: {fileID: 0}
+  footRight: {fileID: 0}
 --- !u!82 &1526551001996190049
 AudioSource:
   m_ObjectHideFlags: 0
@@ -31109,6 +31129,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: aad9fcebb064a4b97ac000fc3e865ae7, type: 3}
   - {fileID: 8300000, guid: 2fb0a26393f964188a0c17a24810ed7d, type: 3}
   checkForGround: {fileID: 0}
+  displayFootDust: 0
+  footDust: {fileID: 0}
+  footLeft: {fileID: 0}
+  footRight: {fileID: 0}
 --- !u!82 &1526551002001337465
 AudioSource:
   m_ObjectHideFlags: 0
