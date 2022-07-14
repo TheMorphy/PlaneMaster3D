@@ -10,7 +10,7 @@ public class BuildForMoney : MonoBehaviour
 	[SerializeField]
 	GameObject buyArea;
 	[SerializeField]
-	GameObject interactableToUnlock;
+	GameObject interactableToUnlock, toolToUnlock;
 
 	[SerializeField]
 	GameObject messageReceiver;
@@ -68,12 +68,20 @@ public class BuildForMoney : MonoBehaviour
 				gameObject.SetActive(true);
 				buyArea.SetActive(true);
 				interactableToUnlock.SetActive(false);
+				if(toolToUnlock != null)
+				{
+					toolToUnlock.SetActive(false);
+				}
 				break;
 			case 2:
 				//Interactable bought
 				gameObject.SetActive(true);
 				buyArea.SetActive(false);
 				interactableToUnlock.SetActive(true);
+				if (toolToUnlock != null)
+				{
+					toolToUnlock.SetActive(true);
+				}
 				break;
 		}
 		if (activeStart)

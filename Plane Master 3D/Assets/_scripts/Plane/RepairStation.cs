@@ -117,7 +117,7 @@ public class RepairStation : MonoBehaviour
 		switch (name)
 		{
 			
-			case "Boeing555":
+			case "Boeing":
 				QuestSystem.instance.AddProgress("Buy second repair zone", 1);
 				break;
 			case "Boeing701":
