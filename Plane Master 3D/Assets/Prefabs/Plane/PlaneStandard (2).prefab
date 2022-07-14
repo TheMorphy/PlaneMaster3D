@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRepaired: 1
   originalPosition: {fileID: 2053815278616545222}
-  paletteRotation: {x: 0, y: 0, z: 0}
+  paletteRotation: {x: -91.48, y: 0, z: 0}
   station: {fileID: 0}
   conditions:
   - name: Iron
@@ -222,7 +222,6 @@ MonoBehaviour:
   debug: 0
   conditionNumbers: 
   progressbar: {fileID: 0}
-  progressBarStartSize: 0
   itemInfos: []
 --- !u!65 &5850993046540535827
 BoxCollider:
@@ -465,7 +464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRepaired: 1
   originalPosition: {fileID: 5143417105147929800}
-  paletteRotation: {x: 0, y: 0, z: 0}
+  paletteRotation: {x: -91.48, y: 0, z: 0}
   station: {fileID: 0}
   conditions:
   - name: Iron
@@ -540,7 +539,6 @@ MonoBehaviour:
   debug: 0
   conditionNumbers: 
   progressbar: {fileID: 0}
-  progressBarStartSize: 0
   itemInfos: []
 --- !u!65 &6035241645268047154
 BoxCollider:
@@ -1076,7 +1074,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRepaired: 1
   originalPosition: {fileID: 2206198610701561723}
-  paletteRotation: {x: 0, y: 0, z: 0}
+  paletteRotation: {x: -91.48, y: -176.2, z: 0}
   station: {fileID: 0}
   conditions:
   - name: Iron
@@ -1151,7 +1149,6 @@ MonoBehaviour:
   debug: 0
   conditionNumbers: 
   progressbar: {fileID: 0}
-  progressBarStartSize: 0
   itemInfos: []
 --- !u!65 &82417592139967601
 BoxCollider:
@@ -1354,7 +1351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRepaired: 1
   originalPosition: {fileID: 3242534307057664425}
-  paletteRotation: {x: 0, y: 0, z: 0}
+  paletteRotation: {x: -91.12, y: 187.99, z: 0}
   station: {fileID: 0}
   conditions:
   - name: Iron
@@ -1429,7 +1426,6 @@ MonoBehaviour:
   debug: 0
   conditionNumbers: 
   progressbar: {fileID: 0}
-  progressBarStartSize: 0
   itemInfos: []
 --- !u!65 &2940901571480766238
 BoxCollider:
@@ -1624,7 +1620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRepaired: 1
   originalPosition: {fileID: 1276336989442981838}
-  paletteRotation: {x: 0, y: 0, z: 0}
+  paletteRotation: {x: 0, y: 0, z: -139.57}
   station: {fileID: 0}
   conditions:
   - name: Iron
@@ -1699,7 +1695,6 @@ MonoBehaviour:
   debug: 0
   conditionNumbers: 
   progressbar: {fileID: 0}
-  progressBarStartSize: 0
   itemInfos: []
 --- !u!65 &8249258982611768743
 BoxCollider:

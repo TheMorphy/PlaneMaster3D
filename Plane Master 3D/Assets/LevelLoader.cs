@@ -9,8 +9,6 @@ public class LevelLoader : MonoBehaviour
 
 	[SerializeField] public float transitionTime = 1f;
 
-	[SerializeField] bool isFirstScene;
-
 	#region singleton
 	public static LevelLoader instance;
 	#endregion
@@ -22,19 +20,14 @@ public class LevelLoader : MonoBehaviour
 		if (instance == null)
 		{
 			instance = this;
-
-			Debug.Log(PlayerPrefs.GetInt("currentLevel"));
-
-			if (isFirstScene)
+			if (SceneManager.GetActiveScene().buildIndex != PlayerPrefs.GetInt("currentLevel"))
 			{
-				if (SceneManager.GetActiveScene().buildIndex != PlayerPrefs.GetInt("currentLevel") && PlayerPrefs.GetInt("currentLevel") > 0)
-				{
-					SceneManager.LoadScene(PlayerPrefs.GetInt("currentLevel"));
-				}
+				SceneManager.LoadScene(PlayerPrefs.GetInt("currentLevel"));
 			}
 		}
 		else
 			Destroy(gameObject);
+
 	}
 
 	public void LoadNextLevel()
