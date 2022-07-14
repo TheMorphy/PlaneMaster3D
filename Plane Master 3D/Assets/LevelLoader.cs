@@ -17,21 +17,19 @@ public class LevelLoader : MonoBehaviour
 
 	private void Start()
 	{
-		Debug.Log("start");
 
 		if (instance == null)
 		{
 			instance = this;
 
-			Debug.Log(PlayerPrefs.GetInt("currentLevel"));
 
-			if (isFirstScene)
-			{
-				if (SceneManager.GetActiveScene().buildIndex != PlayerPrefs.GetInt("currentLevel") && PlayerPrefs.GetInt("currentLevel") > 0)
+			/*	if (isFirstScene)
 				{
-					SceneManager.LoadScene(PlayerPrefs.GetInt("currentLevel"));
-				}
-			}
+					if (SceneManager.GetActiveScene().buildIndex != PlayerPrefs.GetInt("currentLevel") && PlayerPrefs.GetInt("currentLevel") > 0)
+					{
+						SceneManager.LoadScene(PlayerPrefs.GetInt("currentLevel"));
+					}
+				}*/
 		}
 		else
 			Destroy(gameObject);
