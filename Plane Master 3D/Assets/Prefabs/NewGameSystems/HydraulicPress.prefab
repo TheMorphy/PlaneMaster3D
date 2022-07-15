@@ -375,8 +375,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9131363025059082959}
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: -4.85, y: 0.097, z: -0.96}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -5.2, y: 0.097, z: -0.1}
+  m_LocalScale: {x: 1.4949999, y: 1.4949999, z: 1.4949999}
   m_Children:
   - {fileID: 9131363026134146508}
   - {fileID: 9131363025930994557}
@@ -1540,7 +1540,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9131363025514757378}
-  m_LocalRotation: {x: -0, y: 0.9991932, z: -0, w: -0.04016174}
+  m_LocalRotation: {x: 0, y: 0.9991934, z: -0, w: -0.040157884}
   m_LocalPosition: {x: 10.33, y: -10.877476, z: 33.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6073,6 +6073,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: UpgradeStorage
       objectReference: {fileID: 0}
+    - target: {fileID: 4739746583264622654, guid: 8d8825f1ffe26814196301c9bdb1cd67, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5609458828205301646, guid: 8d8825f1ffe26814196301c9bdb1cd67, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -6087,7 +6091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7717813844405083392, guid: 8d8825f1ffe26814196301c9bdb1cd67, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d8825f1ffe26814196301c9bdb1cd67, type: 3}
