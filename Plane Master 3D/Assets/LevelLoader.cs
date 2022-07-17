@@ -37,8 +37,12 @@ public class LevelLoader : MonoBehaviour
 
 	public void LoadNextLevel()
 	{
-		Debug.Log("Load Next Level");
 		StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+	}
+
+	public void ResetActiveLevel()
+	{
+		StartCoroutine(ResetLevel());
 	}
 
 	IEnumerator LoadLevel(int levelIndex)
@@ -52,5 +56,18 @@ public class LevelLoader : MonoBehaviour
 		PlayerPrefs.SetInt("currentLevel", SceneManager.GetActiveScene().buildIndex + 1);
 
 		SceneManager.LoadScene(levelIndex);
+	}
+
+	IEnumerator ResetLevel()
+	{
+		transition.SetTrigger("Start");
+
+		PlayerPrefs.DeleteAll();
+
+		yield return new WaitForSeconds(transitionTime);
+
+		PlayerPrefs.SetInt("currentLevel", SceneManager.GetActiveScene().buildIndex);
+
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 }

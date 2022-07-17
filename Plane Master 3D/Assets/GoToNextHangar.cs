@@ -13,6 +13,8 @@ public class GoToNextHangar : MonoBehaviour
 	[SerializeField]
 	GameObject disableOnOpen2;
 
+	[SerializeField] bool resetActiveScene;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -22,13 +24,27 @@ public class GoToNextHangar : MonoBehaviour
 
 	void OnAllConditionsComplete()
 	{
-		anim.SetBool("GateOpen", true);
-
-		if (disableOnOpen!=null && disableOnOpen2 != null)
+		if (!resetActiveScene)
 		{
-			disableOnOpen.SetActive(false);
-			disableOnOpen2.SetActive(false);
+			anim.SetBool("GateOpen", true);
+
+			if (disableOnOpen != null && disableOnOpen2 != null)
+			{
+				disableOnOpen.SetActive(false);
+				disableOnOpen2.SetActive(false);
+			}
+			LevelLoader.instance.LoadNextLevel();
 		}
-		LevelLoader.instance.LoadNextLevel();
+		else
+		{
+			anim.SetBool("GateOpen", true);
+
+			if (disableOnOpen != null && disableOnOpen2 != null)
+			{
+				disableOnOpen.SetActive(false);
+				disableOnOpen2.SetActive(false);
+			}
+			LevelLoader.instance.ResetActiveLevel();
+		}
 	}
 }

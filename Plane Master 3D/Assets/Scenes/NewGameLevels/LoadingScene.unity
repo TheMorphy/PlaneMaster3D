@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -581,6 +581,78 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1413121588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1413121591}
+  - component: {fileID: 1413121590}
+  - component: {fileID: 1413121589}
+  m_Layer: 0
+  m_Name: Bootstrap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1413121589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413121588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -97182912, guid: 563d3cb31beb84d698c585c16143db9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  secretHash: 
+  itunesAppID: 
+--- !u!114 &1413121590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413121588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1232434722, guid: 563d3cb31beb84d698c585c16143db9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_coreUIInterface: {fileID: 0}
+  m_inputInterface: {fileID: 0}
+  m_serverInterface: {fileID: 0}
+  m_saveDataInterface: {fileID: 0}
+  m_adsInterface: {fileID: 0}
+  m_prototypeConfig: {fileID: 1413121589}
+  m_gdprInterface: {fileID: 0}
+  m_gameSettingsInterface: {fileID: 0}
+  m_ratingInterface: {fileID: 0}
+  m_marketInterface: {fileID: 0}
+  m_crossPromotionInterface: {fileID: 0}
+  m_gameCoreInterface: {fileID: 0}
+  m_splashInterface: {fileID: 0}
+  m_sceneExecutionOrder: []
+--- !u!4 &1413121591
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413121588}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2046914256
 GameObject:
