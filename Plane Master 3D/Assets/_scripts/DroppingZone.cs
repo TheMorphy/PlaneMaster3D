@@ -51,6 +51,7 @@ public class DroppingZone : MonoBehaviour
         if (progressbar != null)
 		{
             progressBarStartSize = progressbar.size.y;
+			progressbar.size = new Vector2(progressbar.size.x, 0);
             setted = true;
 
         }
