@@ -68,6 +68,7 @@ public class RepairStation : MonoBehaviour
 	[SerializeField]
 	float timePilotDropsMoney = 1;
 
+
 	private void Awake()
 	{
 		dz = GetComponent<DroppingZone>();

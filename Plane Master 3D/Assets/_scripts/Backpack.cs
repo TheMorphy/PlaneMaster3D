@@ -466,7 +466,7 @@ public class Backpack : MonoBehaviour
 
 	void FixedUpdate()
     {
-		dropTime -= Time.deltaTime;
+		dropTime -= Time.fixedDeltaTime;
 		//Check For Item to pick up
 		int iteration = 0;
         foreach (Collider c in Physics.OverlapSphere(player != null ? player.transform.position : worker.transform.position, pickupRadius))
@@ -716,42 +716,6 @@ public class Backpack : MonoBehaviour
 
 
 
-	/*
-		//old from here
-		//print(start);
-		//Vector3 pos = Vector3.zero;
-		if(start > 0 && start % stackSize > 0)
-		{
-			
-			pos = items[start - 1].destination + Vector3.up * items[start - 1].height;
-			//print(start + "|" + System.Convert.ToInt32(start / stackSize));
-		}
-
-		float iterations = (float)items.Count / stackSize;
-
-		for (int i = (int)start / stackSize; i < Mathf.CeilToInt(iterations); i++)
-		{
-
-            //set the distance betweeen the stacks 
-			pos.z = -i * stackOffset;
-			
-			for (int x = start; x < Mathf.Min(items.Count, stackSize * (i + 1)); x++)
-			{
-				//Debug.Log($"Started at: {start} \n now setting pos for x")
-				items[x].destination = pos;
-
-				if (items[x].lerpCoroutine != null)
-					StopCoroutine(items[x].lerpCoroutine);
-				items[x].lerpCoroutine = StartCoroutine(BringItemToDesPosition(items[x]));
-
-				pos.y += items[x].height;
-                start = x;
-			}
-			pos.y = 0;
-			
-			//pos.z += stackOffset;
-		}
-	*/
 	}
 
 	IEnumerator BringItemToDesPosition(Item i)
