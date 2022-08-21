@@ -67,7 +67,8 @@ public class RepairStation : MonoBehaviour
 	GameObject textBG;
 	[SerializeField]
 	float timePilotDropsMoney = 1;
-
+	[SerializeField]
+	LandingLights landingLights;
 
 	private void Awake()
 	{
@@ -227,12 +228,13 @@ public class RepairStation : MonoBehaviour
 		pilot.gameObject.SetActive(false);
 		partyEmoji.SetActive(false);
 		LevelUp();
+		landingLights.Blink();
 		yield return new WaitForSeconds(1.2f);
 		// do the mat stuff here
 
 		//Set Random Material
 
-
+		landingLights.TurnGreen();
 		int materialIndex = Random.Range(0, materialPool.Count);
 		PlayerPrefs.SetInt(name + "mat", materialIndex);
 		if(currentAircraft.Model.GetComponent<MeshRenderer>() != null)
@@ -358,8 +360,10 @@ public class RepairStation : MonoBehaviour
 
 	IEnumerator BringBreakablesToBrokenPos()
 	{
-		yield return new WaitForSeconds(2.5f);
-
+		yield return new WaitForSeconds(1);
+		
+		yield return new WaitForSeconds(1.5f);
+		landingLights.TurnRed();
 		float t = 0;
 		Vector3 firstStartPos = breakablesToRepair[0].transform.position;
 		Quaternion firstStartRot = breakablesToRepair[0].transform.rotation;
