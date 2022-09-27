@@ -53729,6 +53729,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LandingLights
       objectReference: {fileID: 0}
+    - target: {fileID: 6454715019633830869, guid: d2b7279ad0cf44d46ad62a7087fa34cb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2b7279ad0cf44d46ad62a7087fa34cb, type: 3}
 --- !u!114 &3205416411243971184 stripped
@@ -54716,6 +54720,10 @@ PrefabInstance:
     - target: {fileID: 6454715019633830869, guid: d2b7279ad0cf44d46ad62a7087fa34cb, type: 3}
       propertyPath: m_Name
       value: LandingLights
+      objectReference: {fileID: 0}
+    - target: {fileID: 6454715019633830869, guid: d2b7279ad0cf44d46ad62a7087fa34cb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2b7279ad0cf44d46ad62a7087fa34cb, type: 3}
@@ -57321,6 +57329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LandingLights
       objectReference: {fileID: 0}
+    - target: {fileID: 6454715019633830869, guid: d2b7279ad0cf44d46ad62a7087fa34cb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2b7279ad0cf44d46ad62a7087fa34cb, type: 3}
 --- !u!4 &4474152897138860728 stripped
@@ -57830,6 +57842,10 @@ PrefabInstance:
     - target: {fileID: 6454715019633830869, guid: d2b7279ad0cf44d46ad62a7087fa34cb, type: 3}
       propertyPath: m_Name
       value: LandingLights
+      objectReference: {fileID: 0}
+    - target: {fileID: 6454715019633830869, guid: d2b7279ad0cf44d46ad62a7087fa34cb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2b7279ad0cf44d46ad62a7087fa34cb, type: 3}
@@ -60071,6 +60087,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LandingLights
       objectReference: {fileID: 0}
+    - target: {fileID: 6454715019633830869, guid: d2b7279ad0cf44d46ad62a7087fa34cb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2b7279ad0cf44d46ad62a7087fa34cb, type: 3}
 --- !u!4 &7665229483627667187 stripped
@@ -60510,6 +60530,10 @@ PrefabInstance:
     - target: {fileID: 6454715019633830869, guid: d2b7279ad0cf44d46ad62a7087fa34cb, type: 3}
       propertyPath: m_Name
       value: LandingLights
+      objectReference: {fileID: 0}
+    - target: {fileID: 6454715019633830869, guid: d2b7279ad0cf44d46ad62a7087fa34cb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2b7279ad0cf44d46ad62a7087fa34cb, type: 3}

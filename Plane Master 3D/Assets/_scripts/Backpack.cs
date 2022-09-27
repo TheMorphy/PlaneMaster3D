@@ -494,7 +494,8 @@ public class Backpack : MonoBehaviour
 								}
 							i.transform.parent = itemParent;
 							UpdateItemDestinations();
-                            c.enabled = false;
+							//c.enabled = false;
+							c.isTrigger = true;
                         }
                     }
                 }
@@ -517,8 +518,12 @@ public class Backpack : MonoBehaviour
 						i.transform.parent = itemParent;
 						UpdateItemDestinations();
 						RefreshItemUI();
-						
-						c.enabled = false;
+						//Causing Item Problem
+						//c.enabled = false;
+						c.isTrigger = true;
+
+
+
 						//AddProgress
 						if (i.itemName == "Iron")
 						{
@@ -535,7 +540,7 @@ public class Backpack : MonoBehaviour
             }
 
             
-                if (c.gameObject.layer == 7 && c.GetComponent<DroppingZone>().enabled && ((player != null && !player.isMoving) || (worker != null && !worker.isMoving)) && dropTime <= 0)
+                if (c.gameObject.layer == 7 && c.GetComponent<DroppingZone>() != null && c.GetComponent<DroppingZone>().isActiveAndEnabled && ((player != null && !player.isMoving) || (worker != null && !worker.isMoving)) && dropTime <= 0)
                 {
                     DroppingZone droppingZone = c.GetComponent<DroppingZone>();
                     foreach (UpgradeCondition u in droppingZone.conditions)

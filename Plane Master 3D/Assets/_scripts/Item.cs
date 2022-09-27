@@ -23,5 +23,6 @@ public class Item : MonoBehaviour
         destination = item.destination;
         lerpCoroutine = item.lerpCoroutine;
         amount = item.amount;
+		
 	}
 }
