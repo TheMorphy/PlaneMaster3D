@@ -14,6 +14,8 @@ public class GoToNextHangar : MonoBehaviour
 	GameObject disableOnOpen2;
 
 	[SerializeField] bool resetActiveScene;
+	[SerializeField] bool tutorialEnd;
+	[SerializeField] GameObject tutorialEndWindow;
 
 	// Start is called before the first frame update
 	void Start()
@@ -24,6 +26,12 @@ public class GoToNextHangar : MonoBehaviour
 
 	void OnAllConditionsComplete()
 	{
+		if (tutorialEnd)
+		{
+			tutorialEndWindow.SetActive(true);
+			return;
+		}
+
 		if (!resetActiveScene)
 		{
 			anim.SetBool("GateOpen", true);

@@ -28,7 +28,7 @@ public class Backpack : MonoBehaviour
     [SerializeField]
     public int stackSize = 10;
     [SerializeField]
-    float stackOffset, pickupRadius, itemDropInterval;
+    float stackOffset, pickupRadius, itemDropInterval, itemPickupInterval;
 
     [SerializeField]
     public List<Item> items = new List<Item>();
@@ -203,6 +203,7 @@ public class Backpack : MonoBehaviour
 
 	//private variables
 	float dropTime;
+	float pickupTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -467,16 +468,13 @@ public class Backpack : MonoBehaviour
 	void FixedUpdate()
     {
 		dropTime -= Time.fixedDeltaTime;
+		pickupTime -= Time.fixedDeltaTime;
 		//Check For Item to pick up
 		int iteration = 0;
         foreach (Collider c in Physics.OverlapSphere(player != null ? player.transform.position : worker.transform.position, pickupRadius))
         {
-			
-			
-            if(c.GetComponent<Item>() != null && items.Count < backpackSize)
+            if(c.GetComponent<Item>() != null && items.Count < backpackSize && pickupTime <= 0)
             {
-				
-
 				Item i = c.GetComponent<Item>();
                 if(worker != null)
                 {
@@ -485,8 +483,8 @@ public class Backpack : MonoBehaviour
                         if (!i.pickedUp && tryAddItem(i))
                         {
                             i.pickedUp = true;
-                            //items.Add(i);
-                           // RefreshItemUI();
+							//items.Add(i);
+							// RefreshItemUI();
 							if (i.transform.parent != null)
 								if (i.transform.parent.parent != null)
 								{
@@ -522,22 +520,21 @@ public class Backpack : MonoBehaviour
 						//c.enabled = false;
 						c.isTrigger = true;
 
-
-
 						//AddProgress
 						if (i.itemName == "Iron")
 						{
 							QuestSystem.instance.AddProgress("Collect Iron", 1);
 						}
+
 						//Play pickup sound
 						if (itemSoundSource != null)
 						{
 							itemSoundSource.PlayOneShot(pickUpSounds[Random.Range(0, pickUpSounds.Count)]);
 						}
 					}
-//						print("cant add item. Stack is full");
-                }
-            }
+					pickupTime = itemPickupInterval;
+				}
+			}
 
             
                 if (c.gameObject.layer == 7 && c.GetComponent<DroppingZone>() != null && c.GetComponent<DroppingZone>().isActiveAndEnabled && ((player != null && !player.isMoving) || (worker != null && !worker.isMoving)) && dropTime <= 0)
@@ -591,10 +588,7 @@ public class Backpack : MonoBehaviour
                         }
                     }
                 }
-            
-            
-            
-        }
+		}
     }
 
     IEnumerator LerpItemToDestination(Transform item, bool destroy = true)
@@ -675,13 +669,8 @@ public class Backpack : MonoBehaviour
 
 		float offset = 0;
 
-
-
 		for (int s = 0; s < itemStacks.Count; s++)
 		{
-			
-			
-			
 			//if(s != 0)
 				offset -= itemStacks[s].items[0].width / 2;
 			pos.z = offset;
@@ -693,34 +682,17 @@ public class Backpack : MonoBehaviour
 					curItem.destination = pos;
 					if (curItem.transform.localPosition != pos)
 					{
-
-
 						if (curItem.lerpCoroutine != null)
 							StopCoroutine(curItem.lerpCoroutine);
 						curItem.lerpCoroutine = StartCoroutine(BringItemToDesPosition(curItem));
 
 					}
-
-
 					pos.y += curItem.height;
 				}
-					
-				
 			}
 			offset -= itemStacks[s].items[0].width / 2;
 			pos.y = 0;
 		}
-
-
-
-
-
-
-
-
-
-
-
 	}
 
 	IEnumerator BringItemToDesPosition(Item i)
