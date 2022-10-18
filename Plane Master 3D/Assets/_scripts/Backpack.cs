@@ -679,7 +679,15 @@ public class Backpack : MonoBehaviour
 				Item curItem = itemStacks[s].items[i];
 				if(curItem != null)
 				{
-					curItem.destination = pos;
+					if (curItem.itemType == ItemType.Money && i > 10)
+					{
+						curItem.destination = itemStacks[s].items[10].destination;
+					}
+					else
+					{
+						curItem.destination = pos;
+					}
+
 					if (curItem.transform.localPosition != pos)
 					{
 						if (curItem.lerpCoroutine != null)
